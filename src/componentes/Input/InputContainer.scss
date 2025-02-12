@@ -1,0 +1,49 @@
+@import '../../global.scss';
+
+.input-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    height: 5.375rem;
+
+    & .input-title{
+        opacity: 50%;
+    }
+
+    .input-title.focused {
+        opacity: 100%;
+        color: $azul;
+    }
+
+
+    & .input-field {
+        
+        background: $contraste-blanco;
+        border: none;
+        border-radius: $radio1;
+        overflow: hidden;
+        padding: 0.875rem 1.25rem;
+
+        width: 100%;
+
+        &::placeholder {
+            opacity: 50%;
+            font-family: 'Lato', sans-serif; 
+            font-size: 1rem;
+        }
+
+        &:focus{
+            outline: 0.0625rem solid $azul;
+        }
+
+    }
+
+    &:hover{
+        & .input-title{
+            opacity: 100%;
+        }
+    }
+
+}

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+//variables de colores
+$azul: #157AFE;
+$contraste-azul: #E4EBF5;
+$morado: #4946E2;
+$contraste-morado: #D6D6ED;
+$amarillo: #EF9131;
+$contraste-amarillo: #F2E4D5;
+$blanco: #FFFFFF;
+$contraste-blanco: #F5F7F9;
+$radio1: 0.5rem;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: $blanco;
+}
+
+h1 {
+    font-size: 3rem; /* 48px */
+    padding: 0;
+    margin: 0;
+
+    &.bold {
+        font-weight: bold; /* Cambiar a negrita */
+    }
+}
+
+h2 {
+    font-size: 2.25rem; /* 36px */
+    padding: 0;
+    margin: 0;
+
+    &.bold {
+        font-weight: bold; /* Cambiar a negrita */
+    }
+}
+
+h3 {
+    font-size: 1.875rem; /* 30px */
+    padding: 0;
+    margin: 0;
+
+    &.bold {
+        font-weight: bold; /* Cambiar a negrita */
+    }
+}
+
+h4 {
+    font-size: 1.5rem; /* 24px */
+    padding: 0;
+    margin: 0;
+
+    &.bold {
+        font-weight: bold; /* Cambiar a negrita */
+    }
+
+    &.lato{
+        font-family: 'Lato', sans-serif; 
+    }
+}
+
+p {
+    font-size: 1rem; /* 16px */
+    padding: 0;
+    margin: 0;
+    overflow-wrap: break-word; 
+
+    &.bold {
+        font-weight: bold; /* Cambiar a negrita */
+    }
+
+    &.lato{
+        font-family: 'Lato', sans-serif; 
+    }
+}
+
+button{
+    width: fill;
+    height: fill;
+    background-color: $azul;
+    border: none;
+    border-radius: $radio1;
+    padding: 0.9375rem 1.25rem;
+    cursor: pointer;
+
+    font-size: 1rem; /* 16px */;
+    font-family: 'Lato', sans-serif;
+    color: $blanco;
+
+    opacity: 80%;
+
+    &:hover{
+        opacity: 100%;
+        box-shadow: 0px 4px 10px $azul;
+    }
+}
+
+.prueba{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 25%;
+}
