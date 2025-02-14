@@ -9,6 +9,8 @@ $amarillo: #EF9131;
 $contraste-amarillo: #F2E4D5;
 $blanco: #FFFFFF;
 $contraste-blanco: #F5F7F9;
+$rojo: #BF786D;
+$contraste-rojo: #a37b75;
 $radio1: 0.5rem;
 $radio2: 0.875rem;
 $radio3: 1.625rem;
@@ -102,8 +104,8 @@ p {
 
 
 button{
-    width: fill;
-    height: fill;
+    width: 100%;
+    height: 100%;
     background-color: $azul;
     border: none;
     border-radius: $radio1;
@@ -120,6 +122,16 @@ button{
         opacity: 100%;
         box-shadow: 0px 4px 10px $azul;
     }
+
+    &.rojo{
+        background-color: $contraste-rojo;
+
+        &:hover{
+            background-color: $rojo;
+            opacity: 100%;
+            box-shadow: 0px 4px 10px $rojo;
+        }
+    }
 }
 
 
@@ -127,6 +139,6 @@ button{
     display: flex;
     flex-direction: column;
     gap: 50px;
-    width: 25%;
+    width: 30%;
 }
 
