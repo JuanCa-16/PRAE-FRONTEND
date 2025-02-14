@@ -17,5 +17,11 @@ const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", tx
         </div>
     )
 }
+Pildora.propTypes = {
+    titulo: PropTypes.string,          // 'titulo' es opcional y debe ser un string
+    txtsuperior: PropTypes.string,     // 'txtsuperior' es opcional y debe ser un string
+    txtinferior: PropTypes.string,     // 'txtinferior' es opcional y debe ser un string
+    color: PropTypes.string           // 'color' es opcional y debe ser un string
+};
 
 export default Pildora

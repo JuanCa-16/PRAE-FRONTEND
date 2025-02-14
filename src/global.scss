@@ -25,6 +25,7 @@ $radio4: 2rem;
 body {
     font-family: "Roboto", sans-serif;
     background-color: $blanco;
+    margin: 0;
 }
 
 h1 {
@@ -87,6 +88,14 @@ p {
     }
 }
 
+.bold {
+    font-weight: bold; /* Cambiar a negrita */
+}
+
+.lato{
+    font-family: 'Lato', sans-serif; 
+}
+
 .inter{
     font-family: 'Inter', sans-serif; 
 }
@@ -120,3 +129,4 @@ button{
     gap: 50px;
     width: 25%;
 }
+

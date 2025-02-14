@@ -4,6 +4,10 @@ import InputContainer from './Input/InputContainer';
 import PildoraMateriaGrado from './PildoraMateriaGrado/PildoraMateriaGrado';
 import PildoraEst from './PildoraEst/PildoraEst';
 import Pildora from './Pildora/Pildora';
+import NavBarItem from './NavBar/NavBarItem';
+import NavBar from './NavBar/NavBar';
+import LogoPrae from './LogoPrae/LogoPrae';
+import TituloDes from './TituloDes/TituloDes';
 
 const Prueba = () => {
   const [email, setEmail] = useState(""); // Estado para manejar el valor del email
@@ -34,6 +38,12 @@ const Prueba = () => {
                 <PildoraEst color='morado'></PildoraEst>
                 <Pildora titulo = "INGLES" txtsuperior = "Esteban Castro Henao" txtinferior="6-2" color="morado"></Pildora>
                 <Pildora titulo = "INGLES" txtsuperior = "Julian Castro Henao" txtinferior="11-2" color="amarillo"></Pildora>
+                <LogoPrae></LogoPrae>
+                <NavBarItem></NavBarItem>
+                <NavBarItem tipo={1}></NavBarItem>
+                <NavBar></NavBar>
+                <TituloDes titulo='LISTADO DE CURSOS ASIGNADOS' desc='Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso'></TituloDes>
+
             </div>
         </div>);
 };
