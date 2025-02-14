@@ -1,16 +1,32 @@
 import './global.scss'
 import Prueba from './componentes/Prueba.jsx';
-import { BrowserRouter } from 'react-router-dom';
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './componentes/NavBar/NavBar.jsx';
+import Login from './paginas/Login/Login.jsx';
 function App() {
 
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
-        <Prueba></Prueba>
+
+        <Login></Login>
+        
+        
+        {/* Navbar fija a la izquierda */}
+        {/* <nav className="navbar">
+          <NavBar></NavBar>
+        </nav> */}
+
+        {/* Contenido que cambia según la ruta */}
+        {/* <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Prueba></Prueba>} />
+
+          </Routes>
+        </main> */}
+
       </div>
-    </BrowserRouter>
+    </Router>
     
   );
 }

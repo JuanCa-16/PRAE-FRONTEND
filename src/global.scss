@@ -107,6 +107,34 @@ button{
     }
 }
 
+.App{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+
+    .navbar {
+        width: 16.8125rem;
+        min-width: 16.8125rem;
+        max-height: 100%;
+        padding: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        top: 0;
+    }
+
+    .main-content {
+        width: auto;
+        padding: 24px 96px;
+        background-color: $blanco;
+        max-height: 100%;
+        overflow: auto;
+    }
+}
+
+
 
 .prueba{
     display: flex;

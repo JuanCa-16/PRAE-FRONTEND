@@ -6,7 +6,7 @@ import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
 import { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon } from '../Icons/Icons.jsx';
-
+import { useNavigate} from 'react-router-dom';
 
 const menus = {
   normal: [
@@ -31,12 +31,17 @@ const menus = {
 const NavBar = ({rol = "admin"}) => {
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
+  const navigate = useNavigate(); // Hook para redirigir
 
+    const handleClick = () => {
+          navigate("/"); // Redirige a la ruta especificada
+        
+    };
 
   return (
     <div className='contenedorNavBar'>
       <div className='menuSuperior'>
-        <LogoPrae color = {rol === 'profe' ? "morado" : "amarillo"}></LogoPrae>
+        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : "amarillo"}></LogoPrae></div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (

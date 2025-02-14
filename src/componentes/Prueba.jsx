@@ -44,6 +44,7 @@ const Prueba = () => {
         <div>
             <div className="prueba">
                 <button>Hola</button>
+
                 <div>
                     <InputContainer
                     titulo="Correo electrónico:"
@@ -54,18 +55,31 @@ const Prueba = () => {
                     required={true} // Hacemos que el campo sea obligatorio
                     />
                 <button onClick={() => console.log(email)}>Mostrar Email</button>
+
                 </div>
+
                 <PildoraMateriaGrado texto='6-2' color='amarillo'></PildoraMateriaGrado>
+
                 <PildoraMateriaGrado texto='MATEMATICAS' color='morado'></PildoraMateriaGrado>
+
                 <PildoraEst clase="peque"></PildoraEst>
+
                 <PildoraEst color='morado'></PildoraEst>
+
                 <Pildora titulo = "INGLES" txtsuperior = "Esteban Castro Henao" txtinferior="6-2" color="morado"></Pildora>
+
                 <Pildora titulo = "INGLES" txtsuperior = "Julian Castro Henao" txtinferior="11-2" color="amarillo"></Pildora>
+
                 <LogoPrae></LogoPrae>
+
                 <NavBarItem></NavBarItem>
+
                 <NavBarItem tipo={1}></NavBarItem>
+
                 <NavBar></NavBar>
+
                 <TituloDes titulo='LISTADO DE CURSOS ASIGNADOS' desc='Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso'></TituloDes>
+                
                 <PildoraTitulo></PildoraTitulo>
 
                 <button onClick={openModal}>Abrir Modal ELIMINAR</button>

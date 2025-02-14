@@ -9,6 +9,7 @@ function InputContainer({ placeholder = "correo@gmail.com",
     inputType = "email",
     value = "",    // Añadimos la prop 'value' para controlar el valor del input
     required = false, // Añadimos la prop 'required' para la validación
+    nomInput,
     onChange = () => {} // Añadimos 'onChange' para manejar los cambios en el input
 }) {
 
@@ -39,6 +40,7 @@ function InputContainer({ placeholder = "correo@gmail.com",
                 onBlur={() => setIsFocused(false)}
                 onChange={handleInputChange} // Llamamos a la función para manejar el cambio
                 required={required} // Si 'required' es true, el input será obligatorio
+                name={nomInput}
             />
         </div>
     );
