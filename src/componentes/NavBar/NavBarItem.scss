@@ -13,6 +13,7 @@
     text-align: left;
     position: relative;
     cursor: pointer;
+    min-height: 2.87rem;
 
     .etiqueta{
 
@@ -23,7 +24,11 @@
         opacity: 0.3;
         position: relative;
 
-        .logo{
+        .logoNav{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
             width: 1.8rem;
             height: 1.8rem;
         }

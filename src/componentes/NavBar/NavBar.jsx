@@ -5,32 +5,26 @@ import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
-
-import { MdOutlineBook } from "react-icons/md";
-import { AiOutlineSetting } from "react-icons/ai";
-import { IoListOutline } from "react-icons/io5";
-import { AiOutlineUser } from "react-icons/ai";
-import { HiOutlineClipboard } from "react-icons/hi";
-import { HiOutlineAcademicCap } from "react-icons/hi2";
+import { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon } from '../Icons/Icons.jsx';
 
 
 const menus = {
   normal: [
-    { texto: "Materias", icono: MdOutlineBook, ruta: "/materias" },
-    { texto: "Ajustes", icono: AiOutlineSetting, ruta: "/ajustes" },
+    { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
   profe: [
-    { texto: "Listado", icono: IoListOutline, ruta: "/listado" },
-    { texto: "Inscribir Estudiante", icono: AiOutlineUser, ruta: "/inscribir" },
-    { texto: "Ajustes", icono: AiOutlineSetting, ruta: "/ajustes" },
+    { texto: "Listado", icono: ListadoIcon, ruta: "/listado" },
+    { texto: "Inscribir Estudiante", icono: EstudianteIcon, ruta: "/inscribir" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
   admin: [
-    { texto: "Grados", icono: MdOutlineBook, ruta: "/grados" },
-    { texto: "Profesores", icono: HiOutlineClipboard, ruta: "/profesores" },
-    { texto: "Materias", icono: IoListOutline, ruta: "/materias" },
-    { texto: "Cursos", icono: HiOutlineAcademicCap, ruta: "/cursos" },
-    { texto: "Estudiantes", icono: AiOutlineUser, ruta: "/estudiantes" },
-    { texto: "Ajustes", icono: AiOutlineSetting, ruta: "/ajustes" },
+    { texto: "Grados", icono: StudyIcon, ruta: "/grados" },
+    { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
+    { texto: "Materias", icono: ListadoIcon, ruta: "/materias" },
+    { texto: "Cursos", icono: GradosIcon, ruta: "/cursos" },
+    { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
 };
 
