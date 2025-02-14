@@ -1,0 +1,112 @@
+@import '../../global.scss';
+
+
+.pildora {
+    border-radius: $radio4;
+    box-shadow: 0px 4px 11px #00000033;
+    overflow: hidden;
+    display: inline-flex;
+    padding: 1.2rem 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    position: relative;
+    min-width: 9.5rem;
+
+    h4{
+        color: $blanco;
+        font-weight: 800
+    }
+
+    background-color: $azul;
+    color: $contraste-azul;
+
+    &.morado {
+        background-color: $morado;
+        color: $contraste-morado;
+    }
+    
+    &.amarillo {
+        background-color: $amarillo;
+        color: $contraste-amarillo;
+    }
+    
+    .info{
+        align-items: center;
+        display: inline-flex;
+        flex-direction: column;
+        gap: 6px;
+        justify-content: center;
+        position: relative;
+
+        .texto{
+            font-size: 0.7rem;
+            align-self: stretch;
+            line-height: normal;
+            position: relative;
+            text-align: center;
+            color: $blanco;
+        }
+
+    }
+
+    .elipse1, .elipse2{
+        background-color: $blanco;
+        border-radius: 119.5px;
+        height: 239px;
+        left: -150px;
+        opacity: 0.1;
+        position: absolute;
+        top: -150px;
+        width: 239px;
+    }
+
+    .elipse2{
+        left: 100px;
+        opacity: 0.05;
+        position: absolute;
+        top: 0px;
+    }
+
+    &:hover{
+        cursor: pointer;
+
+        cursor: pointer;
+        background-color: $contraste-azul;
+        
+        h4, .texto{
+            color: $azul;
+        }
+
+        .elipse1, .elipse2{
+            background-color: $azul;
+        }
+
+        &.morado {
+            background-color: $contraste-morado;
+            color: $morado;
+
+            h4, .texto{
+                color: $morado;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $morado;
+            }
+        }
+
+        &.amarillo {
+            background-color: $contraste-amarillo;
+            color: $amarillo;
+
+            h4, .texto{
+                color: $amarillo;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $amarillo;
+            }
+        }
+    }
+}

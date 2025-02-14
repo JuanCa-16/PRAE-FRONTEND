@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 //variables de colores
@@ -11,7 +9,13 @@ $amarillo: #EF9131;
 $contraste-amarillo: #F2E4D5;
 $blanco: #FFFFFF;
 $contraste-blanco: #F5F7F9;
+$rojo: #BF786D;
+$contraste-rojo: #a37b75;
 $radio1: 0.5rem;
+$radio2: 0.875rem;
+$radio3: 1.625rem;
+$radio4: 2rem;
+
 
 *,
 *::before,
@@ -23,6 +27,7 @@ $radio1: 0.5rem;
 body {
     font-family: "Roboto", sans-serif;
     background-color: $blanco;
+    margin: 0;
 }
 
 h1 {
@@ -67,6 +72,7 @@ h4 {
     &.lato{
         font-family: 'Lato', sans-serif; 
     }
+
 }
 
 p {
@@ -84,9 +90,22 @@ p {
     }
 }
 
+.bold {
+    font-weight: bold; /* Cambiar a negrita */
+}
+
+.lato{
+    font-family: 'Lato', sans-serif; 
+}
+
+.inter{
+    font-family: 'Inter', sans-serif; 
+}
+
+
 button{
-    width: fill;
-    height: fill;
+    width: 100%;
+    height: 100%;
     background-color: $azul;
     border: none;
     border-radius: $radio1;
@@ -103,11 +122,23 @@ button{
         opacity: 100%;
         box-shadow: 0px 4px 10px $azul;
     }
+
+    &.rojo{
+        background-color: $contraste-rojo;
+
+        &:hover{
+            background-color: $rojo;
+            opacity: 100%;
+            box-shadow: 0px 4px 10px $rojo;
+        }
+    }
 }
+
 
 .prueba{
     display: flex;
     flex-direction: column;
     gap: 50px;
-    width: 25%;
+    width: 30%;
 }
+

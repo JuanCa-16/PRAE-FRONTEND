@@ -1,0 +1,93 @@
+@import '../../global.scss';
+
+
+.contenedorPildoraG{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radio2;
+    box-shadow: 0px 4px 11px #00000033;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0.625rem 0.75rem;
+    position: relative;
+    width: fit-content;
+
+    h4{
+        color: $blanco;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    background-color: $azul;
+    color: $contraste-azul;
+    
+    &.morado {
+        background-color: $morado;
+        color: $contraste-morado;
+    }
+    
+    &.amarillo {
+        background-color: $amarillo;
+        color: $contraste-amarillo;
+    }
+
+    .elipse1, .elipse2{
+        background-color: $blanco;
+        border-radius: 119.5px;
+        height: 239px;
+        left: -190px;
+        opacity: 0.1;
+        position: absolute;
+        top: -160px;
+        width: 239px;
+    }
+
+    .elipse2{
+        left: 50px;
+        opacity: 0.05;
+        top: -20px;
+        
+    }
+
+
+    &:hover{
+        cursor: pointer;
+        background-color: $contraste-azul;
+        
+        h4{
+            color: $azul;
+        }
+
+        .elipse1, .elipse2{
+            background-color: $azul;
+        }
+
+        &.morado {
+            background-color: $contraste-morado;
+            color: $morado;
+
+            h4{
+                color: $morado;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $morado;
+            }
+        }
+
+        &.amarillo {
+            background-color: $contraste-amarillo;
+            color: $amarillo;
+
+            h4{
+                color: $amarillo;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $amarillo;
+            }
+        }
+    }
+}
+

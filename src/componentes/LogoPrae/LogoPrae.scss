@@ -1,0 +1,28 @@
+@import '../../global.scss';
+
+.logoContenedor{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    color: $azul;
+    cursor: pointer;
+
+    .logoPrae{
+        width: 2.4rem;
+        position: relative;
+        height: 2.4rem;
+        
+    }
+
+    .morado{
+        color: $morado
+    }
+
+    .amarillo{
+        color: $amarillo
+    }
+}

@@ -1,12 +1,17 @@
 import './global.scss'
 import Prueba from './componentes/Prueba.jsx';
+import { BrowserRouter } from 'react-router-dom';
+
 
 function App() {
 
   return (
-    <div className="App">
-      <Prueba></Prueba>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Prueba></Prueba>
+      </div>
+    </BrowserRouter>
+    
   );
 }
 
