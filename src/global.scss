@@ -11,6 +11,7 @@ $blanco: #FFFFFF;
 $contraste-blanco: #F5F7F9;
 $rojo: #BF786D;
 $contraste-rojo: #a37b75;
+
 $radio1: 0.5rem;
 $radio2: 0.875rem;
 $radio3: 1.625rem;
@@ -34,45 +35,24 @@ h1 {
     font-size: 3rem; /* 48px */
     padding: 0;
     margin: 0;
-
-    &.bold {
-        font-weight: bold; /* Cambiar a negrita */
-    }
 }
 
 h2 {
     font-size: 2.25rem; /* 36px */
     padding: 0;
     margin: 0;
-
-    &.bold {
-        font-weight: bold; /* Cambiar a negrita */
-    }
 }
 
 h3 {
     font-size: 1.875rem; /* 30px */
     padding: 0;
     margin: 0;
-
-    &.bold {
-        font-weight: bold; /* Cambiar a negrita */
-    }
 }
 
 h4 {
     font-size: 1.5rem; /* 24px */
     padding: 0;
     margin: 0;
-
-    &.bold {
-        font-weight: bold; /* Cambiar a negrita */
-    }
-
-    &.lato{
-        font-family: 'Lato', sans-serif; 
-    }
-
 }
 
 p {
@@ -80,14 +60,6 @@ p {
     padding: 0;
     margin: 0;
     overflow-wrap: break-word; 
-
-    &.bold {
-        font-weight: bold; /* Cambiar a negrita */
-    }
-
-    &.lato{
-        font-family: 'Lato', sans-serif; 
-    }
 }
 
 .bold {
@@ -119,6 +91,7 @@ button{
     opacity: 80%;
 
     &:hover{
+        cursor: pointer;
         opacity: 100%;
         box-shadow: 0px 4px 10px $azul;
     }
