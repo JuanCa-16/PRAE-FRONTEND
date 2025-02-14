@@ -1,0 +1,42 @@
+@import '../../global.scss';
+
+.contenedorLogin{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    background-color: $blanco;
+
+    .pagLogin{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1 0 0;
+        align-self: stretch;
+        background-color: $blanco;
+
+        .izq{
+            display: flex;
+            width: 41.1875rem;
+            padding: 6.125rem 4.625rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            align-self: stretch;
+            background: $contraste-blanco;
+        }
+
+        .der{
+            display: flex;
+            width: 47.3125rem;
+            padding: 4.625rem 6rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.625rem;
+            align-self: stretch;
+        }
+    }
+}
