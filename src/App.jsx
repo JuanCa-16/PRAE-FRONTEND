@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import './global.scss'
+
 import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import Login from './paginas/Login/Login.jsx';
-import { useState } from 'react';
-import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
+import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
 function App() {
 
   const [user, setUser] = useState(() => {
@@ -43,10 +45,12 @@ function App() {
             
             <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/" : user.rol === "profe" ? "/hola" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
 
-            <Route element={<ProtectedRoute isAllowed={user && user.rol == 'normal'}/>} >
-                <Route path="/" element={<Prueba></Prueba>} />
+            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}/>} >
+                <Route index element={<CursosEst/>} />
+                <Route path="/prueba" element={<Prueba></Prueba>} />
+                <Route path="/materias" element={<CursosEst/>} />
+                <Route path="/notas" element={<VistaMateria/>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
-                <Route path="/materias" element={<VistaMateria/>} />
             </Route>
 
             <Route path='/hola' element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}> <ProfePrueba></ProfePrueba> </ProtectedRoute>}></Route>
