@@ -128,6 +128,21 @@ const GradosIcon = ({ color = "#000", width = 30, height = 30, estado,activo, ..
   </svg>
 )
 
+const ExitIcon = ({ color = "#000", width = 30, height = 30, estado,activo, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={14}
+    height={15}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill={estado || activo ? "#157AFE" : color} 
+      d="M9.5 12.614V8.182H4.97a.445.445 0 0 1-.354-.2.824.824 0 0 1-.146-.482c0-.18.052-.354.146-.482a.445.445 0 0 1 .354-.2H9.5V2.386c0-.632-.185-1.239-.513-1.686C8.659.252 8.214 0 7.75 0h-6C1.286 0 .841.252.513.7.185 1.147 0 1.754 0 2.386v10.228c0 .632.185 1.239.513 1.686.328.448.773.7 1.237.7h6c.464 0 .909-.252 1.237-.7.328-.447.513-1.054.513-1.686Zm2.793-4.432-1.646 2.245c-.09.129-.14.3-.138.479a.821.821 0 0 0 .147.473.447.447 0 0 0 .347.2.438.438 0 0 0 .35-.188l2.5-3.409A.824.824 0 0 0 14 7.5a.824.824 0 0 0-.146-.482l-2.5-3.409a.438.438 0 0 0-.351-.188.447.447 0 0 0-.347.2.821.821 0 0 0-.147.474.832.832 0 0 0 .138.478l1.646 2.245H9.5v1.364h2.793Z"
+    />
+  </svg>
+)
+
 
 // Exporta todos los iconos
-export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon }
+export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon}

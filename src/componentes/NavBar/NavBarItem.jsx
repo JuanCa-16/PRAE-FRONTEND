@@ -6,10 +6,14 @@ import '../../global.scss';
 import "./NavBarItem.scss";
 import { HomeIcon } from '../Icons/Icons.jsx';
 
-const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo }) => {
+const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo,func }) => {
     const navigate = useNavigate(); // Hook para redirigir
 
     const handleClick = () => {
+
+        if(func){
+            func()
+        }
         if (ruta) {
             navigate(ruta); // Redirige a la ruta especificada
         }

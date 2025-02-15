@@ -82,19 +82,23 @@
     .elipse1, .elipse2{
         background-color: #ffffff;
         border-radius: 119.5px;
-        height: 239px;
-        left: 60%;
+        //height: 239px;
+        left: 83%;
         opacity: 0.1;
         position: absolute;
-        top: -60%;
-        width: 239px;
+        top: -40%;
+        //width: 239px;
+        width: 13vw; // Se basa en el ancho de la pantalla
+        aspect-ratio: 1 / 1;
     }
 
     .elipse2{
-        left: 40%;
+        left: 70%;
         opacity: 0.05;
         position: absolute;
         top: 20%;
     }
+
+
 
 }

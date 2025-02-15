@@ -1,31 +1,59 @@
-import './global.scss'
-import Prueba from './componentes/Prueba.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
+import './global.scss'
+
+import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import Login from './paginas/Login/Login.jsx';
+import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
+import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
 function App() {
 
+  const [user, setUser] = useState(() => {
+    const userData = localStorage.getItem("usuario");
+    return userData ? JSON.parse(userData) : null;
+  });
+  
+
+  const iniciarSesion = (valorRol, valorName) => {
+    // PETICIONES AL BACK (simulado)
+    const newUser = { rol: valorRol, name: valorName };
+    setUser(newUser);
+    localStorage.setItem("usuario", JSON.stringify(newUser)); // Guardar en localStorage
+  };
+
+  const cerrarSesion = () => {
+    setUser(null);
+    localStorage.removeItem("usuario"); // Eliminar del localStorage
+  };
   return (
     <Router>
       <div className="App">
 
-        {/* <Login></Login> */}
-        
-        
-        {/* Navbar fija a la izquierda */}
-        <nav className="navbar">
-          <NavBar rol='normal'></NavBar>
-        </nav>
+        {
+          user ?
+          (<nav className="navbar">
+            <NavBar rol={user.rol} func = {cerrarSesion}></NavBar>
+          </nav>): null
+        }
 
-        {/* Contenido que cambia según la ruta */}
-        <main className="main-content">
+        <main className={user? "main-content": "completo"}>
           <Routes>
-            <Route path="/" element={<Prueba></Prueba>} />
-            <Route path="/materias" element={<VistaMateria></VistaMateria>} />
-            <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
+            
+            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/" : user.rol === "profe" ? "/hola" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
 
+            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}/>} >
+                <Route index element={<CursosEst/>} />
+                <Route path="/prueba" element={<Prueba></Prueba>} />
+                <Route path="/materias" element={<CursosEst/>} />
+                <Route path="/notas" element={<VistaMateria/>} />
+                <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
+            </Route>
+
+            <Route path='/hola' element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}> <ProfePrueba></ProfePrueba> </ProtectedRoute>}></Route>
           </Routes>
         </main>
 

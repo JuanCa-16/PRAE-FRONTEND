@@ -1,0 +1,20 @@
+@import '../../../global.scss';
+
+
+.contenedorCursos{
+    display: flex;
+    padding: 0rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.0625rem;
+    align-self: stretch;
+
+    .materias{
+        display: flex;
+        align-items: center;
+        align-content: center;
+        gap: 1.5rem;
+        align-self: stretch;
+        flex-wrap: wrap;
+    }
+}

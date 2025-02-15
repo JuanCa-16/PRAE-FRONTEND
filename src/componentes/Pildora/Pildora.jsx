@@ -4,9 +4,9 @@ import '../../global.scss'
 import './Pildora.scss'
 
 
-const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", txtinferior, color}) => {
+const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", txtinferior, color, onClick}) => {
     return (
-        <div className={`pildora ${color}`}>
+        <div className={`pildora ${color}`} onClick={onClick}>
             <div className="info">
                 <p className="texto superior lato">{txtsuperior}</p>
                 <h4 className="titulo inter bold">{titulo}</h4>
