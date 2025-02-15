@@ -40,9 +40,11 @@
 
     }
 
-    &:hover{
-        & .input-title{
-            opacity: 100%;
+    &.siHover{
+        &:hover{
+            & .input-title{
+                opacity: 100%;
+            }
         }
     }
 

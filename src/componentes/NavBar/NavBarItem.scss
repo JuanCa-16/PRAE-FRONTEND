@@ -54,6 +54,19 @@
         }
 
     }
+
+    &.activar{
+        outline: 0.0625rem solid #A9CEFF;
+        background-color: $contraste-azul;
+        
+        .etiqueta{
+            opacity: 1;
+        
+            .logo, .texto{
+                color: $azul;
+            }
+        }
+    }
 }
 
 .tipo-existe{

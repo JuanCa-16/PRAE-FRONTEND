@@ -1,0 +1,57 @@
+@import '../../global.scss';
+
+.celda{
+
+    border-radius: 0.75rem;
+    display: inline-flex;
+    padding: 0.3125rem 1.3125rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+    
+    &.titulo{
+        font-weight: bold;
+        color: $azul;
+        background-color: $contraste-azul;
+
+        &.ver{
+            &:hover{
+                cursor: pointer;
+                color: $contraste-azul;
+                background-color: $azul;
+            }
+        }
+    }
+
+    &.titulo2{
+        font-weight: bold;
+        color: $azul;
+        padding: 0.3125rem 1.3125rem;
+        background-color: $contraste-blanco;
+
+        &.ver{
+            &:hover{
+                cursor: pointer;
+                color: $contraste-blanco;
+                background-color: $azul;
+            }
+        }
+    }
+
+    &.normal{
+        
+        padding: 0.375rem 1.3125rem;
+        background-color: $blanco;
+
+        &.ver{
+            &:hover{
+                cursor: pointer;
+                color: $azul;
+                background-color: $contraste-blanco;
+            }
+        }
+    }
+
+
+}

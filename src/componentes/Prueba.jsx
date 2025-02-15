@@ -10,6 +10,7 @@ import LogoPrae from './LogoPrae/LogoPrae';
 import TituloDes from './TituloDes/TituloDes';
 import PildoraTitulo from './PildoraTitulo/PildoraTitulo';
 import Modal from './Modal/Modal';
+import Celda from './Celda/Celda';
 
 const Prueba = () => {
 
@@ -92,6 +93,10 @@ const Prueba = () => {
                 
                 <button onClick={openModal3}>Abrir Modal NOTAS</button>
                 <Modal isOpen={isModalOpen3} closeModal={closeModal3} tipo="nota" modalTitulo='ELIMINAR GRADO O CURSO'></Modal>
+
+                <Celda txt='Hola' tipo='titulo'></Celda>
+                <Celda txt='Hola' tipo='titulo2'></Celda>
+                <Celda txt='Hola' tipo='normal'></Celda>
             </div>
         </div>);
 };

@@ -1,0 +1,42 @@
+@import '../../../global.scss';
+
+.contenedorVistaMateria{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    align-self: stretch;
+    height: 100%;
+
+    .contenedor{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        align-self: stretch;
+
+        .tabla{
+            display: flex;
+            padding: 0.75rem 0rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            align-self: stretch;
+
+            .col{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1.0625rem;
+            }
+        }
+    }
+
+    .input-container{
+        height: fit-content
+        input{
+            height: 100%;
+        }
+    }
+}

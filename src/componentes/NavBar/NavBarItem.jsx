@@ -6,7 +6,7 @@ import '../../global.scss';
 import "./NavBarItem.scss";
 import { HomeIcon } from '../Icons/Icons.jsx';
 
-const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color }) => {
+const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo }) => {
     const navigate = useNavigate(); // Hook para redirigir
 
     const handleClick = () => {
@@ -19,9 +19,9 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
 
     return (
 
-        <div className={` ${tipo ? "tipo-existe color" : "contenedorNavBarItem "} ${color}`} onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+        <div className={` ${tipo ? "tipo-existe color" : "contenedorNavBarItem "} ${color}  ${activo ? "activar" : " "}` } onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='etiqueta'>
-                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered}/> </div>):(<div></div>)}
+                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered} activo={activo} /> </div>):(<div></div>)}
                 <p className='texto lato'>{texto}</p>
             </div>
         </div>
