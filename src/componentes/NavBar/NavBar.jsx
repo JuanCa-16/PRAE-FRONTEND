@@ -6,12 +6,12 @@ import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
 import { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon } from '../Icons/Icons.jsx';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const menus = {
   normal: [
     { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
   ],
   profe: [
     { texto: "Listado", icono: ListadoIcon, ruta: "/listado" },
@@ -28,10 +28,12 @@ const menus = {
   ],
 };
 
-const NavBar = ({rol = "admin"}) => {
+const NavBar = ({rol = "normal"}) => {
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
+
   const navigate = useNavigate(); // Hook para redirigir
+  const location = useLocation(); // Obtiene la ruta actual
 
     const handleClick = () => {
           navigate("/"); // Redirige a la ruta especificada
@@ -41,11 +43,11 @@ const NavBar = ({rol = "admin"}) => {
   return (
     <div className='contenedorNavBar'>
       <div className='menuSuperior'>
-        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : "amarillo"}></LogoPrae></div>
+        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : rol === 'normal' ? "azul" : "amarillo"} texto={rol === 'profe' ? "PROFESORES" : rol === 'normal' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
-            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta}/>))}
+            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname === item.ruta}/>))}
         </nav>
       </div>
       {

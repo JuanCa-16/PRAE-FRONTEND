@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import '../../global.scss'
 import './InputContainer.scss'
 import { useState } from 'react';
+import { useId } from 'react';
 
 function InputContainer({ placeholder = "correo@gmail.com",
     titulo = "correo electronico:",
     inputType = "email",
     value = "",    // Añadimos la prop 'value' para controlar el valor del input
-    required = false, // Añadimos la prop 'required' para la validación
+    required = false, // Añadimos la prop 'required' para la validación,
+    isDisabled= false,
     nomInput,
     onChange = () => {} // Añadimos 'onChange' para manejar los cambios en el input
 }) {
@@ -24,15 +26,17 @@ function InputContainer({ placeholder = "correo@gmail.com",
         onChange(event.target.value); // Pasamos el nuevo valor al 'onChange' recibido como prop
     };
 
-    return (
-        <div className="input-container">
+    const uniqueId = useId();
 
-            <p htmlFor="input-field" className={`input-title lato ${isFocused ? 'focused' : ''}`}>
+    return (
+        <div className={`input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
+
+            <p htmlFor="input-field" className={`input-title lato ${isFocused? 'focused' : ''}`}>
             {titulo}</p>
     
             <input
                 type={inputType}
-                id="input-field"
+                id={uniqueId} 
                 placeholder={placeholder}
                 className="input-field"
                 value={inputValue}  // Vinculamos el valor del input al estado
@@ -40,6 +44,7 @@ function InputContainer({ placeholder = "correo@gmail.com",
                 onBlur={() => setIsFocused(false)}
                 onChange={handleInputChange} // Llamamos a la función para manejar el cambio
                 required={required} // Si 'required' es true, el input será obligatorio
+                disabled={isDisabled} 
                 name={nomInput}
             />
         </div>

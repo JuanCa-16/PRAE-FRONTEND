@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import '../../global.scss'
 import "./LogoPrae.scss";
-const LogoPrae = ({texto = "RECTORES", color="amarillo"}) => {
+
+const LogoPrae = ({texto = "ESTUDIANTES", color}) => {
     return (
     <div className="logoContenedor">
         <img className="logoPrae" alt="" src="LOGO.svg"/>

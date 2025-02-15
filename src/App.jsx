@@ -2,6 +2,8 @@ import './global.scss'
 import Prueba from './componentes/Prueba.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './componentes/NavBar/NavBar.jsx';
+import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
+import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import Login from './paginas/Login/Login.jsx';
 function App() {
 
@@ -9,21 +11,23 @@ function App() {
     <Router>
       <div className="App">
 
-        <Login></Login>
+        {/* <Login></Login> */}
         
         
         {/* Navbar fija a la izquierda */}
-        {/* <nav className="navbar">
-          <NavBar></NavBar>
-        </nav> */}
+        <nav className="navbar">
+          <NavBar rol='normal'></NavBar>
+        </nav>
 
         {/* Contenido que cambia según la ruta */}
-        {/* <main className="main-content">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Prueba></Prueba>} />
+            <Route path="/materias" element={<VistaMateria></VistaMateria>} />
+            <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
 
           </Routes>
-        </main> */}
+        </main>
 
       </div>
     </Router>
