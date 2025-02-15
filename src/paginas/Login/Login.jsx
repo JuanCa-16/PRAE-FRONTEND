@@ -7,7 +7,7 @@ import InputContainer from '../../componentes/Input/InputContainer';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Login() {
+export default function Login({func}) {
     const [getDataLogin, SetgetDatasLogin] = useState({
         correo: "",
         password: "",
@@ -17,6 +17,7 @@ export default function Login() {
 
 
     const handleChange = (titulo, value) => {
+        
         SetgetDatasLogin({
             ...getDataLogin,
             [titulo]: value, // Convierte el título en key (puedes ajustarlo según tus necesidades)
@@ -25,8 +26,11 @@ export default function Login() {
 
 
 
-    const handlerLogin = () => {
+    const handlerLogin = (e) => {
+        e.preventDefault()
         console.log(getDataLogin)
+
+        func(getDataLogin.password, getDataLogin.password)
         // navigate("/home") /* cambiar la ruta despues */
     }
 
@@ -49,8 +53,8 @@ export default function Login() {
                     <div className='title'>
                         <TituloDes titulo="Bienvenido" desc='Accede a tu información académica, consulta tus cursos y gestiona calificaciones en un solo lugar.'></TituloDes>
                     </div>
-                    <div className='Form_login'>
-                        <div className='inputs'>
+                    <form onSubmit={handlerLogin} className='Form_login'>
+                        <div  className='inputs'>
                             <InputContainer
                                 placeholder="correo@gmail.com"
                                 titulo="correo electronico:"
@@ -72,8 +76,8 @@ export default function Login() {
 
                         </div>
                         <p className='lato_1' onClick={() => navigate("/")}>Olvidaste tu contraseña?</p>
-                        <div className='btn_login' onClick={handlerLogin}><button>Ingresar</button></div>
-                    </div>
+                        <div className='btn_login'><button type='submit'>Ingresar</button></div>
+                    </form>
                 </div>
             </div>
         </div>

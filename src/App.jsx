@@ -10,47 +10,46 @@ import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
 function App() {
 
-  const [user,setUser] = useState(null)
+  const [user, setUser] = useState(() => {
+    const userData = localStorage.getItem("usuario");
+    return userData ? JSON.parse(userData) : null;
+  });
+  
 
-  const iniciarSesion = () =>{
+  const iniciarSesion = (valorRol, valorName) => {
+    // PETICIONES AL BACK (simulado)
+    const newUser = { rol: valorRol, name: valorName };
+    setUser(newUser);
+    localStorage.setItem("usuario", JSON.stringify(newUser)); // Guardar en localStorage
+  };
 
-    //PETICIONES AL BACK
-
-    setUser({
-      rol: "normal",
-      name: "Juan" 
-    })
-
-  }
-
-  const cerrarSesion = () => setUser(null)
-
+  const cerrarSesion = () => {
+    setUser(null);
+    localStorage.removeItem("usuario"); // Eliminar del localStorage
+  };
   return (
     <Router>
       <div className="App">
-        {!user? (<button onClick={iniciarSesion}>INICIAR</button>):null}
-        
 
         {
           user ?
           (<nav className="navbar">
-            <NavBar rol='normal' func = {cerrarSesion}></NavBar>
+            <NavBar rol={user.rol} func = {cerrarSesion}></NavBar>
           </nav>): null
         }
 
         <main className={user? "main-content": "completo"}>
           <Routes>
-            <Route path="/" element={<Prueba></Prueba>} />
-
-        
-            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/ajustesEstudiante" : user.rol === "profe" ? "/hola" : "/") : "/"} > <Login/></ProtectedRoute>}></Route>
+            
+            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/" : user.rol === "profe" ? "/hola" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol == 'normal'}/>} >
+                <Route path="/" element={<Prueba></Prueba>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
                 <Route path="/materias" element={<VistaMateria/>} />
             </Route>
 
-            <Route path='/hola' element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}> <ProfePrueba></ProfePrueba> </ProtectedRoute>}></Route>
+            <Route path='/hola' element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}> <ProfePrueba></ProfePrueba> </ProtectedRoute>}></Route>
           </Routes>
         </main>
 
