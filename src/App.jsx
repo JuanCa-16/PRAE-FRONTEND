@@ -1,31 +1,56 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './global.scss'
 import Prueba from './componentes/Prueba.jsx';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import Login from './paginas/Login/Login.jsx';
+import { useState } from 'react';
+import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
+import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
 function App() {
+
+  const [user,setUser] = useState(null)
+
+  const iniciarSesion = () =>{
+
+    //PETICIONES AL BACK
+
+    setUser({
+      rol: "normal",
+      name: "Juan" 
+    })
+
+  }
+
+  const cerrarSesion = () => setUser(null)
 
   return (
     <Router>
       <div className="App">
-
-        {/* <Login></Login> */}
+        {!user? (<button onClick={iniciarSesion}>INICIAR</button>):null}
         
-        
-        {/* Navbar fija a la izquierda */}
-        <nav className="navbar">
-          <NavBar rol='normal'></NavBar>
-        </nav>
 
-        {/* Contenido que cambia según la ruta */}
-        <main className="main-content">
+        {
+          user ?
+          (<nav className="navbar">
+            <NavBar rol='normal' func = {cerrarSesion}></NavBar>
+          </nav>): null
+        }
+
+        <main className={user? "main-content": "completo"}>
           <Routes>
             <Route path="/" element={<Prueba></Prueba>} />
-            <Route path="/materias" element={<VistaMateria></VistaMateria>} />
-            <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
 
+        
+            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/ajustesEstudiante" : user.rol === "profe" ? "/hola" : "/") : "/"} > <Login/></ProtectedRoute>}></Route>
+
+            <Route element={<ProtectedRoute isAllowed={user && user.rol == 'normal'}/>} >
+                <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
+                <Route path="/materias" element={<VistaMateria/>} />
+            </Route>
+
+            <Route path='/hola' element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}> <ProfePrueba></ProfePrueba> </ProtectedRoute>}></Route>
           </Routes>
         </main>
 

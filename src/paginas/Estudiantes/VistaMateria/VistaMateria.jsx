@@ -23,13 +23,13 @@ const VistaMateria = () => {
                     </div>
                     <div className="col 2">
                     <Celda txt='Notas' tipo='titulo' rol='NoVer'></Celda>
-                        {titulos.map((notas, index) => (
+                        {notas.map((notas, index) => (
                             <Celda key={index} tipo='normal' txt={notas} rol='NoVer'></Celda>
                         ))}
                     </div>
                     <div className="col 3">
                     <Celda txt='Peso' tipo='titulo' rol='NoVer'></Celda>
-                        {titulos.map((pesos, index) => (
+                        {pesos.map((pesos, index) => (
                             <Celda key={index} tipo='normal' txt={pesos} rol='NoVer'></Celda>
                         ))}
                     </div>

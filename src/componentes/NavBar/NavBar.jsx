@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
-import { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon } from '../Icons/Icons.jsx';
+import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon } from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const menus = {
@@ -28,7 +28,7 @@ const menus = {
   ],
 };
 
-const NavBar = ({rol = "normal"}) => {
+const NavBar = ({rol = "normal", func}) => {
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
 
@@ -48,6 +48,7 @@ const NavBar = ({rol = "normal"}) => {
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
             <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname === item.ruta}/>))}
+            <NavBarItem func={func} texto={"Salir"} ruta='/login'/>
         </nav>
       </div>
       {
