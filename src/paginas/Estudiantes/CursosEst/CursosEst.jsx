@@ -21,7 +21,7 @@ export default function CursosEst() {
     //pasa los datos de la materia a la pagina de notas de la materias
     const manejarClick = (materia, profesor,color) => {
         const datos = { materia, profesor,color }; // Datos a enviar
-        navigate("/notas", { state: datos }); // Navegar con los datos
+        navigate("/materias/notas", { state: datos }); // Navegar con los datos
     };
 
     //Informacion de las pildoras

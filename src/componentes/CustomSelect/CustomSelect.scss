@@ -1,0 +1,53 @@
+@import '../../global.scss';
+.custom-select {
+    
+    position: relative;
+    width: 100%;
+
+    cursor: pointer;
+
+    p{
+        padding-bottom: 0.5rem;
+    }
+
+    .selected {
+        background: $contraste-blanco;
+        padding: 0.6rem 1rem;
+        border-radius: $radio1;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        opacity: .5;
+    }
+
+    .options {
+        position: absolute;
+        width: 100%;
+        background: $blanco;
+        border-radius: $radio1;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 5px;
+        z-index: 10;
+
+        .option {
+            padding: 0.6rem 1rem;
+            transition: background 0.3s;
+            overflow-wrap: break-word; 
+            &:hover {
+                background: $azul;
+                color: $blanco;
+            }
+
+            // Aplica bordes redondeados SOLO al primero y último
+            &:first-child {
+                border-top-left-radius: $radio1;
+                border-top-right-radius: $radio1;
+            }
+
+            &:last-child {
+                border-bottom-left-radius: $radio1;
+                border-bottom-right-radius: $radio1;
+            }
+        }
+    }
+}
