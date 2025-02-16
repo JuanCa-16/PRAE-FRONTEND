@@ -4,15 +4,27 @@ import './CursosEst.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes'
 import Pildora from '../../../componentes/Pildora/Pildora'
 
+
+/** 
+ * Componente: CursosEst
+ * Descripción: Muestra un listado de materias del estudiante con la posibilidad de navegar a una página de notas.
+ * Props:
+ *      - Ninguna.
+ * Funcionalidad:
+ *      - Muestra una lista de materias con el nombre de la materia, el nombre del profesor y un color asociado.
+ *      - Al hacer clic en una "píldora" de materia, navega a la página de notas pasando los datos correspondientes.
+ */
 export default function CursosEst() {
 
     const navigate = useNavigate();
 
+    //pasa los datos de la materia a la pagina de notas de la materias
     const manejarClick = (materia, profesor,color) => {
         const datos = { materia, profesor,color }; // Datos a enviar
         navigate("/notas", { state: datos }); // Navegar con los datos
     };
 
+    //Informacion de las pildoras
     const infoPildoras = [
         { materia: "Matemáticas", profesor: "Carlos Pérez", color:'morado' },
         { materia: "Física", profesor: "Ana Gómez", color:'azul' },

@@ -31,6 +31,7 @@ body {
     margin: 0;
 }
 
+//Estilos de letra (ROBOTO por defecto)
 h1 {
     font-size: 3rem; /* 48px */
     padding: 0;
@@ -62,10 +63,12 @@ p {
     overflow-wrap: break-word; 
 }
 
+//Volverlos negrilla
 .bold {
     font-weight: bold; /* Cambiar a negrita */
 }
 
+//Cambiar tipografia
 .lato{
     font-family: 'Lato', sans-serif; 
 }
@@ -74,7 +77,7 @@ p {
     font-family: 'Inter', sans-serif; 
 }
 
-
+//Estilos del Booton
 button{
     width: 100%;
     height: 100%;
@@ -107,6 +110,7 @@ button{
     }
 }
 
+//Estilos de la navegacion
 .App{
     display: flex;
     flex-direction: row;
@@ -114,6 +118,7 @@ button{
     padding: 0;
     margin: 0;
 
+    //Ocupa un pedazo de la pantalla
     .navbar {
         width: 16.8125rem;
         min-width: 16.8125rem;
@@ -125,6 +130,7 @@ button{
         top: 0;
     }
 
+    //Ocupa lo restante y scroll
     .main-content {
         width: 100%;
         padding: 24px 96px;
@@ -133,6 +139,7 @@ button{
         overflow: auto;
     }
 
+    //Si es el login toda la pantalla
     .completo{
         width: 100%;
         height: 100vh;

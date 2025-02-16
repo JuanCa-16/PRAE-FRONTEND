@@ -63,19 +63,19 @@ const Prueba = () => {
 
                 <PildoraMateriaGrado texto='MATEMATICAS' color='morado'></PildoraMateriaGrado>
 
-                <PildoraEst clase="peque"></PildoraEst>
+                <PildoraEst color='morado' clase="peque" est='jose maria esteban'></PildoraEst>
 
                 <PildoraEst color='morado'></PildoraEst>
 
                 <Pildora titulo = "INGLES" txtsuperior = "Esteban Castro Henao" txtinferior="6-2" color="morado"></Pildora>
 
-                <Pildora titulo = "INGLES" txtsuperior = "Julian Castro Henao" txtinferior="11-2" color="amarillo"></Pildora>
+                <Pildora titulo = "Ingles" txtsuperior = "julian castro Henao" txtinferior="11-2" color="amarillo"></Pildora>
 
                 <LogoPrae></LogoPrae>
 
                 <NavBarItem></NavBarItem>
 
-                <NavBarItem tipo={1}></NavBarItem>
+                <NavBarItem tipo={true}></NavBarItem>
 
                 <NavBar></NavBar>
 

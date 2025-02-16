@@ -1,19 +1,24 @@
 import React from 'react'
-import PropTypes from 'prop-types'; // Importa PropTypes para validación
-import '../../global.scss'
+import PropTypes from 'prop-types';
 import './InputContainer.scss'
 import { useState } from 'react';
 import { useId } from 'react';
 
-function InputContainer({ placeholder = "correo@gmail.com",
-    titulo = "correo electronico:",
-    inputType = "email",
-    value = "",    // Añadimos la prop 'value' para controlar el valor del input
-    required = false, // Añadimos la prop 'required' para la validación,
-    isDisabled= false,
-    nomInput,
-    onChange = () => {} // Añadimos 'onChange' para manejar los cambios en el input
-}) {
+
+/** 
+ * Componente: InputContainer
+ * Descripción: Renderiza un Input personalizado.
+ * Props:
+ *      - placeholder (string): Texto de ejemplo dentro del input (por defecto: "correo@gmail.com").
+ *      - titulo (string): Texto que aparecerá como título del input (por defecto: "correo electronico:").
+ *      - inputType (string): Tipo de input (por defecto: "email").
+ *      - value (string): Valor del input, útil para controlarlo desde un estado externo (por defecto: "").
+ *      - required (bool): Indica si el campo es obligatorio (por defecto: false).
+ *      - isDisabled (bool): Deshabilita el input cuando es true (por defecto: false).
+ *      - nomInput (string): Nombre del input para formularios.
+ *      - onChange (func): Función que se ejecuta cuando el valor del input cambia.
+ */
+function InputContainer({placeholder = "correo@gmail.com", titulo = "correo electronico:", inputType = "email", value = "", required = false, isDisabled= false, nomInput, onChange = () => {}}) {
 
     const [isFocused, setIsFocused] = useState(false);
 
@@ -39,11 +44,11 @@ function InputContainer({ placeholder = "correo@gmail.com",
                 id={uniqueId} 
                 placeholder={placeholder}
                 className="input-field"
-                value={inputValue}  // Vinculamos el valor del input al estado
+                value={inputValue}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                onChange={handleInputChange} // Llamamos a la función para manejar el cambio
-                required={required} // Si 'required' es true, el input será obligatorio
+                onChange={handleInputChange} 
+                required={required} 
                 disabled={isDisabled} 
                 name={nomInput}
             />
@@ -51,14 +56,15 @@ function InputContainer({ placeholder = "correo@gmail.com",
     );
 }
 
-// Validación de las props usando PropTypes
 InputContainer.propTypes = {
     placeholder: PropTypes.string,
     titulo: PropTypes.string,
     inputType: PropTypes.string,
     value: PropTypes.string,
     required: PropTypes.bool,
-    onChange: PropTypes.func,  // Validación para la función 'onChange'
+    isDisabled: PropTypes.bool,
+    nomInput: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 export default InputContainer;

@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import InputContainer from "../Input/InputContainer";
 import PropTypes from 'prop-types';
-import '../../global.scss'
 import './Modal.scss';
 
-const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar",modalTexto="Estas seguro de eliminar...", children }) => {
-    
+/** 
+ * Componente: Modal
+ * Descripción: Renderiza un modal dinámico que puede ser de tipo "eliminar", "actividad" o "nota".
+ * Props:
+ *      - isOpen (bool): Indica si el modal está abierto.
+ *      - closeModal (func): Función para cerrar el modal.
+ *      - tipo (string): Define el tipo de modal. Solo acepta "eliminar", "actividad" o "nota".
+ *      - modalTitulo (string): Título del modal (por defecto: "Eliminar").
+ *      - modalTexto (string): Texto del modal (por defecto: "Estas seguro de eliminar...").
+ *      - children (node): Elementos adicionales que se pueden renderizar dentro del modal.
+ */
 
-    //ENVIO DATOS MODAL ACTIVIDAD
+const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", children }) => {
+    
+    //La logica del modal eliminar se le hace es al boton que llega por children.
+    
+    //Envio datos modal actividad.
     const [nombreAct, setNonombreAct] = useState(""); // Estado para manejar el valor de la actividad
     const [pesoAct, setPesoAct] = useState(""); // Estado para manejar el valor del peso
 
@@ -34,7 +46,7 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar",modalTexto="Es
         // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
     };
 
-    //ENVIO DATOS MODAL NOTA
+    //Envio datos modal notas
     const [nota, setNota] = useState(""); // Estado para manejar el valor del email
     
       // Función para manejar el cambio en el campo del email
@@ -55,7 +67,7 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar",modalTexto="Es
         };
 
 
-    //MANEJO MODAL 
+    //MANEJO LOGICA MODAL 
     if (!isOpen) return null; // No renderiza el modal si isOpen es false
 
     const handleClickOutside = (e) => {
@@ -126,16 +138,12 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar",modalTexto="Es
 };
 
 Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired, // Debe ser un booleano y es obligatorio
-    closeModal: PropTypes.func.isRequired, // Debe ser una función y es obligatorio
-    tipo: PropTypes.string, // Debe ser una cadena de texto (opcional)
-    modalTitulo: PropTypes.string, // Debe ser una cadena de texto (opcional)
-    modalTexto: PropTypes.string, // Debe ser una cadena de texto (opcional)
-    children: PropTypes.node, // Puede ser cualquier cosa que pueda ser renderizada (opcional)
+    isOpen: PropTypes.bool.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    tipo: PropTypes.oneOf(["eliminar", "actividad", "nota"]), // Solo permite estos valores
+    modalTitulo: PropTypes.string,
+    modalTexto: PropTypes.string,
+    children: PropTypes.node,
 };
-
-
-
-
 
 export default Modal;

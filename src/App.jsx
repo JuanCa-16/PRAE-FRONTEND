@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
-import './global.scss'
-
 import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
@@ -10,14 +8,30 @@ import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import Login from './paginas/Login/Login.jsx';
 import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
 import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
+
+/** 
+ * Componente: App
+ * Descripción: Componente principal que maneja la navegación de la aplicación y el control de sesiones de usuario.
+ * Funcionalidad:
+ *      - Gestiona el estado del usuario a través del hook `useState`, cargando los datos desde `localStorage`.
+ *      - Permite iniciar sesión mediante la función `iniciarSesion`, que simula la autenticación y guarda los datos del usuario en `localStorage`.
+ *      - Permite cerrar sesión a través de la función `cerrarSesion`, eliminando los datos del usuario de `localStorage`.
+ *      - Configura las rutas protegidas mediante el componente `ProtectedRoute`, que redirige a las páginas correspondientes según el rol del usuario (estudiante o docente).
+ *      - Si el usuario está autenticado, muestra la barra de navegación (`NavBar`) y el contenido principal; de lo contrario, solo muestra el formulario de inicio de sesión.
+ * Props:
+ *      - Ninguna.
+ */
+
 function App() {
 
+  //Cargar datos del usario desde el local 
   const [user, setUser] = useState(() => {
     const userData = localStorage.getItem("usuario");
     return userData ? JSON.parse(userData) : null;
   });
   
 
+  //Si inicia seseion se crear el LOCAL 
   const iniciarSesion = (valorRol, valorName) => {
     // PETICIONES AL BACK (simulado)
     const newUser = { rol: valorRol, name: valorName };
@@ -25,10 +39,12 @@ function App() {
     localStorage.setItem("usuario", JSON.stringify(newUser)); // Guardar en localStorage
   };
 
+  //Eliminar TOKEN del local
   const cerrarSesion = () => {
     setUser(null);
     localStorage.removeItem("usuario"); // Eliminar del localStorage
   };
+  
   return (
     <Router>
       <div className="App">
@@ -36,7 +52,7 @@ function App() {
         {
           user ?
           (<nav className="navbar">
-            <NavBar rol={user.rol} func = {cerrarSesion}></NavBar>
+            <NavBar rol={user.rol} func = {cerrarSesion} nombreUsuario={user.name} ></NavBar>
           </nav>): null
         }
 

@@ -1,7 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import '../../global.scss'
 import "./LogoPrae.scss";
+
+/** 
+ * Componente: LogoPrae
+ * Descripción: Renderiza un logotipo con texto dinámico y color personalizado.
+ * Props:
+ *      - texto (string): Texto que se mostrará debajo del logo (por defecto: "ESTUDIANTES").
+ *      - color (string): Clase CSS para definir el color del texto. Solo puede ser "azul", "morado" o "amarillo".
+ */
 
 const LogoPrae = ({texto = "ESTUDIANTES", color}) => {
     return (
@@ -12,9 +19,9 @@ const LogoPrae = ({texto = "ESTUDIANTES", color}) => {
     </div>
     )
 }
-LogoPrae.propTypes = {
-    texto: PropTypes.string,         // Asegura que `texto` sea una cadena de texto
-    color: PropTypes.string,         // Asegura que `color` sea una cadena de texto
-};
 
+LogoPrae.propTypes = {
+    texto: PropTypes.string,      
+    color: PropTypes.oneOf(["azul", "morado", "amarillo"]), 
+};
 export default LogoPrae

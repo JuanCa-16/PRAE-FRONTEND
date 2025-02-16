@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../global.scss'
 import './NavBar.scss'
 import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
@@ -8,6 +7,7 @@ import PildoraEst from '../PildoraEst/PildoraEst';
 import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon} from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+//menus contendra las opciones de la navBar para cada usuario. Contiene su titulo, icono y ruta
 const menus = {
   normal: [
     { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
@@ -28,7 +28,16 @@ const menus = {
   ],
 };
 
-const NavBar = ({rol = "normal", func}) => {
+/** 
+ * Componente: NavBar
+ * Descripción: Renderiza una barra de navegación dinámica según el rol del usuario.
+ * Props:
+ *      - rol (string): Define el rol del usuario. Puede ser "normal", "profe" o "admin" (por defecto: "normal").
+ *      - nombreUsuario (string): Nombre del usuario que se mostrará en la barra de navegación en mayúsculas.
+ *      - func (func): Función a ejecutar al hacer clic en el botón de salida.
+ */
+
+const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func}) => {
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
 
@@ -36,7 +45,7 @@ const NavBar = ({rol = "normal", func}) => {
   const location = useLocation(); // Obtiene la ruta actual
 
     const handleClick = () => {
-          navigate("/"); // Redirige a la ruta especificada
+          navigate("/"); // Click del LOGOTIPO
         
     };
 
@@ -54,17 +63,16 @@ const NavBar = ({rol = "normal", func}) => {
       {
         rol === 'normal' ? (
 
-          <PildoraEst est='JULIAN CASTRO HENAO'></PildoraEst>
+          <PildoraEst est={nombreUsuario}></PildoraEst>
           
         ) : rol === 'profe' ? (
           
-          <NavBarItem tipo={1} texto='JUAN MANUEL VALENCIA'></NavBarItem>
+          <NavBarItem tipo={true} texto={nombreUsuario}></NavBarItem>
           
         ) :  (
           
-          <NavBarItem tipo={1} texto='JUAN CAMILO HENAO' color="amarillo"></NavBarItem>
+          <NavBarItem tipo={true} texto={nombreUsuario} color="amarillo"></NavBarItem>
           
-  
         )
       }
     </div>
@@ -73,7 +81,9 @@ const NavBar = ({rol = "normal", func}) => {
 }
 
 NavBar.propTypes = {
-  rol: PropTypes.oneOf(['normal', 'profe', 'admin']), // Asegura que el rol sea uno de los valores permitidos
+  rol: PropTypes.oneOf(['normal', 'profe', 'admin']),
+  nombreUsuario: PropTypes.string, 
+  func: PropTypes.func, 
 };
 
 export default NavBar

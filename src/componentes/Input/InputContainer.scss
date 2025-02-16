@@ -1,5 +1,6 @@
 @import '../../global.scss';
 
+//Estilos para el Input Container
 .input-container {
     align-items: flex-start;
     display: flex;
@@ -8,16 +9,18 @@
     gap: 0.5rem;
     height: 5.375rem;
 
+    //Estilo del titulo
     & .input-title{
         opacity: 50%;
     }
 
+    //Estilo del titulo cuando esta activo
     .input-title.focused {
         opacity: 100%;
         color: $azul;
     }
 
-
+    //Estilo del input
     & .input-field {
         
         background: $contraste-blanco;
@@ -40,6 +43,7 @@
 
     }
 
+    //Estilo del Input container cuando se hace hover.
     &.siHover{
         &:hover{
             & .input-title{

@@ -6,8 +6,23 @@ import Logo from "../../assets/logo.png"
 import InputContainer from '../../componentes/Input/InputContainer';
 import { useNavigate } from 'react-router-dom';
 
+/** 
+ * Componente: Login
+ * Descripción: Permite a los usuarios iniciar sesión en la plataforma de registro académico estudiantil.
+ * Funcionalidad:
+ *      - Presenta un formulario de inicio de sesión con campos para correo electrónico y contraseña.
+ *      - Al enviar el formulario, se captura la información del correo y la contraseña.
+ *      - Utiliza la función `func` pasada como prop para realizar alguna acción con los datos del usuario.
+ *      - Incluye un enlace para recuperar la contraseña si el usuario la ha olvidado.
+ *      - Después de un inicio de sesión exitoso, redirige a una página de inicio (actualmente comentada).
+ * Props:
+ *      - `func` (function): Función que maneja el proceso de autenticación con las credenciales del usuario.
+ */
+
 
 export default function Login({func}) {
+
+    //Valores de los inputs
     const [getDataLogin, SetgetDatasLogin] = useState({
         correo: "",
         password: "",
@@ -15,25 +30,23 @@ export default function Login({func}) {
 
     const navigate = useNavigate()
 
-
-    const handleChange = (titulo, value) => {
-        
+    //captar info de los inputs
+    const handleChange = (titulo, value) => { 
         SetgetDatasLogin({
             ...getDataLogin,
             [titulo]: value, // Convierte el título en key (puedes ajustarlo según tus necesidades)
         });
     };
 
-
-
+    //ENVIO DEL FORMULARIO ------ BACK
     const handlerLogin = (e) => {
         e.preventDefault()
         console.log(getDataLogin)
 
+        //Le envio a APP el resultado para actualiar valores del usuario. por ahora esto luego TOKEN
         func(getDataLogin.password, getDataLogin.password)
         // navigate("/home") /* cambiar la ruta despues */
     }
-
 
     return (
         <div className='contenedorLogin'>
@@ -59,8 +72,8 @@ export default function Login({func}) {
                                 placeholder="correo@gmail.com"
                                 titulo="correo electronico:"
                                 inputType="email"
-                                value={getDataLogin.correo}   // Añadimos la prop 'value' para controlar el valor del input
-                                required={true}  // Añadimos la prop 'required' para la validación
+                                value={getDataLogin.correo}   
+                                required={true}  
                                 nomInput="correo"
                                 onChange={(value) => handleChange('correo', value)} 
                             />
@@ -68,8 +81,8 @@ export default function Login({func}) {
                                 placeholder="*"
                                 titulo="Clave:"
                                 inputType="password"
-                                value={getDataLogin.password}   // Añadimos la prop 'value' para controlar el valor del input
-                                required={true}  // Añadimos la prop 'required' para la validación
+                                value={getDataLogin.password} 
+                                required={true}  
                                 nomInput="password"
                                 onChange={(value) => handleChange('password', value)} 
                             />

@@ -1,5 +1,13 @@
 import * as React from "react";
 
+/** 
+ * Componentes: Iconos 
+ * Descripcion: Iconos a usar en la NavBar
+ * Props:
+ *    - estado (bool): Para darle color cuando se hace hover.
+ *    - activo (bool): Para darle color cuando esta activado.
+*/
+
 const HomeIcon = ({ color = "#000", width = 30, height = 30, estado,activo, ...props }) => {
 
   return (
@@ -20,8 +28,6 @@ const HomeIcon = ({ color = "#000", width = 30, height = 30, estado,activo, ...p
     </svg>
   );
 };
-
-
 
 const StudyIcon = ({ color = "#000", width = 30, height = 30, estado, activo, ...props }) => (
   <svg
@@ -142,7 +148,6 @@ const ExitIcon = ({ color = "#000", width = 30, height = 30, estado,activo, ...p
     />
   </svg>
 )
-
 
 // Exporta todos los iconos
 export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon}
