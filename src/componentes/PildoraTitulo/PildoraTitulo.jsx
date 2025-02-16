@@ -1,17 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
-import '../../global.scss'
 import './PildoraTitulo.scss'
 
+//Fucnion para poner mayusculas iniciales
+const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+};
 
+/**
+ * Componente: PildoraTitulo
+ * Descripción: Representa una tarjeta con información de un estudiante, su materia y su nota.
+ * Props:
+ *      - color (string): Define el color de la píldora. Puede ser "azul", "morado" o "amarillo".
+ *      - nombre (string): Nombre del estudiante. Se mostrará con mayúscula inicial en cada palabra.
+ *      - materia (string): Nombre de la materia. Se mostrará en mayúsculas.
+ *      - nota (string): Nota del estudiante.
+ */
 
-const PildoraTitulo = ({color="morado", nombre="Juan Camilo Henao", materia="CALCULO II", nota = "4.5"}) => {
+const PildoraTitulo = ({color="azul", nombre="Juan Camilo Henao", materia="CALCULO II", nota = "4.5"}) => {
     return (
         <div className={`contenedorPilaTitulo ${color} `}>
             <div className="infoContainer">
                 <div className="info">
-                    <p className='lato nombre'>{nombre}</p>
-                    <h4 className='inter bold materia'>{materia}</h4>
+                    <p className='lato nombre'>{capitalizeWords(nombre)}</p>
+                    <h4 className='inter bold materia'>{materia.toUpperCase()}</h4>
                 </div>
                 <h2 className='nota inter bold'>{nota}</h2>
             </div>
@@ -22,10 +34,10 @@ const PildoraTitulo = ({color="morado", nombre="Juan Camilo Henao", materia="CAL
 }
 
 PildoraTitulo.propTypes = {
-    color: PropTypes.string,  // Debe ser una cadena de texto (opcional)
-    nombre: PropTypes.string, // Debe ser una cadena de texto (opcional)
-    materia: PropTypes.string, // Debe ser una cadena de texto (opcional)
-    nota: PropTypes.string,    // Debe ser una cadena de texto (opcional)
+    color: PropTypes.oneOf(["azul", "morado", "amarillo"]), // El color solo puede ser "azul", "morado" o "amarillo"
+    nombre: PropTypes.string.isRequired, // El nombre es obligatorio y debe ser una cadena de texto
+    materia: PropTypes.string.isRequired, // La materia es obligatoria y debe ser una cadena de texto
+    nota: PropTypes.string.isRequired, // La nota es obligatoria y debe ser una cadena de texto
 };
 
 export default PildoraTitulo

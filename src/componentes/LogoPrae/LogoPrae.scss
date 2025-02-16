@@ -1,5 +1,6 @@
 @import '../../global.scss';
 
+//Estilos del componente por defecto azul
 .logoContenedor{
     display: inline-flex;
     align-items: center;
@@ -11,6 +12,7 @@
     color: $azul;
     cursor: pointer;
 
+    //Estilos para el logo
     .logoPrae{
         width: 2.4rem;
         position: relative;
@@ -18,10 +20,12 @@
         
     }
 
+    //Aplicar color Morado
     .morado{
         color: $morado
     }
 
+    //Aplicar color Amarillo
     .amarillo{
         color: $amarillo
     }

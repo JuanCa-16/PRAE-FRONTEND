@@ -1,6 +1,6 @@
 @import '../../global.scss';
 
-
+//Estilos del componente
 .contenedorPildoraG{
     display: inline-flex;
     align-items: center;
@@ -22,6 +22,7 @@
     background-color: $azul;
     color: $contraste-azul;
     
+    //colores
     &.morado {
         background-color: $morado;
         color: $contraste-morado;
@@ -50,7 +51,7 @@
         
     }
 
-
+    //colores hover
     &:hover{
         cursor: pointer;
         background-color: $contraste-azul;

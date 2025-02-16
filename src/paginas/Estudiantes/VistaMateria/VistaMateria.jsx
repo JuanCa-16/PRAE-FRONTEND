@@ -5,11 +5,23 @@ import InputContainer from '../../../componentes/Input/InputContainer'
 import PildoraTitulo from '../../../componentes/PildoraTitulo/PildoraTitulo'
 import Celda from '../../../componentes/Celda/Celda'
 
+/** 
+ * Componente: VistaMateria
+ * Descripción: Muestra la información detallada de una materia, incluyendo actividades, notas y pesos.
+ * Funcionalidad:
+ *      - Recupera los datos de la materia, profesor y color desde la ruta mediante `useLocation`.
+ *      - Muestra un resumen de la materia con el nombre de la materia, el profesor y un color destacado.
+ *      - Presenta una tabla con las actividades, sus respectivas notas y los pesos correspondientes.
+ *      - Incluye un campo de observaciones deshabilitado con un texto predeterminado ("Sin Observaciones").
+ * Props:
+ *      - Ninguna.
+ */
 const VistaMateria = () => {
 
     const location = useLocation();
     const { materia, profesor,color } = location.state || {};
 
+    //Informacion de la tabla traer info del BACK
     const titulos = ["Actividad 1", "Actividad 2", "Actividad 3"];
     const notas = [4.5, 3.8, 4.0];
     const pesos = [30, 20, 50]; 

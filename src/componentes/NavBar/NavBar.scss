@@ -1,22 +1,18 @@
 @import '../../global.scss';
 
+//Estilos de la NavBar
 .contenedorNavBar{
     background-color: $contraste-blanco;
     display: flex;
-
-
     width: 100%;
-    // height: 42.5rem;
     height: 100%;
-
-    
     padding: 1.25rem 0.625rem;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
     
-
+    //Estilos del menu Superior
     .menuSuperior{
         display: flex;
         flex-direction: column;
@@ -34,7 +30,6 @@
     }
 
     .linea{
-
         background-color: black;  /* El color de la línea */
         opacity: 0.15;
         width: 100%;             /* Ocupa todo el ancho del contenedor */
@@ -42,5 +37,4 @@
         border-radius: 10rem;
     }
 
-    
 }

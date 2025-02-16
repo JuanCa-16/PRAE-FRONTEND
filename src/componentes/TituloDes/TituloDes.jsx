@@ -1,9 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
-import '../../global.scss'
 import './TituloDes.scss'
 
-
+/**
+ * Componente: TituloDes
+ * Descripción: Representa un título con una breve descripción debajo.
+ * Props:
+ *      - titulo (string): Texto del título (por defecto: "Titulo").
+ *      - desc (string): Texto de la descripción (por defecto: "Descripcion del titulo").
+ */
 const TituloDes = ({titulo="Titulo", desc="Descripcion del titulo"}) => {
     return (
     <div className='contenedorTituloDes'>

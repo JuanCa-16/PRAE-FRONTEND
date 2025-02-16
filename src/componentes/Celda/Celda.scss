@@ -1,5 +1,7 @@
 @import '../../global.scss';
 
+
+//Estilos para la celda
 .celda{
 
     border-radius: 0.75rem;
@@ -9,12 +11,13 @@
     align-items: center;
     width: 100%;
     
-    
+    //Si es de tipo titulo
     &.titulo{
         font-weight: bold;
         color: $azul;
         background-color: $contraste-azul;
 
+        //si tiene rol de ver
         &.ver{
             &:hover{
                 cursor: pointer;
@@ -24,12 +27,14 @@
         }
     }
 
+    //Si es de tipo titulo2
     &.titulo2{
         font-weight: bold;
         color: $azul;
         padding: 0.3125rem 1.3125rem;
         background-color: $contraste-blanco;
 
+        //Si tiene rol de ver
         &.ver{
             &:hover{
                 cursor: pointer;
@@ -39,11 +44,13 @@
         }
     }
 
+    //Si es de tipo normal
     &.normal{
         
         padding: 0.375rem 1.3125rem;
         background-color: $blanco;
 
+        //si tiene el rol de ver
         &.ver{
             &:hover{
                 cursor: pointer;

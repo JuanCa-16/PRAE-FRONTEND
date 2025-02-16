@@ -1,5 +1,6 @@
 @import '../../global.scss';
 
+//Oscurecer el fondo
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -12,6 +13,7 @@
     align-items: center;
     z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
   
+    //Mostrar modal eliminar
     .modal-content {
       background: $blanco;
       display: inline-flex;
@@ -25,6 +27,7 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       z-index: 1001; /* Asegura que el contenido del modal esté sobre el fondo */
   
+      //Estilos elementos del modal
       .modalContenedor{
         display: flex;
         flex-direction: column;
@@ -44,6 +47,7 @@
   
     }
 
+    //Modal si es de tipo actividad y notas
     &.actividad, &.nota{
       
       .modal-content{
@@ -89,10 +93,10 @@
             }
           }
         }
-      }
-    
+      } 
     }
 
+    //Modal si es tipo nota
     &.nota{
       .modal-content{
         max-width: 20.75rem; 

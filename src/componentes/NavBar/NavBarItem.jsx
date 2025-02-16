@@ -1,19 +1,33 @@
 import React from 'react';
+import "./NavBarItem.scss";
 import { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
-import '../../global.scss';
-import "./NavBarItem.scss";
 import { HomeIcon } from '../Icons/Icons.jsx';
 
-const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo,func }) => {
+/** 
+ * Componente: NavBarItem
+ * Descripción: Representa un ítem de la barra de navegación que puede incluir un ícono, texto y una función opcional.
+ * Props:
+ *      - icono (elementType): Componente del ícono a mostrar (por defecto: HomeIcon).
+ *      - texto (string): Texto a mostrar en el ítem (por defecto: "Principal").
+ *      - ruta (string): Ruta a la que redirige al hacer clic (por defecto: "/").
+ *      - tipo (boolean | null | undefined): Define un tipo especial de ítem (true para tipo especial, null o undefined para estándar).
+ *      - color (string): Clase CSS adicional para el color (solo puede ser "azul", "morado" o "amarillo").
+ *      - activo (boolean): Indica si el ítem está activo.
+ *      - func (func): Función a ejecutar al hacer clic.
+ */
+const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo, func }) => {
     const navigate = useNavigate(); // Hook para redirigir
 
     const handleClick = () => {
 
+        //  Funcion del cerrar sesion
         if(func){
-            func()
+            return func()
         }
+
+        //Rutas de los items de la navBar
         if (ruta) {
             navigate(ruta); // Redirige a la ruta especificada
         }
@@ -22,22 +36,23 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     const [hovered, setHovered] = useState(false);
 
     return (
-
         <div className={` ${tipo ? "tipo-existe color" : "contenedorNavBarItem "} ${color}  ${activo ? "activar" : " "}` } onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='etiqueta'>
                 {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered} activo={activo} /> </div>):(<div></div>)}
-                <p className='texto lato'>{texto}</p>
+                <p className='texto lato'>{tipo? texto.toUpperCase() : texto}</p>
             </div>
         </div>
     );
 };
 
 NavBarItem.propTypes = {
-    icono: PropTypes.elementType,   // Asegura que `icono` sea un componente React (como un ícono de react-icons)
+    icono: PropTypes.elementType,   // Asegura que `icono` sea un componente React
     texto: PropTypes.string,        // Asegura que `texto` sea una cadena de texto
     ruta: PropTypes.string,         // Asegura que `ruta` sea una cadena de texto
-    tipo: PropTypes.number,         // `tipo` es un número opcional, si es que se usa
-    color: PropTypes.string,        // `color` es una cadena de texto, generalmente para clases CSS
+    tipo: PropTypes.oneOf([true, null, undefined]), // `tipo` solo permite estos valores
+    color: PropTypes.oneOf(["azul", "morado", "amarillo"]), // `color` solo permite estos valores
+    activo: PropTypes.bool,         // `activo` indica si el ítem está activo
+    func: PropTypes.func,           // `func` es una función opcional
 };
 
 export default NavBarItem;

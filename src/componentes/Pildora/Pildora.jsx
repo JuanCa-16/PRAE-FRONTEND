@@ -1,15 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
-import '../../global.scss'
 import './Pildora.scss'
 
+//Fucnion para poner mayusculas iniciales
+const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+};
+
+/**
+ * Componente: Pildora
+ * Descripción: Representa un componente visual tipo "píldora" con informacion de la materia profesor y grado.
+ * Props:
+ *      - titulo (string): Texto principal, se convierte a mayúsculas. (MATERIA)
+ *      - txtsuperior (string): Texto superior, se capitaliza cada palabra. (PROFESOR)
+ *      - txtinferior (string): Texto inferior opcional. (GRADO opcional)
+ *      - color (string): Solo permite "azul", "morado" o "amarillo".
+ *      - onClick (func): Función a ejecutar cuando se hace clic en la píldora.
+ */
 
 const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", txtinferior, color, onClick}) => {
     return (
         <div className={`pildora ${color}`} onClick={onClick}>
             <div className="info">
-                <p className="texto superior lato">{txtsuperior}</p>
-                <h4 className="titulo inter bold">{titulo}</h4>
+                <p className="texto superior lato">{capitalizeWords(txtsuperior)}</p>
+                <h4 className="titulo inter bold">{titulo.toUpperCase()}</h4>
                 <p className="texto inferior lato"> {txtinferior}</p>
             </div>
             <div className="elipse1" />
@@ -17,11 +31,13 @@ const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", tx
         </div>
     )
 }
+
 Pildora.propTypes = {
-    titulo: PropTypes.string,          // 'titulo' es opcional y debe ser un string
-    txtsuperior: PropTypes.string,     // 'txtsuperior' es opcional y debe ser un string
-    txtinferior: PropTypes.string,     // 'txtinferior' es opcional y debe ser un string
-    color: PropTypes.string           // 'color' es opcional y debe ser un string
+    titulo: PropTypes.string.isRequired,  
+    txtsuperior: PropTypes.string,        
+    txtinferior: PropTypes.string,        
+    color: PropTypes.oneOf(["azul", "morado", "amarillo"]), 
+    onClick: PropTypes.func               
 };
 
 export default Pildora

@@ -1,6 +1,7 @@
 @import '../../global.scss';
 
 
+//Estilos del componente cuando es NavBarItemn
 .contenedorNavBarItem{
 
     width: 100%;
@@ -15,6 +16,7 @@
     cursor: pointer;
     min-height: 2.87rem;
 
+    //Estilos logo y texto
     .etiqueta{
 
         display: inline-flex;
@@ -28,7 +30,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             width: 1.8rem;
             height: 1.8rem;
         }
@@ -39,9 +40,9 @@
 
     }
 
+    //Estilos para el Hover
     &:hover{
 
-        
         outline: 0.0625rem solid #A9CEFF;
         background-color: $contraste-azul;
         
@@ -55,6 +56,7 @@
 
     }
 
+    //Estilo cuando el menu este activo
     &.activar{
         outline: 0.0625rem solid #A9CEFF;
         background-color: $contraste-azul;
@@ -69,6 +71,7 @@
     }
 }
 
+//Estilos cuando es tipo existe (solo es nombre e iluminacion)
 .tipo-existe{
 
     width: 100%;
@@ -82,7 +85,7 @@
     outline: 0.0625rem solid #A2A1D5;
     background-color: $contraste-morado;
 
-
+    //Estilo letra
     .etiqueta{
 
         display: inline-flex;
@@ -109,6 +112,7 @@
 
     }
 
+    //colores
     &.amarillo{
         outline: 0.0625rem solid #D9C3AC;
         background-color: $contraste-amarillo;
