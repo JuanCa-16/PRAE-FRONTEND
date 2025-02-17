@@ -1,4 +1,6 @@
 @import '../../global.scss';
+
+//Estilos
 .custom-select {
     
     position: relative;
@@ -10,6 +12,7 @@
         padding-bottom: 0.5rem;
     }
 
+    //Del input
     .selected {
         background: $contraste-blanco;
         padding: 0.6rem 1rem;
@@ -20,6 +23,7 @@
         opacity: .5;
     }
 
+    //Del menu de opciones
     .options {
         position: absolute;
         width: 100%;
@@ -29,6 +33,7 @@
         margin-top: 5px;
         z-index: 10;
 
+        //De cada opcion
         .option {
             padding: 0.6rem 1rem;
             transition: background 0.3s;

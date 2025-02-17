@@ -4,6 +4,28 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 
+/**
+ * Componente: CursosDocentes
+ * Descripción: Muestra una lista de cursos asignados a un docente con la opción de filtrar por materia y grado.
+ * 
+ * Props:
+ *      - nombreDocente (string): Nombre del docente al que se le asignan los cursos.
+ * 
+ * Estado:
+ *      - materiaSeleccionada (string): Materia seleccionada en el filtro.
+ *      - gradoSeleccionado (string): Grado seleccionado en el filtro.
+ * 
+ * Funcionalidad:
+ *      - Filtra los cursos por materia y/o grado según las selecciones del usuario.
+ *      - Permite limpiar los filtros para mostrar todos los cursos.
+ *      - Muestra un mensaje si no hay cursos que coincidan con los filtros seleccionados.
+ * 
+ * Componentes utilizados:
+ *      - TituloDes: Muestra un título y una descripción.
+ *      - CustomSelect: Selector personalizado para elegir materia y grado.
+ *      - Pildora: Representa visualmente un curso con su materia, grado y color asociado.
+ */
+
 const CursosDocentes = ({ nombreDocente }) => {
     const infoPildoras = [
         { materia: "Matemáticas", grado: "6-2", color: 'morado' },
@@ -14,6 +36,7 @@ const CursosDocentes = ({ nombreDocente }) => {
         { materia: "Historia", grado: "9-2", color: 'morado' },
     ];
 
+    //Elimina opciones duplicadas para el selector
     const materiasUnicas = [...new Set(infoPildoras.map(item => item.materia))];
     const gradosUnicos = [...new Set(infoPildoras.map(item => item.grado))];
 
