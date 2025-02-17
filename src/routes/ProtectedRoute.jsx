@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 /** 
  * Componente: ProtectedRoute
@@ -16,7 +16,9 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 export const ProtectedRoute = ({ children, isAllowed, redireccionar="/login"}) => {
 
-    if(!isAllowed){
+    const location = useLocation();
+
+    if(!isAllowed && location.pathname !== redireccionar){
         return <Navigate to={redireccionar} replace />
     }
 

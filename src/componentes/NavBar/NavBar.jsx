@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import './NavBar.scss'
 import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
@@ -14,7 +14,7 @@ const menus = {
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
   ],
   profe: [
-    { texto: "Listado", icono: ListadoIcon, ruta: "/listado" },
+    { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
     { texto: "Inscribir Estudiante", icono: EstudianteIcon, ruta: "/inscribir" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
@@ -44,10 +44,14 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   const navigate = useNavigate(); // Hook para redirigir
   const location = useLocation(); // Obtiene la ruta actual
 
-    const handleClick = () => {
-          navigate("/"); // Click del LOGOTIPO
+  const handleClick = () => {
+        navigate("/login"); // Click del LOGOTIPO
         
-    };
+  };
+
+  useEffect(() => {
+    // Forzar actualización del estado cuando cambie la ubicación
+  }, [location.pathname]);
 
   return (
     <div className='contenedorNavBar'>
@@ -56,7 +60,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
-            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname === item.ruta}/>))}
+            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname.startsWith(item.ruta)}/>))}
             <NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>
         </nav>
       </div>

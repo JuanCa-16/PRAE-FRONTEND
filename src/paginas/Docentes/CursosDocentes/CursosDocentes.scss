@@ -1,0 +1,77 @@
+//estilos
+@import '../../../global.scss';
+
+.contenedorCursosDocentes{
+    display: flex;
+    padding: 0rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.0625rem;
+    align-self: stretch;
+
+    .informacion{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        align-self: stretch;
+
+        .filtros{
+            display: flex;
+            width: 70%;
+            align-items: center;
+            gap: 2.75rem;
+            align-self: stretch;
+
+            button{
+                width: 20%;
+            }
+
+            .busqueda{
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.5rem;
+                height: 5.375rem;
+
+                .selector{
+                    // appearance: none;
+                    background-color: $contraste-blanco;
+                    border: none;
+                    outline: none;
+                    border-radius: $radio1;
+                    padding: 0.875rem 1.25rem;
+
+                    &:focus {
+                        outline: 0.0625rem solid $azul; // Borde cuando está enfocado
+                    }
+
+                    .opcion{
+                        padding: 2rem;
+                        &:hover{
+                            background-color: $azul;
+                        }
+                    }
+
+                    & option{
+                        padding: 2rem;
+                        &:hover{
+                            background-color: $azul;
+                        }
+                    }
+        
+                }
+
+            }
+        }
+
+        .materias{
+            display: flex;
+            align-items: center;
+            align-content: center;
+            gap: 1.5rem;
+            align-self: stretch;
+            flex-wrap: wrap;
+        }
+    }
+}
