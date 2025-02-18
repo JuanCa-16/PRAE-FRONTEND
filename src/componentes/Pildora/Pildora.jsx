@@ -18,7 +18,7 @@ const capitalizeWords = (str) => {
  *      - onClick (func): Función a ejecutar cuando se hace clic en la píldora.
  */
 
-const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel Valencia", txtinferior, color, onClick}) => {
+const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel", txtinferior, color, onClick}) => {
     return (
         <div className={`pildora ${color}`} onClick={onClick}>
             <div className="info">

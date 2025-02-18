@@ -14,9 +14,9 @@ import './Celda.scss'
  *                      VALORES: ver (permite el hover), NoVer (desactiva el hover)
  */
 
-const Celda = ({txt="Valor", tipo="titulo", rol="ver"}) => {
+const Celda = ({txt="Valor", tipo="titulo", rol="ver", onClick}) => {
     return (
-        <div className={`celda ${tipo} ${rol}`}>
+        <div className={`celda ${tipo} ${rol}`} onClick={onClick}>
             <p>{txt}</p>
         </div>
 )

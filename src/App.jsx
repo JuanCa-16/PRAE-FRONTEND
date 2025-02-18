@@ -11,6 +11,7 @@ import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
 
 //DOCENTES
 import CursosDocentes from './paginas/Docentes/CursosDocentes/CursosDocentes.jsx';
+import ActividadesCurso from './paginas/Docentes/ActividadesCurso/ActividadesCurso.jsx';
 
 
 import Login from './paginas/Login/Login.jsx';
@@ -41,7 +42,7 @@ function App() {
   //Si inicia seseion se crear el LOCAL 
   const iniciarSesion = (valorRol, valorName) => {
     // PETICIONES AL BACK (simulado)
-    const newUser = { rol: valorRol, name: valorName };
+    const newUser = { rol: valorRol, name: valorName, grado: '6-2' };
     setUser(newUser);
     localStorage.setItem("usuario", JSON.stringify(newUser)); // Guardar en localStorage
   };
@@ -77,8 +78,8 @@ function App() {
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}/>} >
-                
-                <Route path='/listadoCursos' element={<CursosDocentes/>} />
+                <Route path='/listadoCursos' element={<CursosDocentes/> } />
+                <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
