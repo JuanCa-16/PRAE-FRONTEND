@@ -23,11 +23,11 @@ function InputContainer({placeholder = "correo@gmail.com", titulo = "correo elec
     const [isFocused, setIsFocused] = useState(false);
 
     // Estado interno para manejar el valor del input
-    const [inputValue, setInputValue] = useState(value);
+    // const [inputValue, setInputValue] = useState(value);
 
     // Función para actualizar el valor del input
     const handleInputChange = (event) => {
-        setInputValue(event.target.value);
+        // setInputValue(event.target.value);
         onChange(event.target.value); // Pasamos el nuevo valor al 'onChange' recibido como prop
     };
 
@@ -44,7 +44,7 @@ function InputContainer({placeholder = "correo@gmail.com", titulo = "correo elec
                 id={uniqueId} 
                 placeholder={placeholder}
                 className="input-field"
-                value={inputValue}
+                value= {value}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onChange={handleInputChange} 

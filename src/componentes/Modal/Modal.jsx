@@ -45,8 +45,8 @@ import './Modal.scss';
  *      - Dependiendo del tipo de modal, se renderiza el contenido adecuado (eliminar, actividad o nota).
  */
 
-const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", valorAct='',ValorPeso='', valorNota = '', children }) => {
-    
+const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", valorAct='',ValorPeso='', valorNota = '', extraData={},  children }) => {
+
     //La logica del modal eliminar se le hace es al boton que llega por children.
     
     //Envio datos modal actividad.
@@ -65,12 +65,13 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
     const handleSubmit1 = () => {
         // Crear el objeto JSON con los valores de los inputs
         const formData = {
+            ...extraData,
             nombreAct: nombreAct,
             pesoAct: pesoAct,
         };
     
         // Mostrar el objeto JSON en la consola (o enviarlo al servidor)
-        console.log("Datos del formulario:", JSON.stringify(formData));
+        console.log("Datos del formulario ACTIVIDAD:", JSON.stringify(formData));
         closeModal()
     
         // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
@@ -87,11 +88,12 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
         const handleSubmit2 = () => {
             // Crear el objeto JSON con los valores de los inputs
             const formData = {
+                ...extraData,
                 nota: nota,
             };
         
             // Mostrar el objeto JSON en la consola (o enviarlo al servidor)
-            console.log("Datos del formulario:", JSON.stringify(formData));
+            console.log("Datos del formulario NOTAS:", JSON.stringify(formData));
             closeModal()
             // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
         };

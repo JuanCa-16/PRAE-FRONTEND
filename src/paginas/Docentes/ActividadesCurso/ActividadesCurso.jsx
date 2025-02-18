@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from "react-router-dom";
 import './ActividadesCurso.scss'
 import InputContainer from '../../../componentes/Input/InputContainer'
@@ -173,9 +173,11 @@ const ActividadesCurso = () => {
 
         ]
       }
-          ]
+        ]
 
         const nombres = datos.map(item => ` ${item.apellido} ${item.nombre}`);
+        const soloApellidos = datos.map(item => ` ${item.apellido}`);
+        const soloNombre = datos.map(item => ` ${item.nombre}`);
         const actividadesUnicas = [
             ...new Set(datos.flatMap(estudiante => estudiante.actividades.map(act => act.actividad)))
         ];
@@ -198,6 +200,11 @@ const ActividadesCurso = () => {
         const handleSubmit = (e) => {
             e.preventDefault()
             console.log(nombreAct)
+            setNonombreAct({
+                actividad: "",
+                peso: "",
+            })
+            
         };
 
 
@@ -248,6 +255,7 @@ const ActividadesCurso = () => {
                                             modalTexto='Edita los parametros de tu actividad'
                                             valorAct={actividad}
                                             ValorPeso='40%'
+                                            extraData={{ materia: materia, profesor: profesor, grado: grado }} 
                                         />
                                     )}
                                     {datos.map((estudiante, j) => {
@@ -269,6 +277,7 @@ const ActividadesCurso = () => {
                                                         valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
                                                         modalTitulo='EDITAR NOTA'
                                                         modalTexto='Edita la nota de esta actividad'
+                                                        extraData={{ materia: materia, profesor: profesor, grado: grado, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i] }}
                                                     />
                                                 )}
                                             </div>
