@@ -12,6 +12,9 @@ import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
 //DOCENTES
 import CursosDocentes from './paginas/Docentes/CursosDocentes/CursosDocentes.jsx';
 import ActividadesCurso from './paginas/Docentes/ActividadesCurso/ActividadesCurso.jsx';
+import Observaciones from './paginas/Docentes/Observaciones/Observaciones.jsx';
+import CrearObservacion from './paginas/Docentes/CrearObservacion/CrearObservacion.jsx';
+
 
 
 import Login from './paginas/Login/Login.jsx';
@@ -80,6 +83,8 @@ function App() {
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}/>} >
                 <Route path='/listadoCursos' element={<CursosDocentes/> } />
                 <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
+                <Route path='/observaciones' element={<Observaciones/>} />
+                <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />

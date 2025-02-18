@@ -15,7 +15,7 @@ const menus = {
   ],
   profe: [
     { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
-    { texto: "Inscribir Estudiante", icono: EstudianteIcon, ruta: "/inscribir" },
+    { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
   admin: [

@@ -4,7 +4,7 @@
 .custom-select {
     
     position: relative;
-    width: 100%;
+    width: fit-content;
 
     cursor: pointer;
 
@@ -17,14 +17,17 @@
         background: $contraste-blanco;
         padding: 0.6rem 1rem;
         border-radius: $radio1;
-        border: none;
-        display: flex;
-        justify-content: space-between;
-        opacity: .5;
-        height: 3rem;
-        align-items: center;
+        border: 1px solid transparent; // Mantiene el grosor del borde
+        outline: none; // Elimina el contorno azul predeterminado
+        transition: border 0.3s ease;
+        height: 2.8rem;
+    
+        &:focus {
+            border-color: $azul; // Solo cambia el color, no el grosor
+        }
     }
-
+    
+    
     //Del menu de opciones
     .options {
         position: absolute;
