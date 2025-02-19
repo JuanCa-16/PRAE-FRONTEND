@@ -18,7 +18,10 @@ const PerfilEst = () => {
 
     //Datos inciales a mostrar
     const [formData, setFormData] = useState({
+        apellidos: 'Henao Gallego' ,
+        nombre:'Juan Camilo',
         correo: 'juan.henao.gallego@gmail.com',
+        doc: '20221598320',
         contrasena: '1234',
         curso: '11-2',
     });
@@ -32,7 +35,8 @@ const PerfilEst = () => {
     };
 
     //Envio del formulario
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         console.log('Datos enviados:', formData);
     };
 
@@ -40,17 +44,17 @@ const PerfilEst = () => {
         <div className='contenedorPerfilEst'>
             <div className="editar">
                 <TituloDes titulo='EDITAR PERFIL ESTUDIANTE' desc='Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado.' />
-                <div className="formulario">
+                <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" titulo='Apellidos' value='Henao Gallego' isDisabled={true} />
-                        <InputContainer nomInput="nombres" titulo='Nombres' value='Juan Camilo' isDisabled={true} />
-                        <InputContainer nomInput="coreo" titulo='Correo' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
-                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
-                        <InputContainer nomInput="doc" titulo='Documento' value='2159831' isDisabled={true} />
-                        <InputContainer nomInput="curso" titulo='Curso' value={formData.curso} onChange={(value) => handleChange('curso', value)} />
+                        <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />
+                        <InputContainer nomInput="nombres" titulo='Nombres' value={formData.nombre} isDisabled={true} />
+                        <InputContainer nomInput="coreo" titulo='Correo' value={formData.correo} required={true} onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={true} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
+                        <InputContainer nomInput="doc" titulo='Documento' inputType='text' value={formData.doc} isDisabled={true} />
+                        <InputContainer nomInput="curso" titulo='Curso' inputType='text' value={formData.curso} required={true} onChange={(value) => handleChange('curso', value)} />
                     </div>
-                    <button onClick={handleSubmit}>Guardar Cambios</button>
-                </div>
+                    <button type='submit'>Guardar Cambios</button>
+                </form>
             </div>
         </div>
     );

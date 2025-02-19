@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './CursosDocentes.scss';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
@@ -8,9 +9,7 @@ import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
  * Componente: CursosDocentes
  * Descripción: Muestra una lista de cursos asignados a un docente con la opción de filtrar por materia y grado.
  * 
- * Props:
- *      - nombreDocente (string): Nombre del docente al que se le asignan los cursos.
- * 
+
  * Estado:
  *      - materiaSeleccionada (string): Materia seleccionada en el filtro.
  *      - gradoSeleccionado (string): Grado seleccionado en el filtro.
@@ -26,7 +25,13 @@ import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
  *      - Pildora: Representa visualmente un curso con su materia, grado y color asociado.
  */
 
-const CursosDocentes = ({ nombreDocente }) => {
+const CursosDocentes = () => {
+
+    //TRAER NOMBRE DEL TOKEN
+    const token= localStorage.getItem("usuario");
+    const nombreDocente= JSON.parse(token).name;
+    
+
     const infoPildoras = [
         { materia: "Matemáticas", grado: "6-2", color: 'morado' },
         { materia: "Física", grado: "6-2", color: 'azul' },
@@ -53,6 +58,14 @@ const CursosDocentes = ({ nombreDocente }) => {
         (materiaSeleccionada === '' || item.materia === materiaSeleccionada) &&
         (gradoSeleccionado === '' || item.grado === gradoSeleccionado)
     );
+
+    const navigate = useNavigate();
+    
+    //pasa los datos de la materia a la pagina de notas de la materias
+    const manejarClick = (materia, profesor,color, grado) => {
+        const datos = { materia, profesor,color, grado}; // Datos a enviar
+        navigate("/listadoCursos/notas", { state: datos }); // Navegar con los datos
+    };
 
     return (
         <div className='contenedorCursosDocentes'>
@@ -86,6 +99,7 @@ const CursosDocentes = ({ nombreDocente }) => {
                                 txtsuperior={nombreDocente}
                                 txtinferior={item.grado}
                                 color={item.color}
+                                onClick={() => manejarClick(item.materia,nombreDocente, item.color, item.grado)}
                             />
                         ))
                     ) : (

@@ -88,6 +88,8 @@
         padding: 0.625rem 0.75rem;
         position: relative;
         width: fit-content;
+        //width: 13rem;
+        height: 3.5rem;
 
         .contenedor{
             align-items: center;
@@ -108,7 +110,7 @@
                 position: relative;
                 text-align: center;
                 width: fit-content;
-                max-width: 8rem;
+                max-width: 9rem;
             }
         }
         
@@ -117,7 +119,7 @@
             background-color: #ffffff;
             border-radius: 119.5px;
             height: 239px;
-            left: 150px;
+            left: 140px;
             opacity: 0.1;
             position: absolute;
             top: -95px;
@@ -125,7 +127,7 @@
         }
 
         .elipse2{
-            left: 160px;
+            left: 150px;
             opacity: 0.05;
             position: absolute;
             top: -95px;

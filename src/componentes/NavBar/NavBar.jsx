@@ -15,7 +15,7 @@ const menus = {
   ],
   profe: [
     { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
-    { texto: "Inscribir Estudiante", icono: EstudianteIcon, ruta: "/inscribir" },
+    { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
   admin: [
@@ -53,6 +53,11 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     // Forzar actualización del estado cuando cambie la ubicación
   }, [location.pathname]);
 
+   //TRAER NOMBRE DEL TOKEN
+  const token= localStorage.getItem("usuario");
+  const grado= JSON.parse(token).grado;
+  
+
   return (
     <div className='contenedorNavBar'>
       <div className='menuSuperior'>
@@ -67,7 +72,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       {
         rol === 'normal' ? (
 
-          <PildoraEst est={nombreUsuario}></PildoraEst>
+          <PildoraEst est={nombreUsuario} curso={grado} ></PildoraEst>
           
         ) : rol === 'profe' ? (
           

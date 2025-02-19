@@ -11,7 +11,7 @@ import Pildora from '../../../componentes/Pildora/Pildora'
  * Props:
  *      - Ninguna.
  * Funcionalidad:
- *      - Muestra una lista de materias con el nombre de la materia, el nombre del profesor y un color asociado.
+ *      - Muestra una lista de materias con el nombre de la materia, el nombre del profesor, grado y un color asociado.
  *      - Al hacer clic en una "píldora" de materia, navega a la página de notas pasando los datos correspondientes.
  */
 export default function CursosEst() {
@@ -19,10 +19,15 @@ export default function CursosEst() {
     const navigate = useNavigate();
 
     //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (materia, profesor,color) => {
-        const datos = { materia, profesor,color }; // Datos a enviar
+    const manejarClick = (materia, profesor,color,grado) => {
+        const datos = { materia, profesor,color,grado }; // Datos a enviar
         navigate("/materias/notas", { state: datos }); // Navegar con los datos
     };
+
+
+     //TRAER NOMBRE DEL TOKEN
+    const token= localStorage.getItem("usuario");
+    const grado= JSON.parse(token).grado;
 
     //Informacion de las pildoras
     const infoPildoras = [
@@ -42,8 +47,9 @@ export default function CursosEst() {
                             key={index}
                             titulo={item.materia}
                             txtsuperior={item.profesor}
+                            txtinferior={grado}
                             color={item.color}
-                            onClick={() => manejarClick(item.materia, item.profesor, item.color)} // Pasa la función con datos dinámicos
+                            onClick={() => manejarClick(item.materia, item.profesor, item.color, grado)} // Pasa la función con datos dinámicos
                         />
                     ))}
         </div>
