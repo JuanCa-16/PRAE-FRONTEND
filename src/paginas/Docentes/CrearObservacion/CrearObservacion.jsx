@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './CrearObservacion.scss';
 

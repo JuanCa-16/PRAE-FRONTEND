@@ -15,6 +15,8 @@ import ActividadesCurso from './paginas/Docentes/ActividadesCurso/ActividadesCur
 import Observaciones from './paginas/Docentes/Observaciones/Observaciones.jsx';
 import CrearObservacion from './paginas/Docentes/CrearObservacion/CrearObservacion.jsx';
 
+//ADMIN
+import CrearGrados from './paginas/Administradores/CrearGrados/CrearGrados.jsx';
 
 
 import Login from './paginas/Login/Login.jsx';
@@ -44,6 +46,13 @@ function App() {
 
   //Si inicia seseion se crear el LOCAL 
   const iniciarSesion = (valorRol, valorName) => {
+
+    const rolesPermitidos = ["normal", "profe", "admin"];
+  
+    if (!rolesPermitidos.includes(valorRol)) {
+      console.error("Rol no válido");
+      return; // Sale de la función si el rol no es válido
+    }
     // PETICIONES AL BACK (simulado)
     const newUser = { rol: valorRol, name: valorName, grado: '6-2' };
     setUser(newUser);
@@ -70,7 +79,7 @@ function App() {
         <main className={user? "main-content": "completo"}>
           <Routes>
             
-            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/materias" : user.rol === "profe" ? "/listadoCursos" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
+            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/materias" : user.rol === "profe" ? "/listadoCursos" : user.rol === "admin" ? "/crearGrados" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}/>} >
                 
@@ -85,6 +94,10 @@ function App() {
                 <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
                 <Route path='/observaciones' element={<Observaciones/>} />
                 <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
+            </Route>
+
+            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
+                <Route path='/crearGrados' element={<CrearGrados/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />

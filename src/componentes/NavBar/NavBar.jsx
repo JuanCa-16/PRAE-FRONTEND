@@ -19,7 +19,7 @@ const menus = {
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],
   admin: [
-    { texto: "Grados", icono: StudyIcon, ruta: "/grados" },
+    { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
     { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
     { texto: "Materias", icono: ListadoIcon, ruta: "/materias" },
     { texto: "Cursos", icono: GradosIcon, ruta: "/cursos" },
