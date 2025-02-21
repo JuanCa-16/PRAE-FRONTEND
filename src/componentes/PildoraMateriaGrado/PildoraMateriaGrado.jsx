@@ -16,7 +16,7 @@ const PildoraMateriaGrado = ({color = "azul", texto = "CALCULO I", onClick}) => 
     return (
         <div className= {`contenedorPildoraG ${color}`} onClick={onClick}>  
             <div className="materia">
-                    <h4 className='inter'>{texto.toUpperCase()}</h4>
+                    <h4 className='inter'>{texto}</h4>
                     <div className='elipse1'></div>
                     <div className='elipse2'></div>
             </div>

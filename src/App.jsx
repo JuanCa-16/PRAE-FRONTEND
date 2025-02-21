@@ -17,7 +17,7 @@ import CrearObservacion from './paginas/Docentes/CrearObservacion/CrearObservaci
 
 //ADMIN
 import CrearGrados from './paginas/Administradores/CrearGrados/CrearGrados.jsx';
-
+import CreacionDocente from './paginas/Administradores/CreacionDocente/CreacionDocente.jsx';
 
 import Login from './paginas/Login/Login.jsx';
 import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
@@ -98,6 +98,7 @@ function App() {
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
                 <Route path='/crearGrados' element={<CrearGrados/>} />
+                <Route path='/profesores' element={<CreacionDocente/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
