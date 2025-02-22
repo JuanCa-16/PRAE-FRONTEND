@@ -28,42 +28,7 @@
                 width: fit-content;
             }
 
-            .busqueda{
-                display: flex;
-                align-items: flex-start;
-                flex-direction: column;
-                gap: 0.5rem;
-                height: 5.375rem;
-
-                .selector{
-                    // appearance: none;
-                    background-color: $contraste-blanco;
-                    border: none;
-                    outline: none;
-                    border-radius: $radio1;
-                    padding: 0.875rem 1.25rem;
-
-                    &:focus {
-                        outline: 0.0625rem solid $azul; // Borde cuando está enfocado
-                    }
-
-                    .opcion{
-                        padding: 2rem;
-                        &:hover{
-                            background-color: $azul;
-                        }
-                    }
-
-                    & option{
-                        padding: 2rem;
-                        &:hover{
-                            background-color: $azul;
-                        }
-                    }
-        
-                }
-
-            }
+            
         }
 
         .materias{

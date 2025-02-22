@@ -111,6 +111,14 @@ button{
             box-shadow: 0px 4px 10px $rojo;
         }
     }
+
+    &:disabled {
+        background-color: $contraste-azul;  // Color gris para deshabilitado
+        cursor: not-allowed;     // Cambia el cursor para indicar que no es interactivo
+        opacity: 0.7;            // Menor opacidad
+        box-shadow: none;
+        color: black;
+    }
 }
 
 //Estilos de la navegacion

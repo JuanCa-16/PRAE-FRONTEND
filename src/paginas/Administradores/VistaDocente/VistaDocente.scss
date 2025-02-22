@@ -1,0 +1,118 @@
+@import '../../../global.scss';
+
+.contenedorCreacionEst{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    align-self: stretch;
+
+    .editar{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        align-self: stretch;
+
+        .formulario{
+            display: flex;
+            width: 100%;
+            max-width: 100%;
+            padding: 1.5rem 0rem;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.25rem;
+
+            .inputs{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+                row-gap: 1.5rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+
+                .input-container{
+                    width: 30%;
+                    min-width: 12.5rem;
+                    padding: 1rem;
+                }
+
+            }
+
+            .selectorMat{
+                display: flex;
+                width: 100%;
+                max-width: 100%;
+                justify-content: space-between;
+                padding: 1rem;
+                gap: 1rem;
+                .selector{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+            }
+
+            button{
+                width: auto;
+            }
+        }
+    }
+
+    .lista{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1.5rem;
+        align-self: stretch;
+        min-height: 20rem;
+
+        .informacion{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            align-self: stretch;
+    
+            .filtros{
+                display: flex;
+                width: 100%;
+                align-items: flex-end;
+                gap: 2.75rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+    
+                button{
+                    width: fit-content;
+                }
+    
+            }
+    
+            .materias{
+                display: flex;
+                align-items: center;
+                align-content: center;
+                gap: 1.5rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+            }
+        }
+
+        
+    }
+
+    .linea{
+        width: 100%;
+        height: .5rem;
+        background-color: $contraste-blanco;
+        border-radius: $radio2;
+    
+    }
+
+    button{
+        width: fit-content;
+        align-self: center;
+    }
+}
