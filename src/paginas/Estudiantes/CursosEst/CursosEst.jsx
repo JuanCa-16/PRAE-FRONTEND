@@ -40,19 +40,19 @@ export default function CursosEst() {
 
     return (
         <div className='contenedorCursos'>
-        <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
-        <div className="materias">
-        {infoPildoras.map((item, index) => (
-                        <Pildora
-                            key={index}
-                            titulo={item.materia}
-                            txtsuperior={item.profesor}
-                            txtinferior={grado}
-                            color={item.color}
-                            onClick={() => manejarClick(item.materia, item.profesor, item.color, grado)} // Pasa la función con datos dinámicos
-                        />
-                    ))}
-        </div>
+            <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
+            <div className="materias">
+            {infoPildoras.map((item, index) => (
+                            <Pildora
+                                key={index}
+                                titulo={item.materia}
+                                txtsuperior={item.profesor}
+                                txtinferior={grado}
+                                color={item.color}
+                                onClick={() => manejarClick(item.materia, item.profesor, item.color, grado)} // Pasa la función con datos dinámicos
+                            />
+                        ))}
+            </div>
         </div>
     )
 }

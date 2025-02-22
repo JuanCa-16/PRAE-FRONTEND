@@ -40,7 +40,7 @@
 
             }
 
-            .selectorMat{
+            .selectorGrado{
                 display: flex;
                 width: 100%;
                 max-width: 100%;
@@ -60,49 +60,6 @@
         }
     }
 
-    .lista{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 1.5rem;
-        align-self: stretch;
-        min-height: 20rem;
-
-        .informacion{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-            align-self: stretch;
-    
-            .filtros{
-                display: flex;
-                width: 100%;
-                align-items: flex-end;
-                gap: 2.75rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-    
-                button{
-                    width: fit-content;
-                }
-    
-            }
-    
-            .materias{
-                display: flex;
-                align-items: center;
-                align-content: center;
-                gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-            }
-        }
-
-        
-    }
-
     .linea{
         width: 100%;
         height: .5rem;
@@ -111,8 +68,21 @@
     
     }
 
-    button{
-        width: fit-content;
-        align-self: center;
+    .contenedorCursos{
+        display: flex;
+        padding: 0rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3.0625rem;
+        align-self: stretch;
+    
+        .materias{
+            display: flex;
+            align-items: center;
+            align-content: center;
+            gap: 1.5rem;
+            align-self: stretch;
+            flex-wrap: wrap;
+        }
     }
 }

@@ -7,7 +7,7 @@
     gap: 2rem;
     align-self: stretch;
 
-    .editar{
+    .crear{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -40,7 +40,7 @@
 
             }
 
-            .selectorMat{
+            .selectorGrado{
                 display: flex;
                 width: 100%;
                 max-width: 100%;
@@ -60,47 +60,35 @@
         }
     }
 
-    .lista{
+    .informacion{
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: flex-start;
         gap: 1.5rem;
         align-self: stretch;
-        min-height: 20rem;
 
-        .informacion{
+        .filtros{
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
+            width: 100%;
+            align-items: flex-end;
+            gap: 2.75rem;
             align-self: stretch;
-    
-            .filtros{
-                display: flex;
-                width: 100%;
-                align-items: flex-end;
-                gap: 2.75rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-    
-                button{
-                    width: fit-content;
-                }
-    
+            flex-wrap: wrap;
+
+            button{
+                width: fit-content;
             }
-    
-            .materias{
-                display: flex;
-                align-items: center;
-                align-content: center;
-                gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-            }
+
         }
 
-        
+        .estudiantes{
+            display: flex;
+            align-items: center;
+            align-content: center;
+            gap: 1.5rem;
+            align-self: stretch;
+            flex-wrap: wrap;
+        }
     }
 
     .linea{
@@ -109,10 +97,5 @@
         background-color: $contraste-blanco;
         border-radius: $radio2;
     
-    }
-
-    button{
-        width: fit-content;
-        align-self: center;
     }
 }

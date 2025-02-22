@@ -6,7 +6,6 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
 import Select from "react-select";
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 const VistaDocente = () => {
@@ -112,10 +111,9 @@ const VistaDocente = () => {
     );
 
     //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (profe,materia, profesor,color,grado) => {
-        // const datos = { materia, profesor,color,grado }; // Datos a enviar
-        // navigate("/materias/notas", { state: datos }); // Navegar con los datos
-        navigate(`/profesores/${profe}`);
+    const manejarClick = (materia, profesor,color,grado) => {
+        const datos = { materia, profesor,color,grado }; // Datos a enviar
+        navigate(`/profesores/${profesor}/${materia}`, { state: datos });
     };
 
      // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
@@ -131,8 +129,8 @@ const VistaDocente = () => {
             closeModal()
         }
     return (
-        <div className='contenedorCreacionDocente'>
-            <div className="crear">
+        <div className='contenedorCreacionEst'>
+            <div className="editar">
                 <TituloDes titulo='EDITAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
@@ -213,7 +211,7 @@ const VistaDocente = () => {
                                     txtsuperior={profe}
                                     txtinferior={item.grado}
                                     color={item.color}
-                                    onClick={() => manejarClick(item.profe)}
+                                    onClick={() => manejarClick(item.materia, profe, item.color, item.grado)}
                                 />
                                     
                                     

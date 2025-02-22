@@ -22,6 +22,10 @@ import VistaDocente from './paginas/Administradores/VistaDocente/VistaDocente.js
 
 import Login from './paginas/Login/Login.jsx';
 import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
+import VistaDocenteAct from './paginas/Administradores/VistaDocenteAct/VistaDocenteAct.jsx';
+import CreacionEst from './paginas/Administradores/CreacionEst/CreacionEst.jsx';
+import VistaEst from './paginas/Administradores/VistaEst/VistaEst.jsx';
+import VistaNotasEst from './paginas/Administradores/VistaNotasEst/VistaNotasEst.jsx';
 
 /** 
  * Componente: App
@@ -101,6 +105,10 @@ function App() {
                 <Route path='/crearGrados' element={<CrearGrados/>} />
                 <Route path='/profesores' element={<CreacionDocente/>} />
                 <Route path='/profesores/:nombreProfe' element={<VistaDocente/>} />
+                <Route path='/profesores/:nombreProfe/:actCurso' element={<VistaDocenteAct/>} />
+                <Route path='/estudiantes' element={<CreacionEst/>} />
+                <Route path='/estudiantes/:nombreEst' element={<VistaEst/>} />
+                <Route path='/estudiantes/:nombreEst/:materia' element={<VistaNotasEst/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
