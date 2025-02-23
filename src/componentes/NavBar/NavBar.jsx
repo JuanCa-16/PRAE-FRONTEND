@@ -21,8 +21,8 @@ const menus = {
   admin: [
     { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
     { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
-    { texto: "Materias", icono: ListadoIcon, ruta: "/materias" },
-    { texto: "Cursos", icono: GradosIcon, ruta: "/cursos" },
+    { texto: "Materias", icono: ListadoIcon, ruta: "/crearMaterias" },
+    { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
     { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
   ],

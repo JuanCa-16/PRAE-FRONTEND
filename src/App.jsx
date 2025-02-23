@@ -26,6 +26,8 @@ import VistaDocenteAct from './paginas/Administradores/VistaDocenteAct/VistaDoce
 import CreacionEst from './paginas/Administradores/CreacionEst/CreacionEst.jsx';
 import VistaEst from './paginas/Administradores/VistaEst/VistaEst.jsx';
 import VistaNotasEst from './paginas/Administradores/VistaNotasEst/VistaNotasEst.jsx';
+import CrearMateria from './paginas/Administradores/CrearMateria/CrearMateria.jsx';
+import AsignarGradosMaterias from './paginas/Administradores/AsignarGradosMaterias/AsignarGradosMaterias.jsx';
 
 /** 
  * Componente: App
@@ -103,12 +105,14 @@ function App() {
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
                 <Route path='/crearGrados' element={<CrearGrados/>} />
+                <Route path='/crearMaterias' element={<CrearMateria/>} />
                 <Route path='/profesores' element={<CreacionDocente/>} />
                 <Route path='/profesores/:nombreProfe' element={<VistaDocente/>} />
                 <Route path='/profesores/:nombreProfe/:actCurso' element={<VistaDocenteAct/>} />
                 <Route path='/estudiantes' element={<CreacionEst/>} />
                 <Route path='/estudiantes/:nombreEst' element={<VistaEst/>} />
                 <Route path='/estudiantes/:nombreEst/:materia' element={<VistaNotasEst/>} />
+                <Route path='/asignarGradosMaterias' element={<AsignarGradosMaterias/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
