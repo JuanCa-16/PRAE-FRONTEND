@@ -26,6 +26,7 @@ const VistaDocente = () => {
 
     const [formData, setFormData] = useState(initialFormData.current);
 
+    
     useEffect(() => {
         const initialMaterias = opcionesMaterias.filter(opt => 
             formData.materias.includes(opt.value)
