@@ -14,7 +14,7 @@ const menus = {
     { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
   ],
-  profe: [
+  docente: [
     { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
     { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilDocente" },
@@ -66,7 +66,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   return (
     <div className='contenedorNavBar'>
       <div className='menuSuperior'>
-        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'profe' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+        <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
@@ -79,7 +79,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 
           <PildoraEst est={nombreUsuario} curso={grado} ></PildoraEst>
           
-        ) : rol === 'profe' ? (
+        ) : rol === 'docente' ? (
           
           <NavBarItem tipo={true} texto={nombreUsuario}></NavBarItem>
           
@@ -95,7 +95,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 }
 
 NavBar.propTypes = {
-  rol: PropTypes.oneOf(['estudiante', 'profe', 'admin']),
+  rol: PropTypes.oneOf(['estudiante', 'docente', 'admin']),
   nombreUsuario: PropTypes.string, 
   func: PropTypes.func, 
 };

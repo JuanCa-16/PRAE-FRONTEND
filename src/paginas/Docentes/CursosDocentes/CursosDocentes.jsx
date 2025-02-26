@@ -4,7 +4,7 @@ import './CursosDocentes.scss';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-
+import { useUser } from '../../../Contexts/UserContext.jsx';
 /**
  * Componente: CursosDocentes
  * Descripción: Muestra una lista de cursos asignados a un docente con la opción de filtrar por materia y grado.
@@ -28,8 +28,9 @@ import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 const CursosDocentes = () => {
 
     //TRAER NOMBRE DEL TOKEN
-    const token= localStorage.getItem("usuario");
-    const nombreDocente= JSON.parse(token).name;
+
+    const { user, setUser } = useUser();
+    const nombreDocente = user.nombre
     
 
     const infoPildoras = [

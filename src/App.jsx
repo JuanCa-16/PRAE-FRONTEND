@@ -156,7 +156,7 @@ function App() {
           <Route path='/login' element={
             <ProtectedRoute isAllowed={!user} redireccionar={user ? {
               estudiante: "/materias",
-              profe: "/listadoCursos",
+              docente: "/listadoCursos",
               admin: "/crearGrados"
             }[user.rol] || "/" : "/"}> 
               <Login func={iniciarSesion} />
@@ -170,7 +170,7 @@ function App() {
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
             </Route>
 
-            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'profe'}/>} >
+            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'docente'}/>} >
                 <Route path='/listadoCursos' element={<CursosDocentes/> } />
                 <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
                 <Route path='/observaciones' element={<Observaciones/>} />
