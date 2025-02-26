@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
@@ -22,7 +22,6 @@ import CreacionDocente from './paginas/Administradores/CreacionDocente/CreacionD
 import VistaDocente from './paginas/Administradores/VistaDocente/VistaDocente.jsx';
 
 import Login from './paginas/Login/Login.jsx';
-import ProfePrueba from './paginas/Docentes/ProfePrueba.jsx';
 import VistaDocenteAct from './paginas/Administradores/VistaDocenteAct/VistaDocenteAct.jsx';
 import CreacionEst from './paginas/Administradores/CreacionEst/CreacionEst.jsx';
 import VistaEst from './paginas/Administradores/VistaEst/VistaEst.jsx';
@@ -89,7 +88,7 @@ function App() {
     window.addEventListener("storage", checkToken); // Escuchar cambios en localStorage
     return () => window.removeEventListener("storage", checkToken); // Limpiar evento al desmontar
   
-  }, [setUser]);
+  }, [setUser, API_URL]);
   
   //Si inicia seseion se crear el LOCAL 
   const iniciarSesion = async(email, password) => {

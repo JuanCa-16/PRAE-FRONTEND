@@ -6,7 +6,6 @@ import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
 import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon} from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import { useUser } from '../../Contexts/UserContext.jsx';
 //menus contendra las opciones de la navBar para cada usuario. Contiene su titulo, icono y ruta
 const menus = {
@@ -59,7 +58,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   
   // const grado= jwtDecode(token).email;
 
-  const { user, setUser } = useUser();
+  const { user} = useUser();
   const grado = user.curso
   
 
