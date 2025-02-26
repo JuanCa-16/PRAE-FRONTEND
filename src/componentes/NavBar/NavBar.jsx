@@ -16,15 +16,15 @@ const menus = {
   profe: [
     { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
     { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilDocente" },
   ],
   admin: [
     { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
     { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
-    { texto: "Materias", icono: ListadoIcon, ruta: "/materias" },
-    { texto: "Cursos", icono: GradosIcon, ruta: "/cursos" },
+    { texto: "Materias", icono: ListadoIcon, ruta: "/crearMaterias" },
+    { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
     { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustes" },
+    { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
   ],
 };
 
