@@ -8,9 +8,7 @@ import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 const Observaciones = () => {
 
     //TRAER NOMBRE DEL TOKEN
-    const token= localStorage.getItem("usuario");
-    const nombreDocente= JSON.parse(token).name;
-    
+
 
     const infoPildoras = [
         { nombreEstudiante: "Juan Pérez Henao Gallego", grado: "6-2", color: 'morado' },

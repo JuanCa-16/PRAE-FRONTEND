@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useLocation } from "react-router-dom";
 import './VistaDocenteAct.scss'
 import PildoraTitulo from '../../../componentes/PildoraTitulo/PildoraTitulo'
@@ -175,8 +175,6 @@ const VistaDocenteAct = () => {
     ]
 
     const nombres = datos.map(item => ` ${item.apellido} ${item.nombre}`);
-    const soloApellidos = datos.map(item => ` ${item.apellido}`);
-    const soloNombre = datos.map(item => ` ${item.nombre}`);
     const actividadesUnicas = [
         ...new Set(datos.flatMap(estudiante => estudiante.actividades.map(act => act.actividad)))
     ];

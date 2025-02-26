@@ -29,7 +29,7 @@ const CursosDocentes = () => {
 
     //TRAER NOMBRE DEL TOKEN
 
-    const { user, setUser } = useUser();
+    const { user } = useUser();
     const nombreDocente = user.nombre
     
 
