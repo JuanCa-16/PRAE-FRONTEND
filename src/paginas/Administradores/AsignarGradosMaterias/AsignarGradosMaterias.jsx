@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { useNavigate } from "react-router-dom";
 import './AsignarGradosMaterias.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import Select from "react-select";
