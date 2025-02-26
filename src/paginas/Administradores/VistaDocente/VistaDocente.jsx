@@ -27,13 +27,7 @@ const VistaDocente = () => {
     const [formData, setFormData] = useState(initialFormData.current);
 
     
-    useEffect(() => {
-        const initialMaterias = opcionesMaterias.filter(opt => 
-            formData.materias.includes(opt.value)
-        );
-        setMateriasSeleccionadas(initialMaterias);
-    }, [formData.materias]); 
-    
+   
         //Actualizar inputs
     const handleChange = (titulo, value) => {
         setFormData({
@@ -71,6 +65,15 @@ const VistaDocente = () => {
         { value: "quimica", label: "Química" },
         { value: "biologia", label: "Biología" },
     ];
+
+    useEffect(() => {
+        const initialMaterias = opcionesMaterias.filter(opt => 
+            formData.materias.includes(opt.value)
+        );
+        setMateriasSeleccionadas(initialMaterias);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formData.materias]); 
+    
     
     const handleChangeMaterias = (selectedOptions) => {
         setMateriasSeleccionadas(selectedOptions);
