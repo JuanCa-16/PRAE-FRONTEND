@@ -28,6 +28,8 @@ import VistaEst from './paginas/Administradores/VistaEst/VistaEst.jsx';
 import VistaNotasEst from './paginas/Administradores/VistaNotasEst/VistaNotasEst.jsx';
 import CrearMateria from './paginas/Administradores/CrearMateria/CrearMateria.jsx';
 import AsignarGradosMaterias from './paginas/Administradores/AsignarGradosMaterias/AsignarGradosMaterias.jsx';
+import EditarPerfilDoc from './paginas/Docentes/EditarPerfilDoc/EditarPerfilDoc.jsx';
+import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/EditarPerfilAdmin.jsx';
 
 /** 
  * Componente: App
@@ -101,6 +103,7 @@ function App() {
                 <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
                 <Route path='/observaciones' element={<Observaciones/>} />
                 <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
+                <Route path='/editarPerfilDocente' element={<EditarPerfilDoc/>} />
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
@@ -113,6 +116,7 @@ function App() {
                 <Route path='/estudiantes/:nombreEst' element={<VistaEst/>} />
                 <Route path='/estudiantes/:nombreEst/:materia' element={<VistaNotasEst/>} />
                 <Route path='/asignarGradosMaterias' element={<AsignarGradosMaterias/>} />
+                <Route path='/editarPerfilRector' element={<EditarPerfilAdmin/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
