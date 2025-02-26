@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import './CursosEst.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes'
 import Pildora from '../../../componentes/Pildora/Pildora'
-
+import { jwtDecode } from 'jwt-decode';
+import { useUser } from '../../../Contexts/UserContext';
 
 /** 
  * Componente: CursosEst
@@ -25,9 +26,9 @@ export default function CursosEst() {
     };
 
 
-     //TRAER NOMBRE DEL TOKEN
-    const token= localStorage.getItem("usuario");
-    const grado= JSON.parse(token).grado;
+    
+    const { user, setUser } = useUser();
+    const grado = user.curso
 
     //Informacion de las pildoras
     const infoPildoras = [

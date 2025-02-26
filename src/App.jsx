@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
-
+import { jwtDecode } from 'jwt-decode';
+import { useUser } from './Contexts/UserContext.jsx';
 //ESTUDIANTES
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
@@ -46,34 +47,98 @@ import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/Edita
 
 function App() {
 
-  //Cargar datos del usario desde el local 
-  const [user, setUser] = useState(() => {
-    const userData = localStorage.getItem("usuario");
-    return userData ? JSON.parse(userData) : null;
-  });
-  
+  const API_URL = process.env.REACT_APP_API_URL; 
 
+  //ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
+  const { user, setUser } = useUser();
+
+  //VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = localStorage.getItem("token");
+  
+      if (!token) {
+        setUser(null);
+        return;
+      }
+  
+      try {
+        const response = await fetch(`${API_URL}auth/validate/${token}`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        });
+        
+        if(response.ok){
+          setUser(jwtDecode(token));
+        }else {
+          console.warn("Token inválido o expirado");
+          localStorage.removeItem("token");
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Token inválido:", error);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    };
+  
+    checkToken(); // Ejecutar al montar el componente
+  
+    window.addEventListener("storage", checkToken); // Escuchar cambios en localStorage
+    return () => window.removeEventListener("storage", checkToken); // Limpiar evento al desmontar
+  
+  }, [setUser]);
+  
   //Si inicia seseion se crear el LOCAL 
-  const iniciarSesion = (valorRol, valorName) => {
+  const iniciarSesion = async(email, password) => {
 
-    const rolesPermitidos = ["normal", "profe", "admin"];
-  
-    if (!rolesPermitidos.includes(valorRol)) {
-      console.error("Rol no válido");
-      return; // Sale de la función si el rol no es válido
+    
+
+    try {
+
+      const response = await fetch(`${API_URL}auth/login`, {
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email, password})
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error("Credenciales incorrectas");
+        }
+        throw new Error(`Error en la autenticación: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      localStorage.setItem("token", data.token);
+      //const newUser = { rol: valorRol, name: valorName, grado: '6-2' };
+      //setUser(newUser);
+
+      if (data.token) {
+        const decoded = jwtDecode(data.token);
+        console.log("Token decodificado:", decoded);
+        setUser(decoded)
+      }
+      
+      return console.log("EXITOSO")
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      return null;
     }
-    // PETICIONES AL BACK (simulado)
-    const newUser = { rol: valorRol, name: valorName, grado: '6-2' };
-    setUser(newUser);
-    localStorage.setItem("usuario", JSON.stringify(newUser)); // Guardar en localStorage
+
   };
 
   //Eliminar TOKEN del local
   const cerrarSesion = () => {
     setUser(null);
-    localStorage.removeItem("usuario"); // Eliminar del localStorage
+    localStorage.removeItem("token"); // Eliminar del localStorage
   };
-  
+
   return (
     <Router>
       <div className="App">
@@ -81,16 +146,23 @@ function App() {
         {
           user ?
           (<nav className="navbar">
-            <NavBar rol={user.rol} func = {cerrarSesion} nombreUsuario={user.name} ></NavBar>
+            <NavBar rol={user.rol} func = {cerrarSesion} nombreUsuario={user.email} ></NavBar>
           </nav>): null
         }
 
         <main className={user? "main-content": "completo"}>
           <Routes>
             
-            <Route path='/login' element={<ProtectedRoute isAllowed={!user} redireccionar= {user ? (user.rol === "normal" ? "/materias" : user.rol === "profe" ? "/listadoCursos" : user.rol === "admin" ? "/crearGrados" : "/") : "/"} > <Login func={iniciarSesion} /></ProtectedRoute>}></Route>
-
-            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'normal'}/>} >
+          <Route path='/login' element={
+            <ProtectedRoute isAllowed={!user} redireccionar={user ? {
+              estudiante: "/materias",
+              profe: "/listadoCursos",
+              admin: "/crearGrados"
+            }[user.rol] || "/" : "/"}> 
+              <Login func={iniciarSesion} />
+            </ProtectedRoute>
+          }/>
+            <Route element={<ProtectedRoute isAllowed={user && user.rol === 'estudiante'}/>} >
                 
                 <Route path="/prueba" element={<Prueba></Prueba>} />
                 <Route path="/materias" element={<CursosEst/>} />

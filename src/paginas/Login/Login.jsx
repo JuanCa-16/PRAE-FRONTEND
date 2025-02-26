@@ -44,7 +44,7 @@ export default function Login({func}) {
         console.log(getDataLogin)
 
         //Le envio a APP el resultado para actualiar valores del usuario. por ahora esto luego TOKEN
-        func(getDataLogin.password, getDataLogin.password)
+        func(getDataLogin.correo, getDataLogin.password)
         // navigate("/home") /* cambiar la ruta despues */
     }
 

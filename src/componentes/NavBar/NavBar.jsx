@@ -6,10 +6,11 @@ import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
 import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon} from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import { jwtDecode } from 'jwt-decode';
+import { useUser } from '../../Contexts/UserContext.jsx';
 //menus contendra las opciones de la navBar para cada usuario. Contiene su titulo, icono y ruta
 const menus = {
-  normal: [
+  estudiante: [
     { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
   ],
@@ -54,14 +55,18 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   }, [location.pathname]);
 
    //TRAER NOMBRE DEL TOKEN
-  const token= localStorage.getItem("usuario");
-  const grado= JSON.parse(token).grado;
+  // const token= localStorage.getItem("token");
+  
+  // const grado= jwtDecode(token).email;
+
+  const { user, setUser } = useUser();
+  const grado = user.curso
   
 
   return (
     <div className='contenedorNavBar'>
       <div className='menuSuperior'>
-        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : rol === 'normal' ? "azul" : "amarillo"} texto={rol === 'profe' ? "PROFESORES" : rol === 'normal' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+        <div onClick={handleClick} ><LogoPrae color = {rol === 'profe' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'profe' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
@@ -70,7 +75,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
         </nav>
       </div>
       {
-        rol === 'normal' ? (
+        rol === 'estudiante' ? (
 
           <PildoraEst est={nombreUsuario} curso={grado} ></PildoraEst>
           
@@ -90,7 +95,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 }
 
 NavBar.propTypes = {
-  rol: PropTypes.oneOf(['normal', 'profe', 'admin']),
+  rol: PropTypes.oneOf(['estudiante', 'profe', 'admin']),
   nombreUsuario: PropTypes.string, 
   func: PropTypes.func, 
 };
