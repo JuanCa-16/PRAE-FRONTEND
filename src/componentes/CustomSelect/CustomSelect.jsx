@@ -12,7 +12,7 @@ const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titul
     }, [valorSeleccionado]);
 
     const opcionesFiltradas = opciones.filter(opcion =>
-        opcion.toLowerCase().includes(filtro.toLowerCase())
+        opcion?.toLowerCase().includes(filtro?.toLowerCase() || "")
     );
 
     const manejarSeleccion = (opcion) => {

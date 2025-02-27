@@ -1,7 +1,9 @@
+@import '../../../global.scss';
+
 .grados{
     display: flex;
     padding: 0rem 1.5rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
     gap: 3.0625rem;
     align-self: stretch;
@@ -63,5 +65,13 @@
                 flex-wrap: wrap;
             }
         }
+    }
+
+    .linea{
+        width: 100%;
+        height: .5rem;
+        background-color: $contraste-blanco;
+        border-radius: $radio2;
+    
     }
 }

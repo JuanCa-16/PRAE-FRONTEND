@@ -38,7 +38,7 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     return (
         <div className={` ${tipo ? "tipo-existe color" : "contenedorNavBarItem "} ${color}  ${activo ? "activar" : " "}` } onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='etiqueta'>
-                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered} activo={activo} /> </div>):(<div></div>)}
+                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered} activo={activo} /> </div>):(<></>)}
                 <p className='texto lato'>{tipo? texto.toUpperCase() : texto}</p>
             </div>
         </div>
