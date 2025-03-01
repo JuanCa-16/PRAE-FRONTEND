@@ -5,6 +5,7 @@ import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from './Contexts/UserContext.jsx';
+import { useTheme } from './Contexts/UserContext.jsx';
 //ESTUDIANTES
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
@@ -50,6 +51,7 @@ function App() {
 
   //ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
   const { user, setUser } = useUser();
+  const { theme, setTheme} = useTheme();
 
   //VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
   useEffect(() => {
@@ -140,7 +142,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className={`App ${theme}`}>
 
         {
           user ?

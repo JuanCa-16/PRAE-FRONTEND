@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import './AsignarGradosMaterias.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
-import Select from "react-select";
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
+import Line from '../../../componentes/Line/Line.jsx';
+import Selector from '../../../componentes/Selector/Selector.jsx';
 
 const AsignarGradosMaterias = () => {
      //Datos inciales a mostrar
@@ -113,29 +114,10 @@ const AsignarGradosMaterias = () => {
                 <TituloDes titulo='ASIGNACION DE MATERIAS A GRADOS' desc='Asigna las materias correspondientes a cada grado.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="selectorGrado">
-                        <div className="selector">
-                            <h4>Asignacion de Grado</h4>
-                            <Select
-                                isMulti
-                                options={opcionesGrados}
-                                value={gradosSeleccionados}
-                                onChange={handleChangeGrado}
-                                placeholder="Selecciona el grado"
-                            />
-                        </div>
-
-                        <div className="selector">
-                            <h4>Asignacion de Materias</h4>
-                            <Select
-                                isMulti
-                                options={opcionesMaterias}
-                                value={materiasSeleccionadas}
-                                onChange={handleChangeMaterias}
-                                placeholder="Selecciona el grado"
-                            />
-                        </div>
+                        <Selector titulo={'Grado'} placeholder={"Selecciona el grado"} opciones={opcionesGrados} valores={gradosSeleccionados} onChange={handleChangeGrado}></Selector>
+                        <Selector titulo={'Materias'} placeholder={"Selecciona la materia"} opciones={opcionesMaterias} valores={materiasSeleccionadas} onChange={handleChangeMaterias}></Selector>
                     </div>
-                    <div className="selecciones">
+                    {/* <div className="selecciones">
                             <div className="seleccion">
                             <h4>Grados seleccionadas:</h4>
                             {gradosSeleccionados.length === 0? (
@@ -162,11 +144,11 @@ const AsignarGradosMaterias = () => {
                             ) }
                             </div>
                             
-                        </div>
+                    </div> */}
                     <button type='submit'>Guardar Cambios</button>
                 </form>
             </div>
-            <div className="linea"></div>
+            <Line></Line>
             <div className="lista">
             <TituloDes 
                     titulo='LISTADO DE CURSOS ASIGNADOS:' 

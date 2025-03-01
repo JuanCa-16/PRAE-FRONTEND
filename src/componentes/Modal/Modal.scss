@@ -103,5 +103,14 @@
       }
     }
 }
+
+.dark{
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.596); /* Fondo oscuro */
+    .modal-content {
+      background: $dark-negro;
+    }
+  } 
+}
   
   

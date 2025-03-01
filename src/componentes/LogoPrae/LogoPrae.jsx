@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import "./LogoPrae.scss";
 import icono from "../../assets/icono.svg"
-
+import { useTheme } from '../../Contexts/UserContext';
 /** 
  * Componente: LogoPrae
  * Descripción: Renderiza un logotipo con texto dinámico y color personalizado.
@@ -12,8 +12,9 @@ import icono from "../../assets/icono.svg"
  */
 
 const LogoPrae = ({texto = "ESTUDIANTES", color}) => {
+    const {theme} = useTheme()
     return (
-    <div className="logoContenedor">
+    <div className={`logoContenedor ${theme}`}>
         <img className="logoPrae" alt="" src={icono}/>
         <p className="bold">PRAE</p>
         <p className={`${color}`}>{texto}</p>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./CustomSelect.scss";
-
+import { useTheme } from "../../Contexts/UserContext";
 const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titulo = "Titulo" }) => {
     const [abierto, setAbierto] = useState(false);
     const [filtro, setFiltro] = useState(valorSeleccionado || ""); // Estado del input
     const selectRef = useRef(null);
-
+    const {theme} = useTheme()
     // Sincroniza el input con el valor seleccionado
     useEffect(() => {
         setFiltro(valorSeleccionado);
@@ -35,7 +35,7 @@ const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titul
     }, []);
 
     return (
-        <div className="custom-select" ref={selectRef}>
+        <div className={`custom-select ${theme}`} ref={selectRef}>
             <p>{titulo}</p>
             <input
                 type="text"

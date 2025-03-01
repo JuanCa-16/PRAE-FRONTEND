@@ -114,3 +114,80 @@
         }
     }
 }
+
+.dark{
+    .pildora {
+    
+        h4{
+            color: $dark-blanco;
+        }
+    
+        background-color: $dark-azul;
+        color: $dark-contraste-azul;
+    
+        //cambiar colores
+        &.morado {
+            background-color: $dark-morado;
+            color: $dark-contraste-morado;
+        }
+        
+        &.amarillo {
+            background-color: $dark-amarillo;
+            color: $dark-contraste-amarillo;
+        }
+        
+        //Estilos del texto
+        .info{
+
+            .texto{
+                color: $dark-blanco;
+            }
+    
+        }
+    
+        //Dibujar figuras del fondo
+        .elipse1, .elipse2{
+            background-color: $dark-blanco;
+        }
+    
+    
+        //Efectos hover
+        &:hover{
+            background-color: $dark-contraste-azul;
+            
+            h4, .texto{
+                color: $dark-azul;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $dark-azul;
+            }
+    
+            &.morado {
+                background-color: $dark-contraste-morado;
+                color: $dark-morado;
+    
+                h4, .texto{
+                    color: $dark-morado;
+                }
+        
+                .elipse1, .elipse2{
+                    background-color: $dark-morado;
+                }
+            }
+    
+            &.amarillo {
+                background-color: $dark-contraste-amarillo;
+                color: $dark-amarillo;
+    
+                h4, .texto{
+                    color: $dark-amarillo;
+                }
+        
+                .elipse1, .elipse2{
+                    background-color: $dark-amarillo;
+                }
+            }
+        }
+    }
+}

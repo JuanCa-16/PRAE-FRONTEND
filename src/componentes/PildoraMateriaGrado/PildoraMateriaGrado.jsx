@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import './PildoraMateriaGrado.scss'
-
+import { useTheme } from '../../Contexts/UserContext';
 
 /**
  * Componente: PildoraMateriaGrado
@@ -13,8 +13,10 @@ import './PildoraMateriaGrado.scss'
  */
 
 const PildoraMateriaGrado = ({color = "azul", texto = "CALCULO I", onClick}) => {
+    
+    const {theme} = useTheme()
     return (
-        <div className= {`contenedorPildoraG ${color}`} onClick={onClick}>  
+        <div className= {`contenedorPildoraG ${color} ${theme}`} onClick={onClick}>  
             <div className="materia">
                     <h4 className='inter'>{texto}</h4>
                     <div className='elipse1'></div>

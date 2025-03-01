@@ -1,12 +1,13 @@
-import React , {useEffect} from 'react'
+import React , {useEffect, useState} from 'react'
 import './NavBar.scss'
 import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
-import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon} from '../Icons/Icons.jsx';
+import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon, ThemeIcon } from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../Contexts/UserContext.jsx';
+import { useTheme } from '../../Contexts/UserContext.jsx';
 //menus contendra las opciones de la navBar para cada usuario. Contiene su titulo, icono y ruta
 const menus = {
   estudiante: [
@@ -20,10 +21,10 @@ const menus = {
   ],
   admin: [
     { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
-    { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
     { texto: "Materias", icono: ListadoIcon, ruta: "/crearMaterias" },
-    { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
+    { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
     { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
+    { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
     { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
   ],
 };
@@ -60,12 +61,18 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 
   const { user} = useUser();
   const grado = user.curso
+
+  const { theme, setTheme } = useTheme();
+  const [hovered, setHovered] = useState(false);
   
 
   return (
-    <div className='contenedorNavBar'>
+    <div className={`contenedorNavBar ${theme}`}>
       <div className='menuSuperior'>
-        <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+        <div className="tituloSuperior">
+          <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
+        </div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (

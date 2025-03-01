@@ -7,6 +7,7 @@ import InputContainer from '../../../componentes/Input/InputContainer.jsx'
 import Select from "react-select";
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
+import Line from '../../../componentes/Line/Line.jsx';
 const VistaEst = () => {
     const location = useLocation();
     const { est } = location.state || {};
@@ -142,7 +143,7 @@ const VistaEst = () => {
                             <button onClick={() => handleEliminar()} className='rojo'>ELIMINAR</button>
                     </Modal>
             </div>
-            <div className="linea"></div>
+            <Line></Line>
             <div className='contenedorCursos'>
                         <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
                         <div className="materias">

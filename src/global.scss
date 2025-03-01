@@ -12,6 +12,21 @@ $contraste-blanco: #F5F7F9;
 $rojo: #BF786D;
 $contraste-rojo: #a37b75;
 
+
+$dark-azul: #2077E9;
+$dark-contraste-azul: #BDCDE5;
+$dark-morado: #5250CE;
+$dark-contraste-morado: #C9C8E6;
+$dark-amarillo: #D98836;
+$dark-contraste-amarillo: #E9DBCC;
+$dark-blanco: #ECECEC;
+$dark-contraste-blanco: #CCCCCC;
+$dark-rojo: #B77E75;
+$dark-contraste-rojo: #D7B1AB;
+$dark-negro: #212121;
+$dark-contraste-negro: #2F2F2F;
+$dark-super-negro: #171717ff;
+
 $radio1: 0.5rem;
 $radio2: 0.875rem;
 $radio3: 1.625rem;
@@ -30,6 +45,7 @@ body {
     background-color: $blanco;
     margin: 0;
 }
+
 
 //Estilos de letra (ROBOTO por defecto)
 h1 {
@@ -166,3 +182,36 @@ button{
     width: 30%;
 }
 
+
+.dark {
+    body {
+        background-color: $dark-negro;
+        color: $dark-blanco;
+    }
+
+    .main-content {
+        background-color: $dark-negro;
+    }
+
+    button {
+        background-color: $dark-azul;
+        color: $dark-blanco;
+
+        &:hover {
+            box-shadow: 0px 4px 10px $dark-azul;
+        }
+
+        &.rojo {
+            background-color: $dark-rojo;
+
+            &:hover {
+                box-shadow: 0px 4px 10px $dark-rojo;
+            }
+        }
+
+        &:disabled {
+            background-color: $dark-contraste-azul;
+            color: $dark-contraste-negro;
+        }
+    }
+}

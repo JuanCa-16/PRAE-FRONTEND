@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import './Celda.scss' 
-
+import { useTheme } from '../../Contexts/UserContext';
 /** 
  * Componente: Celda
  * Descripcion: Renderiza una celda (para las tablas) con texto 
@@ -15,8 +15,9 @@ import './Celda.scss'
  */
 
 const Celda = ({txt="Valor", tipo="titulo", rol="ver", onClick}) => {
+    const {theme} = useTheme()
     return (
-        <div className={`celda ${tipo} ${rol}`} onClick={onClick}>
+        <div className={`${theme} celda ${tipo} ${rol}`} onClick={onClick}>
             <p>{txt}</p>
         </div>
 )

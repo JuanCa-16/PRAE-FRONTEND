@@ -20,6 +20,21 @@
         gap: 0.625rem;
         align-self: stretch;
 
+        .tituloSuperior{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: space-between;
+            width: 100%;
+            
+        }
+
+        .iconoTheme{
+            display: flex;
+            align-items: center;
+        }
+
         .itemBar{
             display: flex;
             flex-direction: column;
@@ -37,4 +52,14 @@
         border-radius: 10rem;
     }
 
+}
+
+.dark{
+    .contenedorNavBar{
+        background-color: $dark-super-negro;
+
+        .linea{
+            background-color: $dark-blanco;
+        }
+    }
 }

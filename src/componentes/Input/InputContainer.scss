@@ -53,3 +53,26 @@
     }
 
 }
+
+.dark{
+    .input-container {
+
+        //Estilo del titulo cuando esta activo
+        .input-title.focused {
+            
+            color: $dark-azul;
+        }
+    
+        //Estilo del input
+        & .input-field {
+            
+            background: $dark-blanco;
+    
+            &:focus{
+                outline: 0.0625rem solid $dark-azul;
+            }
+    
+        }
+    
+    }
+}

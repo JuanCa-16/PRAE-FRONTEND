@@ -30,3 +30,20 @@
         color: $amarillo
     }
 }
+
+.dark{
+    .logoContenedor{
+        color: $dark-azul;
+    
+    
+        //Aplicar color Morado
+        .morado{
+            color: $dark-morado
+        }
+    
+        //Aplicar color Amarillo
+        .amarillo{
+            color: $dark-amarillo
+        }
+    }
+}

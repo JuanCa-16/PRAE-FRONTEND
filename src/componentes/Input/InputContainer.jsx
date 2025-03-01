@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './InputContainer.scss'
 import { useState } from 'react';
 import { useId } from 'react';
-
+import { useTheme } from '../../Contexts/UserContext';
 
 /** 
  * Componente: InputContainer
@@ -21,7 +21,7 @@ import { useId } from 'react';
 function InputContainer({placeholder = "correo@gmail.com", titulo = "correo electronico:", inputType = "email", value = "", required = false, isDisabled= false, nomInput, onChange = () => {}}) {
 
     const [isFocused, setIsFocused] = useState(false);
-
+    const {theme} = useTheme()
     // Estado interno para manejar el valor del input
     // const [inputValue, setInputValue] = useState(value);
 
@@ -34,7 +34,7 @@ function InputContainer({placeholder = "correo@gmail.com", titulo = "correo elec
     const uniqueId = useId();
 
     return (
-        <div className={`input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
+        <div className={`${theme} input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
 
             <p htmlFor="input-field" className={`input-title lato ${isFocused? 'focused' : ''}`}>
             {titulo}</p>
