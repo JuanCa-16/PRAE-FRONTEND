@@ -16,6 +16,7 @@ const CreacionDocente = () => {
         correo: '',
         doc: '',
         contrasena: '',
+        area: '',
         materias: []
     });
     
@@ -42,6 +43,7 @@ const CreacionDocente = () => {
             correo: '',
             doc: '',
             contrasena: '',
+            area: '',
             materias: []
         })
         setMateriasSeleccionadas([])
@@ -99,11 +101,12 @@ const CreacionDocente = () => {
                 <TituloDes titulo='CREAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', value)}  />
-                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Nombres' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', value)}  />
-                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Castro Henao' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', value)}  />
+                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Esteban' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', value)}  />
+                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' value={formData.correo} placeholder='esteban@gmail.com' onChange={(value) => handleChange('correo', value)} />
                         <InputContainer nomInput="contra" required={true}  titulo='Contraseña'placeholder='*****' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
-                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
+                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='1116458796' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
+                        <InputContainer nomInput="areaEnsenanza" required={true}  titulo='Area Enseñanza' inputType='text' placeholder='Humanidades' value={formData.area} onChange={(value) => handleChange('area', value)} />
                     </div>
                     <div className="selectorMat">
                         <div className="selector">

@@ -99,7 +99,7 @@ const CrearGrados = () => {
                 setInfoPildoras(data); // Guarda los datos en el estado
 
             } catch (error) {
-                
+                console.error(error);
             }
         }
 
