@@ -51,7 +51,7 @@ function App() {
 
   //ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
   const { user, setUser } = useUser();
-  const { theme, setTheme} = useTheme();
+  const { theme} = useTheme();
 
   //VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
   useEffect(() => {
