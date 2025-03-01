@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import './PildoraEst.scss'
-
+import { useTheme } from '../../Contexts/UserContext';
 /**
  * Componente: PildoraEst
  * Descripción: Representa una tarjetacon información de un estudiante (Nombre y Curso).
@@ -13,8 +13,11 @@ import './PildoraEst.scss'
  *      - onClick (func): Función a ejecutar cuando se hace clic en la píldora.
  */
 const PildoraEst = ({color = "azul", est = "JUAN CAMILO HENAO GALLEGO", curso = "11-2", clase="grande", onClick}) => {
+    
+    const {theme} = useTheme()
+    
     return (
-        <div className={`pildoraEst ${clase} ${color}`} onClick={onClick}>
+        <div className={`pildoraEst ${clase} ${color} ${theme}`} onClick={onClick}>
             <div className="contenedor">
                 <p className="nombre bold">{est.toUpperCase()}</p>
                 <h4 className="inter curso">{curso}</h4>

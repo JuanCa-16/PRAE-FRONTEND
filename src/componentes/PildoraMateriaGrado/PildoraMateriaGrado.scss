@@ -92,3 +92,74 @@
     }
 }
 
+.dark{
+    .contenedorPildoraG{
+
+        box-shadow: 0px 4px 11px $dark-super-negro;
+
+    
+        h4{
+            color: $dark-blanco;
+        }
+    
+        background-color: $dark-azul;
+        color: $dark-contraste-azul;
+        
+        //colores
+        &.morado {
+            background-color: $dark-morado;
+            color: $dark-contraste-morado;
+        }
+        
+        &.amarillo {
+            background-color: $dark-amarillo;
+            color: $dark-contraste-amarillo;
+        }
+    
+        .elipse1, .elipse2{
+            background-color: $dark-blanco;
+
+        }
+    
+        //colores hover
+        &:hover{
+
+            background-color: $dark-contraste-azul;
+            
+            h4{
+                color: $dark-azul;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $dark-azul;
+            }
+    
+            &.morado {
+                background-color: $dark-contraste-morado;
+                color: $dark-morado;
+    
+                h4{
+                    color: $dark-morado;
+                }
+        
+                .elipse1, .elipse2{
+                    background-color: $dark-morado;
+                }
+            }
+    
+            &.amarillo {
+                background-color: $dark-contraste-amarillo;
+                color: $dark-amarillo;
+    
+                h4{
+                    color: $dark-amarillo;
+                }
+        
+                .elipse1, .elipse2{
+                    background-color: $dark-amarillo;
+                }
+            }
+        }
+    }
+}
+

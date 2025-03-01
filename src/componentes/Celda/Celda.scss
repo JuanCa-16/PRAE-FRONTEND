@@ -62,3 +62,59 @@
 
 
 }
+
+.dark{
+    .celda{
+
+        //Si es de tipo titulo
+        &.titulo{
+            
+            color: $dark-azul;
+            background-color: $dark-contraste-azul;
+    
+            //si tiene rol de ver
+            &.ver{
+                &:hover{
+                    
+                    color: $dark-contraste-azul;
+                    background-color: $dark-azul;
+                }
+            }
+        }
+    
+        //Si es de tipo titulo2
+        &.titulo2{
+            
+            color: $dark-azul;
+            
+            background-color: $dark-contraste-blanco;
+    
+            //Si tiene rol de ver
+            &.ver{
+                &:hover{
+                    
+                    color: $dark-contraste-blanco;
+                    background-color: $dark-azul;
+                }
+            }
+        }
+    
+        //Si es de tipo normal
+        &.normal{
+            
+            
+            background-color: $dark-contraste-negro;
+    
+            //si tiene el rol de ver
+            &.ver{
+                &:hover{
+
+                    color: $dark-azul;
+                    background-color: $dark-contraste-blanco;
+                }
+            }
+        }
+    
+    
+    }
+}

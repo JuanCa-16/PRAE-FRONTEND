@@ -6,6 +6,7 @@ import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
 import Modal from '../../../componentes/Modal/Modal';
 import { useUser } from '../../../Contexts/UserContext.jsx';
+import Line from '../../../componentes/Line/Line.jsx';
 
 
 const CrearMateria = () => {
@@ -154,7 +155,7 @@ const CrearMateria = () => {
                     <button type='submit'>CREAR</button>
                 </form>
             </div>
-            <div className="linea"></div>
+            <Line></Line>
             <div className="todosMaterias">
                 <TituloDes 
                     titulo='LISTADO DE MATERIAS:' 

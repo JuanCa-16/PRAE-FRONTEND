@@ -174,3 +174,96 @@
         }
     }
 }
+
+.dark{
+    .pildoraEst{
+
+        .nombre{
+            color: $dark-blanco;
+        }
+    
+        background-color: $dark-azul;
+        color: $dark-contraste-azul;
+        
+    
+        //colores
+        &.morado {
+            background-color: $dark-morado;
+            color: $dark-contraste-morado;
+        }
+    
+        &.amarillo {
+            background-color: $dark-amarillo;
+            color: $dark-contraste-amarillo;
+        }
+        
+        &.grande{
+            box-shadow: 0px 4px 11px $dark-super-negro;
+    
+            h4{
+                color: $dark-blanco;
+            }
+    
+            .elipse1, .elipse2{
+                background-color: $dark-blanco;
+            }
+        }
+    
+        //Estilos si es peque
+        &.peque{
+    
+            .contenedor{
+
+                .curso{
+                    color: $dark-blanco;
+                }
+    
+            }
+            
+    
+            .elipse1, .elipse2{
+                background-color: $dark-blanco;
+            }
+    
+            //Estilos Hover
+            &:hover{
+                
+                background-color: $dark-contraste-azul;
+                
+                .nombre, .curso{
+                    color: $dark-azul;
+                }
+        
+                .elipse1, .elipse2{
+                    background-color: $dark-azul;
+                }
+        
+                &.morado {
+                    background-color: $dark-contraste-morado;
+                    color: $dark-morado;
+        
+                    .nombre, .curso{
+                        color: $dark-morado;
+                    }
+            
+                    .elipse1, .elipse2{
+                        background-color: $dark-morado;
+                    }
+                }
+        
+                &.amarillo {
+                    background-color: $dark-contraste-amarillo;
+                    color: $dark-amarillo;
+        
+                    .nombre, .curso{
+                        color: $dark-amarillo;
+                    }
+            
+                    .elipse1, .elipse2{
+                        background-color: $dark-amarillo;
+                    }
+                }
+            }
+        }
+    }
+}

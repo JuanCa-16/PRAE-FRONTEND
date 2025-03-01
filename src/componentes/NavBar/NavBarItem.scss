@@ -125,3 +125,70 @@
         }
     }
 }
+
+
+.dark{
+    //Estilos del componente cuando es NavBarItemn
+    .contenedorNavBarItem{
+
+        background-color: $dark-contraste-negro;
+
+
+        //Estilos para el Hover
+        &:hover{
+
+            outline: 0.0625rem solid $dark-azul;
+            background-color: $dark-contraste-azul;
+            
+            .etiqueta{
+                opacity: 1;
+            
+                .logo, .texto{
+                    color: $dark-azul;
+                }
+            }
+
+        }
+
+        //Estilo cuando el menu este activo
+        &.activar{
+            outline: 0.0625rem solid $dark-azul;
+            background-color: $dark-contraste-azul;
+            
+            .etiqueta{
+            
+                .logo, .texto{
+                    color: $dark-azul;
+                }
+            }
+        }
+    }
+
+    //Estilos cuando es tipo existe (solo es nombre e iluminacion)
+    .tipo-existe{
+
+        outline: 0.0625rem solid $dark-morado;
+        background-color: $dark-contraste-morado;
+
+        //Estilo letra
+        .etiqueta{
+
+            .logo, .texto{
+                color: $dark-morado;
+            }
+
+        }
+
+        //colores
+        &.amarillo{
+            outline: 0.0625rem solid $dark-amarillo;
+            background-color: $dark-contraste-amarillo;
+
+            .logo, .texto{
+                color: $dark-amarillo;
+
+                
+            }
+        }
+    }
+}

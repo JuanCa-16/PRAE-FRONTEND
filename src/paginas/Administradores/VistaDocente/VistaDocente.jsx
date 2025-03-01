@@ -8,6 +8,7 @@ import Select from "react-select";
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
+import Line from '../../../componentes/Line/Line.jsx';
 const VistaDocente = () => {
 
     const location = useLocation();
@@ -182,10 +183,10 @@ const VistaDocente = () => {
                             <button onClick={() => handleEliminar()} className='rojo'>ELIMINAR</button>
                     </Modal>
             </div>
-            <div className="linea"></div>
+            <Line></Line>
             <div className="lista">
             <TituloDes 
-                    titulo='LISTADO DE CURSOS ASIGNADOS::' 
+                    titulo='LISTADO DE CURSOS ASIGNADOS:' 
                     desc='Consulta los cursos que tienes asignados en los distintos grados. Gestiona las calificaciones y el progreso de tus estudiantes en cada uno de tus grupos.'
                 />
                 <div className="informacion">

@@ -61,3 +61,30 @@
         }
     }
 }
+
+.dark{
+    .custom-select {
+        //Del input
+        .selected {
+            background: $dark-blanco;
+            &:focus {
+                border-color: $dark-azul; // Solo cambia el color, no el grosor
+            }
+        }
+        
+        
+        //Del menu de opciones
+        .options {
+            
+            background: $dark-super-negro;
+            //De cada opcion
+            .option {
+                
+                &:hover {
+                    background: $dark-azul;
+                    color: $dark-blanco;
+                }
+            }
+        }
+    }
+}

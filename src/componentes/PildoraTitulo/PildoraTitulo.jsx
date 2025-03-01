@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import './PildoraTitulo.scss'
-
+import { useTheme } from '../../Contexts/UserContext';
 //Fucnion para poner mayusculas iniciales
 const capitalizeWords = (str) => {
     return str.replace(/\b\w/g, char => char.toUpperCase());
@@ -19,8 +19,10 @@ const capitalizeWords = (str) => {
  */
 
 const PildoraTitulo = ({color="azul", nombre="Juan Camilo Henao", materia="CALCULO II", nota = "4.5", grado}) => {
+    
+    const {theme} = useTheme()
     return (
-        <div className={`contenedorPilaTitulo ${color} `}>
+        <div className={`${theme} contenedorPilaTitulo ${color} `}>
             <div className="infoContainer">
                 <div className="info">
                     <p className='lato nombre'>{capitalizeWords(nombre)}</p>

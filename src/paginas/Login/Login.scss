@@ -101,14 +101,41 @@
                     .lato_1{
                         display: flex;
                         justify-content: flex-end;
-                        color: $azul;
+                        color: $contraste-azul;
                         cursor: pointer;
                         
                         &:hover{
-                            color: blue;
+                            color:$azul;
                         }
                     }
             
+        }
+    }
+}
+
+.dark{
+    .contenedorLogin{
+
+        background-color: $dark-negro;
+    
+        .pagLogin{
+
+            background-color: $dark-blanco;
+    
+            .izq{
+                background: $dark-super-negro;
+            }
+
+            .der{
+                background-color: $dark-negro;
+                .lato_1{
+                    color: $dark-contraste-azul;
+
+                    &:hover{
+                        color: $dark-azul;
+                        }
+                    }
+            }
         }
     }
 }

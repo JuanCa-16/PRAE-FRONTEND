@@ -101,3 +101,25 @@
         top: 20%;
     }
 }
+
+.dark{
+    .contenedorPilaTitulo{
+        background-color:  $dark-azul;
+
+        color: $dark-blanco;
+
+    
+        //colores
+        &.morado {
+            background-color: $dark-morado;
+        }
+    
+        &.amarillo {
+            background-color: $dark-amarillo;
+        }
+        
+        .elipse1, .elipse2{
+            background-color: $dark-blanco;
+        }
+    }
+}

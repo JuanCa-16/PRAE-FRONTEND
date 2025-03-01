@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import './CreacionDocente.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import Select from "react-select";
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
+import Line from '../../../componentes/Line/Line.jsx';
+import Selector from '../../../componentes/Selector/Selector.jsx';
 
 const CreacionDocente = () => {
 
@@ -109,17 +110,8 @@ const CreacionDocente = () => {
                         <InputContainer nomInput="areaEnsenanza" required={true}  titulo='Area Enseñanza' inputType='text' placeholder='Humanidades' value={formData.area} onChange={(value) => handleChange('area', value)} />
                     </div>
                     <div className="selectorMat">
-                        <div className="selector">
-                            <h4>Asignacion de Materias</h4>
-                            <Select
-                                isMulti
-                                options={opcionesMaterias}
-                                value={materiasSeleccionadas}
-                                onChange={handleChangeMaterias}
-                                placeholder="Selecciona las materias"
-                            />
-                        </div>
-                        <div className="selecciones">
+                        <Selector titulo={'Asignacion de Materias'} opciones={opcionesMaterias} valores={materiasSeleccionadas} onChange={handleChangeMaterias} placeholder={"Selecciona las materias"}></Selector>
+                        {/* <div className="selecciones">
                             <h4>Materias seleccionadas:</h4>
                             {materiasSeleccionadas.length === 0? (
                                 <p>No has seleccionado ninguna materia todavía.</p>
@@ -131,12 +123,12 @@ const CreacionDocente = () => {
                                 </ul>
                             ) }
                             
-                        </div>
+                        </div> */}
                     </div>
                     <button type='submit'>Guardar Cambios</button>
                 </form>
             </div>
-            <div className="linea"></div>
+            <Line></Line>
             <div className="lista">
             <TituloDes 
                     titulo='LISTADO DE PROFESORES:' 

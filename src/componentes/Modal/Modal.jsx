@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputContainer from "../Input/InputContainer";
 import PropTypes from 'prop-types';
 import './Modal.scss';
-
+import { useTheme } from "../../Contexts/UserContext";
 /** 
  * Componente: Modal
  * Descripción: Este componente renderiza un modal dinámico que puede ser de tipo "eliminar", "actividad" o "nota".
@@ -47,6 +47,7 @@ import './Modal.scss';
 
 const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", valorAct='',ValorPeso='', valorNota = '', extraData={},  children }) => {
 
+    const {theme} = useTheme()
     //La logica del modal eliminar se le hace es al boton que llega por children.
     
     //Envio datos modal actividad.
@@ -110,8 +111,8 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
     };
 
     return (
-        <div className={`modal-overlay ${tipo}`} onClick={handleClickOutside}>
-        <div className="modal-content">
+        <div className={`modal-overlay ${tipo} ${theme}`} onClick={handleClickOutside}>
+        <div className={`modal-content ${theme}`}>
             {tipo === "eliminar"? (
                 <div className="modalContenedor">
                 <div className="titulo">
