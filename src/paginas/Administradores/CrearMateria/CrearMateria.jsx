@@ -154,6 +154,7 @@ const CrearMateria = () => {
                     <button type='submit'>CREAR</button>
                 </form>
             </div>
+            <div className="linea"></div>
             <div className="todosMaterias">
                 <TituloDes 
                     titulo='LISTADO DE MATERIAS:' 
