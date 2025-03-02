@@ -131,14 +131,14 @@
     //Estilos del componente cuando es NavBarItemn
     .contenedorNavBarItem{
 
-        background-color: $dark-contraste-negro;
+        background: none;
 
 
         //Estilos para el Hover
         &:hover{
 
             outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-azul;
+            background-color: $dark-contraste-negro;
             
             .etiqueta{
                 opacity: 1;
@@ -153,7 +153,7 @@
         //Estilo cuando el menu este activo
         &.activar{
             outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-azul;
+            background-color: $dark-contraste-negro;
             
             .etiqueta{
             

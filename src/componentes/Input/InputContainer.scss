@@ -66,12 +66,12 @@
     
         //Estilo del input
         & .input-field {
-            
-            background: $dark-contraste-blanco;
+            color: $dark-blanco;
+            background: $dark-super-negro;
     
             &:focus{
-                background: $dark-blanco;
-                outline: 0.0625rem solid $dark-azul;
+                background: $dark-contraste-negro;
+                outline: 0.0625rem solid $dark-super-negro;
             }
     
         }

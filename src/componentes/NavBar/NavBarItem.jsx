@@ -21,18 +21,19 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     const navigate = useNavigate(); // Hook para redirigir
 
     const {theme} = useTheme()
+
     const handleClick = () => {
-
-        //  Funcion del cerrar sesion
-        if(func){
-            return func()
+        if (tipo === true) return;  // Evita la ejecución si `tipo` es true
+    
+        if (func) {
+            return func();
         }
-
-        //Rutas de los items de la navBar
+    
         if (ruta) {
-            navigate(ruta); // Redirige a la ruta especificada
+            navigate(ruta);
         }
     };
+    
 
     const [hovered, setHovered] = useState(false);
 

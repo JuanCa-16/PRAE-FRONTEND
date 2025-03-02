@@ -40,12 +40,26 @@
 }
 
 .dark{
+
+
+    .css-t3ipsp-control{
+        box-shadow: 0 0 0 1px $dark-super-negro;
+    }
+    
     .css-13cymwt-control{ //fondo input
-        background-color: $dark-contraste-blanco;
+        
+        background-color: $dark-super-negro;
     }
 
     .react-select__control--is-focused{
-        background-color: $dark-blanco;
+        border-color: $dark-contraste-negro;
+        outline-color: $dark-contraste-negro;
+        background-color: $dark-contraste-negro;
+
+        &:hover{
+            border-color: $dark-contraste-negro;
+            outline-color: $dark-contraste-negro;
+        }
     }
 
     .react-select__multi-value{
@@ -54,6 +68,7 @@
 
 
     .css-1nmdiq5-menu{
+        
         border-radius: $radio1;
         background-color: $dark-super-negro;
     }
@@ -78,6 +93,11 @@
 
     .react-select__option--is-focused{
         background-color: $dark-azul;
+    }
+
+    // Color del texto seleccionado
+    .react-select__single-value {
+        color: $dark-blanco;
     }
 
     

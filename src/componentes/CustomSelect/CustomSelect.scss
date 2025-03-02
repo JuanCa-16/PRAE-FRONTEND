@@ -87,13 +87,19 @@
 }
 
 .dark{
+
+    
     .custom-select {
         //Del input
+        
         .selected {
-            background: $dark-contraste-blanco;
+            
+            color: $dark-blanco;
+            
+            background: $dark-super-negro;
             &:focus {
-                background: $dark-blanco;
-                border-color: $dark-azul; // Solo cambia el color, no el grosor
+                background: $dark-contraste-negro;
+                border-color:$dark-super-negro; // Solo cambia el color, no el grosor
             }
         }
         
