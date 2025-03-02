@@ -4,7 +4,7 @@ import './VistaDocente.scss'
 import { useNavigate } from "react-router-dom";
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import Select from "react-select";
+import Selector from '../../../componentes/Selector/Selector.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
@@ -146,17 +146,9 @@ const VistaDocente = () => {
                         <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
                     </div>
                     <div className="selectorMat">
-                        <div className="selector">
-                            <h4>Asignacion de Materias</h4>
-                            <Select
-                                isMulti
-                                options={opcionesMaterias}
-                                value={materiasSeleccionadas}
-                                onChange={handleChangeMaterias}
-                                placeholder="Selecciona las materias"
-                            />
-                        </div>
-                        <div className="selecciones">
+
+                        <Selector titulo={'Asignacion de Materias'} placeholder={"Selecciona las materias"} onChange={handleChangeMaterias} opciones={opcionesMaterias} valores={materiasSeleccionadas}></Selector>
+                        {/* <div className="selecciones">
                             <h4>Materias seleccionadas:</h4>
                             {materiasSeleccionadas.length === 0? (
                                 <p>No has seleccionado ninguna materia todavía.</p>
@@ -168,7 +160,7 @@ const VistaDocente = () => {
                                 </ul>
                             ) }
                             
-                        </div>
+                        </div> */}
                     </div>
                     <button type='submit' disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>

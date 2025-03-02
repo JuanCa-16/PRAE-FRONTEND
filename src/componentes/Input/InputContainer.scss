@@ -8,6 +8,7 @@
     width: 100%;
     gap: 0.5rem;
     //height: 5.375rem;
+    
 
     //Estilo del titulo
     & .input-title{
@@ -66,9 +67,10 @@
         //Estilo del input
         & .input-field {
             
-            background: $dark-blanco;
+            background: $dark-contraste-blanco;
     
             &:focus{
+                background: $dark-blanco;
                 outline: 0.0625rem solid $dark-azul;
             }
     

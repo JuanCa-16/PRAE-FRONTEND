@@ -111,7 +111,7 @@ const CrearMateria = () => {
     };
     
     const pildorasFiltradas = infoPildoras.filter(item =>
-        (materiaSeleccionada === '' || item.materia === materiaSeleccionada)
+        (materiaSeleccionada === '' || item.nombre === materiaSeleccionada)
     );
 
 
