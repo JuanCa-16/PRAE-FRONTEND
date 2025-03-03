@@ -34,9 +34,11 @@ const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titul
         };
     }, []);
 
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <div className={`custom-select ${theme}`} ref={selectRef}>
-            <p>{titulo}</p>
+            <p htmlFor="selected"  className={`input-title lato ${isFocused? 'focused' : ''}`}>{titulo}</p>
             <input
                 type="text"
                 value={filtro}
@@ -44,6 +46,8 @@ const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titul
                     setFiltro(e.target.value);
                     setAbierto(true);
                 }}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 onClick={() => setAbierto(true)}
                 placeholder={titulo}
                 className="selected"

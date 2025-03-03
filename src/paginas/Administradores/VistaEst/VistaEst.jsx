@@ -4,7 +4,7 @@ import './VistaEst.scss'
 import { useNavigate } from "react-router-dom";
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import Select from "react-select";
+import Selector from '../../../componentes/Selector/Selector.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
@@ -119,16 +119,7 @@ const VistaEst = () => {
                         <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
                     </div>
                     <div className="selectorGrado">
-                        <div className="selector">
-                            <h4>Asignacion de Materias</h4>
-                            <Select
-                                isMulti={false} 
-                                options={opcionesGrados}
-                                value={gradoAsignado}
-                                onChange={handleChangeGrado}
-                                placeholder="Selecciona el grado"
-                            />
-                        </div>
+                        <Selector multi={false}  opciones={opcionesGrados} valores={gradoAsignado} onChange={handleChangeGrado} placeholder={"Selecciona el grado"}></Selector>
                     </div>
                     <button type='submit' disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>

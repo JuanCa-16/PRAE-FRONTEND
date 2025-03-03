@@ -17,9 +17,13 @@ const CrearMateria = () => {
     const [reload, setReload] = useState(false);
 
     function capitalizeWords(str) {
-        return str.toLowerCase().split(' ').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' ');
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
     }
     
     const [formData, setFormData] = useState({
@@ -37,7 +41,7 @@ const CrearMateria = () => {
     //Envio del formulario
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const nombreCapitalize = capitalizeWords(formData.materia)
+        const nombreCapitalize = formData.materia
         console.log('Datos enviados:', nombreCapitalize);
 
         try {
@@ -111,7 +115,7 @@ const CrearMateria = () => {
     };
     
     const pildorasFiltradas = infoPildoras.filter(item =>
-        (materiaSeleccionada === '' || item.materia === materiaSeleccionada)
+        (materiaSeleccionada === '' || item.nombre === materiaSeleccionada)
     );
 
 
@@ -151,7 +155,7 @@ const CrearMateria = () => {
             <div className="crear">
                 <TituloDes titulo='CREAR MATERIA' desc='Ingresa el nombre de la materia nueva' ></TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
-                    <InputContainer value={formData.materia} inputType='text' placeholder='Materia' titulo='Materia' required={true} onChange={(value) => handleChange('materia',  value)}></InputContainer>
+                    <InputContainer value={formData.materia} inputType='text' placeholder='Materia' titulo='Materia' required={true} onChange={(value) => handleChange('materia',  capitalizeWords(value))}></InputContainer>
                     <button type='submit'>CREAR</button>
                 </form>
             </div>

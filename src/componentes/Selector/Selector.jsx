@@ -1,12 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Selector.scss'
 import Select from "react-select";
 import { useTheme } from '../../Contexts/UserContext'
-const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholder}) => {
+const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholder, mensajeVacio= "No hay opciones disponibles"}) => {
     const {theme} = useTheme() 
+    const [isFocused, setIsFocused] = useState(false);
     return (
         <div className={`selector ${theme}`}>
-            <h4>{titulo}</h4>
+            <p className={`input-title lato ${isFocused? 'focused' : ''}`}>{titulo}</p>
             <Select
                 classNamePrefix="react-select"
                 isMulti = {multi}
@@ -14,6 +15,9 @@ const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholde
                 value={valores}
                 onChange={onChange}
                 placeholder= {placeholder}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                noOptionsMessage={() => mensajeVacio}
             />
         </div>
     )

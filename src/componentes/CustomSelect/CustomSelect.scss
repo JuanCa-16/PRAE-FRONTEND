@@ -12,6 +12,24 @@
         padding-bottom: 0.5rem;
     }
 
+    & .input-title{
+        opacity: 50%;
+    }
+
+    &:hover{
+            
+        .input-title{
+            opacity: 100%;
+        }
+        
+    }
+
+    //Estilo del titulo cuando esta activo
+    .input-title.focused {
+        opacity: 100%;
+        color: $azul;
+    }
+
     //Del input
     .selected {
         background: $contraste-blanco;
@@ -21,7 +39,13 @@
         outline: none; // Elimina el contorno azul predeterminado
         transition: border 0.3s ease;
         height: 2.8rem;
-    
+        
+        &::placeholder {
+            opacity: 50%;
+            font-family: 'Lato', sans-serif; 
+            font-size: 1rem;
+        }
+
         &:focus {
             border-color: $azul; // Solo cambia el color, no el grosor
         }
@@ -63,12 +87,19 @@
 }
 
 .dark{
+
+    
     .custom-select {
         //Del input
+        
         .selected {
-            background: $dark-blanco;
+            
+            color: $dark-blanco;
+            
+            background: $dark-super-negro;
             &:focus {
-                border-color: $dark-azul; // Solo cambia el color, no el grosor
+                background: $dark-contraste-negro;
+                border-color:$dark-super-negro; // Solo cambia el color, no el grosor
             }
         }
         
@@ -76,7 +107,7 @@
         //Del menu de opciones
         .options {
             
-            background: $dark-super-negro;
+            background: $dark-contraste-negro;
             //De cada opcion
             .option {
                 
