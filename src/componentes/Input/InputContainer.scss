@@ -18,13 +18,13 @@
     //Estilo del titulo cuando esta activo
     .input-title.focused {
         opacity: 100%;
-        color: $azul;
+        color: var(--colorPrincipal);
     }
 
     //Estilo del input
     & .input-field {
         
-        background: $contraste-blanco;
+        background: var(--colorSecundario);
         border: none;
         border-radius: $radio1;
         overflow: hidden;
@@ -39,7 +39,7 @@
         }
 
         &:focus{
-            outline: 0.0625rem solid $azul;
+            outline: 0.0625rem solid var(--colorPrincipal);;
         }
 
     }

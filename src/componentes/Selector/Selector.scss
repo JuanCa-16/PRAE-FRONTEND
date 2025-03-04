@@ -18,14 +18,26 @@
         
     }
 
+    .react-select__option{
+        &:first-child {
+            border-top-left-radius: $radio1;
+            border-top-right-radius: $radio1;
+        }
+
+        &:last-child {
+            border-bottom-left-radius: $radio1;
+            border-bottom-right-radius: $radio1;
+        }
+    }
+
     //Estilo del titulo cuando esta activo
     .input-title.focused {
         opacity: 100%;
-        color: $azul;
+        color: var(--colorPrincipal);;
     }
 
     .css-13cymwt-control{ //fondo input
-        background-color: $contraste-blanco;
+        background-color: var(--colorSecundario);
         outline: none;
         border: 1px solid transparent;
         padding: 0.3rem 0;
@@ -33,13 +45,46 @@
         
     }
 
+    .react-select__menu-list{ //fondo input
+        background-color: var(--colorSecundario);
+        border-radius: $radio1;
+
+    }
+
     .react-select__control--is-focused{
         padding: 0.3rem 0;
         border-radius: $radio1;
+        background-color: var(--colorSecundario);
+
+        &:hover{
+            border-color: var(--colorPrincipal);
+            outline-color: var(--colorPrincipal);
+            box-shadow:none;
+        }
+    }
+
+    .react-select__option--is-focused{
+        background-color: var(--colorPrincipal);
+    }
+
+    .css-t3ipsp-control{
+        box-shadow: none;
+
+    }
+    
+    .react-select__control--is-focused{
+        border-color: var(--colorPrincipal);
+        outline-color: var(--colorPrincipal);
+        
     }
 }
 
 .dark{
+
+    .input-title.focused {
+        
+        color: $azul;;
+    }
 
 
     .css-t3ipsp-control{
@@ -79,17 +124,7 @@
 
     }
 
-    .react-select__option{
-        &:first-child {
-            border-top-left-radius: $radio1;
-            border-top-right-radius: $radio1;
-        }
-
-        &:last-child {
-            border-bottom-left-radius: $radio1;
-            border-bottom-right-radius: $radio1;
-        }
-    }
+    
 
     .react-select__option--is-focused{
         background-color: $dark-azul;

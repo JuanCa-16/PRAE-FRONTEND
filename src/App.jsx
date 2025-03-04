@@ -140,19 +140,23 @@ function App() {
     localStorage.removeItem("token"); // Eliminar del localStorage
   };
 
-  // useEffect(() => {
-  //   // Simulación de obtener colores de la BD
-  //   const colores = {
+   useEffect(() => {
+     // Simulación de obtener colores de la BD
+     const colores = {
       
-  //     colorPrincipal:"#fe2515", 
-  //     contrastePrincipal: "#f5e4e4",
-  //   };
+      //  colorPrincipal:"#b33238ff", 
+      //  colorSecundario: "#f7f9faff",
+      //  fondo: '#f2f3f7ff',
+      //  colorPildora1:"#4946E2", 
+      //  colorPildora2:"#b33238ff", 
+      //  colorPildora3:"#509936ff", 
+     };
 
-  //   // Aplicar colores a :root
-  //   Object.entries(colores).forEach(([key, value]) => {
-  //     document.documentElement.style.setProperty(`--${key}`, value);
-  //   });
-  // }, []);
+     // Aplicar colores a :root
+     Object.entries(colores).forEach(([key, value]) => {
+       document.documentElement.style.setProperty(`--${key}`, value);
+     });
+   }, []);
 
 
 

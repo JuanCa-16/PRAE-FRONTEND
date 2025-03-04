@@ -19,18 +19,18 @@
         margin: 0;
     }
 
-    background-color: $azul;
-    color: $contraste-azul;
+    background-color: var(--colorPildora1);
+    color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
     
     //colores
     &.morado {
-        background-color: $morado;
-        color: $contraste-morado;
+        background-color: var(--colorPildora2);
+        color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
     }
     
     &.amarillo {
-        background-color: $amarillo;
-        color: $contraste-amarillo;
+        background-color: var(--colorPildora3);
+        color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
     }
 
     .elipse1, .elipse2{
@@ -54,39 +54,39 @@
     //colores hover
     &:hover{
         cursor: pointer;
-        background-color: $contraste-azul;
+        background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
         
         h4{
-            color: $azul;
+            color: var(--colorPildora1);
         }
 
         .elipse1, .elipse2{
-            background-color: $azul;
+            background-color: var(--colorPildora1);
         }
 
         &.morado {
-            background-color: $contraste-morado;
+            background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
             color: $morado;
 
             h4{
-                color: $morado;
+                color: var(--colorPildora2);
             }
     
             .elipse1, .elipse2{
-                background-color: $morado;
+                background-color: var(--colorPildora2);
             }
         }
 
         &.amarillo {
-            background-color: $contraste-amarillo;
+            background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
             color: $amarillo;
 
             h4{
-                color: $amarillo;
+                color: var(--colorPildora3);
             }
     
             .elipse1, .elipse2{
-                background-color: $amarillo;
+                background-color: var(--colorPildora3);
             }
         }
     }

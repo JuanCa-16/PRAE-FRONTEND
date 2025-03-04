@@ -82,7 +82,7 @@ const VistaDocente = () => {
         if (profe?.documento_identidad) {
             listaProfes();
         }
-    }, [reload,profe.documento_identidad, API_URL, token]); // ✅ Dependencias correctas
+    }, [reload,profe.documento_identidad, API_URL, token]); 
     
 
     const [opcionesMaterias, setOpcionesMaterias] = useState([]);
@@ -145,8 +145,15 @@ const VistaDocente = () => {
             contrasena: formData.contrasena || null 
         };
 
-        // console.log('envio',dataToSend)
-        // console.log('original',initialFormData.current)
+        console.log('envio',dataToSend)
+        console.log('original',initialFormData.current)
+
+        //MATERIAS ELIMINADAS
+        const eliminarMat = initialFormData.current.materias.filter((materia) => !(dataToSend.materias.includes(materia)))
+        console.log('eliminar',eliminarMat)
+        //MATERIAS CREADAS
+        const crearMat = dataToSend.materias.filter((materia) => !(initialFormData.current.materias.includes(materia)))
+        console.log('crear',crearMat)
 
         try {
             const response = await fetch(`${API_URL}usuario/updateProfesor/${dataToSend.doc}`,{
@@ -170,6 +177,30 @@ const VistaDocente = () => {
             }
 
             const data = await response.json(); 
+
+            for (const materia of crearMat) {
+                try {
+                    const responseMateria = await fetch(`${API_URL}dictar/${dataToSend.doc}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            documento_profe: dataToSend.doc,
+                            id_materia: materia
+                        })
+                    });
+            
+                    if (!responseMateria.ok) {
+                        const errorData = await responseMateria.json();
+                        throw new Error(`Error al asignar materia ${materia}: ${errorData.message || responseMateria.status}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
             console.log('DOCENTE EDITADO EXITOSAMENTE', data);
             
             setReload(!reload);

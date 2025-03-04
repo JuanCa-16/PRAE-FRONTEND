@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 //variables de colores
+
+:root{
+    --colorPrincipal:#157AFE;
+    --colorSecundario: #F5F7F9;
+    --fondo: #FFFFFF;
+    --colorPildora1:#157AFE; 
+    --colorPildora2:#4946E2;
+    --colorPildora3:#EF9131; 
+}
+
 $azul: #157AFE;
 $contraste-azul: #E4EBF5;
 $morado: #4946E2;
@@ -100,7 +110,7 @@ button{
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: $azul;
+    background-color: var(--colorPrincipal);
     border: none;
     border-radius: $radio1;
     padding: 0.9375rem 1.25rem;
@@ -115,7 +125,7 @@ button{
     &:hover{
         cursor: pointer;
         opacity: 100%;
-        box-shadow: 0px 4px 10px $azul;
+        box-shadow: 0px 4px 10px var(--colorPrincipal);
     }
 
     &.rojo{
@@ -161,7 +171,7 @@ button{
     .main-content {
         width: 100%;
         padding: 24px 96px;
-        background-color: $blanco;
+        background-color: var(--fondo);
         max-height: 100%;
         overflow: auto;
     }

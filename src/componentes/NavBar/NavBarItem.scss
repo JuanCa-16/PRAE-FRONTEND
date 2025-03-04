@@ -6,7 +6,7 @@
 
     width: 100%;
     border-radius: $radio1;
-    background-color: $contraste-blanco;
+    background-color: var(--colorSecundario);
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
@@ -43,14 +43,14 @@
     //Estilos para el Hover
     &:hover{
 
-        outline: 0.0625rem solid #A9CEFF;
-        background-color: $contraste-azul;
+        outline: 0.0625rem solid var(--colorPrincipal);
+        background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
         
         .etiqueta{
             opacity: 1;
         
             .logo, .texto{
-                color: $azul;
+                color: var(--colorPrincipal);
             }
         }
 
@@ -58,14 +58,14 @@
 
     //Estilo cuando el menu este activo
     &.activar{
-        outline: 0.0625rem solid #A9CEFF;
-        background-color: $contraste-azul;
+        outline: 0.0625rem solid var(--colorPrincipal);
+        background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));;
         
         .etiqueta{
             opacity: 1;
         
             .logo, .texto{
-                color: $azul;
+                color: var(--colorPrincipal);
             }
         }
     }

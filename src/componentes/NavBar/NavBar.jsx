@@ -64,6 +64,15 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 
   const { theme, setTheme } = useTheme();
   const [hovered, setHovered] = useState(false);
+
+  const [colorIcono, setColorIcono] = useState("");
+  
+      useEffect(() => {
+          const colorPrincipal = getComputedStyle(document.documentElement)
+          .getPropertyValue("--colorPrincipal")
+          .trim();
+          setColorIcono(colorPrincipal);
+      }, []);
   
 
   return (
@@ -71,7 +80,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       <div className='menuSuperior'>
         <div className="tituloSuperior">
           <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
-          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
+          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
         </div>
         <div className="linea"></div>
         <nav className="itemBar">
