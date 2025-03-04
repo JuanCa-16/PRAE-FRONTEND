@@ -82,8 +82,8 @@
     padding: 0.5rem 1rem;
     text-align: left;
     position: relative;
-    outline: 0.0625rem solid #A2A1D5;
-    background-color: $contraste-morado;
+    outline: 0.0625rem solid var(--colorPrincipal);
+    background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
 
     //Estilo letra
     .etiqueta{
@@ -106,7 +106,7 @@
         }
 
         .logo, .texto{
-            color: $morado;
+            color: var(--colorPrincipal);
 
             
         }
@@ -114,16 +114,16 @@
     }
 
     //colores
-    &.amarillo{
-        outline: 0.0625rem solid #D9C3AC;
-        background-color: $contraste-amarillo;
+    // &.amarillo{
+    //     outline: 0.0625rem solid var(--colorPildora3);;
+    //     background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
 
-        .logo, .texto{
-            color: $amarillo;
+    //     .logo, .texto{
+    //         color: var(--colorPildora3);
 
             
-        }
-    }
+    //     }
+    // }
 }
 
 

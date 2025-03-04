@@ -192,7 +192,7 @@ const VistaDocenteAct = () => {
                             <Celda key={index} color={color} tipo='titulo2' txt={nombre} rol='NoVer'></Celda>
                         ))}
                     </div>
-                    <div className="notas">
+                    <div className={`notas ${color}`}>
 
                         {actividadesUnicas.map((actividad, i) => (
                             <div key={i} className="col nota">

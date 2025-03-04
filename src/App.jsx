@@ -31,6 +31,8 @@ import CrearMateria from './paginas/Administradores/CrearMateria/CrearMateria.js
 import AsignarGradosMaterias from './paginas/Administradores/AsignarGradosMaterias/AsignarGradosMaterias.jsx';
 import EditarPerfilDoc from './paginas/Docentes/EditarPerfilDoc/EditarPerfilDoc.jsx';
 import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/EditarPerfilAdmin.jsx';
+import FooterCom from './componentes/FooterCom/FooterCom.jsx';
+
 
 /** 
  * Componente: App
@@ -144,12 +146,12 @@ function App() {
      // Simulación de obtener colores de la BD
      const colores = {
       
-      //  colorPrincipal:"#b33238ff", 
-      //  colorSecundario: "#f7f9faff",
-      //  fondo: '#f2f3f7ff',
-      //  colorPildora1:"#4946E2", 
-      //  colorPildora2:"#b33238ff", 
-      //  colorPildora3:"#509936ff", 
+       colorPrincipal:"#1d2642ff", 
+       colorSecundario: "#edededff",
+       fondo: '#ffffffff',
+       colorPildora1:"#f2d44bff", 
+       colorPildora2:"#2c4a91ff", 
+       colorPildora3:"#7232d9ff", 
      };
 
      // Aplicar colores a :root
@@ -215,8 +217,17 @@ function App() {
             <Route path="/*" element={<Navigate to="/login"/>} />
 
             
+            
           </Routes>
+
+          <FooterCom></FooterCom>
+
+          
         </main>
+
+        
+
+        
 
       </div>
     </Router>
