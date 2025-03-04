@@ -140,6 +140,22 @@ function App() {
     localStorage.removeItem("token"); // Eliminar del localStorage
   };
 
+  // useEffect(() => {
+  //   // Simulación de obtener colores de la BD
+  //   const colores = {
+      
+  //     colorPrincipal:"#fe2515", 
+  //     contrastePrincipal: "#f5e4e4",
+  //   };
+
+  //   // Aplicar colores a :root
+  //   Object.entries(colores).forEach(([key, value]) => {
+  //     document.documentElement.style.setProperty(`--${key}`, value);
+  //   });
+  // }, []);
+
+
+
   return (
     <Router>
       <div className={`App ${theme}`}>
