@@ -211,7 +211,7 @@ const CreacionDocente = () => {
             }
     
             listaProfes()
-        },[reload,API_URL, token, user.institucion])
+    },[reload,API_URL, token, user.institucion])
             
         
             //Elimina opciones duplicadas para el selector
@@ -228,10 +228,12 @@ const CreacionDocente = () => {
         );
 
     //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (profe,materia, profesor,color,grado) => {
+    const manejarClick = (profe) => {
         const datos = {profe};
+        console.log(profe)
+    
         // navigate("/materias/notas", { state: datos }); // Navegar con los datos
-        navigate(`/profesores/${profe}`, { state: datos });
+        navigate(`/profesores/${profe.nombre}`, { state: datos });
     };
     return (
         <div className='contenedorCreacionDocente'>
@@ -290,7 +292,7 @@ const CreacionDocente = () => {
                                     texto={item.nombre} 
                                     color={item.color} 
                                     key={index} 
-                                    onClick={() => manejarClick(item.nombre)}
+                                    onClick={() => manejarClick(item)}
                                 />
                                     
                                     
