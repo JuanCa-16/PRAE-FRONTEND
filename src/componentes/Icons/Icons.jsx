@@ -150,7 +150,7 @@ const ExitIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 
 )
 
 
-const ThemeIcon = ({ color = "#157AFE",colorApagado = '#aaabadff', width = 30, height = 30, estado,activo,dark, ...props }) => (
+const ThemeIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={17}

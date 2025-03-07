@@ -33,6 +33,11 @@
         .iconoTheme{
             display: flex;
             align-items: center;
+            opacity: 0.3;
+
+            &:hover{
+                opacity: 1;
+            }
         }
 
         .itemBar{

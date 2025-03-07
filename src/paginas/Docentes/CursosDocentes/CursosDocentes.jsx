@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import './CursosDocentes.scss';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
+import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx';
 /**
  * Componente: CursosDocentes
  * Descripción: Muestra una lista de cursos asignados a un docente con la opción de filtrar por materia y grado.
@@ -29,17 +27,16 @@ const CursosDocentes = () => {
 
     //TRAER NOMBRE DEL TOKEN
 
-    const { user } = useUser();
-    const nombreDocente = user.nombre
+
     
 
     const infoPildoras = [
-        { materia: "Matemáticas", grado: "6-2", color: 'morado' },
-        { materia: "Física", grado: "6-2", color: 'azul' },
-        { materia: "Química", grado: "11-2", color: 'amarillo' },
-        { materia: "Historia", grado: "10-1", color: 'morado' },
-        { materia: "Historia", grado: "11-2", color: 'morado' },
-        { materia: "Historia", grado: "9-2", color: 'morado' },
+        { materia: "Matemáticas", profesor: "Carlos Pérez",grado: "6-2", color: 'morado' },
+        { materia: "Física", profesor: "Carlos Pérez",grado: "6-2", color: 'azul' },
+        { materia: "Química", profesor: "Ana Gómez",grado: "11-2", color: 'amarillo' },
+        { materia: "Historia", profesor: "Ana Gómez",grado: "10-1", color: 'morado' },
+        { materia: "Historia", profesor: "Ana Gómez",grado: "11-2", color: 'morado' },
+        { materia: "Historia", profesor: "Luis Rodríguez",grado: "9-2", color: 'morado' },
     ];
 
     //Elimina opciones duplicadas para el selector
@@ -60,13 +57,6 @@ const CursosDocentes = () => {
         (gradoSeleccionado === '' || item.grado === gradoSeleccionado)
     );
 
-    const navigate = useNavigate();
-    
-    //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (materia, profesor,color, grado) => {
-        const datos = { materia, profesor,color, grado}; // Datos a enviar
-        navigate("/listadoCursos/notas", { state: datos }); // Navegar con los datos
-    };
 
     return (
         <div className='contenedorCursosDocentes'>
@@ -91,22 +81,7 @@ const CursosDocentes = () => {
                     <button onClick={limpiarFiltros}>Limpiar</button>
                 </div>
 
-                <div className="materias">
-                    {pildorasFiltradas.length > 0 ? (
-                        pildorasFiltradas.map((item, index) => (
-                            <Pildora
-                                key={index}
-                                titulo={item.materia}
-                                txtsuperior={nombreDocente}
-                                txtinferior={item.grado}
-                                color={item.color}
-                                onClick={() => manejarClick(item.materia,nombreDocente, item.color, item.grado)}
-                            />
-                        ))
-                    ) : (
-                        <p className="mensaje-no-cursos">No hay cursos que cumplan con estos parametros.</p>
-                    )}
-                </div>
+                <ContenedorMaterias url="/listadoCursos" info={pildorasFiltradas} est={false}></ContenedorMaterias>
             </div>
         </div>
     );

@@ -7,9 +7,9 @@ import InputContainer from '../../../componentes/Input/InputContainer.jsx'
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
-import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
+import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx';
 const VistaDocente = () => {
 
     const location = useLocation();
@@ -237,12 +237,12 @@ const VistaDocente = () => {
     const navigate = useNavigate();
 
     const infoPildoras = [
-        { materia: "Matemáticas", grado: "6-2", color: 'morado' },
-        { materia: "Física", grado: "6-2", color: 'azul' },
-        { materia: "Química", grado: "11-2", color: 'amarillo' },
-        { materia: "Historia", grado: "10-1", color: 'morado' },
-        { materia: "Historia", grado: "11-2", color: 'morado' },
-        { materia: "Historia", grado: "9-2", color: 'morado' },
+        { materia: "Matemáticas", profesor: "Carlos Pérez",grado: "6-2", color: 'morado' },
+        { materia: "Física", profesor: "Carlos Pérez",grado: "6-2", color: 'azul' },
+        { materia: "Química", profesor: "Ana Gómez",grado: "11-2", color: 'amarillo' },
+        { materia: "Historia", profesor: "Ana Gómez",grado: "10-1", color: 'morado' },
+        { materia: "Historia", profesor: "Ana Gómez",grado: "11-2", color: 'morado' },
+        { materia: "Historia", profesor: "Luis Rodríguez",grado: "9-2", color: 'morado' },
     ];
 
             
@@ -266,11 +266,6 @@ const VistaDocente = () => {
         (gradoSeleccionado === '' || item.grado === gradoSeleccionado)
     );
 
-    //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (materia, profesor,color,grado) => {
-        const datos = { materia, profesor,color,grado }; // Datos a enviar
-        navigate(`/profesores/${profesor}/${materia}`, { state: datos });
-    };
 
      // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
     const isFormUnchanged = (
@@ -313,7 +308,7 @@ const VistaDocente = () => {
             
         }
     return (
-        <div className='contenedorCreacionEst'>
+        <div className='contenedorVistaDocente'>
             <div className="editar">
                 <TituloDes titulo='EDITAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
@@ -379,25 +374,9 @@ const VistaDocente = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <div className="materias">
-                        {pildorasFiltradas.length > 0 ? (
-                            pildorasFiltradas.map((item, index) => (
-                                
-                                <Pildora
-                                    key={index} 
-                                    titulo={item.materia}
-                                    txtsuperior={profe.nombre}
-                                    txtinferior={item.grado}
-                                    color={item.color}
-                                    onClick={() => manejarClick(item.materia, profe.nombre, item.color, item.grado)}
-                                />
-                                    
-                                    
-                            ))
-                        ) : (
-                            <p>No hay profesores que cumplan con estos parametros</p>
-                        )}
-                    </div>
+                    <ContenedorMaterias url='/profesores' est={false} info={pildorasFiltradas}></ContenedorMaterias>
+
+                    
                 </div>
             </div>
         </div>

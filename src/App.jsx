@@ -32,6 +32,7 @@ import AsignarGradosMaterias from './paginas/Administradores/AsignarGradosMateri
 import EditarPerfilDoc from './paginas/Docentes/EditarPerfilDoc/EditarPerfilDoc.jsx';
 import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/EditarPerfilAdmin.jsx';
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
+import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 
 
 /** 
@@ -164,7 +165,10 @@ function App() {
 
   return (
     <Router>
+      
       <div className={`App ${theme}`}>
+
+        
 
         {
           user ?
@@ -174,11 +178,13 @@ function App() {
         }
 
         <main className={user? "main-content": "completo"}>
+
+          <ScrollToTop></ScrollToTop>
           <Routes>
             
           <Route path='/login' element={
             <ProtectedRoute isAllowed={!user} redireccionar={user ? {
-              estudiante: "/materias",
+              estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
               docente: "/listadoCursos",
               admin: "/crearGrados"
             }[user.rol] || "/" : "/"}> 
@@ -188,14 +194,14 @@ function App() {
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'estudiante'}/>} >
                 
                 <Route path="/prueba" element={<Prueba></Prueba>} />
-                <Route path="/materias" element={<CursosEst/>} />
-                <Route path="/materias/notas" element={<VistaMateria/>} />
+                <Route path="/materias/:nombreEst" element={<CursosEst/>} />
+                <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'docente'}/>} >
                 <Route path='/listadoCursos' element={<CursosDocentes/> } />
-                <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
+                <Route path='/listadoCursos/:nombreProfe/:actCurso' element={<ActividadesCurso/>} />
                 <Route path='/observaciones' element={<Observaciones/>} />
                 <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
                 <Route path='/editarPerfilDocente' element={<EditarPerfilDoc/>} />
