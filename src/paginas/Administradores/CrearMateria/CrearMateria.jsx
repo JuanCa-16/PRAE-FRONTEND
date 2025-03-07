@@ -51,7 +51,7 @@ const CrearMateria = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
-                body: JSON.stringify({ nombre: nombreCapitalize, institucion: user.institucion })
+                body: JSON.stringify({ nombre: nombreCapitalize, id_institucion: user.institucion.id_institucion })
             });
 
             if (!response.ok) {
@@ -75,7 +75,7 @@ const CrearMateria = () => {
     useEffect(() => {
         const listaMaterias = async () => {
             try {
-                const response = await fetch(`${API_URL}materias/institucion/${user.institucion}`,{
+                const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}`,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const CrearMateria = () => {
         }
 
         listaMaterias()
-    },[reload,API_URL, token, user.institucion])
+    },[reload,API_URL, token, user.institucion.id_institucion])
 
     
     

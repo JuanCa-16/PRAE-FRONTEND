@@ -139,27 +139,40 @@ function App() {
 
   //Eliminar TOKEN del local
   const cerrarSesion = () => {
-    setUser(null);
     localStorage.removeItem("token"); // Eliminar del localStorage
+    setUser(null);
   };
 
-   useEffect(() => {
-     // Simulación de obtener colores de la BD
-     const colores = {
-      
-       colorPrincipal:"#1d2642ff", 
-       colorSecundario: "#edededff",
-       fondo: '#ffffffff',
-       colorPildora1:"#f2d44bff", 
-       colorPildora2:"#2c4a91ff", 
-       colorPildora3:"#7232d9ff", 
-     };
+  useEffect(() => {
+    if (user) {  // Verifica si hay usuario antes de extraer los colores
+        const colores = {
+            colorPrincipal: user.institucion.color_principal,
+            colorSecundario: user.institucion.color_secundario,
+            fondo:  user.institucion.fondo,
+            colorPildora1: user.institucion.color_pildora1,
+            colorPildora2:  user.institucion.color_pildora2,
+            colorPildora3: user.institucion.color_pildora3,
+        };
 
-     // Aplicar colores a :root
-     Object.entries(colores).forEach(([key, value]) => {
-       document.documentElement.style.setProperty(`--${key}`, value);
-     });
-   }, []);
+        // Aplicar colores a :root
+        Object.entries(colores).forEach(([key, value]) => {
+            document.documentElement.style.setProperty(`--${key}`, value);
+        });
+    }else{
+      const valoresPorDefecto = {
+        "--colorPrincipal": "#157AFE",  // Reemplázalo con el valor real de tu root
+        "--colorSecundario": "#F5F7F9",
+        "--fondo": "#FFFFFF",
+        "--colorPildora1": "#157AFE",
+        "--colorPildora2": "#4946E2",
+        "--colorPildora3": "#EF9131",
+    };
+
+      Object.entries(valoresPorDefecto).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+      });
+    }
+},[user]); 
 
 
 
@@ -226,7 +239,10 @@ function App() {
             
           </Routes>
 
-          <FooterCom></FooterCom>
+          {
+          user ?
+          (<FooterCom></FooterCom>): null
+          }
 
           
         </main>

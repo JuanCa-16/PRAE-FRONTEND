@@ -133,7 +133,7 @@ const VistaEst = () => {
             <div className='contenedorCursos'>
                         <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
 
-                        <ContenedorMaterias url='/estudiantes' info={infoPildoras}></ContenedorMaterias>
+                        <ContenedorMaterias url='/estudiantes' info={infoPildoras} nombre={est}></ContenedorMaterias>
                     </div>
         </div>
     )

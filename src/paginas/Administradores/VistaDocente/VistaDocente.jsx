@@ -90,7 +90,7 @@ const VistaDocente = () => {
     useEffect(() => {
             const listaMaterias = async () => {
                 try {
-                    const response = await fetch(`${API_URL}materias/institucion/${user.institucion}`,{
+                    const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}`,{
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const VistaDocente = () => {
             }
     
             listaMaterias()
-    },[API_URL, token, user.institucion])
+    },[API_URL, token, user.institucion.id_institucion])
 
         //Actualizar inputs
     const handleChange = (titulo, value) => {
@@ -167,7 +167,7 @@ const VistaDocente = () => {
                     apellido: dataToSend.apellidos,
                     correo: dataToSend.correo,
                     contraseña: dataToSend.contrasena || undefined,
-                    area_ensenanza:dataToSend.area, institucion: user.institucion })
+                    area_ensenanza:dataToSend.area, id_institucion: user.institucion.id_institucion })
             });
 
             if (!response.ok) {
@@ -180,7 +180,7 @@ const VistaDocente = () => {
 
             for (const materia of crearMat) {
                 try {
-                    const responseMateria = await fetch(`${API_URL}dictar/${dataToSend.doc}`, {
+                    const responseMateria = await fetch(`${API_URL}dictar`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -195,6 +195,29 @@ const VistaDocente = () => {
                     if (!responseMateria.ok) {
                         const errorData = await responseMateria.json();
                         throw new Error(`Error al asignar materia ${materia}: ${errorData.message || responseMateria.status}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+            for (const materia of eliminarMat) {
+                try {
+                    const responseMateria = await fetch(`${API_URL}dictar`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            documento_profe: dataToSend.doc,
+                            id_materia: materia
+                        })
+                    });
+            
+                    if (!responseMateria.ok) {
+                        const errorData = await responseMateria.json();
+                        throw new Error(`Error al eliminar materia ${materia}: ${errorData.message || responseMateria.status}`);
                     }
                 } catch (error) {
                     console.error(error);

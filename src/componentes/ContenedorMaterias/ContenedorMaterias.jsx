@@ -4,7 +4,7 @@ import './ContenedorMaterias.scss'
 import Pildora from '../Pildora/Pildora';
 import { useUser } from '../../Contexts/UserContext';
 
-const ContenedorMaterias = ({url, info, est=true}) => {
+const ContenedorMaterias = ({url, info, est=true, nombre}) => {
 
     const navigate = useNavigate();
     const {user} = useUser()
@@ -15,7 +15,7 @@ const ContenedorMaterias = ({url, info, est=true}) => {
     const manejarClick = (materia, profesor,color,grado) => {
         const datos = { materia, profesor,color,grado }; // Datos a enviar
         if(est){
-            navigate(`${url}/${user.nombre + ' ' +user.apellido}/${materia}`, { state: datos }); // Navegar con los datos
+            navigate(`${url}/${nombre? nombre : user.nombre + ' ' +user.apellido}/${materia}`, { state: datos }); // Navegar con los datos
         }else{
             navigate(`${url}/${profesor}/${materia}`, { state: datos });
         }

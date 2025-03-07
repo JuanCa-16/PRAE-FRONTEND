@@ -69,7 +69,7 @@
             overflow-wrap: break-word; 
             &:hover {
                 background: var(--colorPrincipal);;
-                color: $blanco;
+                color: color-mix(in srgb, var(--colorPrincipal) 10%, rgb(255, 255, 255));
             }
 
             // Aplica bordes redondeados SOLO al primero y último
