@@ -235,16 +235,16 @@ const ActividadesCurso = () => {
                     <PildoraTitulo materia= {materia} nombre={profesor} color={color} grado={grado} ></PildoraTitulo>
                     <div className="tabla">
                         <div className="col ">
-                            <Celda txt='Actividad' tipo='titulo' rol='NoVer'></Celda>
+                            <Celda txt='Actividad' color={color} tipo='titulo' rol='NoVer'></Celda>
                             {nombres.map((nombre, index) => (
-                                <Celda key={index} tipo='titulo2' txt={nombre} rol='NoVer'></Celda>
+                                <Celda key={index} tipo='titulo2' color={color} txt={nombre} rol='NoVer'></Celda>
                             ))}
                         </div>
                         <div className="notas">
 
                             {actividadesUnicas.map((actividad, i) => (
                                 <div key={i} className="col nota">
-                                    <Celda txt={actividad} tipo='titulo' onClick={() => openModalAct(i)} />
+                                    <Celda color={color} txt={actividad} tipo='titulo' onClick={() => openModalAct(i)} />
                                     {/* Modal específico para la actividad seleccionada */}
                                     {modalIndexAbierto === i && (
                                         <Modal
@@ -264,6 +264,7 @@ const ActividadesCurso = () => {
                                             <div className='full' key={j}>
                                                 <Celda 
                                                     tipo="normal" 
+                                                    color={color}
                                                     txt={actividadEncontrada ? actividadEncontrada.nota : "N/A"} 
                                                     onClick={() => openModalNota(i, j)} // Ahora pasa ambos índices
                                                 />

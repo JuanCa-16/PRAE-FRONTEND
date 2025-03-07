@@ -51,7 +51,7 @@ const CrearGrados = () => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
-                body: JSON.stringify({ nombre: nuevoGrado, institucion: user.institucion })
+                body: JSON.stringify({ nombre: nuevoGrado, id_institucion: user.institucion.id_institucion })
             });
     
             if (!response.ok) {
@@ -75,7 +75,7 @@ const CrearGrados = () => {
     useEffect(()=>{
         const listaGrados = async () => {
             try {
-                const response = await fetch(`${API_URL}cursos/institucion/${user.institucion}`, {
+                const response = await fetch(`${API_URL}cursos/institucion/${user.institucion.id_institucion}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const CrearGrados = () => {
         }
 
         listaGrados()
-    },[reload,API_URL, token, user.institucion])
+    },[reload,API_URL, token, user.institucion.id_institucion])
 
     
     //Elimina opciones duplicadas para el selector

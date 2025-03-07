@@ -6,10 +6,43 @@ const ThemeContext = createContext();
 
 export const ContextProvider = ({ children }) => {
 
-    const [user, setUser] = useState(()=>{
-        const token = localStorage.getItem("token");
-        return token ? jwtDecode(token) : null;
-    });
+    const [user, setUser] = useState(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return null; // Si no hay token, devuelve null
+
+    try {
+        console.log(jwtDecode(token));
+        return jwtDecode(token);
+    } catch (error) {
+        console.error("Error al decodificar el token:", error);
+        return null; // Devuelve null si el token es inválido
+    }
+});
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                setUser(null);
+                return;
+            }
+
+            try {
+                setUser(jwtDecode(token));
+            } catch (error) {
+                console.error("Error al decodificar el token:", error);
+                setUser(null);
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, []);
 
     const [theme, setTheme] = useState(() => {
         const savedTheme = localStorage.getItem("theme");

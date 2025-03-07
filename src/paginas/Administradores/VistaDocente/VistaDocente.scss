@@ -1,8 +1,8 @@
 @import '../../../global.scss';
 
-.contenedorCreacionEst{
+.contenedorVistaDocente{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
     gap: 2rem;
     align-self: stretch;
@@ -88,15 +88,6 @@
                     width: fit-content;
                 }
     
-            }
-    
-            .materias{
-                display: flex;
-                align-items: center;
-                align-content: center;
-                gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
             }
         }
 

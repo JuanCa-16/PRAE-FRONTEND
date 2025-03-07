@@ -8,7 +8,7 @@ import * as React from "react";
  *    - activo (bool): Para darle color cuando esta activado.
 */
 
-const HomeIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark, ...props }) => {
+const HomeIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => {
 
   return (
     <svg
@@ -20,7 +20,7 @@ const HomeIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark,
       {...props}
     >
       <path
-        fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)} // Corrige la sintaxis del operador ternario
+        fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color: colorApagado)} // Corrige la sintaxis del operador ternario
         fillRule="evenodd"
         d="M13.9 7.038a1.855 1.855 0 0 1 2.227 0l6.492 4.869a1.854 1.854 0 0 1 .742 1.484v8.81a1.855 1.855 0 0 1-1.855 1.856h-4.544a1.02 1.02 0 0 1-1.02-1.02v-5.473a.928.928 0 0 0-1.856 0v5.473a1.02 1.02 0 0 1-1.02 1.02H8.522a1.855 1.855 0 0 1-1.855-1.855V13.39a1.854 1.854 0 0 1 .742-1.484l6.492-4.87Zm1.114 1.484L8.522 13.39v8.81h3.71v-4.637a2.782 2.782 0 1 1 5.564 0v4.638h3.71V13.39l-6.492-4.87Z"
         clipRule="evenodd"
@@ -29,7 +29,7 @@ const HomeIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark,
   );
 };
 
-const StudyIcon = ({ color = "#000", width = 30, height = 30, estado, activo,dark, ...props }) => (
+const StudyIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado, activo,dark, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -38,13 +38,13 @@ const StudyIcon = ({ color = "#000", width = 30, height = 30, estado, activo,dar
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color :colorApagado)}
       d="M9.75 23a1.71 1.71 0 0 1-1.236-.499A1.617 1.617 0 0 1 8 21.3V7.7c0-.468.171-.868.514-1.2.344-.333.755-.5 1.236-.5h10.5c.481 0 .893.167 1.236.5.343.333.515.733.514 1.2v13.6c0 .467-.171.868-.514 1.201-.342.333-.754.5-1.236.499H9.75Zm0-1.7h10.5V7.7H18.5v5.95l-2.188-1.275-2.187 1.275V7.7H9.75v13.6Z"
     />
   </svg>
 )
 
-const AjustesIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark, ...props }) => (
+const AjustesIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width={30}
@@ -53,13 +53,13 @@ const AjustesIcon = ({ color = "#000", width = 30, height = 30, estado,activo,da
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color :colorApagado)}
       d="M14.013 24c-.379 0-.704-.128-.977-.383a1.573 1.573 0 0 1-.494-.934l-.19-1.403a3.152 3.152 0 0 1-.513-.255c-.161-.1-.319-.205-.473-.319l-1.303.553c-.35.156-.7.17-1.05.042a1.553 1.553 0 0 1-.82-.68l-.987-1.742a1.362 1.362 0 0 1-.168-1.042c.084-.368.273-.672.567-.913l1.113-.85a2.055 2.055 0 0 1-.02-.288v-.573c0-.092.006-.188.02-.287l-1.113-.85a1.615 1.615 0 0 1-.567-.914 1.362 1.362 0 0 1 .168-1.04l.987-1.743c.196-.326.47-.553.82-.68.35-.128.7-.114 1.05.042l1.303.553a5.73 5.73 0 0 1 .483-.319c.168-.1.336-.184.504-.255l.189-1.402c.056-.369.22-.68.494-.935S13.635 7 14.013 7h1.974c.379 0 .704.128.978.383.273.255.438.566.493.935l.19 1.402c.181.07.353.156.514.255.162.1.319.205.473.319l1.302-.553c.35-.156.7-.17 1.05-.042.35.127.624.354.82.68l.987 1.742c.196.326.252.673.168 1.041a1.615 1.615 0 0 1-.567.914l-1.113.85c.014.1.02.195.02.288v.572c0 .093-.014.189-.041.288l1.113.85c.294.24.483.545.567.913.084.369.028.716-.168 1.042l-1.008 1.742c-.196.326-.47.553-.82.68-.35.128-.7.114-1.05-.042l-1.26-.553c-.155.114-.316.22-.484.319a4.21 4.21 0 0 1-.504.255l-.189 1.402c-.056.369-.22.68-.493.936a1.382 1.382 0 0 1-.978.382h-1.974Zm.147-1.7h1.66l.293-2.253c.435-.113.837-.28 1.209-.498.371-.22.71-.485 1.018-.798l2.08.871.82-1.445-1.807-1.38c.07-.2.119-.408.147-.627a5.284 5.284 0 0 0 0-1.339 3.061 3.061 0 0 0-.147-.627l1.806-1.382-.819-1.444-2.08.892a4.67 4.67 0 0 0-1.018-.818 4.7 4.7 0 0 0-1.209-.5L15.84 8.7h-1.66l-.293 2.253c-.435.113-.837.28-1.208.5-.37.22-.71.485-1.02.796l-2.08-.872-.819 1.445 1.807 1.36c-.07.213-.119.425-.147.638a5.212 5.212 0 0 0 0 1.339c.028.212.077.425.147.637l-1.806 1.381.819 1.445 2.08-.892c.308.326.648.599 1.019.819.371.22.774.386 1.208.498l.273 2.253Zm.882-3.825c.812 0 1.506-.29 2.08-.871.574-.581.861-1.282.861-2.104 0-.822-.287-1.523-.861-2.104a2.818 2.818 0 0 0-2.08-.871c-.826 0-1.523.29-2.09.871a2.906 2.906 0 0 0-.851 2.104c0 .822.283 1.523.851 2.104.568.58 1.265.871 2.09.871Z"
     />
   </svg>
 )
 
-const ListadoIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark,...props }) => (
+const ListadoIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark,...props }) => (
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width={30}
@@ -68,13 +68,13 @@ const ListadoIcon = ({ color = "#000", width = 30, height = 30, estado,activo,da
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color: colorApagado)}
       d="M11.444 12.8a.88.88 0 0 1-.889-.9c0-.254.085-.468.257-.64a.856.856 0 0 1 .632-.26h10.667c.252 0 .463.086.634.26.17.172.256.386.255.64a.884.884 0 0 1-.256.642.845.845 0 0 1-.633.258H11.444Zm0 3.6a.88.88 0 0 1-.889-.9c0-.254.085-.468.257-.64a.856.856 0 0 1 .632-.26h10.667c.252 0 .463.086.634.26.17.172.256.386.255.64a.884.884 0 0 1-.256.642.845.845 0 0 1-.633.258H11.444Zm0 3.6a.88.88 0 0 1-.889-.9c0-.254.085-.468.257-.64a.856.856 0 0 1 .632-.26h10.667c.252 0 .463.086.634.26.17.172.256.386.255.64a.884.884 0 0 1-.256.642.845.845 0 0 1-.633.258H11.444ZM7.89 12.8A.88.88 0 0 1 7 11.9c0-.254.085-.468.256-.64a.856.856 0 0 1 .633-.26.86.86 0 0 1 .634.26.864.864 0 0 1 .255.64.894.894 0 0 1-.256.642.841.841 0 0 1-.633.258Zm0 3.6A.88.88 0 0 1 7 15.5c0-.254.085-.468.256-.64a.856.856 0 0 1 .633-.26.86.86 0 0 1 .634.26.864.864 0 0 1 .255.64.894.894 0 0 1-.256.642.841.841 0 0 1-.633.258Zm0 3.6A.88.88 0 0 1 7 19.1c0-.254.085-.468.256-.64a.856.856 0 0 1 .633-.26.86.86 0 0 1 .634.26.864.864 0 0 1 .255.64.894.894 0 0 1-.256.642.841.841 0 0 1-.633.258Z"
     />
   </svg>
 )
 
-const EstudianteIcon = ({ color = "#000", width = 30, height = 30, estado, activo,dark, ...props }) => (
+const EstudianteIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado, activo,dark, ...props }) => (
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width={30}
@@ -83,7 +83,7 @@ const EstudianteIcon = ({ color = "#000", width = 30, height = 30, estado, activ
     {...props}
   >
     <path
-      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color:colorApagado)}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -92,7 +92,7 @@ const EstudianteIcon = ({ color = "#000", width = 30, height = 30, estado, activ
   </svg>
 )
 
-const TeacherIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark,  ...props }) => (
+const TeacherIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark,  ...props }) => (
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width={16}
@@ -101,14 +101,14 @@ const TeacherIcon = ({ color = "#000", width = 30, height = 30, estado,activo,da
     {...props}
   >
     <path
-      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado)}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
       d="M1 1h10.889c1.467 0 2.2 0 2.655.469C15 1.938 15 2.69 15 4.2V9c0 1.509 0 2.262-.456 2.731-.456.469-1.188.469-2.655.469H6.444m.778-7.6h4.667M1 13V9.8c0-.754 0-1.131.228-1.366.228-.234.594-.234 1.328-.234H4.11M1 13h3.111M1 13v4m3.111-8.8V13m0-4.8h4.667M4.11 13v4"
     />
     <path
-      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      stroke={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado)}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -117,7 +117,7 @@ const TeacherIcon = ({ color = "#000", width = 30, height = 30, estado,activo,da
   </svg>
 )
 
-const GradosIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark, ...props }) => (
+const GradosIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
     <svg
     xmlns="http://www.w3.org/2000/svg"
     width={30}
@@ -126,7 +126,7 @@ const GradosIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dar
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado)}
       fillRule="evenodd"
       d="M14.222 9.556A1.556 1.556 0 0 0 12.667 8H9.556A1.556 1.556 0 0 0 8 9.556v3.11a1.556 1.556 0 0 0 1.556 1.556h3.11a1.556 1.556 0 0 0 1.556-1.555V9.556Zm-4.666 0h3.11v3.11h-3.11v-3.11Zm12.444 0A1.556 1.556 0 0 0 20.444 8h-3.11a1.556 1.556 0 0 0-1.556 1.556v3.11a1.556 1.556 0 0 0 1.555 1.556h3.111A1.556 1.556 0 0 0 22 12.667V9.556Zm-4.667 0h3.111v3.11h-3.11v-3.11Zm-4.666 6.222a1.556 1.556 0 0 1 1.555 1.555v3.111A1.556 1.556 0 0 1 12.667 22H9.556A1.556 1.556 0 0 1 8 20.444v-3.11a1.556 1.556 0 0 1 1.556-1.556h3.11Zm0 1.555H9.556v3.111h3.11v-3.11Zm3.11 1.556a.778.778 0 0 1 .779-.778h1.555v-1.555a.778.778 0 0 1 1.556 0v1.555h1.555a.778.778 0 0 1 0 1.556h-1.555v1.555a.778.778 0 0 1-1.556 0v-1.555h-1.555a.778.778 0 0 1-.778-.778Z"
       clipRule="evenodd"
@@ -134,7 +134,7 @@ const GradosIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dar
   </svg>
 )
 
-const ExitIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark, ...props }) => (
+const ExitIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -143,14 +143,14 @@ const ExitIcon = ({ color = "#000", width = 30, height = 30, estado,activo,dark,
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado)}
       d="M9.5 12.614V8.182H4.97a.445.445 0 0 1-.354-.2.824.824 0 0 1-.146-.482c0-.18.052-.354.146-.482a.445.445 0 0 1 .354-.2H9.5V2.386c0-.632-.185-1.239-.513-1.686C8.659.252 8.214 0 7.75 0h-6C1.286 0 .841.252.513.7.185 1.147 0 1.754 0 2.386v10.228c0 .632.185 1.239.513 1.686.328.448.773.7 1.237.7h6c.464 0 .909-.252 1.237-.7.328-.447.513-1.054.513-1.686Zm2.793-4.432-1.646 2.245c-.09.129-.14.3-.138.479a.821.821 0 0 0 .147.473.447.447 0 0 0 .347.2.438.438 0 0 0 .35-.188l2.5-3.409A.824.824 0 0 0 14 7.5a.824.824 0 0 0-.146-.482l-2.5-3.409a.438.438 0 0 0-.351-.188.447.447 0 0 0-.347.2.821.821 0 0 0-.147.474.832.832 0 0 0 .138.478l1.646 2.245H9.5v1.364h2.793Z"
     />
   </svg>
 )
 
 
-const ThemeIcon = ({ color = "#aaabadff", width = 30, height = 30, estado,activo,dark, ...props }) => (
+const ThemeIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={17}
@@ -159,7 +159,7 @@ const ThemeIcon = ({ color = "#aaabadff", width = 30, height = 30, estado,activo
     {...props}
   >
     <path
-      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? "#157AFE" : color)}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado )}
       d="M8.5 17A8.5 8.5 0 0 0 17 8.5 8.5 8.5 0 1 0 8.5 17Zm0-1.7V1.7a6.8 6.8 0 1 1 0 13.6Z"
     />
   </svg>

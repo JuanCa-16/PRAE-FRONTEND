@@ -14,10 +14,10 @@ import { useTheme } from '../../Contexts/UserContext';
  *                      VALORES: ver (permite el hover), NoVer (desactiva el hover)
  */
 
-const Celda = ({txt="Valor", tipo="titulo", rol="ver", onClick}) => {
+const Celda = ({txt="Valor", color, tipo="titulo", rol="ver", onClick}) => {
     const {theme} = useTheme()
     return (
-        <div className={`${theme} celda ${tipo} ${rol}`} onClick={onClick}>
+        <div className={`${theme} celda ${tipo} ${rol} ${color}`} onClick={onClick}>
             <p>{txt}</p>
         </div>
 )

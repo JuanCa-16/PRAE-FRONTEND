@@ -32,7 +32,7 @@ const CreacionDocente = () => {
     useEffect(() => {
         const listaMaterias = async () => {
             try {
-                const response = await fetch(`${API_URL}materias/institucion/${user.institucion}`,{
+                const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}`,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const CreacionDocente = () => {
         }
 
         listaMaterias()
-    },[API_URL, token, user.institucion])
+    },[API_URL, token, user.institucion.id_institucion])
 
      //Datos inciales a mostrar
     const [formData, setFormData] = useState({
@@ -107,7 +107,7 @@ const CreacionDocente = () => {
                     apellido: formData.apellidos,
                     correo: formData.correo,
                     contraseña: formData.contrasena,
-                    area_ensenanza:formData.area, institucion: user.institucion })
+                    area_ensenanza:formData.area, id_institucion: user.institucion.id_institucion })
             });
 
             if (!response.ok) {
@@ -185,7 +185,7 @@ const CreacionDocente = () => {
     useEffect(() => {
             const listaProfes = async () => {
                 try {
-                    const response = await fetch(`${API_URL}usuario/docentes/institucion/${user.institucion}`,{
+                    const response = await fetch(`${API_URL}usuario/docentes/institucion/${user.institucion.id_institucion}`,{
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -211,7 +211,7 @@ const CreacionDocente = () => {
             }
     
             listaProfes()
-    },[reload,API_URL, token, user.institucion])
+    },[reload,API_URL, token, user.institucion.id_institucion])
             
         
             //Elimina opciones duplicadas para el selector

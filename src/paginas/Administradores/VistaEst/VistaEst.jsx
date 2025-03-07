@@ -1,13 +1,12 @@
 import React, {useState,useEffect, useRef } from 'react'
 import { useLocation } from "react-router-dom";
 import './VistaEst.scss'
-import { useNavigate } from "react-router-dom";
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
-import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
+import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx';
 const VistaEst = () => {
     const location = useLocation();
     const { est } = location.state || {};
@@ -77,7 +76,7 @@ const VistaEst = () => {
         { value: "7-2", label: "7-2" },
     ];
 
-    const navigate = useNavigate();
+
 
     //Informacion de las pildoras
     const infoPildoras = [
@@ -88,11 +87,7 @@ const VistaEst = () => {
     ];
             
     
-    //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (materia, profesor,color,grado) => {
-        const datos = { materia, profesor,color,grado }; // Datos a enviar
-        navigate(`/estudiantes/${est}/${materia}`, { state: datos });
-    };
+
 
      // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
     const isFormUnchanged = JSON.stringify(formData) === JSON.stringify(initialFormData.current);
@@ -107,7 +102,7 @@ const VistaEst = () => {
             closeModal()
         }
     return (
-        <div className='contenedorCreacionEst'>
+        <div className='contenedorVistaEst'>
             <div className="editar">
                 <TituloDes titulo='EDITAR ESTUDIANTE' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
@@ -137,18 +132,8 @@ const VistaEst = () => {
             <Line></Line>
             <div className='contenedorCursos'>
                         <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
-                        <div className="materias">
-                        {infoPildoras.map((item, index) => (
-                                        <Pildora
-                                            key={index}
-                                            titulo={item.materia}
-                                            txtsuperior={item.profesor}
-                                            txtinferior={formData.grado}
-                                            color={item.color}
-                                            onClick={() => manejarClick(item.materia, item.profesor, item.color, formData.grado)} // Pasa la función con datos dinámicos
-                                        />
-                                    ))}
-                        </div>
+
+                        <ContenedorMaterias url='/estudiantes' info={infoPildoras} nombre={est}></ContenedorMaterias>
                     </div>
         </div>
     )

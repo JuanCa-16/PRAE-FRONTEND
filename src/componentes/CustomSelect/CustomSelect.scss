@@ -27,12 +27,12 @@
     //Estilo del titulo cuando esta activo
     .input-title.focused {
         opacity: 100%;
-        color: $azul;
+        color: var(--colorPrincipal);;
     }
 
     //Del input
     .selected {
-        background: $contraste-blanco;
+        background: var(--colorSecundario);;
         padding: 0.6rem 1rem;
         border-radius: $radio1;
         border: 1px solid transparent; // Mantiene el grosor del borde
@@ -47,7 +47,7 @@
         }
 
         &:focus {
-            border-color: $azul; // Solo cambia el color, no el grosor
+            border-color: var(--colorPrincipal);; // Solo cambia el color, no el grosor
         }
     }
     
@@ -68,8 +68,8 @@
             transition: background 0.3s;
             overflow-wrap: break-word; 
             &:hover {
-                background: $azul;
-                color: $blanco;
+                background: var(--colorPrincipal);;
+                color: color-mix(in srgb, var(--colorPrincipal) 10%, rgb(255, 255, 255));
             }
 
             // Aplica bordes redondeados SOLO al primero y último

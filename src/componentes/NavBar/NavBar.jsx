@@ -9,25 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../Contexts/UserContext.jsx';
 import { useTheme } from '../../Contexts/UserContext.jsx';
 //menus contendra las opciones de la navBar para cada usuario. Contiene su titulo, icono y ruta
-const menus = {
-  estudiante: [
-    { texto: "Materias", icono: StudyIcon, ruta: "/materias" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
-  ],
-  docente: [
-    { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
-    { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilDocente" },
-  ],
-  admin: [
-    { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
-    { texto: "Materias", icono: ListadoIcon, ruta: "/crearMaterias" },
-    { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
-    { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
-    { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
-    { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
-  ],
-};
+
 
 /** 
  * Componente: NavBar
@@ -39,6 +21,25 @@ const menus = {
  */
 
 const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func}) => {
+  const menus = {
+    estudiante: [
+      { texto: "Materias", icono: StudyIcon, ruta: `/materias/${nombreUsuario}` },
+      { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
+    ],
+    docente: [
+      { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
+      { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
+      { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilDocente" },
+    ],
+    admin: [
+      { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
+      { texto: "Materias", icono: ListadoIcon, ruta: "/crearMaterias" },
+      { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
+      { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
+      { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
+      { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
+    ],
+  };
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
 
@@ -62,8 +63,18 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   const { user} = useUser();
   const grado = user.curso
 
+
   const { theme, setTheme } = useTheme();
   const [hovered, setHovered] = useState(false);
+
+  const [colorIcono, setColorIcono] = useState("");
+  
+      useEffect(() => {
+          const colorPrincipal = getComputedStyle(document.documentElement)
+          .getPropertyValue("--colorPrincipal")
+          .trim();
+          setColorIcono(colorPrincipal);
+      }, []);
   
 
   return (
@@ -71,7 +82,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       <div className='menuSuperior'>
         <div className="tituloSuperior">
           <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
-          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
+          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
         </div>
         <div className="linea"></div>
         <nav className="itemBar">

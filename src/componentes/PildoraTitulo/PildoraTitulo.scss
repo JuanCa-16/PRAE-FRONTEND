@@ -6,7 +6,7 @@
     position: relative;
     box-shadow: 0px 4px 11px 0px rgba(0, 0, 0, 0.20);
     border-radius: 0.75rem;
-    background-color:  $azul;
+    background-color:  var(--colorPildora1);;
     height: auto;
     min-height: 5.1875rem;
     overflow: hidden;
@@ -20,11 +20,11 @@
 
     //colores
     &.morado {
-        background-color: $morado;
+        background-color: var(--colorPildora2);;
     }
 
     &.amarillo {
-        background-color: $amarillo;
+        background-color: var(--colorPildora3);;
     }
     
 

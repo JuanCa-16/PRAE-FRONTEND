@@ -1,6 +1,6 @@
 import React from 'react';
 import "./NavBarItem.scss";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import { HomeIcon } from '../Icons/Icons.jsx';
@@ -33,6 +33,15 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
             navigate(ruta);
         }
     };
+
+    const [colorIcono, setColorIcono] = useState("");
+
+    useEffect(() => {
+        const colorPrincipal = getComputedStyle(document.documentElement)
+        .getPropertyValue("--colorPrincipal")
+        .trim();
+        setColorIcono(colorPrincipal);
+    }, []);
     
 
     const [hovered, setHovered] = useState(false);
@@ -40,7 +49,7 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     return (
         <div className={` ${theme} ${tipo ? "tipo-existe color" : "contenedorNavBarItem "} ${color}  ${activo ? "activar" : " "}` } onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className='etiqueta'>
-                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon estado= {hovered} activo={activo} dark={theme === 'dark'}/> </div>):(<></>)}
+                {tipo === undefined || tipo === null ? (<div className="logoNav"> <Icon color={colorIcono} estado= {hovered} activo={activo} dark={theme === 'dark'}/> </div>):(<></>)}
                 <p className='texto lato'>{tipo? texto.toUpperCase() : texto}</p>
             </div>
         </div>

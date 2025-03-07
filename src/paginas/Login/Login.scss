@@ -8,7 +8,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    background-color: $blanco;
 
     .pagLogin{
         display: flex;
@@ -16,7 +15,7 @@
         align-items: center;
         height: 100%;
         align-self: stretch;
-        background-color: $blanco;
+        background-color: var(--fondo);
 
         .izq{
             
@@ -27,7 +26,7 @@
             align-items: center;
             gap: 10px;
             align-self: stretch;
-            background: $contraste-blanco;
+            background: var(--colorSecundario);
         
         }
             .imagen_logo{
@@ -101,11 +100,11 @@
                     .lato_1{
                         display: flex;
                         justify-content: flex-end;
-                        color: $contraste-azul;
+                        color: color-mix(in srgb, var(--colorPrincipal) 60%, rgb(255, 255, 255));
                         cursor: pointer;
                         
                         &:hover{
-                            color:$azul;
+                            color:var(--colorPrincipal);
                         }
                     }
             

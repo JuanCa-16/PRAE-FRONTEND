@@ -31,6 +31,9 @@ import CrearMateria from './paginas/Administradores/CrearMateria/CrearMateria.js
 import AsignarGradosMaterias from './paginas/Administradores/AsignarGradosMaterias/AsignarGradosMaterias.jsx';
 import EditarPerfilDoc from './paginas/Docentes/EditarPerfilDoc/EditarPerfilDoc.jsx';
 import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/EditarPerfilAdmin.jsx';
+import FooterCom from './componentes/FooterCom/FooterCom.jsx';
+import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
+
 
 /** 
  * Componente: App
@@ -136,29 +139,49 @@ function App() {
 
   //Eliminar TOKEN del local
   const cerrarSesion = () => {
-    setUser(null);
     localStorage.removeItem("token"); // Eliminar del localStorage
+    setUser(null);
   };
 
-  // useEffect(() => {
-  //   // Simulación de obtener colores de la BD
-  //   const colores = {
-      
-  //     colorPrincipal:"#fe2515", 
-  //     contrastePrincipal: "#f5e4e4",
-  //   };
+  useEffect(() => {
+    if (user) {  // Verifica si hay usuario antes de extraer los colores
+        const colores = {
+            colorPrincipal: user.institucion.color_principal,
+            colorSecundario: user.institucion.color_secundario,
+            fondo:  user.institucion.fondo,
+            colorPildora1: user.institucion.color_pildora1,
+            colorPildora2:  user.institucion.color_pildora2,
+            colorPildora3: user.institucion.color_pildora3,
+        };
 
-  //   // Aplicar colores a :root
-  //   Object.entries(colores).forEach(([key, value]) => {
-  //     document.documentElement.style.setProperty(`--${key}`, value);
-  //   });
-  // }, []);
+        // Aplicar colores a :root
+        Object.entries(colores).forEach(([key, value]) => {
+            document.documentElement.style.setProperty(`--${key}`, value);
+        });
+    }else{
+      const valoresPorDefecto = {
+        "--colorPrincipal": "#157AFE",  // Reemplázalo con el valor real de tu root
+        "--colorSecundario": "#F5F7F9",
+        "--fondo": "#FFFFFF",
+        "--colorPildora1": "#157AFE",
+        "--colorPildora2": "#4946E2",
+        "--colorPildora3": "#EF9131",
+    };
+
+      Object.entries(valoresPorDefecto).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(key, value);
+      });
+    }
+},[user]); 
 
 
 
   return (
     <Router>
+      
       <div className={`App ${theme}`}>
+
+        
 
         {
           user ?
@@ -168,11 +191,13 @@ function App() {
         }
 
         <main className={user? "main-content": "completo"}>
+
+          <ScrollToTop></ScrollToTop>
           <Routes>
             
           <Route path='/login' element={
             <ProtectedRoute isAllowed={!user} redireccionar={user ? {
-              estudiante: "/materias",
+              estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
               docente: "/listadoCursos",
               admin: "/crearGrados"
             }[user.rol] || "/" : "/"}> 
@@ -182,14 +207,14 @@ function App() {
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'estudiante'}/>} >
                 
                 <Route path="/prueba" element={<Prueba></Prueba>} />
-                <Route path="/materias" element={<CursosEst/>} />
-                <Route path="/materias/notas" element={<VistaMateria/>} />
+                <Route path="/materias/:nombreEst" element={<CursosEst/>} />
+                <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'docente'}/>} >
                 <Route path='/listadoCursos' element={<CursosDocentes/> } />
-                <Route path='/listadoCursos/notas' element={<ActividadesCurso/>} />
+                <Route path='/listadoCursos/:nombreProfe/:actCurso' element={<ActividadesCurso/>} />
                 <Route path='/observaciones' element={<Observaciones/>} />
                 <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
                 <Route path='/editarPerfilDocente' element={<EditarPerfilDoc/>} />
@@ -211,8 +236,20 @@ function App() {
             <Route path="/*" element={<Navigate to="/login"/>} />
 
             
+            
           </Routes>
+
+          {
+          user ?
+          (<FooterCom></FooterCom>): null
+          }
+
+          
         </main>
+
+        
+
+        
 
       </div>
     </Router>

@@ -58,7 +58,15 @@
             }
             
             .notas::-webkit-scrollbar-thumb:hover {
-                background: $azul/* Un poco más visible al pasar el mouse */
+                background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
+            }
+
+            .notas.morado::-webkit-scrollbar-thumb:hover {
+                background: var(--colorPildora2);/* Un poco más visible al pasar el mouse */
+            }
+
+            .notas.amarillo::-webkit-scrollbar-thumb:hover {
+                background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
             }
             
             .notas::-webkit-scrollbar-track {

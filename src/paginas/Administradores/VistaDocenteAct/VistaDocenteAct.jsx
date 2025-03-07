@@ -187,21 +187,22 @@ const VistaDocenteAct = () => {
                 <PildoraTitulo materia= {materia} nombre={profesor} color={color} grado={grado} ></PildoraTitulo>
                 <div className="tabla">
                     <div className="col ">
-                        <Celda txt='Actividad' tipo='titulo' rol='NoVer'></Celda>
+                        <Celda txt='Actividad' color={color} tipo='titulo' rol='NoVer'></Celda>
                         {nombres.map((nombre, index) => (
-                            <Celda key={index} tipo='titulo2' txt={nombre} rol='NoVer'></Celda>
+                            <Celda key={index} color={color} tipo='titulo2' txt={nombre} rol='NoVer'></Celda>
                         ))}
                     </div>
-                    <div className="notas">
+                    <div className={`notas ${color}`}>
 
                         {actividadesUnicas.map((actividad, i) => (
                             <div key={i} className="col nota">
-                                <Celda txt={actividad} tipo='titulo'rol='NoVer' />
+                                <Celda color={color} txt={actividad} tipo='titulo'rol='NoVer' />
                                 {datos.map((estudiante, j) => {
                                     const actividadEncontrada = estudiante.actividades.find(act => act.actividad === actividad);
                                     return (
                                         <div className='full' key={j}>
                                             <Celda 
+                                                color={color}
                                                 tipo="normal" 
                                                 txt={actividadEncontrada ? actividadEncontrada.nota : "N/A"} 
                                                 rol='NoVer'

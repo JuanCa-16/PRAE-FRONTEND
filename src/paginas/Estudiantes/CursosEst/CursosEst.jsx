@@ -1,9 +1,7 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
 import './CursosEst.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes'
-import Pildora from '../../../componentes/Pildora/Pildora'
-import { useUser } from '../../../Contexts/UserContext';
+import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias';
 
 /** 
  * Componente: CursosEst
@@ -16,43 +14,21 @@ import { useUser } from '../../../Contexts/UserContext';
  */
 export default function CursosEst() {
 
-    const navigate = useNavigate();
 
-    //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (materia, profesor,color,grado) => {
-        const datos = { materia, profesor,color,grado }; // Datos a enviar
-        navigate("/materias/notas", { state: datos }); // Navegar con los datos
-    };
-
-
-    
-    const { user } = useUser();
-    const grado = user.curso
 
     //Informacion de las pildoras
     const infoPildoras = [
-        { materia: "Matemáticas", profesor: "Carlos Pérez", color:'morado' },
-        { materia: "Física", profesor: "Ana Gómez", color:'azul' },
-        { materia: "Química", profesor: "Luis Rodríguez",color:'amarillo' },
-        { materia: "Historia", profesor: "Marta Sánchez", color:'morado' },
+        { materia: "Matemáticas",  grado: "6-2",profesor: "Carlos Pérez", color:'morado' },
+        { materia: "Física", grado: "6-2",profesor: "Ana Gómez", color:'azul' },
+        { materia: "Química", grado: "6-2",profesor: "Luis Rodríguez",color:'amarillo' },
+        { materia: "Historia", grado: "6-2",profesor: "Marta Sánchez", color:'morado' },
     ];
 
 
     return (
         <div className='contenedorCursos'>
             <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
-            <div className="materias">
-            {infoPildoras.map((item, index) => (
-                            <Pildora
-                                key={index}
-                                titulo={item.materia}
-                                txtsuperior={item.profesor}
-                                txtinferior={grado}
-                                color={item.color}
-                                onClick={() => manejarClick(item.materia, item.profesor, item.color, grado)} // Pasa la función con datos dinámicos
-                            />
-                        ))}
-            </div>
+            <ContenedorMaterias url="/materias" info={infoPildoras} ></ContenedorMaterias>
         </div>
     )
 }
