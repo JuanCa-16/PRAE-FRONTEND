@@ -1,5 +1,5 @@
 
-.contenedorMaterias{
+.crearMaterias{
     display: flex;
     padding: 0rem 1.5rem;
     flex-direction: column-reverse;
@@ -55,14 +55,6 @@
     
             }
     
-            .materias{
-                display: flex;
-                align-items: center;
-                align-content: center;
-                gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-            }
         }
     }
 

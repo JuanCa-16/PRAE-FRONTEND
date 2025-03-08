@@ -8,6 +8,7 @@ import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/Pildor
 import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 const CreacionDocente = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -301,6 +302,8 @@ const CreacionDocente = () => {
                             <p className="mensaje-no-cursos">No hay profesores que cumplan con estos parametros</p>
                         )}
                     </div>
+
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>
