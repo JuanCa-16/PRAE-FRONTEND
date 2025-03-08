@@ -177,7 +177,7 @@ const AsignarGradosMaterias = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <div className="materias">
+                    <div className="contenedorAsignacion">
                         {pildorasFiltradas.length > 0 ? (
                             pildorasFiltradas.map((item, index) => (
                                 
