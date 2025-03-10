@@ -38,12 +38,11 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     const { user} = useUser();
 
     const [colorIcono, setColorIcono] = useState("");
-
+    
     useEffect(() => {
-        const colorPrincipal = getComputedStyle(document.documentElement)
-        .getPropertyValue("--colorPrincipal")
-        .trim();
-        setColorIcono(colorPrincipal);
+            const colorPrincipal = user.institucion.color_principal;
+    
+            setColorIcono(colorPrincipal);
     }, [user]);
     
 
