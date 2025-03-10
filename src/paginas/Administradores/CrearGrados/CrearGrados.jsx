@@ -3,10 +3,10 @@ import './CrearGrados.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
-import Modal from '../../../componentes/Modal/Modal';
+
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 
 const CrearGrados = () => {
 
@@ -129,12 +129,8 @@ const CrearGrados = () => {
     );
 
 
-    const [isModalOpen, setIsModalOpen] = useState(null);
-    
-    const openModal = (index) => setIsModalOpen(index);
-    const closeModal = () => setIsModalOpen(null);
 
-    const handleEliminar = async (index,grado, id) => {
+    const handleEliminar = async (index,grado, id, onSuccess) => {
         console.log(grado, index, id)
         try {
             const response = await fetch(`${API_URL}cursos/${id}`, {
@@ -151,7 +147,8 @@ const CrearGrados = () => {
             }
     
             console.log('GRADO ELIMINADO EXITOSAMENTE');
-            closeModal()
+            // Si la petición fue exitosa, ejecuta la función `onSuccess` que es la que cierra el modal
+            if (onSuccess) onSuccess();
             setReload(!reload);
             
     
@@ -189,33 +186,7 @@ const CrearGrados = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <div className="materias">
-                        {pildorasFiltradas.length > 0 ? (
-                            pildorasFiltradas.map((item, index) => (
-                                <React.Fragment key={index}>
-                                    <PildoraMateriaGrado 
-                                        texto={item.nombre} 
-                                        color={item.color || 'azul'}
-                                        key={index} 
-                                        onClick={() => openModal(index)}
-                                    />
-                                    {isModalOpen === index && (
-                                        <Modal
-                                        isOpen={true}
-                                        closeModal={closeModal}
-                                        tipo='eliminar'
-                                        modalTexto={`Seguro de que quieres eliminar ${item.nombre} como grado de la institucion.`}
-                                        modalTitulo = {`ELIMINAR GRADO ${item.nombre}`}
-                                        >
-                                            <button onClick={() => handleEliminar(index, item.nombre, item.id_curso)} className='rojo'>ELIMINAR</button>
-                                        </Modal>
-                                    )}
-                                    </React.Fragment>
-                            ))
-                        ) : (
-                            <p className="mensaje-no-cursos">No hay cursos que cumplan con estos parametros.</p>
-                        )}
-                    </div>
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'grado'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>

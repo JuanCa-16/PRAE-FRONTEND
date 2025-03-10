@@ -3,8 +3,7 @@ import './CrearMateria.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
-import Modal from '../../../componentes/Modal/Modal';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 
@@ -119,12 +118,8 @@ const CrearMateria = () => {
     );
 
 
-    const [isModalOpen, setIsModalOpen] = useState(null);
-    
-    const openModal = (index) => setIsModalOpen(index);
-    const closeModal = () => setIsModalOpen(null);
 
-    const handleEliminar = async (index,materia,id) => {
+    const handleEliminar = async (index,materia,id,onSuccess) => {
         console.log(materia,index,id)
 
         try {
@@ -142,7 +137,7 @@ const CrearMateria = () => {
             }
 
             console.log('MATERIA ELIMINADA EXITOSAMENTE');
-            closeModal()
+            if (onSuccess) onSuccess();
             setReload(!reload);
         } catch (error) {
             //toast
@@ -151,7 +146,7 @@ const CrearMateria = () => {
     }
 
     return (
-        <div className='contenedorMaterias'>
+        <div className='crearMaterias'>
             <div className="crear">
                 <TituloDes titulo='CREAR MATERIA' desc='Ingresa el nombre de la materia nueva' ></TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
@@ -176,33 +171,7 @@ const CrearMateria = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <div className="materias">
-                        {pildorasFiltradas.length > 0 ? (
-                            pildorasFiltradas.map((item, index) => (
-                                <React.Fragment key={index}>
-                                    <PildoraMateriaGrado 
-                                        texto={item.nombre} 
-                                        color={item.color} 
-                                        key={index} 
-                                        onClick={() => openModal(index)}
-                                    />
-                                    {isModalOpen === index && (
-                                        <Modal
-                                        isOpen={true}
-                                        closeModal={closeModal}
-                                        tipo='eliminar'
-                                        modalTexto={`Seguro de que quieres eliminar ${item.nombre} como materia de la institucion.`}
-                                        modalTitulo = {`ELIMINAR MATERIA ${item.nombre.toUpperCase()}`}
-                                        >
-                                            <button onClick={() => handleEliminar(index, item.nombre, item.id_materia)} className='rojo'>ELIMINAR</button>
-                                        </Modal>
-                                    )}
-                                    </React.Fragment>
-                            ))
-                        ) : (
-                            <p className="mensaje-no-cursos">No hay cursos que cumplan con estos parametros.</p>
-                        )}
-                    </div>
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@ const ContenedorMaterias = ({url, info, est=true, nombre}) => {
     //Informacion de las pildoras
     const infoPildoras = info
     return (
-    <div className="materias">
+    <div className="contenedorMaterias">
         {est ? (infoPildoras.map((item, index) => (
                                 <Pildora
                                     key={index}
