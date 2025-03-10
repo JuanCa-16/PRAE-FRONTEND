@@ -74,7 +74,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
           .getPropertyValue("--colorPrincipal")
           .trim();
           setColorIcono(colorPrincipal);
-      }, []);
+      }, [user]);
   
 
   return (

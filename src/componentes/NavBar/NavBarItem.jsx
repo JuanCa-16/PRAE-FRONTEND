@@ -5,6 +5,7 @@ import { useNavigate} from 'react-router-dom';
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import { HomeIcon } from '../Icons/Icons.jsx';
 import { useTheme } from '../../Contexts/UserContext.jsx';
+import { useUser } from '../../Contexts/UserContext.jsx';
 /** 
  * Componente: NavBarItem
  * Descripción: Representa un ítem de la barra de navegación que puede incluir un ícono, texto y una función opcional.
@@ -34,6 +35,8 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
         }
     };
 
+    const { user} = useUser();
+
     const [colorIcono, setColorIcono] = useState("");
 
     useEffect(() => {
@@ -41,7 +44,7 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
         .getPropertyValue("--colorPrincipal")
         .trim();
         setColorIcono(colorPrincipal);
-    }, []);
+    }, [user]);
     
 
     const [hovered, setHovered] = useState(false);
