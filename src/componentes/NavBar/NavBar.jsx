@@ -70,11 +70,10 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   const [colorIcono, setColorIcono] = useState("");
   
       useEffect(() => {
-          const colorPrincipal = getComputedStyle(document.documentElement)
-          .getPropertyValue("--colorPrincipal")
-          .trim();
+          const colorPrincipal = user.institucion.color_principal;
+
           setColorIcono(colorPrincipal);
-      }, []);
+      }, [user]);
   
 
   return (
