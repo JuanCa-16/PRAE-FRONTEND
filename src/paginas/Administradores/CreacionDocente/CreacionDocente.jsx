@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from "react-router-dom";
+
 import './CreacionDocente.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import InputContainer from '../../../componentes/Input/InputContainer.jsx'
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
+
 import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
@@ -179,7 +179,7 @@ const CreacionDocente = () => {
         });
     };   
 
-    const navigate = useNavigate();
+    
 
     const [infoPildoras, setInfoPildoras] = useState([])
 
@@ -228,14 +228,7 @@ const CreacionDocente = () => {
             (profeSeleccionado === '' || item.nombre === profeSeleccionado)
         );
 
-    //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (profe) => {
-        const datos = {profe};
-        console.log(profe)
     
-        // navigate("/materias/notas", { state: datos }); // Navegar con los datos
-        navigate(`/profesores/${profe.nombre}`, { state: datos });
-    };
     return (
         <div className='contenedorCreacionDocente'>
             <div className="crear">
@@ -285,23 +278,6 @@ const CreacionDocente = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <div className="materias">
-                        {pildorasFiltradas.length > 0 ? (
-                            pildorasFiltradas.map((item, index) => (
-                                
-                                <PildoraMateriaGrado 
-                                    texto={item.nombre} 
-                                    color={item.color} 
-                                    key={index} 
-                                    onClick={() => manejarClick(item)}
-                                />
-                                    
-                                    
-                            ))
-                        ) : (
-                            <p className="mensaje-no-cursos">No hay profesores que cumplan con estos parametros</p>
-                        )}
-                    </div>
 
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true}></ContenedorPildoraMateriaGrado>
                 </div>

@@ -1,0 +1,243 @@
+.contenedorInstitucion{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+
+    .editar{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+        align-self: stretch;
+
+        .formulario{
+            display: flex;
+            width: 100%;
+            padding: 1.5rem 0rem;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.25rem;
+
+
+            .inputs{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-content: center;
+                row-gap: 1.5rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+
+                .input-container{
+                    width: 25%;
+                    padding: 1rem;
+                }
+            }
+        }
+    }
+
+    .vistas{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8rem;
+        align-self: stretch;
+        background-color:  var(--color-fondo);
+        width: 100%;
+        flex-wrap: wrap;
+        
+
+        .p1{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex: 1 0 0;
+            align-self: stretch;
+
+            .casilla{
+                display: flex;
+                padding: 0.625rem;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.625rem;
+                align-self: stretch;
+            }
+
+            .input{
+                .input-title.focused {
+                    
+                    color: var(--color-principal);
+                }
+            
+                //Estilo del input
+                & .input-field {
+                    
+                    background: var(--color-secundario);
+
+
+                    &:focus{
+                        outline: 0.0625rem solid var(--color-principal);;
+                    }
+            
+                }
+            }
+
+            .btn{
+                background-color: var(--color-principal);
+
+                &:hover {
+                    box-shadow: 0px 4px 10px var(--color-principal);
+                }
+            }
+
+            .capsula{
+
+                
+
+                .contenedorPildoraG{
+                    &.azul{
+                        background-color: var(--color-pildora1);
+                        h4{color: color-mix(in srgb, var(--color-pildora1) 10%, rgb(255, 255, 255));}
+                    }
+                    
+                    //colores
+                    &.morado {
+                        background-color: var(--color-pildora2);
+                        h4{color: color-mix(in srgb, var(--color-pildora2) 10%, rgb(255, 255, 255));}
+                    }
+                    
+                    &.amarillo {
+                        background-color: var(--color-pildora3);
+                        h4{color: color-mix(in srgb, var(--color-pildora3) 10%, rgb(255, 255, 255));}
+                    }
+
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: color-mix(in srgb, var(--color-pildora1) 20%, rgb(255, 255, 255));
+                        
+                        &.azul{
+                            h4{
+                            color: var(--color-pildora1);
+                            }
+                        }
+                
+                        .elipse1, .elipse2{
+                            background-color: var(--color-pildora1);
+                        }
+                
+                        &.morado {
+                            background-color: color-mix(in srgb, var(--color-pildora2) 20%, rgb(255, 255, 255));
+                            color: var(--color-pildora2);
+                
+                            h4{
+                                color: var(--color-pildora2);
+                            }
+                    
+                            .elipse1, .elipse2{
+                                background-color: var(--color-pildora2);
+                            }
+                        }
+                
+                        &.amarillo {
+                            background-color: color-mix(in srgb, var(--color-pildora3) 20%, rgb(255, 255, 255));
+                            color: var(--color-pildora3);
+                
+                            h4{
+                                color: var(--color-pildora3);
+                            }
+                    
+                            .elipse1, .elipse2{
+                                background-color: var(--color-pildora3);
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+
+            .tipo{
+                .tipo-existe{
+                    outline: 0.0625rem solid var(--color-principal);
+                    background-color: color-mix(in srgb, var(--color-principal) 20%, rgb(255, 255, 255));
+
+                    .etiqueta{
+                        .logo, .texto{
+                            color: var(--color-principal) ;
+                        }
+                    }
+                }
+            }
+        }
+
+        .p2{
+            display: flex;
+            width: 18.0625rem;
+            padding: 0.625rem;
+            align-items: center;
+            gap: 0.625rem;
+
+            .contenedorNavBarItem{
+                background-color: var(--color-secundario);
+
+                &:hover{
+
+                    outline: 0.0625rem solid var(--color-principal);
+                    background-color: color-mix(in srgb, var(--color-principal) 20%, rgb(255, 255, 255));
+                    
+                    .etiqueta{
+                    
+                        .logo, .texto{
+                            color: var(--color-principal);
+                        }
+                    }
+            
+                }
+            
+                //Estilo cuando el menu este activo
+                &.activar{
+                    outline: 0.0625rem solid var(--color-principal);
+                    background-color: color-mix(in srgb, var(--color-principal) 20%, rgb(255, 255, 255));;
+                    
+                    .etiqueta{
+                    
+                        .logo, .texto{
+                            color: var(--color-principal);
+                        }
+                    }
+                }
+
+                
+            }
+
+            .tipo-existe{
+                outline: 0.0625rem solid var(--color-principal);
+                background-color: color-mix(in srgb, var(--color-principal) 20%, rgb(255, 255, 255));
+
+                .etiqueta{
+                    .logo, .texto{
+                        color: var(--color-principal) ;
+                    }
+                }
+            }
+
+            .contenedorNavBar{
+                background-color: var(--color-secundario);
+
+                .linea{
+                    background-color: var(--color-secundario);  /* El color de la línea */
+                }
+            }
+
+            .colorear{
+                fill: var(--color-principal);
+            }
+        }
+    }
+
+}
