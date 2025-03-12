@@ -20,7 +20,7 @@ import { useTheme } from '../../Contexts/UserContext.jsx';
  *      - func (func): Función a ejecutar al hacer clic en el botón de salida.
  */
 
-const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func}) => {
+const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func, imagen}) => {
   const menus = {
     normal: [
       { texto: "Materias", icono: StudyIcon, ruta: `#` },
@@ -86,7 +86,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     <div className={`contenedorNavBar ${theme}`}>
       <div className='menuSuperior'>
         <div className="tituloSuperior">
-          <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+          <div onClick={handleClick} ><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
           {(rol !== 'normal') && (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
         </div>
         <div className="linea"></div>
@@ -96,6 +96,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
             {(rol !== 'normal') &&(<NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>)}
         </nav>
       </div>
+      
       {
         rol === 'estudiante' ? (
 

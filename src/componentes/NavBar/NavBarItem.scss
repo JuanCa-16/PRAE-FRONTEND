@@ -35,6 +35,7 @@
         }
 
         .texto{
+            color: var(--colorPrincipal);
             word-break: break-word; //salto de linea en caso de exceder el contenedor
         }
 
