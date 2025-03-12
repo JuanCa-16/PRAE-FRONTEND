@@ -18,7 +18,7 @@ import { useTheme } from '../../Contexts/UserContext';
  *      - nomInput (string): Nombre del input para formularios.
  *      - onChange (func): Función que se ejecuta cuando el valor del input cambia.
  */
-function InputContainer({placeholder = "correo@gmail.com", titulo = "correo electronico:", inputType = "email", value = "", required = false, isDisabled= false, nomInput, onChange = () => {}}) {
+function InputContainer({className, placeholder = "correo@gmail.com", titulo = "correo electronico:", inputType = "email", value = "", required = false, isDisabled= false, nomInput, onChange = () => {}}) {
 
     const [isFocused, setIsFocused] = useState(false);
     const {theme} = useTheme()
@@ -28,13 +28,17 @@ function InputContainer({placeholder = "correo@gmail.com", titulo = "correo elec
     // Función para actualizar el valor del input
     const handleInputChange = (event) => {
         // setInputValue(event.target.value);
-        onChange(event.target.value); // Pasamos el nuevo valor al 'onChange' recibido como prop
+        if (inputType === "file") {
+        onChange(event); // Pasamos el evento completo
+    } else {
+        onChange(event.target.value);
+    }
     };
 
     const uniqueId = useId();
 
     return (
-        <div className={`${theme} input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
+        <div className={`${theme} ${className} input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
 
             <p htmlFor="input-field" className={`input-title lato ${isFocused? 'focused' : ''}`}>
             {titulo}</p>
@@ -43,7 +47,7 @@ function InputContainer({placeholder = "correo@gmail.com", titulo = "correo elec
                 type={inputType}
                 id={uniqueId} 
                 placeholder={placeholder}
-                className="input-field"
+                className={`input-field`}
                 value= {value}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}

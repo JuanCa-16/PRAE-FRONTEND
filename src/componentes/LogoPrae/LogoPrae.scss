@@ -24,9 +24,12 @@
 
     //Estilos para el logo
     .logoPrae{
+        border-radius: $radio1;
         width: 2.4rem;
         position: relative;
         height: 2.4rem;
+        object-fit: cover; /* Corta la imagen para llenar el espacio sin deformarla */
+        object-position: center; /* Centra la imagen */
         
     }
 

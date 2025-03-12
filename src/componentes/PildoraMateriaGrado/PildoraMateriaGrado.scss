@@ -14,23 +14,27 @@
     width: fit-content;
 
     h4{
-        color: $blanco;
+        color: color-mix(in srgb, var(--colorPildora1) 10%, rgb(255, 255, 255));
         font-weight: bold;
         margin: 0;
     }
 
     background-color: var(--colorPildora1);
-    color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+    
     
     //colores
     &.morado {
         background-color: var(--colorPildora2);
-        color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+        h4{
+            color: color-mix(in srgb, var(--colorPildora2) 10%, rgb(255, 255, 255));
+        }
     }
     
     &.amarillo {
         background-color: var(--colorPildora3);
-        color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+        h4{
+            color: color-mix(in srgb, var(--colorPildora3) 10%, rgb(255, 255, 255));
+        }
     }
 
     .elipse1, .elipse2{
@@ -66,7 +70,7 @@
 
         &.morado {
             background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-            color: $morado;
+            
 
             h4{
                 color: var(--colorPildora2);
@@ -79,8 +83,7 @@
 
         &.amarillo {
             background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-            color: $amarillo;
-
+            
             h4{
                 color: var(--colorPildora3);
             }

@@ -20,8 +20,12 @@ import { useTheme } from '../../Contexts/UserContext.jsx';
  *      - func (func): Función a ejecutar al hacer clic en el botón de salida.
  */
 
-const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func}) => {
+const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func, imagen}) => {
   const menus = {
+    normal: [
+      { texto: "Materias", icono: StudyIcon, ruta: `#` },
+      { texto: "Ajustes", icono: AjustesIcon, ruta: "#" },
+    ],
     estudiante: [
       { texto: "Materias", icono: StudyIcon, ruta: `/materias/${nombreUsuario}` },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
@@ -37,6 +41,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
       { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
       { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
+      { texto: "Institucion", icono: AjustesIcon, ruta: "/institucion" },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
     ],
   };
@@ -47,7 +52,8 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   const location = useLocation(); // Obtiene la ruta actual
 
   const handleClick = () => {
-        navigate("/login"); // Click del LOGOTIPO
+
+        (rol==='normal')? navigate("#") : navigate("/login"); // Click del LOGOTIPO
         
   };
 
@@ -80,16 +86,17 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     <div className={`contenedorNavBar ${theme}`}>
       <div className='menuSuperior'>
         <div className="tituloSuperior">
-          <div onClick={handleClick} ><LogoPrae color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
-          <div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>
+          <div onClick={handleClick} ><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+          {(rol !== 'normal') && (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
         </div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
             <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname.startsWith(item.ruta)}/>))}
-            <NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>
+            {(rol !== 'normal') &&(<NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>)}
         </nav>
       </div>
+      
       {
         rol === 'estudiante' ? (
 

@@ -77,7 +77,7 @@ const Prueba = () => {
 
                 <NavBarItem tipo={true}></NavBarItem>
 
-                <NavBar></NavBar>
+                <NavBar rol='admin'></NavBar>
 
                 <TituloDes titulo='LISTADO DE CURSOS ASIGNADOS' desc='Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso'></TituloDes>
                 

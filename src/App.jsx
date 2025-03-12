@@ -33,6 +33,7 @@ import EditarPerfilDoc from './paginas/Docentes/EditarPerfilDoc/EditarPerfilDoc.
 import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/EditarPerfilAdmin.jsx';
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
+import AjustesInstitucion from './paginas/Administradores/AjustesInstitucion/AjustesInstitucion.jsx';
 
 
 /** 
@@ -206,7 +207,7 @@ function App() {
           }/>
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'estudiante'}/>} >
                 
-                <Route path="/prueba" element={<Prueba></Prueba>} />
+                
                 <Route path="/materias/:nombreEst" element={<CursosEst/>} />
                 <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
@@ -221,6 +222,7 @@ function App() {
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
+                <Route path="/prueba" element={<Prueba></Prueba>} />
                 <Route path='/crearGrados' element={<CrearGrados/>} />
                 <Route path='/crearMaterias' element={<CrearMateria/>} />
                 <Route path='/profesores' element={<CreacionDocente/>} />
@@ -231,6 +233,7 @@ function App() {
                 <Route path='/estudiantes/:nombreEst/:materia' element={<VistaNotasEst/>} />
                 <Route path='/asignarGradosMaterias' element={<AsignarGradosMaterias/>} />
                 <Route path='/editarPerfilRector' element={<EditarPerfilAdmin/>} />
+                <Route path='/institucion' element={<AjustesInstitucion/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
