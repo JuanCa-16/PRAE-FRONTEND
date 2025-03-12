@@ -9,16 +9,6 @@ import NavBar from '../../../componentes/NavBar/NavBar';
 
 const AjustesInstitucion = () => {
 
-    function capitalizeWords(str) {
-        return str
-            .split(' ') // Divide en palabras
-            .map(word => word.length > 0 
-                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
-                : ''
-            )
-            .join(' ');
-    }
-
     const [formData, setFormData] = useState({
         color_principal: '#157AFE' ,
         color_secundario:'#F5F7F9',
