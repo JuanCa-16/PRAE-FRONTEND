@@ -187,7 +187,7 @@ function App() {
         {
           user ?
           (<nav className="navbar">
-            <NavBar rol={user.rol} func = {cerrarSesion} nombreUsuario={user.nombre + ' ' +user.apellido} ></NavBar>
+            <NavBar rol={user.rol} func = {cerrarSesion} imagen={user.institucion.logo} nombreUsuario={user.nombre + ' ' +user.apellido} ></NavBar>
           </nav>): null
         }
 

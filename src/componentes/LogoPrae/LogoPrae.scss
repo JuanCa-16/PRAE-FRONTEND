@@ -25,12 +25,13 @@
     //Estilos para el logo
     .logoPrae{
         border-radius: $radio1;
-        width: 2.4rem;
+        width: 2.6rem;
         position: relative;
-        height: 2.4rem;
-        object-fit: cover; /* Corta la imagen para llenar el espacio sin deformarla */
-        object-position: center; /* Centra la imagen */
-        
+        height: 2.6rem;
+        object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
+        object-position: center;
+        max-width: 100%;
+        max-height: 100%; // Reduce el tamaño de la imagen al 80%
     }
 
     // //Aplicar color Morado

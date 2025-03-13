@@ -39,52 +39,40 @@ const AjustesInstitucion = () => {
     //Envio del formulario
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const { logo, ...formDataSinLogo } = formData;
-        console.log('Datos enviados:', formDataSinLogo);
+        const formDataToSend = new FormData();
+        formDataToSend.append("color_principal", formData.color_principal);
+        formDataToSend.append("color_secundario", formData.color_secundario);
+        formDataToSend.append("color_pildora1", formData.color_pildora1);
+        formDataToSend.append("color_pildora2", formData.color_pildora2);
+        formDataToSend.append("color_pildora3", formData.color_pildora3);
+        formDataToSend.append("fondo", formData.fondo);
+        formDataToSend.append("nombre", formData.nombre);
+        
+        if (formData.logo) {
+            formDataToSend.append("logo", formData.logo);
+        }
 
         try {
             const response = await fetch(`${API_URL}instituciones/${user.institucion.id_institucion}`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
-                body: JSON.stringify(formDataSinLogo)
+                body: formDataToSend
             });
     
             if (!response.ok) {
-                const errorData = await response.json(); // Obtiene respuesta del servidor
+                const errorData = await response.json();
                 throw new Error(`${errorData.message || response.status}`);
             }
     
-            console.log('INSITUCION EDITADA EXITOSAMENTE');
+            console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
 
         } catch  (error) {
             //toast
             console.error(error);
         }
 
-        // const formDataLogo = new FormData();
-        // formDataLogo.append("logo", formData.logo);
-    
-        // try {
-        //     const response = await fetch(`${API_URL}instituciones/${user.institucion.id_institucion}`, {
-        //         method: "POST", 
-        //         headers: {
-        //             "Authorization": `Bearer ${token}`,
-        //         },
-        //         body: formDataLogo
-        //     });
-    
-        //     if (!response.ok) {
-        //         const errorData = await response.json();
-        //         throw new Error(`${errorData.message || response.status}`);
-        //     }
-    
-        //     console.log("LOGO SUBIDO EXITOSAMENTE");
-        // } catch (error) {
-        //     console.error("Error al subir el logo:", error);
-        // }
     };
 
     const [preview, setPreview] = useState(null); // Estado para la vista previa
