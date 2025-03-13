@@ -164,8 +164,23 @@ const ThemeIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height
     />
   </svg>
 )
-export default ThemeIcon 
+
+
+const InstitucionIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={19}
+    fill="none"
+    {...props}
+  >
+    <path className={(estado || activo)? 'colorear':'normal'}
+    fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado )}
+      d="M6.65 18.5.5 12.35a1.702 1.702 0 0 1-.375-.55 1.61 1.61 0 0 1 0-1.25c.083-.2.208-.383.375-.55l5.75-5.725L4.375 2.4a1.102 1.102 0 0 1-.337-.775c-.008-.3.096-.567.312-.8.216-.233.483-.35.8-.35.317 0 .592.117.825.35L15.15 10c.167.167.288.35.363.55a1.804 1.804 0 0 1 0 1.25c-.074.2-.195.383-.363.55L9 18.5a1.7 1.7 0 0 1-.55.375 1.61 1.61 0 0 1-1.25 0 1.7 1.7 0 0 1-.55-.375ZM7.825 5.85l-5.35 5.35h10.7l-5.35-5.35ZM17.8 19c-.6 0-1.108-.213-1.525-.638-.417-.425-.625-.946-.625-1.562 0-.45.113-.875.338-1.275.225-.4.48-.792.762-1.175l.475-.6a.758.758 0 0 1 .588-.287.69.69 0 0 1 .587.262l.5.625c.267.383.517.775.75 1.175.233.4.35.825.35 1.275 0 .617-.217 1.138-.65 1.563-.433.425-.95.638-1.55.637Z"
+    />
+  </svg>
+)
 
 
 // Exporta todos los iconos
-export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon }
+export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon }
