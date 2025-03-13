@@ -39,10 +39,14 @@
                     &.colorInput{
                         width: 15%;
                         padding: 1rem;
-
+                        
                         .input-field{
                                 margin: 0;
                                 padding: 0;
+                                background: none;
+                                border: none;
+                                outline: none;
+                                
                             
                         }
                     }
@@ -207,8 +211,12 @@
             align-items: center;
             gap: 0.625rem;
 
+            
+
             .contenedorNavBarItem{
                 background-color: var(--color-secundario);
+
+    
 
                 .texto{
                     color: var(--color-principal);
@@ -246,6 +254,7 @@
             }
 
             .tipo-existe{
+                margin-top: 2rem;
                 outline: 0.0625rem solid var(--color-principal);
                 background-color: color-mix(in srgb, var(--color-principal) 20%, rgb(255, 255, 255));
 
@@ -257,10 +266,11 @@
             }
 
             .contenedorNavBar{
+                border-radius: 0.5rem;
                 background-color: var(--color-secundario);
 
                 .linea{
-                    background-color: var(--color-secundario);  /* El color de la línea */
+                    background-color: var(--color-principal);  /* El color de la línea */
                 }
             }
 

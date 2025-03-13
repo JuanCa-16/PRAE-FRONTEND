@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
-import { StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon, ThemeIcon } from '../Icons/Icons.jsx';
+import { StudyIcon, AjustesIcon, InstitucionIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon, ThemeIcon } from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../Contexts/UserContext.jsx';
 import { useTheme } from '../../Contexts/UserContext.jsx';
@@ -41,7 +41,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
       { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
       { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
-      { texto: "Institucion", icono: AjustesIcon, ruta: "/institucion" },
+      { texto: "Institucion", icono: InstitucionIcon, ruta: "/institucion" },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
     ],
   };
@@ -87,7 +87,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       <div className='menuSuperior'>
         <div className="tituloSuperior">
           <div onClick={handleClick} ><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
-          {(rol !== 'normal') && (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono}  estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
+          {(rol !== 'normal') && (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
         </div>
         <div className="linea"></div>
         <nav className="itemBar">
