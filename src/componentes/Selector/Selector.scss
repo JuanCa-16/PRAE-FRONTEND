@@ -75,6 +75,11 @@
         color: color-mix(in srgb, var(--colorPrincipal) 5%, rgb(255, 255, 255));;
     }
 
+    .react-select__option--is-selected{
+        background-color: var(--colorPrincipal);
+        color: color-mix(in srgb, var(--colorPrincipal) 5%, rgb(255, 255, 255));;
+    }
+
     .css-t3ipsp-control{
         box-shadow: none;
 

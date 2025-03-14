@@ -200,12 +200,19 @@ const CreacionDocente = () => {
                     }
     
                     const data = await response.json(); // Espera la conversión a JSON
-                    if (data.length > 1) {
-                        data.sort((a, b) => a.apellido.localeCompare(b.apellido))
+                    if (data.length >= 1) {
+                        const dataPildora = data.map(est => ({
+                            ...est,
+                            nombreCompleto: `${est.apellido.split(" ")[0]} ${est.nombre.split(" ")[0]}`
+                        })).sort((a, b) => a.nombreCompleto.localeCompare(b.nombreCompleto));
+                        console.log("Respuesta completa:", dataPildora);
+                        setInfoPildoras(dataPildora);
+                    }else{
+                        console.log("Respuesta del servidor:", data);
                     }
                     
-                    console.log("Respuesta del servidor:", data);
-                    setInfoPildoras(data);
+                    
+                    
                 } catch (error) {
                     console.error(error);
                 }
@@ -216,7 +223,7 @@ const CreacionDocente = () => {
             
         
             //Elimina opciones duplicadas para el selector
-    const profesUnicos = [...new Set(infoPildoras.map(item => item.nombre))];
+    const profesUnicos = [...new Set(infoPildoras.map(item => item.nombreCompleto))];
     const [profeSeleccionado, setProfeSeleccionado] = useState('');
         
             // Función para limpiar los filtros
@@ -225,7 +232,7 @@ const CreacionDocente = () => {
         };
         
         const pildorasFiltradas = infoPildoras.filter(item =>
-            (profeSeleccionado === '' || item.nombre === profeSeleccionado)
+            (profeSeleccionado === '' || item.nombreCompleto === profeSeleccionado)
         );
 
     

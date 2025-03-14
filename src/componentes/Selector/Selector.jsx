@@ -9,6 +9,7 @@ const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholde
         <div className={`selector ${theme}`}>
             <p className={`input-title lato ${isFocused? 'focused' : ''}`}>{titulo}</p>
             <Select
+                // menuIsOpen={true}
                 classNamePrefix="react-select"
                 isMulti = {multi}
                 options={opciones}
