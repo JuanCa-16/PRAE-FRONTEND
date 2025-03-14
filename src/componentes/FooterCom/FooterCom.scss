@@ -3,29 +3,86 @@
 .contenedorFooter{
     display: flex;
     padding: 2.25rem 6rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.625rem;
-    align-self: stretch;
+    align-items: center;
+    justify-content: space-between;
+    
     background-color: var(--colorPrincipal);
     color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
     margin-top: 8rem;
     border-radius: $radio4;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
 
+    a {
+        text-decoration: none; /* Quita el subrayado */
+        color: inherit; /* Usa el color del texto del padre */
+    }
+    
     .contenedor{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 1.5625rem;
-        flex: 1 0 0;
+        flex-wrap: wrap;
+        width: auto;
+        max-width: 40%;
+
+        
 
         .info{
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 0.625rem;
-            flex: 1 0 0;
-            align-self: stretch;
+            flex-wrap: wrap;
+            max-width: 100%;
+
+            .redes{
+                display: flex;
+                max-width: 100%;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                .logo{
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+
+            p{
+                max-width: 100%;
+                white-space: normal; /* Permite saltos de línea */
+                word-wrap: break-word;
+            }
+            
         }
+    }
+
+    .contenedorImg{
+        
+        display: flex;
+        align-items: center; /* Centra la imagen */
+        justify-content: center;
+        max-width: 20%;
+        
+        .logo{
+            width: 100%; /* Ajusta el ancho al 100% del contenedor */
+            height: 100%; /* Ocupa toda la altura del contenedor */
+
+            object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
+            object-position: center;
+
+        }
+    }
+
+    h3 {
+        max-width: 100%;
+        white-space: normal; /* Permite saltos de línea */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 }

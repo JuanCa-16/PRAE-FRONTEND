@@ -9,6 +9,9 @@
     --colorPildora1:#157AFE; 
     --colorPildora2:#4946E2;
     --colorPildora3:#EF9131; 
+
+    --colorMezclado: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
+    --colorMezclado2: color-mix(in srgb, var(--colorPrincipal) 5%, rgb(255, 255, 255));
 }
 
 $azul: #157AFE;

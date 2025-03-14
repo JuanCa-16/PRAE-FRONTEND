@@ -244,7 +244,7 @@ function App() {
 
           {
           user ?
-          (<FooterCom></FooterCom>): null
+          (<FooterCom ></FooterCom>): null
           }
 
           
