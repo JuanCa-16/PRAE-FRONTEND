@@ -23,7 +23,11 @@ const AjustesInstitucion = () => {
         color_pildora3:  user.institucion.color_pildora3,
         fondo: user.institucion.fondo,
         nombre: user.institucion.nombre,
-        logo:null
+        logo:null,
+        instagram: user.institucion.instagram,
+        facebook: user.institucion.facebook,
+        telefono: user.institucion.telefono,
+        direccion: user.institucion.direccion,
     });
 
 
@@ -47,6 +51,10 @@ const AjustesInstitucion = () => {
         formDataToSend.append("color_pildora3", formData.color_pildora3);
         formDataToSend.append("fondo", formData.fondo);
         formDataToSend.append("nombre", formData.nombre);
+        formDataToSend.append("instagram", formData.instagram);
+        formDataToSend.append("facebook", formData.facebook);
+        formDataToSend.append("telefono", formData.telefono);
+        formDataToSend.append("direccion", formData.direccion);
         
         if (formData.logo) {
             formDataToSend.append("logo", formData.logo);
@@ -102,8 +110,9 @@ const AjustesInstitucion = () => {
             '--color-pildora3': formData.color_pildora3,
             '--color-fondo': formData.fondo
         }}>
+            <TituloDes titulo='PERSONALIZACIÓN INSTITUCION' desc='Personaliza tu experiencia ajustando la aplicacion con tus preferencias.' />
+            <div className="contPersonalizacion">
             <div className="editar">
-                <TituloDes titulo='PERSONALIZACIÓN INSTITUCION' desc='Personaliza tu experiencia ajustando la aplicacion con tus preferencias.' />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer className={'colorInput'} nomInput="color_principal" titulo='Principal' inputType='color' value={formData.color_principal} required={true} onChange={(value) => handleChange('color_principal', value)} />
@@ -113,6 +122,10 @@ const AjustesInstitucion = () => {
                         <InputContainer className={'colorInput'} nomInput="color_pildora3" titulo='Color-3' inputType='color' value={formData.color_pildora3} required={true} onChange={(value) => handleChange('color_pildora3', value)}/>
                         <InputContainer  className={'colorInput'} nomInput="fondo" titulo='Fondo' inputType='color' value={formData.fondo} required={true} onChange={(value) => handleChange('fondo', value)}/>
                         <InputContainer nomInput="nombre" titulo='Institucion' inputType='text' value={formData.nombre} required={true} onChange={(value) => handleChange('nombre', value)} />
+                        <InputContainer nomInput="facebook" titulo='Facebook' inputType='text' value={formData.facebook} required={false} onChange={(value) => handleChange('facebook', value)} />
+                        <InputContainer nomInput="instagram" titulo='Instagram' inputType='text' value={formData.instagram} required={false} onChange={(value) => handleChange('instagram', value)} />
+                        <InputContainer nomInput="telefono" titulo='Telefono' inputType='text' value={formData.telefono} required={false} onChange={(value) => handleChange('telefono', value)} />
+                        <InputContainer nomInput="direccion" titulo='Dirección' inputType='text' value={formData.direccion} required={false} onChange={(value) => handleChange('direccion', value)} />
                         <InputContainer nomInput="logo" titulo='Logo' inputType='file' accept="image/*" onChange={handleFileChange} />
 
                         {preview && <img src={preview} alt="Vista previa" width="100px" style={{ 
@@ -132,20 +145,21 @@ const AjustesInstitucion = () => {
                     <div className="casilla input"><InputContainer
                                         titulo="Correo electrónico:"
                                         placeholder="correo@example.com"
-                                        
-                                        /></div>
+                                        />
+                                        </div>
                     <div className="casilla"><button className='btn'>Boton</button></div>
                     <div className="casilla tipo"><NavBarItem tipo={true}></NavBarItem></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='azul'></PildoraMateriaGrado></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='morado'></PildoraMateriaGrado></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='amarillo'></PildoraMateriaGrado></div>
-                    <div className="casilla capsula"><FooterCom></FooterCom></div>
+                    <div className="p2">
+                    <NavBar imagen={preview? preview:''}></NavBar>
+                    </div>
+                    <div className="casilla capsula"><FooterCom imagen={preview? preview:'' }></FooterCom></div>
 
                 </div>
-                <div className="p2">
-                    
-                    <NavBar imagen={preview? preview:''}></NavBar>
-                </div>
+                
+            </div>
             </div>
         </div>
     );

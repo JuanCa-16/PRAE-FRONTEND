@@ -181,6 +181,35 @@ const InstitucionIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, 
   </svg>
 )
 
+const FacebookIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={20}
+    fill="none"
+    {...props}
+  >
+    <path className={(estado || activo)? 'colorear':'normal'}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado )}
+      d="M18.9 0H1.1A1.1 1.1 0 0 0 0 1.1v17.8A1.1 1.1 0 0 0 1.1 20h9.58v-7.75h-2.6v-3h2.6V7a3.64 3.64 0 0 1 3.88-4 20 20 0 0 1 2.33.12v2.7H15.3c-1.26 0-1.5.6-1.5 1.47v1.93h3l-.39 3H13.8V20h5.1a1.102 1.102 0 0 0 1.1-1.1V1.1A1.101 1.101 0 0 0 18.9 0Z"
+    />
+  </svg>
+)
+
+const InstagramIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={20}
+    fill="none"
+    {...props}
+  >
+    <path className={(estado || activo)? 'colorear':'normal'}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado )}
+      d="M11.029 0c1.125.003 1.696.009 2.189.023l.194.007c.224.008.445.018.712.03 1.064.05 1.79.218 2.427.465.66.254 1.216.598 1.772 1.153a4.9 4.9 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.012.266.022.487.03.712l.006.194c.015.492.02 1.063.023 2.188v2.056a79.4 79.4 0 0 1-.022 2.188l-.006.194c-.008.225-.018.446-.03.712-.05 1.065-.22 1.79-.466 2.428a4.9 4.9 0 0 1-1.153 1.772 4.9 4.9 0 0 1-1.772 1.153c-.637.247-1.363.415-2.427.465l-.712.03-.194.006c-.493.014-1.064.021-2.19.023l-.745.001h-1.31c-.73.003-1.459-.005-2.188-.023l-.194-.006c-.238-.009-.475-.02-.712-.031-1.064-.05-1.79-.218-2.428-.465a4.899 4.899 0 0 1-1.771-1.153A4.9 4.9 0 0 1 .526 16.55C.279 15.913.11 15.187.06 14.122l-.03-.712-.005-.194A79.001 79.001 0 0 1 0 11.028V8.972a79 79 0 0 1 .022-2.188L.03 6.59c.008-.225.018-.446.03-.712.05-1.065.218-1.79.465-2.428A4.9 4.9 0 0 1 1.68 1.678 4.9 4.9 0 0 1 3.45.525C4.089.278 4.814.11 5.879.06c.266-.012.488-.022.712-.03l.194-.006A79 79 0 0 1 8.973.001L11.029 0ZM10 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2A3 3 0 1 1 10 13a3 3 0 0 1 .002-6m5.25-3.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"
+    />
+  </svg>
+)
 
 // Exporta todos los iconos
-export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon }
+export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon,FacebookIcon,InstagramIcon }
