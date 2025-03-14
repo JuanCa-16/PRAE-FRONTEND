@@ -12,7 +12,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt })
     console.log(profe);
 
     // navigate("/materias/notas", { state: datos }); // Navegar con los datos
-    navigate(`/profesores/${profe.nombre}`, { state: datos });
+    navigate(`/profesores/${profe.nombreCompleto}`, { state: datos });
   };
 
 
@@ -29,7 +29,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt })
         pildorasFiltradas.length > 0 ? (
           pildorasFiltradas.map((item, index) => (
             <PildoraMateriaGrado
-              texto={item.nombre}
+              texto={item.nombreCompleto}
               color={item.color}
               key={index}
               onClick={() => manejarClick(item)}
@@ -61,8 +61,8 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt })
                     <button
                       onClick={() =>
                       (txt==='grado')?
-                       eliminar(index, item.nombre, item.id_curso, closeModal)
-                       :eliminar(index, item.nombre, item.id_materia, closeModal)
+                      eliminar(index, item.nombre, item.id_curso, closeModal)
+                      :eliminar(index, item.nombre, item.id_materia, closeModal)
                       }
                       className="rojo"
                     >

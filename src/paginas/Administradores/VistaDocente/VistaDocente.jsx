@@ -20,6 +20,16 @@ const VistaDocente = () => {
     const {user} = useUser();
     const [reload, setReload] = useState(false);
 
+    function capitalizeWords(str) {
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
+    }
+
     // Estado inicial que se usará para comparar
     const initialFormData = useRef({
         apellidos: '',
@@ -336,8 +346,8 @@ const VistaDocente = () => {
                 <TituloDes titulo='EDITAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', value)}  />
-                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Nombres' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', value)}  />
+                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
+                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Nombres' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', capitalizeWords(value))}  />
                         <InputContainer nomInput="coreo" required={false}  titulo='Correo' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
                         <InputContainer nomInput="contra" required={false}  titulo='Contraseña'placeholder='*****' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
                         <InputContainer nomInput="doc" required={false} isDisabled={true} titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />

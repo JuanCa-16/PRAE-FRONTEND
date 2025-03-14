@@ -14,6 +14,7 @@ const ContenedorMaterias = ({url, info, est=true, nombre}) => {
     //pasa los datos de la materia a la pagina de notas de la materias
     const manejarClick = (materia, profesor,color,grado) => {
         const datos = { materia, profesor,color,grado }; // Datos a enviar
+        console.log('aquii', nombre)
         if(est){
             navigate(`${url}/${nombre? nombre : user.nombre + ' ' +user.apellido}/${materia}`, { state: datos }); // Navegar con los datos
         }else{
