@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import InputContainer from "../../../componentes/Input/InputContainer";
 import TituloDes from "../../../componentes/TituloDes/TituloDes";
 import "./EditarPerfilAdmin.scss";
+import { useUser } from "../../../Contexts/UserContext";
 
 const EditarPerfilAdmin = () => {
-    //Datos inciales a mostrar
-    const [formData, setFormData] = useState({
-        apellidos: "Henao Gallego",
-        nombre: "Juan Camilo",
-        correo: "juan.henao.gallego@gmail.com",
-        doc: "20221598320",
-        contrasena: "1234",
-        institucion: "San Francisco",
+
+    //const API_URL = process.env.REACT_APP_API_URL; 
+    //const token = localStorage.getItem("token");
+    const {user} = useUser();
+    //const [reload, setReload] = useState(false);
+
+
+    // Estado inicial que se usará para comparar
+    const initialFormData = useRef({
+        apellidos: user.apellido,
+        nombre: user.nombre,
+        correo: user.email,
+        doc: user.id,
+        contrasena: '',
     });
+
+    //Datos inciales a mostrar
+    const [formData, setFormData] = useState(initialFormData.current);
 
     //Actualizar inputs
     const handleChange = (titulo, value) => {
@@ -78,14 +88,6 @@ const EditarPerfilAdmin = () => {
                             required={true}
                             onChange={(value) => handleChange("doc", value)}
                             
-                        />
-                        <InputContainer
-                            nomInput="institucion"
-                            titulo="Institucion"
-                            inputType="text"
-                            value={formData.institucion}
-                            required={true}
-                            onChange={(value) => handleChange("institucion", value)}
                         />
                     </div>
                     <button type="submit">Guardar Cambios</button>

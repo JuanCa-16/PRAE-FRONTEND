@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './AsignarGradosMaterias.scss'
+import { useUser } from '../../../Contexts/UserContext.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
@@ -7,7 +8,14 @@ import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 
+
 const AsignarGradosMaterias = () => {
+
+    const API_URL = process.env.REACT_APP_API_URL; 
+    const token = localStorage.getItem("token");
+    const {user} = useUser();
+    const [reload, setReload] = useState(false);
+
      //Datos inciales a mostrar
     const [formData, setFormData] = useState({
         grados: [],
@@ -15,60 +23,113 @@ const AsignarGradosMaterias = () => {
     });
     
 
-    
-        //Envio del formulario
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if(materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0){
-            alert('Debes seleccionar alemnos una materia y grado')
-            return;
-        }
-        console.log('Datos enviados:', formData);
-        setFormData({
-            grados: [],
-            materias: [],
-        })
-        setMateriasSeleccionadas([])
-        setGradosSeleccionados([])
-    };
-
     //GRADOS
-        const [gradosSeleccionados, setGradosSeleccionados] = useState([]);
-    
-    
-        // Actualización de materia seleccionada
-        const handleChangeGrado = (selectedOptions) => {
-            setGradosSeleccionados(selectedOptions);
-            setFormData({
-                ...formData,
-                grados: selectedOptions.map((grado) => grado.value),
-            });
-        };
-    
-        const opcionesGrados = [
-            { value: "6-2", label: "6-2" },
-            { value: "7-2", label: "7-2" },
-        ];
-
-
-        const [materiasSeleccionadas, setMateriasSeleccionadas] = useState([]);
+        const [opcionesGrados, setOpcionesGrados] = useState([])
         
-                // Opciones de materias
-            const opcionesMaterias = [
-                { value: "matematicas", label: "Matemáticas" },
-                { value: "fisica", label: "Física" },
-                { value: "quimica", label: "Química" },
-                { value: "biologia", label: "Biología" },
-            ];
+            useEffect(()=>{
+                    const listaGrados = async () => {
+                        try {
+                            const response = await fetch(`${API_URL}cursos/institucion/${user.institucion.id_institucion}`, {
+                                method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                },
+                            });
             
-            const handleChangeMaterias = (selectedOptions) => {
-                setMateriasSeleccionadas(selectedOptions);
+                            if (!response.ok) {
+                                const errorData = await response.json(); // Obtiene respuesta del servidor
+                                throw new Error(`${errorData.message || response.status}`);
+                            }
+                    
+                            
+                            const data = await response.json(); // Espera la conversión a JSON
+                            data.sort((a, b) => {
+                                const [numA, subA] = a.nombre.split('-');
+                                const [numB, subB] = b.nombre.split('-');
+                
+                                return parseInt(numA) - parseInt(numB) || subA.localeCompare(subB, 'es', { numeric: true });
+                            });
+                            console.log("Respuesta del servidor grados:", data);
+                            const opciones = data.map(materia => ({
+                                value: materia.id_curso,
+                                label: materia.nombre
+                            }));
+                            setOpcionesGrados(opciones)
+                            
+            
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+            
+                    listaGrados()
+                },[reload,API_URL, token, user.institucion.id_institucion])
+    
+
+            const [gradosSeleccionados, setGradosSeleccionados] = useState([]);
+        
+        
+            // Actualización de materia seleccionada
+            const handleChangeGrado = (selectedOptions) => {
+                setGradosSeleccionados(selectedOptions);
                 setFormData({
                     ...formData,
-                    materias: selectedOptions.map((materia) => materia.value),
+                    grados: selectedOptions.map((curso) => curso.value),
                 });
-            };  
+            };
+    
+    //materias
+
+    const [opcionesMaterias, setOpcionesMaterias] = useState([]);
+        
+        useEffect(() => {
+            const listaMaterias = async () => {
+                try {
+                    const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}/docentes`,{
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+    
+                    if (!response.ok) {
+                        const errorData = await response.json(); // Obtiene respuesta del servidor
+                        throw new Error(`${errorData.message || response.status}`);
+                    }
+    
+                    const data = await response.json(); // Espera la conversión a JSON
+                    if (data.length > 1) {
+                        data.sort((a, b) => (a.nombre?.localeCompare(b.nombre || '') || 0));
+                    }
+                    
+                    console.log("Respuesta del servidor materias:", data);
+                    const opciones = data.map(materia => ({
+                        value: [materia.id_materia, materia.docente_documento],
+                        label: materia.nombre + ' - '  +materia.docente_nombre + ' '  +materia.docente_apellido
+                    }));
+                    
+                    setOpcionesMaterias(opciones);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+    
+            listaMaterias()
+        },[API_URL, token, user.institucion.id_institucion])
+
+
+    const [materiasSeleccionadas, setMateriasSeleccionadas] = useState([]);
+    
+        
+        const handleChangeMaterias = (selectedOptions) => {
+            setMateriasSeleccionadas(selectedOptions);
+            setFormData({
+                ...formData,
+                materias: selectedOptions.map((materia) => materia.value),
+            });
+        };    
             
             const infoPildoras = [
                 { materia: "Matemáticas", grado: "6-2", profe: 'Juan Esteban',color: 'morado' },
@@ -107,6 +168,60 @@ const AsignarGradosMaterias = () => {
                 console.log(grado,materia,profe)
                 closeModal()
             }
+
+                //Envio del formulario
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+
+        if(materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0){
+            alert('Debes seleccionar alemnos una materia y grado')
+            return;
+        }
+        console.log('Datos enviados:', formData);
+
+        const combinaciones = formData.grados.flatMap(id_curso=> 
+            formData.materias.map(([id_materia, id_docente]) => ({ id_curso, id_materia, id_docente }))
+        );
+
+        console.log('aaaaa',combinaciones)
+
+        try {
+            
+            const respuestas = await Promise.all(
+                combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
+                    const response = await fetch(`${API_URL}asignar/asignarMateria`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ id_curso, id_materia, id_docente })
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error(`Error en id_curso ${id_curso}, materia ${id_materia}: ${response.statusText}`);
+                    }
+    
+                    return response.json();
+                })
+            );
+    
+            console.log('Respuestas del backend:', respuestas);
+        
+    
+            // Limpiar el formulario
+            setFormData({
+                grados: [],
+                materias: []
+            });
+            setMateriasSeleccionadas([]);
+            setGradosSeleccionados([]);
+    
+        } catch (error) {
+            console.error('Error en las peticiones:', error);
+
+        }
+    };
 
     return (
         <div className='contenedorAsignarGradosMaterias'>

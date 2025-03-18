@@ -159,6 +159,11 @@ function App() {
         Object.entries(colores).forEach(([key, value]) => {
             document.documentElement.style.setProperty(`--${key}`, value);
         });
+
+        // Forzar actualización de las variables que usan color-mix
+      const principal = getComputedStyle(document.documentElement).getPropertyValue("--colorPrincipal");
+      document.documentElement.style.setProperty("--colorMezclado", `color-mix(in srgb, ${principal} 20%, rgb(255, 255, 255))`);
+      document.documentElement.style.setProperty("--colorMezclado2", `color-mix(in srgb, ${principal} 5%, rgb(255, 255, 255))`);
     }else{
       const valoresPorDefecto = {
         "--colorPrincipal": "#157AFE",  // Reemplázalo con el valor real de tu root

@@ -23,10 +23,6 @@ const FooterCom = ({imagen}) => {
   
     updateColors(); // Aplicar colores al cargar
   
-    const observer = new MutationObserver(updateColors);
-    observer.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ["style"] });
-  
-    return () => observer.disconnect();
   }, [user]);
 
   return (
