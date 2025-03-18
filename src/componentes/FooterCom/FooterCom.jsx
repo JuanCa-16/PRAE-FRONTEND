@@ -18,7 +18,7 @@ const FooterCom = ({imagen}) => {
   useEffect(() => {
     setColorHex(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado").trim());
     setColorHex2(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado2").trim());
-  }, []);
+  }, [user]);
 
   return (
     <footer className={`contenedorFooter `}>
