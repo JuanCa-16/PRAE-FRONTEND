@@ -16,8 +16,17 @@ const FooterCom = ({imagen}) => {
   const [hovered2, setHovered2] = useState(false);
 
   useEffect(() => {
-    setColorHex(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado").trim());
-    setColorHex2(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado2").trim());
+    const updateColors = () => {
+      setColorHex(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado").trim());
+      setColorHex2(getComputedStyle(document.documentElement).getPropertyValue("--colorMezclado2").trim());
+    };
+  
+    updateColors(); // Aplicar colores al cargar
+  
+    const observer = new MutationObserver(updateColors);
+    observer.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ["style"] });
+  
+    return () => observer.disconnect();
   }, [user]);
 
   return (
