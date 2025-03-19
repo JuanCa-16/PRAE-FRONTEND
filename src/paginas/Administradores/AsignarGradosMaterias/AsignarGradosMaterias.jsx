@@ -131,16 +131,55 @@ const AsignarGradosMaterias = () => {
             });
         };    
             
-            const infoPildoras = [
-                { materia: "Matemáticas", grado: "6-2", profe: 'Juan Esteban',color: 'morado' },
-                { materia: "Ingles", grado: "6-2", profe: 'Juan Manuel',color: 'morado' },
-            ];
+            // const infoPildoras = [
+            //     { materia: "Matemáticas", grado: "6-2", profe: 'Juan Esteban',color: 'morado' },
+            //     { materia: "Ingles", grado: "6-2", profe: 'Juan Manuel',color: 'morado' },
+            // ];
+
+
+            const [infoPildoras, setInfoPildoras] = useState([]);
+            
+                useEffect(() => {
+                    const listaCursos = async () => {
+                        try {
+                            const response = await fetch(`${API_URL}asignar/institucion/${user.institucion.id_institucion}`,{
+                                method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                },
+                            });
+            
+                            if (!response.ok) {
+                                const errorData = await response.json(); // Obtiene respuesta del servidor
+                                throw new Error(`${errorData.message || response.status}`);
+                            }
+            
+                            const data = await response.json(); // Espera la conversión a JSON
+                            if (data.length > 1) {
+                            data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
+                            }
+
+                            const dataCompleta = data.map(item => ({
+                                ...item,
+                                nombre_completo: `${item.profesor_nombre} ${item.profesor_apellido}`
+                            }));
+                            
+                            console.log("Respuesta del servidor listaCursos:", dataCompleta);
+                            setInfoPildoras(dataCompleta);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+            
+                    listaCursos()
+                },[reload,API_URL, token, user.institucion.id_institucion])
                     
                 
            //Elimina opciones duplicadas para el selector
             const materiasUnicas = [...new Set(infoPildoras.map(item => item.materia))];
-            const gradosUnicos = [...new Set(infoPildoras.map(item => item.grado))];
-            const profesUnicos = [...new Set(infoPildoras.map(item => item.profe))];
+            const gradosUnicos = [...new Set(infoPildoras.map(item => item.curso))];
+            const profesUnicos = [...new Set(infoPildoras.map(item => item.nombre_completo))];
 
             const [materiaFiltro, setMateriaFiltro] = useState('');
             const [gradoFiltro, setGradoFiltro] = useState('');
@@ -154,8 +193,8 @@ const AsignarGradosMaterias = () => {
     
             const pildorasFiltradas = infoPildoras.filter(item =>
                 (materiaFiltro === '' || item.materia === materiaFiltro) &&
-                (gradoFiltro === '' || item.grado === gradoFiltro)&&
-                (profeFiltro === '' || item.profe === profeFiltro)
+                (gradoFiltro === '' || item.curso === gradoFiltro)&&
+                (profeFiltro === '' || item.nombre_completo === profeFiltro)
             );
 
 
@@ -164,9 +203,38 @@ const AsignarGradosMaterias = () => {
             const openModal = (index) => setIsModalOpen(index);
             const closeModal = () => setIsModalOpen(null);
         
-            const handleEliminar = (index,grado,materia,profe) => {
-                console.log(grado,materia,profe)
-                closeModal()
+            const handleEliminar = async(index,asigancion,grado,materia,profe) => {
+                console.log(asigancion,grado,materia,profe)
+
+
+                try {
+                    const response = await fetch(`${API_URL}asignar/eliminarAsignacion/${asigancion}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+            
+                    if (!response.ok) {
+                        const errorData = await response.json(); // Obtiene respuesta del servidor
+                        throw new Error(`${errorData.error || response.status}`);
+                    }
+            
+                    console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
+
+                    closeModal()
+                    setReload(!reload);
+                    
+
+                    
+                    
+            
+                } catch (error) {
+                    //toast
+                    console.error(error);
+                }
+
             }
 
                 //Envio del formulario
@@ -187,7 +255,7 @@ const AsignarGradosMaterias = () => {
 
         try {
             
-            const respuestas = await Promise.all(
+            const respuestas = await Promise.allSettled(
                 combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
                     const response = await fetch(`${API_URL}asignar/asignarMateria`, {
                         method: "POST",
@@ -199,7 +267,8 @@ const AsignarGradosMaterias = () => {
                     });
     
                     if (!response.ok) {
-                        throw new Error(`Error en id_curso ${id_curso}, materia ${id_materia}: ${response.statusText}`);
+                        const errorData = await response.json();
+                        throw new Error(errorData.error);
                     }
     
                     return response.json();
@@ -207,9 +276,20 @@ const AsignarGradosMaterias = () => {
             );
     
             console.log('Respuestas del backend:', respuestas);
+
+            const errores = respuestas
+            .filter(result => result.status === "rejected")
+            .map(result => result.reason.message);
+
+            if (errores.length > 0) {
+                alert(`Algunas asiganaciones fallaron:\n${errores.join("\n")}`);
+            } else {
+                alert("Todas las asignaciones fueron asignadas correctamente.");
+            }
         
     
             // Limpiar el formulario
+            setReload(!reload);
             setFormData({
                 grados: [],
                 materias: []
@@ -300,8 +380,8 @@ const AsignarGradosMaterias = () => {
                                     <Pildora
                                     key={index} 
                                     titulo={item.materia}
-                                    txtsuperior={item.profe}
-                                    txtinferior={item.grado}
+                                    txtsuperior={item.nombre_completo}
+                                    txtinferior={item.curso}
                                     color={item.color}
                                     onClick={() => openModal(index)}
                                 />
@@ -312,9 +392,9 @@ const AsignarGradosMaterias = () => {
                                         closeModal={closeModal}
                                         tipo='eliminar'
                                         modalTexto='¿Estás seguro de continuar con la acción? Eliminar este curso será permanente y no se podrá cancelar.'
-                                        modalTitulo = {`ELIMINAR CURSO ${item.materia} ${item.grado} de ${item.profe}`}
+                                        modalTitulo = {`ELIMINAR CURSO ${item.materia} ${item.curso} de ${item.nombre_completo}`}
                                         >
-                                        <button onClick={() => handleEliminar(index, item.grado, item.materia, item.profe)} className='rojo'>ELIMINAR</button>
+                                        <button onClick={() => handleEliminar(index,item.id_asignacion, item.curso, item.materia, item.nombre_completo)} className='rojo'>ELIMINAR</button>
                                         </Modal>
                                         )}
                                 </React.Fragment>
