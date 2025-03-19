@@ -175,11 +175,124 @@ const AsignarGradosMaterias = () => {
                     listaCursos()
                 },[reload,API_URL, token, user.institucion.id_institucion])
                     
+
+            const [infoPildorasMaterias, setInfoPildorasMaterias] = useState([]);
+            
+                useEffect(() => {
+                    const listaMaterias = async () => {
+                        try {
+                            const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}`,{
+                                method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                },
+                            });
+            
+                            if (!response.ok) {
+                                const errorData = await response.json(); // Obtiene respuesta del servidor
+                                throw new Error(`${errorData.message || response.status}`);
+                            }
+            
+                            const data = await response.json(); // Espera la conversión a JSON
+                            if (data.length > 1) {
+                                data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
+                            }
+                            
+                            console.log("Respuesta del servidor materias2:", data);
+                            setInfoPildorasMaterias(data);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+            
+                    listaMaterias()
+                },[reload,API_URL, token, user.institucion.id_institucion])
+            
+            
+            const [infoPildorasGrados, setInfoPildorasGrados] = useState([]);
+            
                 
+                useEffect(()=>{
+                    const listaGrados = async () => {
+                        try {
+                            const response = await fetch(`${API_URL}cursos/institucion/${user.institucion.id_institucion}`, {
+                                method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                },
+                            });
+            
+                            if (!response.ok) {
+                                const errorData = await response.json(); // Obtiene respuesta del servidor
+                                throw new Error(`${errorData.message || response.status}`);
+                            }
+                    
+                            
+                            const data = await response.json(); // Espera la conversión a JSON
+                            data.sort((a, b) => {
+                                const [numA, subA] = a.nombre.split('-');
+                                const [numB, subB] = b.nombre.split('-');
+                
+                                return parseInt(numA) - parseInt(numB) || subA.localeCompare(subB, 'es', { numeric: true });
+                            });
+                            console.log("Respuesta del servidor:", data);
+                            setInfoPildorasGrados(data); // Guarda los datos en el estado
+            
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+            
+                    listaGrados()
+                },[reload,API_URL, token, user.institucion.id_institucion])
+
+            
+                const [infoPildorasProfe, setInfoPildorasProfe] = useState([])
+                
+                    useEffect(() => {
+                            const listaProfes = async () => {
+                                try {
+                                    const response = await fetch(`${API_URL}usuario/docentes/institucion/${user.institucion.id_institucion}`,{
+                                        method: "GET",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                            "Authorization": `Bearer ${token}`,
+                                        },
+                                    });
+                    
+                                    if (!response.ok) {
+                                        const errorData = await response.json(); // Obtiene respuesta del servidor
+                                        throw new Error(`${errorData.error || response.status}`);
+                                    }
+                    
+                                    const data = await response.json(); // Espera la conversión a JSON
+                                    if (data.length >= 1) {
+                                        const dataPildora = data.map(est => ({
+                                            ...est,
+                                            nombreCompleto: `${est.nombre} ${est.apellido}`
+                                        })).sort((a, b) => a.nombreCompleto.localeCompare(b.nombreCompleto));
+                                        console.log("Respuesta completa:", dataPildora);
+                                        setInfoPildorasProfe(dataPildora);
+                                    }else{
+                                        console.log("Respuesta del servidor:", data);
+                                    }
+                                    
+                                    
+                                    
+                                } catch (error) {
+                                    console.error(error);
+                                }
+                            }
+                    
+                            listaProfes()
+                    },[reload,API_URL, token, user.institucion.id_institucion])
+            
            //Elimina opciones duplicadas para el selector
-            const materiasUnicas = [...new Set(infoPildoras.map(item => item.materia))];
-            const gradosUnicos = [...new Set(infoPildoras.map(item => item.curso))];
-            const profesUnicos = [...new Set(infoPildoras.map(item => item.nombre_completo))];
+            const materiasUnicas = [...new Set(infoPildorasMaterias.map(item => item.nombre))];
+            const gradosUnicos = [...new Set(infoPildorasGrados.map(item => item.nombre))];
+            const profesUnicos = [...new Set(infoPildorasProfe.map(item => item.nombreCompleto))];
 
             const [materiaFiltro, setMateriaFiltro] = useState('');
             const [gradoFiltro, setGradoFiltro] = useState('');

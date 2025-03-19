@@ -269,20 +269,51 @@ const VistaDocente = () => {
 
     const navigate = useNavigate();
 
-    const infoPildoras = [
-        { materia: "Matemáticas", profesor: "Carlos Pérez",grado: "6-2", color: 'morado' },
-        { materia: "Física", profesor: "Carlos Pérez",grado: "6-2", color: 'azul' },
-        { materia: "Química", profesor: "Ana Gómez",grado: "11-2", color: 'amarillo' },
-        { materia: "Historia", profesor: "Ana Gómez",grado: "10-1", color: 'morado' },
-        { materia: "Historia", profesor: "Ana Gómez",grado: "11-2", color: 'morado' },
-        { materia: "Historia", profesor: "Luis Rodríguez",grado: "9-2", color: 'morado' },
-    ];
+
+    const [infoPildoras, setInfoPildoras] = useState([]);
+                
+    useEffect(() => {
+        const listaCursos = async () => {
+            try {
+                const response = await fetch(`${API_URL}asignar/asignaciones/profesor/${profe.documento_identidad}/institucion/${user.institucion.id_institucion}`,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Obtiene respuesta del servidor
+                    throw new Error(`${errorData.message || response.status}`);
+                }
+
+                const data = await response.json(); // Espera la conversión a JSON
+                if (data.length > 1) {
+                data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
+                }
+
+                const dataCompleta = data.map(item => ({
+                    ...item,
+                    nombre_completo: `${item.profesor_nombre} ${item.profesor_apellido}`
+                }));
+                
+                console.log("Respuesta del servidor listaCursosProfe:", dataCompleta);
+                setInfoPildoras(dataCompleta);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        listaCursos()
+    },[reload,API_URL, token, profe.documento_identidad])
+        
 
             
         
    //Elimina opciones duplicadas para el selector
     const materiasUnicas = [...new Set(infoPildoras.map(item => item.materia))];
-    const gradosUnicos = [...new Set(infoPildoras.map(item => item.grado))];
+    const gradosUnicos = [...new Set(infoPildoras.map(item => item.curso))];
    
     const [materiaSeleccionada, setMateriaSeleccionada] = useState('');
     const [gradoSeleccionado, setGradoSeleccionado] = useState('');
@@ -296,7 +327,7 @@ const VistaDocente = () => {
 
     const pildorasFiltradas = infoPildoras.filter(item =>
         (materiaSeleccionada === '' || item.materia === materiaSeleccionada) &&
-        (gradoSeleccionado === '' || item.grado === gradoSeleccionado)
+        (gradoSeleccionado === '' || item.curso === gradoSeleccionado)
     );
 
 
