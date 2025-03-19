@@ -163,7 +163,7 @@ const CrearGrados = () => {
     return (
         <div className='grados'>
             <div className="crear">
-                <TituloDes titulo='CREAR GRADO' desc='Ingresa el curso a crear, puedes creear cursos desde 1 hasta 11' ></TituloDes>
+                <TituloDes titulo='CREAR GRADO' desc='Ingresa el curso a crear, puedes crear cursos desde 1 hasta 11' ></TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
                     <InputContainer value={formData.grado} inputType='text' placeholder='6-2' titulo='Grado' required={true} onChange={(value) => handleChange('grado',  value)}></InputContainer>
                     <button type='submit'>CREAR</button>
