@@ -306,7 +306,7 @@ const VistaDocente = () => {
         }
 
         listaCursos()
-    },[reload,API_URL, token, profe.documento_identidad])
+    },[reload,API_URL, token, profe.documento_identidad, user.institucion.id_institucion])
         
 
             
