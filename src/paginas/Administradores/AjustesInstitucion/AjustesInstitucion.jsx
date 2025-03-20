@@ -73,8 +73,11 @@ const AjustesInstitucion = () => {
                 const errorData = await response.json();
                 throw new Error(`${errorData.message || response.status}`);
             }
+
+            const data = await response.json();
     
             console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
+            console.log('response', data)
 
         } catch  (error) {
             //toast

@@ -22,8 +22,7 @@ $amarillo: #EF9131;
 $contraste-amarillo: #F2E4D5;
 $blanco: #FFFFFF;
 $contraste-blanco: #F5F7F9;
-$rojo: #BF786D;
-$contraste-rojo: #a37b75;
+$rojo: #de4337ff;
 
 
 $dark-azul: #2077E9;
@@ -132,10 +131,10 @@ button{
     }
 
     &.rojo{
-        background-color: $contraste-rojo;
+        background-color: $rojo;
 
         &:hover{
-            background-color: $rojo;
+            
             opacity: 100%;
             box-shadow: 0px 4px 10px $rojo;
         }
