@@ -116,7 +116,7 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
             {tipo === "eliminar"? (
                 <div className="modalContenedor">
                 <div className="titulo">
-                    <p className='bold'>{modalTitulo} </p>
+                    <p className='bold'>{modalTitulo.toUpperCase()} </p>
                 </div>
                 <p className='lato'>{modalTexto} </p>
                 {children}

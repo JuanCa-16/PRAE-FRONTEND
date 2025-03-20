@@ -29,24 +29,24 @@ const ContenedorMaterias = ({url, info, est=true, nombre}) => {
     const infoPildoras = info
     return (
     <div className="contenedorMaterias">
-        {est ? (infoPildoras.map((item, index) => (
+        {est ? (infoPildoras.length > 0? (infoPildoras.map((item, index) => (
                                 <Pildora
                                     key={index}
                                     titulo={item.materia}
-                                    txtsuperior={item.profesor}
-                                    txtinferior={item.grado}
+                                    txtsuperior={item.nombre_completo}
+                                    txtinferior={item.curso}
                                     color={item.color}
-                                    onClick={() => manejarClick(item.materia, item.profesor, item.color, item.grado)} // Pasa la función con datos dinámicos
+                                    onClick={() => manejarClick(item.materia, item.nombre_completo, item.color, item.curso)} // Pasa la función con datos dinámicos
                                 />
-                            ))) : (infoPildoras.length > 0 ? (
+                            ))):<p>Tu grado todavia no tiene materias asignadas</p>) : (infoPildoras.length > 0 ? (
                                     infoPildoras.map((item, index) => (
                                                         <Pildora
                                                         key={index}
                                                         titulo={item.materia}
-                                                        txtsuperior={item.profesor}
-                                                        txtinferior={item.grado}
+                                                        txtsuperior={item.nombre_completo}
+                                                        txtinferior={item.curso}
                                                         color={item.color}
-                                                        onClick={() => manejarClick(item.materia, item.profesor, item.color, item.grado)} // Pasa la función con datos dinámicos
+                                                        onClick={() => manejarClick(item.materia, item.nombre_completo, item.color, item.curso)} // Pasa la función con datos dinámicos
                                                     />
                                                     ))
                                                 ) : (

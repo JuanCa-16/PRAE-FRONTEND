@@ -17,6 +17,7 @@ const VistaEst = () => {
     const token = localStorage.getItem("token");
     const { user } = useUser();
     const [reload, setReload] = useState(false);
+    const [reload2, setReload2] = useState(false);
 
     function capitalizeWords(str) {
         return str
@@ -78,6 +79,8 @@ const VistaEst = () => {
                     contrasena: "",
                     grado: estData.id_curso,
                 });
+
+                setReload2(!reload);
             } catch (error) {
                 console.error(error);
             }
@@ -233,13 +236,55 @@ const VistaEst = () => {
     }, [reload, API_URL, token, user.institucion.id_institucion]);
 
 
-    //Informacion de las pildoras
-    const infoPildoras = [
-        { materia: "Matemáticas", profesor: "Carlos Pérez", color: "morado" },
-        { materia: "Física", profesor: "Ana Gómez", color: "azul" },
-        { materia: "Química", profesor: "Luis Rodríguez", color: "amarillo" },
-        { materia: "Historia", profesor: "Marta Sánchez", color: "morado" },
-    ];
+    const [infoPildoras, setInfoPildoras] = useState([]);
+                    
+        useEffect(() => {
+
+
+            const listaCursos = async () => {
+
+                if (!formData.grado || !user?.institucion?.id_institucion) {
+                    console.log("Esperando a que se carguen los datos...");
+                    return;
+                }
+
+
+                try {
+                    const response = await fetch(`${API_URL}asignar/grado/${formData.grado}/institucion/${user.institucion.id_institucion}`,{
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+    
+                    if (!response.ok) {
+                        const errorData = await response.json(); // Obtiene respuesta del servidor
+                        throw new Error(`${errorData.message || response.status}`);
+                    }
+    
+                    const data = await response.json(); // Espera la conversión a JSON
+                    if (data.length > 1) {
+                    data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
+                    }
+
+                    console.log(data)
+    
+                    const dataCompleta = data.map(item => ({
+                        ...item,
+                        nombre_completo: `${item.profesor_nombre} ${item.profesor_apellido}`
+                    }));
+                    
+                    console.log("Respuesta del servidor lista cursos est:", dataCompleta);
+                    setInfoPildoras(dataCompleta);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+    
+            listaCursos()
+        },[reload2, API_URL, token, formData.grado,user?.institucion?.id_institucion])
+            
 
     // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
     const isFormUnchanged = (

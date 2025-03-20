@@ -2,10 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'; // Importa PropTypes para validación
 import './Pildora.scss'
 import { useTheme } from '../../Contexts/UserContext';
-//Fucnion para poner mayusculas iniciales
-const capitalizeWords = (str) => {
-    return str.replace(/\b\w/g, char => char.toUpperCase());
-};
 
 /**
  * Componente: Pildora
@@ -24,7 +20,7 @@ const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel", txtinferior
     return (
         <div className={`pildora ${color} ${theme}`} onClick={onClick}>
             <div className="info">
-                <p className="texto superior lato">{capitalizeWords(txtsuperior)}</p>
+                <p className="texto superior lato">{txtsuperior}</p>
                 <h4 className="titulo inter bold">{titulo.toUpperCase()}</h4>
                 <p className="texto inferior lato"> {txtinferior}</p>
             </div>
