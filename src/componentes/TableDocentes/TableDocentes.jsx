@@ -1,183 +1,70 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import './TableDocentes.scss';
 import InputContainer from '../Input/InputContainer';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo'; 
 import Celda from '../Celda/Celda'; 
 import Modal from '../Modal/Modal';
+import { useUser } from '../../Contexts/UserContext';
 
-const TableDocentes = ({ materia, profesor, color, grado } ) => {
+const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente } ) => {
 
-    //Informacion de la tabla traer info del BACK
-    const datos =  [
-            {
-            "documento_identidad": "1006321",
-            "nombre": "Julian",
-            "apellido": "Castro Henao",
-            "actividades": [
-                {
-                "nota": "4.50",
-                "actividad": "Examen Final"
-                },
-                {
-                "nota": "5.00",
-                "actividad": "Primer Examen"
-                },
-                {
-                "nota": "4.75",
-                "actividad": "Exposiciones"
-                },
-                {
-                "nota": "2.10",
-                "actividad": "Talleres en clase"
+    const API_URL = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem('token')
+    const {user} = useUser();
+    
+    const [info, setInfo] = useState([])
+    
+    const [nombres, setNombres] = useState([])
+    const [soloApellidos, setSoloApellidos] = useState([])
+    const [soloNombre,setSoloNombre] = useState([])
+    const [actividadesUnicas, setActividadesUnicas] = useState([])
+
+    useEffect(() => {
+            const notasCursoDocente = async () => {
+                try {
+                    const response = await fetch(`${API_URL}calificacion/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}/docente/${infoDocente.documento_identidad}/institucion/${user.institucion.id_institucion}`,{
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+    
+                    if (!response.ok) {
+                        const errorData = await response.json(); // Obtiene respuesta del servidor
+                        throw new Error(`${errorData.message || response.status}`);
+                    }
+    
+                    const data = await response.json();
+                    console.log('info',data)
+                    setInfo(data)
+                    setNombres(data.map(item=> ` ${item.apellido} ${item.nombre}`)) 
+                    setSoloApellidos(data.map(item => ` ${item.apellido}`))
+                    setSoloNombre(data.map(item => ` ${item.nombre}`))
+                    setActividadesUnicas([
+                        ...new Map(
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso }]))
+                        ).values()
+                    ])
+
+                    console.log([
+                        ...new Map(
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso }]))
+                        ).values()
+                    ])
+
+                    
+                } catch (error) {
+                    console.error(error);
                 }
-                                ]
-            },
-
-            {
-            "documento_identidad": "1006322",
-            "nombre": "Esteban",
-            "apellido": "Castro Henao",
-            "actividades": [
-                {
-                "nota": "5.00",
-                "actividad": "Examen Final"
-                },
-                {
-                "nota": "5.00",
-                "actividad": "Primer Examen"
-                },
-                {
-                "nota": "5.00",
-                "actividad": "Exposiciones"
-                },
-                {
-                "nota": "5.00",
-                "actividad": "Talleres en clase"
-               },
-                {
-                "nota": "5.00",
-                "actividad": "Talleres en clase6"
-               }
-
-            ]
-          },
-
-        {
-        "documento_identidad": "1006322",
-        "nombre": "Esteban",
-        "apellido": "Castro Henao",
-        "actividades": [
-            {
-            "nota": "5.00",
-            "actividad": "Examen Final"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Primer Examen"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Exposiciones"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Talleres en clase"
-           },
-            {
-            "nota": "5.00",
-            "actividad": "Talleres en clase6"
-           }
-
-        ]
-      },{
-        "documento_identidad": "1006321",
-        "nombre": "Julian",
-        "apellido": "Castro Henao",
-        "actividades": [
-            {
-            "nota": "4.50",
-            "actividad": "Examen Final"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Primer Examen"
-            },
-            {
-            "nota": "4.75",
-            "actividad": "Exposiciones"
-            },
-            {
-            "nota": "2.10",
-            "actividad": "Talleres en clase"
             }
-                            ]
-        },
+    
+            notasCursoDocente()
+        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente.documento_identidad])
+    
+    
 
-        {
-        "documento_identidad": "1006322",
-        "nombre": "Esteban",
-        "apellido": "Castro Henao",
-        "actividades": [
-            {
-            "nota": "5.00",
-            "actividad": "Examen Final"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Primer Examen"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Exposiciones"
-            },
-            {
-            "nota": "5.00",
-            "actividad": "Talleres en clase"
-           },
-            {
-            "nota": "5.00",
-            "actividad": "Talleres en clase6"
-           }
-
-        ]
-      },
-
-    {
-    "documento_identidad": "1006322",
-    "nombre": "Esteban",
-    "apellido": "Castro Henao",
-    "actividades": [
-        {
-        "nota": "5.00",
-        "actividad": "Examen Final"
-        },
-        {
-        "nota": "5.00",
-        "actividad": "Primer Examen"
-        },
-        {
-        "nota": "5.00",
-        "actividad": "Exposiciones"
-        },
-        {
-        "nota": "5.00",
-        "actividad": "Talleres en clase"
-       },
-        {
-        "nota": "5.00",
-        "actividad": "Talleres en clase6"
-       }
-
-    ]
-  }
-    ]
-
-    const nombres = datos.map(item => ` ${item.apellido} ${item.nombre}`);
-    const soloApellidos = datos.map(item => ` ${item.apellido}`);
-    const soloNombre = datos.map(item => ` ${item.nombre}`);
-    const actividadesUnicas = [
-        ...new Set(datos.flatMap(estudiante => estudiante.actividades.map(act => act.actividad)))
-    ];
+    
     
 
     //CREAR ACTIVIDAD BACK
@@ -237,11 +124,11 @@ const TableDocentes = ({ materia, profesor, color, grado } ) => {
                             <Celda key={index} tipo='titulo2' color={color} txt={nombre} rol='NoVer'></Celda>
                         ))}
                     </div>
-                    <div className="notas">
+                    <div className={`notas ${color}`}>
 
                         {actividadesUnicas.map((actividad, i) => (
                             <div key={i} className="col nota">
-                                <Celda color={color} txt={actividad} tipo='titulo' onClick={() => openModalAct(i)} />
+                                <Celda color={color} txt={actividad.actividad} tipo='titulo' onClick={() => openModalAct(i)} />
                                 {/* Modal específico para la actividad seleccionada */}
                                 {modalIndexAbierto === i && (
                                     <Modal
@@ -250,13 +137,13 @@ const TableDocentes = ({ materia, profesor, color, grado } ) => {
                                         tipo='actividad'
                                         modalTitulo='EDITAR ACTIVIDAD'
                                         modalTexto='Edita los parametros de tu actividad'
-                                        valorAct={actividad}
-                                        ValorPeso='40%'
+                                        valorAct={actividad.actividad}
+                                        ValorPeso={actividad.peso}
                                         extraData={{ materia: materia, profesor: profesor, grado: grado }} 
                                     />
                                 )}
-                                {datos.map((estudiante, j) => {
-                                    const actividadEncontrada = estudiante.actividades.find(act => act.actividad === actividad);
+                                {info.map((estudiante, j) => {
+                                    const actividadEncontrada = estudiante.actividades.find(act => act.actividad === actividad.actividad);
                                     return (
                                         <div className='full' key={j}>
                                             <Celda 
@@ -275,7 +162,7 @@ const TableDocentes = ({ materia, profesor, color, grado } ) => {
                                                     valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
                                                     modalTitulo='EDITAR NOTA'
                                                     modalTexto='Edita la nota de esta actividad'
-                                                    extraData={{ materia: materia, profesor: profesor, grado: grado, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i] }}
+                                                    extraData={{ materia: materia, profesor: profesor, grado: grado, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0] }}
                                                 />
                                             )}
                                         </div>

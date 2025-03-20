@@ -438,7 +438,7 @@ const VistaDocente = () => {
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>
 
-                    <ContenedorMaterias url='/profesores' est={false} info={pildorasFiltradas}></ContenedorMaterias>
+                    <ContenedorMaterias url='/profesores' est={false} info={pildorasFiltradas} profe={profe}></ContenedorMaterias>
 
                     
                 </div>

@@ -1,43 +1,76 @@
-import React from 'react'
-
+import React, {useState, useEffect } from 'react'
 import './TableEst.scss'
 import InputContainer from '../Input/InputContainer';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
 import Celda from '../Celda/Celda';
+import { useUser } from '../../Contexts/UserContext';
 
-
-const TableEst = ({ materia, profesor,color,grado } ) => {
+const TableEst = ({infoMateria, infoEst } ) => {
 
 
     //Informacion de la tabla traer info del BACK
-    const titulos = ["Actividad 1", "Actividad 2", "Actividad 3"];
-    const notas = [4.5, 3.8, 4.0];
-    const pesos = [30, 20, 50]; 
+
+    const API_URL = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem('token')
+    const {user} = useUser();
+
+    const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        const notasMateriaEstudiante = async () => {
+            try {
+                const response = await fetch(`${API_URL}calificacion/materia/${infoMateria.id_materia}/estudiante/${infoEst.documento_identidad}/docente/${infoMateria.profesor_documento}/institucion/${user.institucion.id_institucion}`,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Obtiene respuesta del servidor
+                    throw new Error(`${errorData.message || response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('info',data)
+                setInfo(data)
+                
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        notasMateriaEstudiante()
+    },[API_URL,infoMateria.id_materia,infoEst.documento_identidad, infoMateria.profesor_documento, token,user.institucion.id_institucion])
+
+
 
     return (
         <div className='contenedorVistaMateria'>
             <div className="contenedor">
-                <PildoraTitulo materia= {materia} nombre={profesor} color={color} grado={grado}></PildoraTitulo>
+                <PildoraTitulo materia= {infoMateria.materia} nombre={infoMateria.nombre_completo} color={infoMateria.color} grado={infoMateria.curso}></PildoraTitulo>
                 <div className="tabla">
                     <div className="col 1">
-                        <Celda color={color} txt='Actividad' tipo='titulo' rol='NoVer'></Celda>
-                        {titulos.map((titulo, index) => (
-                            <Celda color={color} key={index} tipo='titulo2' txt={titulo} rol='NoVer'></Celda>
+                        <Celda color={infoMateria.color} txt='Actividad' tipo='titulo' rol='NoVer'></Celda>
+                        {info.map((item, index) => (
+                            <Celda color={infoMateria.color} key={index} tipo='titulo2' txt={item.actividad} rol='NoVer'></Celda>
                         ))}
                     </div>
                     <div className="col 2">
-                    <Celda color={color} txt='Notas' tipo='titulo' rol='NoVer'></Celda>
-                        {notas.map((notas, index) => (
-                            <Celda color={color} key={index} tipo='normal' txt={notas} rol='NoVer'></Celda>
+                    <Celda color={infoMateria.color} txt='Notas' tipo='titulo' rol='NoVer'></Celda>
+                        {info.map((item, index) => (
+                            <Celda color={infoMateria.color} key={index} tipo='normal' txt={item.nota} rol='NoVer'></Celda>
                         ))}
                     </div>
                     <div className="col 3">
-                    <Celda color={color} txt='Peso' tipo='titulo' rol='NoVer'></Celda>
-                        {pesos.map((pesos, index) => (
-                            <Celda color={color} key={index} tipo='normal' txt={pesos} rol='NoVer'></Celda>
+                    <Celda color={infoMateria.color} txt='Peso' tipo='titulo' rol='NoVer'></Celda>
+                        {info.map((item, index) => (
+                            <Celda color={infoMateria.color} key={index} tipo='normal' txt={item.peso + '%'} rol='NoVer'></Celda>
                         ))}
                     </div>
                 </div>
+                {/* {(info.length > 0)? (<h1>MAYOR</h1>) : <p>No hay actividades todavia</p>} */}
             </div>
             <InputContainer titulo='Observaciones' isDisabled={true} value='Sin Observaciones'></InputContainer>
         </div>

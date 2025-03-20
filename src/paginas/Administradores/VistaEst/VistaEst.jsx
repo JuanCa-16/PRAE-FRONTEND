@@ -17,7 +17,8 @@ const VistaEst = () => {
     const token = localStorage.getItem("token");
     const { user } = useUser();
     const [reload, setReload] = useState(false);
-    const [reload2, setReload2] = useState(false);
+
+    const [gradoEst, setGradoEst] = useState('')
 
     function capitalizeWords(str) {
         return str
@@ -80,7 +81,9 @@ const VistaEst = () => {
                     grado: estData.id_curso,
                 });
 
-                setReload2(!reload);
+
+
+                setGradoEst(estData.id_curso)
             } catch (error) {
                 console.error(error);
             }
@@ -243,14 +246,14 @@ const VistaEst = () => {
 
             const listaCursos = async () => {
 
-                if (!formData.grado || !user?.institucion?.id_institucion) {
+                if ((gradoEst === '') || !user?.institucion?.id_institucion) {
                     console.log("Esperando a que se carguen los datos...");
                     return;
                 }
 
 
                 try {
-                    const response = await fetch(`${API_URL}asignar/grado/${formData.grado}/institucion/${user.institucion.id_institucion}`,{
+                    const response = await fetch(`${API_URL}asignar/grado/${gradoEst}/institucion/${user.institucion.id_institucion}`,{
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -283,7 +286,7 @@ const VistaEst = () => {
             }
     
             listaCursos()
-        },[reload2, API_URL, token, formData.grado,user?.institucion?.id_institucion])
+        },[API_URL, token, gradoEst ,user?.institucion?.id_institucion])
             
 
     // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
@@ -418,6 +421,7 @@ const VistaEst = () => {
                     url="/estudiantes"
                     info={infoPildoras}
                     nombre={est.nombreCompleto}
+                    estudiante={est}
                 ></ContenedorMaterias>
             </div>
         </div>
