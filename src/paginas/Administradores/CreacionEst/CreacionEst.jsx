@@ -8,6 +8,7 @@ import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 const CreacionEst = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -123,7 +124,7 @@ const CreacionEst = () => {
             }
 
             console.log('EST CREADO EXITOSAMENTE');
-            
+            Alerta.success('Estudiante creado exitosamente');
             // Reiniciar formulario
             setFormData({
                 apellidos: '',
@@ -137,8 +138,8 @@ const CreacionEst = () => {
 
             setReload(!reload);
         } catch (error) {
-            //toast
             console.error(error);
+            Alerta.error(error.message);
         }
     
         

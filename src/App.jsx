@@ -6,6 +6,7 @@ import NavBar from './componentes/NavBar/NavBar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useUser } from './Contexts/UserContext.jsx';
 import { useTheme } from './Contexts/UserContext.jsx';
+import Alerta from "./componentes/Alerta/Alerta.jsx";
 //ESTUDIANTES
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
@@ -129,10 +130,12 @@ function App() {
         console.log("Token decodificado:", decoded);
         setUser(decoded)
       }
-      
+      Alerta.success("Inicio de sesión exitoso");
       return console.log("EXITOSO")
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error al iniciar sesión:", error);
+      Alerta.error(error.message);
       return null;
     }
 

@@ -4,12 +4,14 @@ import './global.scss'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './Contexts/UserContext';
+import { Toaster } from 'react-hot-toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ContextProvider>
       <App />
+      <Toaster />
     </ContextProvider>
   </React.StrictMode>
 );
