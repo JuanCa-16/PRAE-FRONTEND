@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './EditarPerfilDoc.scss';
-import Select from "react-select";
 import { useUser } from '../../../Contexts/UserContext';
 import { jwtDecode } from "jwt-decode";
 import Selector from '../../../componentes/Selector/Selector';
