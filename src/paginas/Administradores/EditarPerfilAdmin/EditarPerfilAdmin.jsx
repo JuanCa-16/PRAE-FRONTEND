@@ -3,14 +3,25 @@ import InputContainer from "../../../componentes/Input/InputContainer";
 import TituloDes from "../../../componentes/TituloDes/TituloDes";
 import "./EditarPerfilAdmin.scss";
 import { useUser } from "../../../Contexts/UserContext";
+import { jwtDecode } from "jwt-decode";
 
 const EditarPerfilAdmin = () => {
 
-    //const API_URL = process.env.REACT_APP_API_URL; 
-    //const token = localStorage.getItem("token");
-    const {user} = useUser();
-    //const [reload, setReload] = useState(false);
+    const API_URL = process.env.REACT_APP_API_URL; 
+    const token = localStorage.getItem("token");
+    const {user, setUser} = useUser();
 
+
+
+    function capitalizeWords(str) {
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
+    }
 
     // Estado inicial que se usará para comparar
     const initialFormData = useRef({
@@ -33,10 +44,65 @@ const EditarPerfilAdmin = () => {
     };
 
     //Envio del formulario
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log("Datos enviados:", formData);
+        
+
+        const dataToSend = { 
+            ...formData, 
+            contrasena: formData.contrasena || null 
+        };
+
+        console.log("Datos enviados:", dataToSend);
+
+
+        try {
+            const response = await fetch(`${API_URL}usuario/updateAdmin/${dataToSend.doc}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    nombre: dataToSend.nombre,
+                    apellido: dataToSend.apellidos,
+                    correo: dataToSend.correo,
+                    contraseña: dataToSend.contrasena || undefined,
+                    id_institucion: user.institucion.id_institucion
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                //toast
+                throw new Error(`${errorData.error || response.status}`);
+            }
+
+            const data = await response.json();
+
+
+            console.log('ADMIN EDITADO EXITOSAMENTE', data);
+
+            if (data.token) {
+                // 2. Guarda el nuevo token en localStorage
+                localStorage.setItem("token", data.token);
+    
+                setUser(jwtDecode(data.token));
+            }
+
+            
+        } catch (error) {
+            //toast
+            console.error(error);
+        }
+
     };
+
+    const isFormUnchanged = (
+        JSON.stringify({ ...formData, contrasena: '', doc: '' }) === 
+        JSON.stringify({ ...initialFormData.current, contrasena: '', doc: '' }) 
+        && !formData.contrasena // Permite activar si escriben algo en "contrasena"
+    );
 
     return (
         <div className="contenedorPerfilAdmin">
@@ -53,7 +119,7 @@ const EditarPerfilAdmin = () => {
                             value={formData.apellidos}
                             inputType="text"
                             required={true}
-                            onChange={(value) => handleChange("apellidos", value)}
+                            onChange={(value) => handleChange("apellidos", capitalizeWords(value))}
                             
                         />
                         <InputContainer
@@ -62,7 +128,7 @@ const EditarPerfilAdmin = () => {
                             value={formData.nombre}
                             inputType="text"
                             required={true}
-                            onChange={(value) => handleChange("nombre", value)}
+                            onChange={(value) => handleChange("nombre", capitalizeWords(value))}
                             
                         />
                         <InputContainer
@@ -76,7 +142,7 @@ const EditarPerfilAdmin = () => {
                             nomInput="contra"
                             titulo="Contraseña"
                             value={formData.contrasena}
-                            required={true}
+                            required={false}
                             inputType="password"
                             onChange={(value) => handleChange("contrasena", value)}
                         />
@@ -85,12 +151,13 @@ const EditarPerfilAdmin = () => {
                             titulo="Documento"
                             inputType="text"
                             value={formData.doc}
-                            required={true}
+                            required={false}
+                            isDisabled={true}
                             onChange={(value) => handleChange("doc", value)}
                             
                         />
                     </div>
-                    <button type="submit">Guardar Cambios</button>
+                    <button type="submit" disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>
             </div>
         </div>
