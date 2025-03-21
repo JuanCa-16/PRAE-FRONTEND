@@ -9,6 +9,7 @@ import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 const CreacionDocente = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -143,7 +144,7 @@ const CreacionDocente = () => {
 
 
     
-
+            Alerta.success('Docente creado exitosamente');
             console.log('DOCENTE CREADO EXITOSAMENTE');
             
             setFormData({
@@ -159,8 +160,7 @@ const CreacionDocente = () => {
 
             setReload(!reload);
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al crear Docente: ',error);
         }
 
 

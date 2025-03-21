@@ -7,6 +7,7 @@ import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 
 
 const AsignarGradosMaterias = () => {
@@ -333,7 +334,8 @@ const AsignarGradosMaterias = () => {
                         const errorData = await response.json(); // Obtiene respuesta del servidor
                         throw new Error(`${errorData.error || response.status}`);
                     }
-            
+                    
+                    Alerta.success('Asignacion eliminada exitosamente');
                     console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
 
                     closeModal()
@@ -344,8 +346,8 @@ const AsignarGradosMaterias = () => {
                     
             
                 } catch (error) {
-                    //toast
                     console.error(error);
+                    Alerta.error(error.message);
                 }
 
             }
@@ -395,9 +397,9 @@ const AsignarGradosMaterias = () => {
             .map(result => result.reason.message);
 
             if (errores.length > 0) {
-                alert(`Algunas asiganaciones fallaron:\n${errores.join("\n")}`);
+                Alerta.error(`Error al crear algunas asiganaciones fallaron:\n${errores.join("\n")}`);
             } else {
-                alert("Todas las asignaciones fueron asignadas correctamente.");
+                Alerta.success("Todas las asignaciones se crearon correctamente.");
             }
         
     

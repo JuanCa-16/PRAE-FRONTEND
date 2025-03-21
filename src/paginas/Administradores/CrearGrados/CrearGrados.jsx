@@ -3,7 +3,7 @@ import './CrearGrados.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
@@ -60,12 +60,13 @@ const CrearGrados = () => {
             }
     
             console.log('GRADO CREADO EXITOSAMENTE');
+            Alerta.success('Grado creado exitosamente');
             setReload(!reload);
             setFormData({ grado: '' });
     
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al crear grado',error);
+            Alerta.error(error.message);
         }
     };
 
@@ -147,14 +148,16 @@ const CrearGrados = () => {
             }
     
             console.log('GRADO ELIMINADO EXITOSAMENTE');
+            Alerta.success('Grado eliminado exitosamente');
+
             // Si la petición fue exitosa, ejecuta la función `onSuccess` que es la que cierra el modal
             if (onSuccess) onSuccess();
             setReload(!reload);
             
     
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al elimnar grado: ',error);
+            Alerta.error(error.message);
         }
         
     }

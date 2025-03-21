@@ -10,6 +10,7 @@ import Modal from '../../../componentes/Modal/Modal.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 const VistaDocente = () => {
 
     const location = useLocation();
@@ -235,11 +236,11 @@ const VistaDocente = () => {
             }
 
             console.log('DOCENTE EDITADO EXITOSAMENTE', data);
-            
+            Alerta.success('Docente editado exitosamente');
             setReload(!reload);
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al editar un doncente: ',error);
+            alert.error(error.message);
         }
 
     };
@@ -359,6 +360,7 @@ const VistaDocente = () => {
                 }
         
                 console.log('DOCENTE ELIMINADO EXITOSAMENTE');
+                Alerta.success('Docente eliminado exitosamente');
                 closeModal()
                 
                 navigate(`/profesores`);
@@ -366,8 +368,8 @@ const VistaDocente = () => {
                 
         
             } catch (error) {
-                //toast
-                console.error(error);
+                console.error('Error al eliminar profesor: ',error);
+                alert.error(error.message);
             }
             
         }

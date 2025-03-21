@@ -3,6 +3,7 @@ import './CrearMateria.scss'
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
@@ -59,12 +60,14 @@ const CrearMateria = () => {
             }
 
             console.log('MATERIA CREADO EXITOSAMENTE');
+            Alerta.success('Materia creada exitosamente');
             setReload(!reload);
             setFormData({materia: ''})
 
         } catch (error) {
             //toast
-            console.error(error);
+            console.error('Error al crear la materia',error);
+            Alerta.error(error.message);
         }
         
     };
@@ -137,11 +140,12 @@ const CrearMateria = () => {
             }
 
             console.log('MATERIA ELIMINADA EXITOSAMENTE');
+            Alerta.success('Materia eliminada exitosamente');
             if (onSuccess) onSuccess();
             setReload(!reload);
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Eror al eliminar la materia: ',error);
+            Alerta.error(error.message);
         }
     }
 

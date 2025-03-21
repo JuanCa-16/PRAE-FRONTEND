@@ -9,6 +9,7 @@ import Modal from "../../../componentes/Modal/Modal.jsx";
 import Line from "../../../componentes/Line/Line.jsx";
 import ContenedorMaterias from "../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx";
 import { useNavigate } from "react-router-dom";
+import Alerta from "../../../componentes/Alerta/Alerta.jsx";
 const VistaEst = () => {
     const location = useLocation();
     const { est } = location.state || {};
@@ -147,7 +148,7 @@ const VistaEst = () => {
 
             const data = await response.json();
 
-
+            Alerta.success('Estudiante editado exitosamente');
             console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
 
             //REVISAR ES SIMPLEMENTE LA URL
@@ -169,8 +170,8 @@ const VistaEst = () => {
 
             setReload(!reload);
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al editar estudiante',error);
+            Alerta.error(error.message);
         }
 
     };
@@ -316,6 +317,7 @@ const VistaEst = () => {
             }
     
             console.log('ESTUDIANTE ELIMINADO EXITOSAMENTE');
+            Alerta.success('Estudiante eliminado exitosamente');
             closeModal()
             
             navigate(`/estudiantes`);
@@ -323,8 +325,7 @@ const VistaEst = () => {
             
     
         } catch (error) {
-            //toast
-            console.error(error);
+            console.error('Error al eliminar estudiante: ',error);
         }
 
     };
