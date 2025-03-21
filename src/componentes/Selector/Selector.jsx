@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './Selector.scss'
 import Select from "react-select";
 import { useTheme } from '../../Contexts/UserContext'
-const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholder, mensajeVacio= "No hay opciones disponibles"}) => {
+const Selector = ({titulo, multi = true, disabled=false, opciones, valores, onChange, placeholder, mensajeVacio= "No hay opciones disponibles"}) => {
     const {theme} = useTheme() 
     const [isFocused, setIsFocused] = useState(false);
     return (
@@ -14,6 +14,7 @@ const Selector = ({titulo, multi = true, opciones, valores, onChange, placeholde
                 isMulti = {multi}
                 options={opciones}
                 value={valores}
+                isDisabled = {disabled}
                 onChange={onChange}
                 placeholder= {placeholder}
                 onFocus={() => setIsFocused(true)}

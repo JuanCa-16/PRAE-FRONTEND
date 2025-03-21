@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './EditarPerfilDoc.scss';
 import Select from "react-select";
+import { useUser } from '../../../Contexts/UserContext';
+import { jwtDecode } from "jwt-decode";
+import Selector from '../../../componentes/Selector/Selector';
 
 const EditarPerfilDoc = () => {
-  //Datos inciales a mostrar
-    const [formData, setFormData] = useState({
-        apellidos: 'Henao Gallego' ,
-        nombre:'Juan Camilo',
-        correo: 'juan.henao.gallego@gmail.com',
-        doc: '20221598320',
-        contrasena: '1234',
-        materias: [{ value: "matematicas", label: "Matemáticas" },
-            { value: "fisica", label: "Física" },]
+
+    const API_URL = process.env.REACT_APP_API_URL; 
+    const token = localStorage.getItem("token");
+    const {user, setUser} = useUser();
+
+    function capitalizeWords(str) {
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
+    }
+    
+    const initialFormData = useRef({
+            apellidos: user.apellido,
+            nombre: user.nombre,
+            correo: user.email,
+            doc: user.id,
+            contrasena: '',
+            area: '',
+            materias: [],
     });
+
+    
+
+  //Datos inciales a mostrar
+    const [formData, setFormData] = useState(initialFormData.current);
 
 
     //Actualizar inputs
@@ -26,10 +48,166 @@ const EditarPerfilDoc = () => {
     };
 
     //Envio del formulario
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log('Datos enviados:', formData);
+         const dataToSend = { 
+                    ...formData, 
+                    contrasena: formData.contrasena || null 
+                };
+        
+                console.log("Datos enviados:", dataToSend);
+        
+        
+                try {
+                    const response = await fetch(`${API_URL}usuario/updateProfesor/${dataToSend.doc}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            nombre: dataToSend.nombre,
+                            apellido: dataToSend.apellidos,
+                            correo: dataToSend.correo,
+                            area_ensenanza:dataToSend.area,
+                            contraseña: dataToSend.contrasena || undefined,
+                            id_institucion: user.institucion.id_institucion
+                        })
+                    });
+        
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        //toast
+                        throw new Error(`${errorData.error || response.status}`);
+                    }
+        
+                    const data = await response.json();
+        
+        
+                    console.log('ADMIN EDITADO EXITOSAMENTE', data);
+        
+                    if (data.token) {
+                        // 2. Guarda el nuevo token en localStorage
+                        localStorage.setItem("token", data.token);
+            
+                        setUser(jwtDecode(data.token));
+                    }
+        
+                    
+                } catch (error) {
+                    //toast
+                    console.error(error);
+                }
     };
+
+    const isFormUnchanged = (
+        JSON.stringify({ ...formData, contrasena: '', doc: '' }) === 
+        JSON.stringify({ ...initialFormData.current, contrasena: '', doc: '' }) 
+        && !formData.contrasena // Permite activar si escriben algo en "contrasena"
+    );
+
+
+    useEffect(() => {
+            const listaProfes = async () => {
+
+                
+                try {
+                    console.log(user.id)
+                    const response = await fetch(`${API_URL}usuario/profesor/${user.id}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+        
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`${errorData.error || response.status}`);
+                    }
+        
+                    const profesorData = await response.json();
+        
+                    console.log("Respuesta del servidor profe:", profesorData);
+    
+                    initialFormData.current = {
+                        ...initialFormData.current, // Mantiene los valores actuales
+                        area: profesorData.area_ensenanza,
+                        materias: profesorData.materias.map(materia => materia.id_materia)
+                    };
+    
+                    setFormData(prevState => ({
+                        ...prevState,
+                        area: profesorData.area_ensenanza,
+                        materias: profesorData.materias.map(materia => materia.id_materia)
+                    }));
+        
+                    
+                } catch (error) {
+                    console.log(error)
+                    
+                    console.error(error);
+                }
+            };
+        
+            
+            if (user?.id) {
+                listaProfes();
+            }
+            
+        }, [user.id, API_URL, token]); 
+
+
+        const [opcionesMaterias, setOpcionesMaterias] = useState([]);
+        const [materiasSeleccionadas, setMateriasSeleccionadas] = useState([]);
+                
+            useEffect(() => {
+                    const listaMaterias = async () => {
+                        try {
+                            const response = await fetch(`${API_URL}materias/institucion/${user.institucion.id_institucion}`,{
+                                method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                },
+                            });
+            
+                            if (!response.ok) {
+                                const errorData = await response.json(); // Obtiene respuesta del servidor
+                                throw new Error(`${errorData.message || response.status}`);
+                            }
+            
+                            const data = await response.json(); // Espera la conversión a JSON
+                            if (data.length > 1) {
+                                data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
+                            }
+                            
+                            console.log("Respuesta del servidor:", data);
+                            const opciones = data.map(materia => ({
+                                value: materia.id_materia,
+                                label: materia.nombre
+                            }));
+                            
+                            setOpcionesMaterias(opciones);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+            
+                    listaMaterias()
+            },[API_URL, token, user.institucion.id_institucion])
+
+
+        useEffect(() => {
+                if (opcionesMaterias.length > 0) {
+                    const initialMaterias = opcionesMaterias.filter(opt => 
+                        formData.materias.includes(opt.value)
+                    );
+                    setMateriasSeleccionadas(initialMaterias);
+                }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [formData.materias, opcionesMaterias]); 
+        
 
     return (
         <div className='contenedorPerfilDoc'>
@@ -38,24 +216,22 @@ const EditarPerfilDoc = () => {
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />
-                        <InputContainer nomInput="nombres" titulo='Nombres' value={formData.nombre} isDisabled={true} />
+                        <InputContainer nomInput="nombres" titulo='Nombres' value={formData.nombre} isDisabled={true}  />
                         <InputContainer nomInput="coreo" titulo='Correo' value={formData.correo} required={true} onChange={(value) => handleChange('correo', value)} />
-                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={true} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
+                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={false} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
                         <InputContainer nomInput="doc" titulo='Documento' inputType='text' value={formData.doc} isDisabled={true} />
-                        <div className="selector">
-                            <p className='lato'>Materias asignadas</p>
-                            <Select
+                        <InputContainer nomInput="area" required={true} placeholder='Humanidades' inputType='text' titulo='Area Enseñanza' value={formData.area} onChange={(value) => handleChange('area', capitalizeWords(value))} />
+                        <Selector
+                                titulo={'Materias Asignadas'} 
                                 isMulti
-                                value={formData.materias}
-                                isDisabled={true} 
-                                placeholder="Materias asignadas"
+                                disabled 
+                                placeholder="Sin materias"
+                                opciones={opcionesMaterias}
+                                valores={materiasSeleccionadas}
                             />
-
-
-                    </div>
                     </div>
                     
-                    <button type='submit'>Guardar Cambios</button>
+                    <button type='submit' disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>
             </div>
         </div>

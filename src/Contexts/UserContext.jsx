@@ -59,6 +59,7 @@ export const ContextProvider = ({ children }) => {
             document.documentElement.classList.remove("dark");
         }
     }, [theme]);
+    
     return (
         <UserContext.Provider value={{ user, setUser }}>
             <ThemeContext.Provider value={{ theme, setTheme }}>
