@@ -22,7 +22,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
     useEffect(() => {
             const notasCursoDocente = async () => {
                 try {
-                    const response = await fetch(`${API_URL}calificacion/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}/docente/${infoDocente.documento_identidad}/institucion/${user.institucion.id_institucion}`,{
+                    const response = await fetch(`${API_URL}calificacion/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}/docente/${infoDocente}/institucion/${user.institucion.id_institucion}`,{
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
             }
     
             notasCursoDocente()
-        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente.documento_identidad])
+        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
     
     
 

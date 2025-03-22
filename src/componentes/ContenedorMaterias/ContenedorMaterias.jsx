@@ -4,17 +4,19 @@ import './ContenedorMaterias.scss'
 import Pildora from '../Pildora/Pildora';
 import { useUser } from '../../Contexts/UserContext';
 
-const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, profe}) => {
+const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, idProfe}) => {
 
     const navigate = useNavigate();
     const {user} = useUser()
+
+    // console.log('soy el profe', profe)
 
     
 
     //pasa los datos de la materia a la pagina de notas de la materias
     const manejarClick = (item,materia, profesor,color,grado) => {
         const datos = { materia, profesor,color,grado, item, estudiante }; // Datos a enviar
-        const datos2 = { materia, profesor,color,grado, item, profe }; // Datos a enviar
+        const datos2 = { materia, profesor,color,grado, item, idProfe }; // Datos a enviar
         console.log('aquii', nombre)
         console.log('item',item)
         console.log('item2',estudiante)
