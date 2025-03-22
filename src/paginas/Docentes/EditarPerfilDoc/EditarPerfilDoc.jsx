@@ -49,7 +49,7 @@ const EditarPerfilDoc = () => {
     //Envio del formulario
     const handleSubmit = async(e) => {
         e.preventDefault()
-         const dataToSend = { 
+        const dataToSend = { 
                     ...formData, 
                     contrasena: formData.contrasena || null 
                 };
@@ -83,7 +83,7 @@ const EditarPerfilDoc = () => {
                     const data = await response.json();
         
         
-                    console.log('ADMIN EDITADO EXITOSAMENTE', data);
+                    console.log('DOCENTE EDITADO EXITOSAMENTE', data);
         
                     if (data.token) {
                         // 2. Guarda el nuevo token en localStorage
