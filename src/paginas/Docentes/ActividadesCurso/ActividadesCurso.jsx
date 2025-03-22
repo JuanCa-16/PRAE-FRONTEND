@@ -5,11 +5,11 @@ import TableDocentes from '../../../componentes/TableDocentes/TableDocentes';
 const ActividadesCurso = () => {
 
         const location = useLocation();
-        const { materia, profesor, color, grado } = location.state || {};
+        const {item, idProfe } = location.state || {};
    
 
         return (
-            <TableDocentes materia={materia} profesor={profesor} color={color} grado={grado} ></TableDocentes>
+            <TableDocentes infoCurso = {item} infoDocente = {idProfe}></TableDocentes>
             
         )
 }

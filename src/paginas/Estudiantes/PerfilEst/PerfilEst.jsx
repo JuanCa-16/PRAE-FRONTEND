@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './PerfilEst.scss';
-
+import { useUser } from '../../../Contexts/UserContext';
+import { jwtDecode } from 'jwt-decode';
 /** 
  * Componente: PerfilEst
  * Descripción: Permite al estudiante editar su perfil, incluyendo su correo, contraseña y curso.
@@ -16,15 +17,23 @@ import './PerfilEst.scss';
  */
 const PerfilEst = () => {
 
-    //Datos inciales a mostrar
-    const [formData, setFormData] = useState({
-        apellidos: 'Henao Gallego' ,
-        nombre:'Juan Camilo',
-        correo: 'juan.henao.gallego@gmail.com',
-        doc: '20221598320',
-        contrasena: '1234',
-        curso: '11-2',
+    const API_URL = process.env.REACT_APP_API_URL; 
+    const token = localStorage.getItem("token");
+    const {user, setUser} = useUser();
+
+
+    const initialFormData = useRef({
+                apellidos: user.apellido,
+                nombre: user.nombre,
+                correo: user.email,
+                doc: user.id,
+                contrasena: '',
+                curso: user.curso,
     });
+
+    //Datos inciales a mostrar
+    const [formData, setFormData] = useState(initialFormData.current);
+    
 
     //Actualizar inputs
     const handleChange = (titulo, value) => {
@@ -34,11 +43,64 @@ const PerfilEst = () => {
         });
     };
 
-    //Envio del formulario
-    const handleSubmit = (e) => {
+   //Envio del formulario
+    const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log('Datos enviados:', formData);
+        const dataToSend = { 
+                    ...formData, 
+                    contrasena: formData.contrasena || null 
+                };
+        
+                console.log("Datos enviados:", dataToSend);
+        
+        
+                try {
+                    const response = await fetch(`${API_URL}usuario/updateEstudiante/${dataToSend.doc}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            nombre: dataToSend.nombre,
+                            apellido: dataToSend.apellidos,
+                            correo: dataToSend.correo,
+                            id_curso: user.id_curso,
+                            contraseña: dataToSend.contrasena || undefined,
+                            id_institucion: user.institucion.id_institucion
+                        })
+                    });
+        
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        //toast
+                        throw new Error(`${errorData.error || response.status}`);
+                    }
+        
+                    const data = await response.json();
+        
+        
+                    console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
+        
+                    if (data.token) {
+                        // 2. Guarda el nuevo token en localStorage
+                        localStorage.setItem("token", data.token);
+            
+                        setUser(jwtDecode(data.token));
+                    }
+        
+                    
+                } catch (error) {
+                    //toast
+                    console.error(error);
+                }
     };
+
+    const isFormUnchanged = (
+        JSON.stringify({ ...formData, contrasena: '', doc: '' }) === 
+        JSON.stringify({ ...initialFormData.current, contrasena: '', doc: '' }) 
+        && !formData.contrasena // Permite activar si escriben algo en "contrasena"
+    );
 
     return (
         <div className='contenedorPerfilEst'>
@@ -49,11 +111,11 @@ const PerfilEst = () => {
                         <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />
                         <InputContainer nomInput="nombres" titulo='Nombres' value={formData.nombre} isDisabled={true} />
                         <InputContainer nomInput="coreo" titulo='Correo' value={formData.correo} required={true} onChange={(value) => handleChange('correo', value)} />
-                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={true} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
+                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={false} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
                         <InputContainer nomInput="doc" titulo='Documento' inputType='text' value={formData.doc} isDisabled={true} />
-                        <InputContainer nomInput="curso" titulo='Curso' inputType='text' value={formData.curso} required={true} onChange={(value) => handleChange('curso', value)} />
+                        <InputContainer nomInput="curso" titulo='Curso' inputType='text' value={formData.curso} isDisabled={true} onChange={(value) => handleChange('curso', value)} />
                     </div>
-                    <button type='submit'>Guardar Cambios</button>
+                    <button type='submit' disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>
             </div>
         </div>

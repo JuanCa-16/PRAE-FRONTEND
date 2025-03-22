@@ -7,9 +7,9 @@ import InputContainer from "../../../componentes/Input/InputContainer.jsx";
 import Selector from "../../../componentes/Selector/Selector.jsx";
 import Modal from "../../../componentes/Modal/Modal.jsx";
 import Line from "../../../componentes/Line/Line.jsx";
-import ContenedorMaterias from "../../../componentes/ContenedorMaterias/ContenedorMaterias.jsx";
 import { useNavigate } from "react-router-dom";
 import Alerta from "../../../componentes/Alerta/Alerta.jsx";
+import CursosAsignadosEstudiante from "../../../componentes/CursosAsignadosEstudiante/CursosAsignadosEstudiante.jsx";
 const VistaEst = () => {
     const location = useLocation();
     const { est } = location.state || {};
@@ -18,8 +18,9 @@ const VistaEst = () => {
     const token = localStorage.getItem("token");
     const { user } = useUser();
     const [reload, setReload] = useState(false);
+    
 
-    const [gradoEst, setGradoEst] = useState('')
+
 
     function capitalizeWords(str) {
         return str
@@ -82,9 +83,6 @@ const VistaEst = () => {
                     grado: estData.id_curso,
                 });
 
-
-
-                setGradoEst(estData.id_curso)
             } catch (error) {
                 console.error(error);
             }
@@ -240,56 +238,6 @@ const VistaEst = () => {
     }, [reload, API_URL, token, user.institucion.id_institucion]);
 
 
-    const [infoPildoras, setInfoPildoras] = useState([]);
-                    
-        useEffect(() => {
-
-
-            const listaCursos = async () => {
-
-                if ((gradoEst === '') || !user?.institucion?.id_institucion) {
-                    console.log("Esperando a que se carguen los datos...");
-                    return;
-                }
-
-
-                try {
-                    const response = await fetch(`${API_URL}asignar/grado/${gradoEst}/institucion/${user.institucion.id_institucion}`,{
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        },
-                    });
-    
-                    if (!response.ok) {
-                        const errorData = await response.json(); // Obtiene respuesta del servidor
-                        throw new Error(`${errorData.message || response.status}`);
-                    }
-    
-                    const data = await response.json(); // Espera la conversión a JSON
-                    if (data.length > 1) {
-                    data.sort((a, b) => (a.materia?.localeCompare(b.materia || '') || 0));
-                    }
-
-                    console.log(data)
-    
-                    const dataCompleta = data.map(item => ({
-                        ...item,
-                        nombre_completo: `${item.profesor_nombre} ${item.profesor_apellido}`
-                    }));
-                    
-                    console.log("Respuesta del servidor lista cursos est:", dataCompleta);
-                    setInfoPildoras(dataCompleta);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-    
-            listaCursos()
-        },[API_URL, token, gradoEst ,user?.institucion?.id_institucion])
-            
-
     // Comparar el estado actual con el inicial para deshabilitar el botón si no hay cambios
     const isFormUnchanged = (
         JSON.stringify({ ...formData, contrasena: '', doc: '' }) ===
@@ -412,19 +360,7 @@ const VistaEst = () => {
                 </Modal>
             </div>
             <Line></Line>
-            <div className="contenedorCursos">
-                <TituloDes
-                    titulo="MIS MATERIAS:"
-                    desc="Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida."
-                ></TituloDes>
-
-                <ContenedorMaterias
-                    url="/estudiantes"
-                    info={infoPildoras}
-                    nombre={est.nombreCompleto}
-                    estudiante={est}
-                ></ContenedorMaterias>
-            </div>
+            <CursosAsignadosEstudiante idCurso={est.id_curso} idEst={est.documento_identidad} url={'/estudiantes'} idInstitucion={user.institucion.id_institucion} nombreEst={est.nombreCompleto}></CursosAsignadosEstudiante>
         </div>
     );
 };

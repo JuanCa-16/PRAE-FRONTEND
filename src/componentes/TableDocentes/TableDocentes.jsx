@@ -6,7 +6,7 @@ import Celda from '../Celda/Celda';
 import Modal from '../Modal/Modal';
 import { useUser } from '../../Contexts/UserContext';
 
-const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente } ) => {
+const TableDocentes = ({infoCurso, infoDocente } ) => {
 
     const API_URL = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem('token')
@@ -19,10 +19,11 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
     const [soloNombre,setSoloNombre] = useState([])
     const [actividadesUnicas, setActividadesUnicas] = useState([])
 
+
     useEffect(() => {
             const notasCursoDocente = async () => {
                 try {
-                    const response = await fetch(`${API_URL}calificacion/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}/docente/${infoDocente.documento_identidad}/institucion/${user.institucion.id_institucion}`,{
+                    const response = await fetch(`${API_URL}calificacion/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}/docente/${infoDocente}/institucion/${user.institucion.id_institucion}`,{
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -60,7 +61,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
             }
     
             notasCursoDocente()
-        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente.documento_identidad])
+        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
     
     
 
@@ -116,19 +117,19 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
     return (
         <div className='contenedorNotas'>
             <div className="contenedor">
-                <PildoraTitulo materia= {materia} nombre={profesor} color={color} grado={grado} ></PildoraTitulo>
+                <PildoraTitulo materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
                 <div className="tabla">
                     <div className="col ">
-                        <Celda txt='Actividad' color={color} tipo='titulo' rol='NoVer'></Celda>
+                        <Celda txt='Actividad' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
                         {nombres.map((nombre, index) => (
-                            <Celda key={index} tipo='titulo2' color={color} txt={nombre} rol='NoVer'></Celda>
+                            <Celda key={index} tipo='titulo2' color={infoCurso.color} txt={nombre} rol='NoVer'></Celda>
                         ))}
                     </div>
-                    <div className={`notas ${color}`}>
+                    <div className={`notas ${infoCurso.color}`}>
 
                         {actividadesUnicas.map((actividad, i) => (
                             <div key={i} className="col nota">
-                                <Celda color={color} txt={actividad.actividad} tipo='titulo' onClick={() => openModalAct(i)} />
+                                <Celda color={infoCurso.color} txt={actividad.actividad} tipo='titulo' onClick={() => openModalAct(i)} />
                                 {/* Modal específico para la actividad seleccionada */}
                                 {modalIndexAbierto === i && (
                                     <Modal
@@ -139,7 +140,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
                                         modalTexto='Edita los parametros de tu actividad'
                                         valorAct={actividad.actividad}
                                         ValorPeso={actividad.peso}
-                                        extraData={{ materia: materia, profesor: profesor, grado: grado }} 
+                                        extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado: infoCurso.curso }} 
                                     />
                                 )}
                                 {info.map((estudiante, j) => {
@@ -148,7 +149,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
                                         <div className='full' key={j}>
                                             <Celda 
                                                 tipo="normal" 
-                                                color={color}
+                                                color={infoCurso.color}
                                                 txt={actividadEncontrada ? actividadEncontrada.nota : "N/A"} 
                                                 onClick={() => openModalNota(i, j)} // Ahora pasa ambos índices
                                             />
@@ -162,7 +163,7 @@ const TableDocentes = ({ materia, profesor, color, grado, infoCurso, infoDocente
                                                     valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
                                                     modalTitulo='EDITAR NOTA'
                                                     modalTexto='Edita la nota de esta actividad'
-                                                    extraData={{ materia: materia, profesor: profesor, grado: grado, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0] }}
+                                                    extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0] }}
                                                 />
                                             )}
                                         </div>
