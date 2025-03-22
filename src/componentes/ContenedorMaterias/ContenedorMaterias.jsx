@@ -4,7 +4,7 @@ import './ContenedorMaterias.scss'
 import Pildora from '../Pildora/Pildora';
 import { useUser } from '../../Contexts/UserContext';
 
-const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, idProfe}) => {
+const ContenedorMaterias = ({url, info, est=true, nombre,idEst, idProfe}) => {
 
     const navigate = useNavigate();
     const {user} = useUser()
@@ -14,12 +14,10 @@ const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, idProfe}) =
     
 
     //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = (item,materia, profesor,color,grado) => {
-        const datos = { materia, profesor,color,grado, item, estudiante }; // Datos a enviar
-        const datos2 = { materia, profesor,color,grado, item, idProfe }; // Datos a enviar
-        console.log('aquii', nombre)
-        console.log('item',item)
-        console.log('item2',estudiante)
+    const manejarClick = (item,materia, profesor) => {
+        const datos = { item,idEst  }; // Datos a enviar
+        const datos2 = { item, idProfe }; // Datos a enviar
+
         if(est){
             navigate(`${url}/${nombre? nombre : user.nombre + ' ' +user.apellido}/${materia}`, { state: datos }); // Navegar con los datos
         }else{
@@ -41,7 +39,7 @@ const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, idProfe}) =
                                     txtsuperior={item.nombre_completo}
                                     txtinferior={item.curso}
                                     color={item.color}
-                                    onClick={() => manejarClick(item,item.materia, item.nombre_completo, item.color, item.curso)} // Pasa la función con datos dinámicos
+                                    onClick={() => manejarClick(item,item.materia, item.nombre_completo)} // Pasa la función con datos dinámicos
                                 />
                             ))):<p>Tu grado todavia no tiene materias asignadas</p>) : (infoPildoras.length > 0 ? (
                                     infoPildoras.map((item, index) => (
@@ -51,7 +49,7 @@ const ContenedorMaterias = ({url, info, est=true, nombre,estudiante, idProfe}) =
                                                         txtsuperior={item.nombre_completo}
                                                         txtinferior={item.curso}
                                                         color={item.color}
-                                                        onClick={() => manejarClick(item,item.materia, item.nombre_completo, item.color, item.curso)} // Pasa la función con datos dinámicos
+                                                        onClick={() => manejarClick(item,item.materia, item.nombre_completo)} // Pasa la función con datos dinámicos
                                                     />
                                                     ))
                                                 ) : (

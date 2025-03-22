@@ -1,8 +1,6 @@
 import React from 'react'
-import './CursosEst.scss'
-import TituloDes from '../../../componentes/TituloDes/TituloDes'
-import ContenedorMaterias from '../../../componentes/ContenedorMaterias/ContenedorMaterias';
-
+import CursosAsignadosEstudiante from '../../../componentes/CursosAsignadosEstudiante/CursosAsignadosEstudiante';
+import { useUser } from '../../../Contexts/UserContext';
 /** 
  * Componente: CursosEst
  * Descripción: Muestra un listado de materias del estudiante con la posibilidad de navegar a una página de notas.
@@ -14,21 +12,10 @@ import ContenedorMaterias from '../../../componentes/ContenedorMaterias/Contened
  */
 export default function CursosEst() {
 
-
-
-    //Informacion de las pildoras
-    const infoPildoras = [
-        { materia: "Matemáticas",  grado: "6-2",profesor: "Carlos Pérez", color:'morado' },
-        { materia: "Física", grado: "6-2",profesor: "Ana Gómez", color:'azul' },
-        { materia: "Química", grado: "6-2",profesor: "Luis Rodríguez",color:'amarillo' },
-        { materia: "Historia", grado: "6-2",profesor: "Marta Sánchez", color:'morado' },
-    ];
-
+    const {user} = useUser()
+    
 
     return (
-        <div className='contenedorCursos'>
-            <TituloDes titulo='MIS MATERIAS:' desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'></TituloDes>
-            <ContenedorMaterias url="/materias" info={infoPildoras} ></ContenedorMaterias>
-        </div>
+        <CursosAsignadosEstudiante idEst={user.id} url={'/materias'} idCurso={user.id_curso} idInstitucion={user.institucion.id_institucion}></CursosAsignadosEstudiante>
     )
 }

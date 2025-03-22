@@ -5,7 +5,7 @@ import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
 import Celda from '../Celda/Celda';
 import { useUser } from '../../Contexts/UserContext';
 
-const TableEst = ({infoMateria, infoEst } ) => {
+const TableEst = ({infoMateria, idEst } ) => {
 
 
     //Informacion de la tabla traer info del BACK
@@ -19,7 +19,7 @@ const TableEst = ({infoMateria, infoEst } ) => {
     useEffect(() => {
         const notasMateriaEstudiante = async () => {
             try {
-                const response = await fetch(`${API_URL}calificacion/materia/${infoMateria.id_materia}/estudiante/${infoEst.documento_identidad}/docente/${infoMateria.profesor_documento}/institucion/${user.institucion.id_institucion}`,{
+                const response = await fetch(`${API_URL}calificacion/materia/${infoMateria.id_materia}/estudiante/${idEst}/docente/${infoMateria.profesor_documento}/institucion/${user.institucion.id_institucion}`,{
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const TableEst = ({infoMateria, infoEst } ) => {
         }
 
         notasMateriaEstudiante()
-    },[API_URL,infoMateria.id_materia,infoEst.documento_identidad, infoMateria.profesor_documento, token,user.institucion.id_institucion])
+    },[API_URL,infoMateria.id_materia,idEst, infoMateria.profesor_documento, token,user.institucion.id_institucion])
 
 
 

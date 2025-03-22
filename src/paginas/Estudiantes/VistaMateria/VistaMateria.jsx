@@ -16,12 +16,11 @@ import TableEst from '../../../componentes/TableEst/TableEst';
 const VistaMateria = () => {
 
     const location = useLocation();
-    const { materia, profesor,color,grado } = location.state || {};
-
+    const {item, idEst} = location.state || {};
 
 
     return (
-      <TableEst materia={materia} profesor={profesor} color={color} grado={grado}></TableEst>
+        <TableEst infoMateria = {item} idEst={idEst}></TableEst>
     )
 }
 
