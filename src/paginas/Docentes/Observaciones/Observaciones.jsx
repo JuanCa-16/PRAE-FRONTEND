@@ -1,28 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import './Observaciones.scss';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
-
+import { useUser } from '../../../Contexts/UserContext.jsx';
 const Observaciones = () => {
 
     //TRAER NOMBRE DEL TOKEN
+    const API_URL = process.env.REACT_APP_API_URL; 
+    const token = localStorage.getItem("token");
+    const {user} = useUser();
+
+    const [infoPildoras, setInfoPildoras] = useState([]);
 
 
-    const infoPildoras = [
-        { nombreEstudiante: "Juan Pérez Henao Gallego", grado: "6-2", color: 'morado' },
-        { nombreEstudiante: "María Gómez", grado: "6-2", color: 'azul' },
-        { nombreEstudiante: "Carlos Rodríguez", grado: "11-2", color: 'amarillo' },
-        { nombreEstudiante: "Ana Martínez", grado: "10-1", color: 'morado' },
-        { nombreEstudiante: "Luis Fernández", grado: "11-2", color: 'morado' },
-        { nombreEstudiante: "Sofía Ramírez", grado: "9-2", color: 'morado' },
-    ];
+    useEffect(() => {
+        const listaEstAsignados = async () =>{
+            try {
+                const response = await fetch(`${API_URL}usuario/profesor/${user.id}/estudiantes`,{
+                    method: 'GET',
+                    headers:{
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                });
+
+                if(!response.ok){
+                    const errorData = await response.json(); // Obtiene respuesta del servidor
+                    throw new Error(`${errorData.message || response.status}`);
+                }
+
+                const data = await response.json(); // Espera la conversión a JSON
+                const dataCompleta = data.map(est => ({
+                    ...est,
+                    nombre_completo: `${est.estudiante_apellido} ${est.estudiante_nombre} `
+                }))
+                console.log('data',dataCompleta)
+                setInfoPildoras(dataCompleta)
+            } catch (error) {
+                console.error("Error en listaEstAsignados:", error.message);
+            }
+        }
+
+        listaEstAsignados()
+    },[API_URL,token,user.id])
     
 
     //Elimina opciones duplicadas para el selector
-    const nombreEstudiante = [...new Set(infoPildoras.map(item => item.nombreEstudiante))];
-    const gradosUnicos = [...new Set(infoPildoras.map(item => item.grado))];
+    const nombreEstudiante = [...new Set(infoPildoras.map(item => item.nombre_completo))];
+    const gradosUnicos = [...new Set(infoPildoras.map(item => item.curso_nombre))];
 
     const [nombreEstudianteSeleccionada, setnombreEstudianteSeleccionada] = useState('');
     const [gradoSeleccionado, setGradoSeleccionado] = useState('');
@@ -34,8 +61,8 @@ const Observaciones = () => {
     };
 
     const pildorasFiltradas = infoPildoras.filter(item =>
-        (nombreEstudianteSeleccionada === '' || item.nombreEstudiante === nombreEstudianteSeleccionada) &&
-        (gradoSeleccionado === '' || item.grado === gradoSeleccionado)
+        (nombreEstudianteSeleccionada === '' || item.nombre_completo === nombreEstudianteSeleccionada) &&
+        (gradoSeleccionado === '' || item.curso_nombre === gradoSeleccionado)
     );
 
     const navigate = useNavigate();
@@ -74,11 +101,11 @@ const Observaciones = () => {
                         pildorasFiltradas.map((item, index) => (
                             <PildoraEst
                                 key={index}
-                                est={item.nombreEstudiante}
-                                curso={item.grado}
+                                est={item.nombre_completo}
+                                curso={item.curso_nombre}
                                 color={item.color}
                                 clase='peque'
-                                onClick={() => manejarClick(item.nombreEstudiante, item.color, item.grado)}
+                                onClick={() => manejarClick(item.nombre_completo, item.color, item.curso_nombre)}
                             />
                         ))
                     ) : (
