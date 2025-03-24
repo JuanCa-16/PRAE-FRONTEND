@@ -50,6 +50,7 @@
                         border-radius: $radio1;
                         font-family: "Roboto", sans-serif;
                         padding: 0.5rem;
+                        resize: none;
 
                         &:focus {
                             outline: 1px solid $azul; 
