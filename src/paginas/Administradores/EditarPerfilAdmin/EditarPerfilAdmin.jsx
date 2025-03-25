@@ -3,6 +3,7 @@ import InputContainer from "../../../componentes/Input/InputContainer";
 import TituloDes from "../../../componentes/TituloDes/TituloDes";
 import "./EditarPerfilAdmin.scss";
 import { useUser } from "../../../Contexts/UserContext";
+import Alerta from "../../../componentes/Alerta/Alerta";
 
 const EditarPerfilAdmin = () => {
 
@@ -35,6 +36,7 @@ const EditarPerfilAdmin = () => {
     //Envio del formulario
     const handleSubmit = (e) => {
         e.preventDefault();
+        Alerta.success("Datos actualizados correctamente");
         console.log("Datos enviados:", formData);
     };
 

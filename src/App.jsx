@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useUser } from './Contexts/UserContext.jsx';
 import { useTheme } from './Contexts/UserContext.jsx';
 import Alerta from "./componentes/Alerta/Alerta.jsx";
+
 //ESTUDIANTES
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
@@ -145,6 +146,7 @@ function App() {
   const cerrarSesion = () => {
     localStorage.removeItem("token"); // Eliminar del localStorage
     setUser(null);
+    Alerta.success("Sesión cerrada exitosamente");
   };
 
   useEffect(() => {

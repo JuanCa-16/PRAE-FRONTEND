@@ -60,6 +60,7 @@ const CreacionDocente = () => {
                 
                 setOpcionesMaterias(opciones);
             } catch (error) {
+                Alerta.error('Error al cargar las materias: ',error.message);
                 console.error(error);
             }
         }
@@ -91,7 +92,7 @@ const CreacionDocente = () => {
         e.preventDefault()
 
         if(materiasSeleccionadas.length === 0){
-            alert('Debes seleccionar alemnos una materia')
+            Alerta.info('Debes seleccionar alemnos una materia')
             return;
         }
 
@@ -139,6 +140,7 @@ const CreacionDocente = () => {
                     }
                 } catch (error) {
                     console.error(error);
+                    Alerta.error(`Error al asignar materia ${materia}: ${error.message}`);
                 }
             }
 
@@ -160,6 +162,7 @@ const CreacionDocente = () => {
 
             setReload(!reload);
         } catch (error) {
+            Alerta.error(error.message);
             console.error('Error al crear Docente: ',error);
         }
 

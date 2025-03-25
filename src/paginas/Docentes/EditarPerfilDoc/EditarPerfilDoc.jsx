@@ -3,6 +3,7 @@ import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './EditarPerfilDoc.scss';
 import Select from "react-select";
+import Alerta from '../../../componentes/Alerta/Alerta';
 
 const EditarPerfilDoc = () => {
   //Datos inciales a mostrar
@@ -28,6 +29,7 @@ const EditarPerfilDoc = () => {
     //Envio del formulario
     const handleSubmit = (e) => {
         e.preventDefault()
+        Alerta.success('Datos actualizados correctamente');
         console.log('Datos enviados:', formData);
     };
 

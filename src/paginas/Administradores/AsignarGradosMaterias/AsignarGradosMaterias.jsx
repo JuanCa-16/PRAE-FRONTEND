@@ -60,6 +60,7 @@ const AsignarGradosMaterias = () => {
                             
             
                         } catch (error) {
+                            Alerta.error("Error al cargar los grados: ",error.message);
                             console.error(error);
                         }
                     }
@@ -347,7 +348,7 @@ const AsignarGradosMaterias = () => {
             
                 } catch (error) {
                     console.error(error);
-                    Alerta.error(error.message);
+                    Alerta.error("Error al eliminar la asinacion: ",error.message);
                 }
 
             }
@@ -357,7 +358,7 @@ const AsignarGradosMaterias = () => {
         e.preventDefault()
 
         if(materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0){
-            alert('Debes seleccionar alemnos una materia y grado')
+            Alerta.info('Debes seleccionar alemnos una materia y grado')
             return;
         }
         console.log('Datos enviados:', formData);

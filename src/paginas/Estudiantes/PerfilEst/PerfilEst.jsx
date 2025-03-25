@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './PerfilEst.scss';
+import Alerta from '../../../componentes/Alerta/Alerta';
 
 /** 
  * Componente: PerfilEst
@@ -37,6 +38,7 @@ const PerfilEst = () => {
     //Envio del formulario
     const handleSubmit = (e) => {
         e.preventDefault()
+        Alerta.success('Datos actualizados correctamente');
         console.log('Datos enviados:', formData);
     };
 
