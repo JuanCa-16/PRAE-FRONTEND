@@ -71,9 +71,9 @@ const Observaciones = () => {
     const navigate = useNavigate();
     
     //pasa los datos de la materia a la pagina de notas de la materias
-    const manejarClick = ( est,color, grado) => {
-        const datos = {est,color, grado}; // Datos a enviar
-        navigate(`/observaciones/${est}`, { state: datos }); // Navegar con los datos
+    const manejarClick = (est) => {
+        const datos = {est}; // Datos a enviar
+        navigate(`/observaciones/${est.nombre_completo}`, { state: datos }); // Navegar con los datos
     };
 
     return (
@@ -108,7 +108,7 @@ const Observaciones = () => {
                                 curso={item.curso_nombre}
                                 color={item.color}
                                 clase='peque'
-                                onClick={() => manejarClick(item.nombre_completo, item.color, item.curso_nombre)}
+                                onClick={() => manejarClick(item)}
                             />
                         ))
                     ) : (

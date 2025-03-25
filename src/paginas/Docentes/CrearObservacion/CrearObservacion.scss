@@ -61,6 +61,13 @@
         }
     }
 
+    .observaciones{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 2rem;
+    }
+
     button{
         width: fit-content;
         height: fit-content;
