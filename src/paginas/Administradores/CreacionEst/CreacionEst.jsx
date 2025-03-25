@@ -96,7 +96,7 @@ const CreacionEst = () => {
         e.preventDefault();
     
         if (!gradoAsignado) {
-            alert('Debes seleccionar un grado');
+            Alerta.info('Debes seleccionar un grado');
             return;
         }
     

@@ -4,6 +4,7 @@ import TituloDes from "../../../componentes/TituloDes/TituloDes";
 import "./EditarPerfilAdmin.scss";
 import { useUser } from "../../../Contexts/UserContext";
 import { jwtDecode } from "jwt-decode";
+import Alerta from "../../../componentes/Alerta/Alerta";
 
 const EditarPerfilAdmin = () => {
 
@@ -52,7 +53,7 @@ const EditarPerfilAdmin = () => {
             ...formData, 
             contrasena: formData.contrasena || null 
         };
-
+        
         console.log("Datos enviados:", dataToSend);
 
 
@@ -82,6 +83,7 @@ const EditarPerfilAdmin = () => {
 
 
             console.log('ADMIN EDITADO EXITOSAMENTE', data);
+            Alerta.success("Datos actualizados correctamente");
 
             if (data.token) {
                 // 2. Guarda el nuevo token en localStorage
@@ -92,7 +94,7 @@ const EditarPerfilAdmin = () => {
 
             
         } catch (error) {
-            //toast
+            Alerta.error(error.message);
             console.error(error);
         }
 

@@ -5,6 +5,8 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+
 const Observaciones = () => {
 
     //TRAER NOMBRE DEL TOKEN
@@ -39,6 +41,7 @@ const Observaciones = () => {
                 console.log('data',dataCompleta)
                 setInfoPildoras(dataCompleta)
             } catch (error) {
+                Alerta.error(error.message);
                 console.error("Error en listaEstAsignados:", error.message);
             }
         }

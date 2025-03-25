@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './CrearObservacion.scss';
+import Alerta from '../../../componentes/Alerta/Alerta';
 
 const CrearObservacion = () => {
     
@@ -20,6 +21,7 @@ const CrearObservacion = () => {
         //Envio del formulario
         const handleSubmit = (e) => {
             e.preventDefault()
+            Alerta.success('Observación realizada correctamente');
             console.log('Datos enviados:', formData);
             setFormData({observacion: ''})
         };

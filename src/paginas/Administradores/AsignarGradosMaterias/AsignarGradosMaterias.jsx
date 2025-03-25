@@ -60,6 +60,7 @@ const AsignarGradosMaterias = () => {
                             
             
                         } catch (error) {
+                            Alerta.error(error.message);
                             console.error(error);
                         }
                     }
@@ -357,7 +358,7 @@ const AsignarGradosMaterias = () => {
         e.preventDefault()
 
         if(materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0){
-            alert('Debes seleccionar alemnos una materia y grado')
+            Alerta.info('Debes seleccionar alemnos una materia y grado')
             return;
         }
         console.log('Datos enviados:', formData);

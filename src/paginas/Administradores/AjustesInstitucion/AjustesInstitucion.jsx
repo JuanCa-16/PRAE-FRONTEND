@@ -8,7 +8,7 @@ import { useUser } from '../../../Contexts/UserContext';
 import NavBar from '../../../componentes/NavBar/NavBar';
 import { jwtDecode } from "jwt-decode";
 import './AjustesInstitucion.scss';
-
+import Alerta from '../../../componentes/Alerta/Alerta';
 const AjustesInstitucion = () => {
 
     const {user,setUser} = useUser()
@@ -76,7 +76,7 @@ const AjustesInstitucion = () => {
             }
 
             const data = await response.json();
-    
+            Alerta.success("Institución actualizada correctamente");
             console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
             console.log('response', data)
 
@@ -88,7 +88,7 @@ const AjustesInstitucion = () => {
             }
 
         } catch  (error) {
-            //toast
+            Alerta.error(error.message);
             console.error(error);
         }
 
@@ -107,7 +107,7 @@ const AjustesInstitucion = () => {
             setFormData((prev) => ({ ...prev, logo: file }));
             setPreview(URL.createObjectURL(file));
         } else {
-            alert("Por favor, selecciona una imagen válida.");
+            Alerta.info("Por favor, selecciona una imagen válida.");
         }
     };
 

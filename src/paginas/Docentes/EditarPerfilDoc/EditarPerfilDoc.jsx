@@ -5,6 +5,7 @@ import './EditarPerfilDoc.scss';
 import { useUser } from '../../../Contexts/UserContext';
 import { jwtDecode } from "jwt-decode";
 import Selector from '../../../componentes/Selector/Selector';
+import Alerta from '../../../componentes/Alerta/Alerta';
 
 const EditarPerfilDoc = () => {
 
@@ -49,6 +50,7 @@ const EditarPerfilDoc = () => {
     //Envio del formulario
     const handleSubmit = async(e) => {
         e.preventDefault()
+        
         const dataToSend = { 
                     ...formData, 
                     contrasena: formData.contrasena || null 
@@ -82,7 +84,7 @@ const EditarPerfilDoc = () => {
         
                     const data = await response.json();
         
-        
+                    Alerta.success('Datos actualizados correctamente');
                     console.log('DOCENTE EDITADO EXITOSAMENTE', data);
         
                     if (data.token) {
@@ -94,7 +96,7 @@ const EditarPerfilDoc = () => {
         
                     
                 } catch (error) {
-                    //toast
+                    Alerta.error(error.message);
                     console.error(error);
                 }
     };
