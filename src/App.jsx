@@ -144,6 +144,7 @@ function App() {
   //Eliminar TOKEN del local
   const cerrarSesion = () => {
     localStorage.removeItem("token"); // Eliminar del localStorage
+    Alerta.success("Sesión cerrada exitosamente");
     setUser(null);
   };
 

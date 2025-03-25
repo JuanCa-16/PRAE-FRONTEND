@@ -4,6 +4,7 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './PerfilEst.scss';
 import { useUser } from '../../../Contexts/UserContext';
 import { jwtDecode } from 'jwt-decode';
+import Alerta from '../../../componentes/Alerta/Alerta';
 /** 
  * Componente: PerfilEst
  * Descripción: Permite al estudiante editar su perfil, incluyendo su correo, contraseña y curso.
@@ -50,7 +51,6 @@ const PerfilEst = () => {
                     ...formData, 
                     contrasena: formData.contrasena || null 
                 };
-        
                 console.log("Datos enviados:", dataToSend);
         
         
@@ -79,7 +79,7 @@ const PerfilEst = () => {
         
                     const data = await response.json();
         
-        
+                    Alerta.success('Datos actualizados correctamente');
                     console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
         
                     if (data.token) {
@@ -91,7 +91,7 @@ const PerfilEst = () => {
         
                     
                 } catch (error) {
-                    //toast
+                    Alerta.error(error.message);
                     console.error(error);
                 }
     };
