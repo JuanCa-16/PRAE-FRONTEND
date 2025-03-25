@@ -3,6 +3,7 @@ import InputContainer from "../Input/InputContainer";
 import PropTypes from 'prop-types';
 import './Modal.scss';
 import { useTheme } from "../../Contexts/UserContext";
+import Alerta from "../Alerta/Alerta";
 /** 
  * Componente: Modal
  * Descripción: Este componente renderiza un modal dinámico que puede ser de tipo "eliminar", "actividad" o "nota".
@@ -45,7 +46,19 @@ import { useTheme } from "../../Contexts/UserContext";
  *      - Dependiendo del tipo de modal, se renderiza el contenido adecuado (eliminar, actividad o nota).
  */
 
-const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", valorAct='',ValorPeso='', valorNota = '', extraData={},  children }) => {
+const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", modalTexto="Estas seguro de eliminar...", valorAct='',ValorPeso='', valorNota = '', extraData={},  children }) => {
+
+    function capitalizeWords(str) {
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
+    }
+    const API_URL = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem('token')
 
     const {theme} = useTheme()
     //La logica del modal eliminar se le hace es al boton que llega por children.
@@ -56,24 +69,53 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
 
 
     const handleNombreChange = (newNombre) => {
-        setNonombreAct(newNombre); // Actualiza el estado 'email'
+        setNonombreAct(capitalizeWords(newNombre)); // Actualiza el estado 'email'
     };
 
     const handlePesoChange = (newPeso) => {
         setPesoAct(newPeso); // Actualiza el estado 'email'
     };
 
-    const handleSubmit1 = () => {
+    const handleSubmit1 = async(e) => {
+        e.preventDefault()
         // Crear el objeto JSON con los valores de los inputs
         const formData = {
             ...extraData,
             nombreAct: nombreAct,
             pesoAct: pesoAct,
         };
+
+        console.log(formData)
+
+        try {
+            const response = await fetch(`${API_URL}actividad/actualizar/${formData.id_act}`,{
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({nombre: formData.nombreAct, peso: formData.pesoAct, id_docente: formData.id_docente})
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json(); // Obtiene respuesta del servidor
+                throw new Error(`${errorData.message || response.status}`);
+            }
+            
+            Alerta.success('Actividad actualizada');
+            
+            console.log("Datos del formulario ACTIVIDAD:", JSON.stringify(formData));
+            closeModal()
+            recargar()
+
+            
+        } catch (error) {
+            console.error('Error al crear actividad',error);
+            Alerta.error(error.message);
+        }
     
         // Mostrar el objeto JSON en la consola (o enviarlo al servidor)
-        console.log("Datos del formulario ACTIVIDAD:", JSON.stringify(formData));
-        closeModal()
+        
     
         // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
     };
@@ -126,7 +168,7 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
                     <div className="titulo">
                         <p className='bold'>{modalTitulo}</p>
                     </div>
-                    <div className="crearAct">
+                    <form onSubmit={handleSubmit1} className="crearAct">
                         <div className="campos">
                             <InputContainer titulo="Nombre Actividad"
                                             inputType="text"
@@ -136,14 +178,14 @@ const Modal = ({ isOpen, closeModal, tipo, modalTitulo="Eliminar", modalTexto="E
                             />
                             <InputContainer titulo="Peso"
                                             placeholder="Nuevo Peso"
-                                            inputType="text"
+                                            inputType="number"
                                             value={pesoAct} // El valor del input viene del estado del componente padre
                                             onChange={handlePesoChange} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
-                            <button onClick={handleSubmit1}>Crear</button>
+                            <button type='submit'>Crear</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             ):(
                 <div className="modalAct">
