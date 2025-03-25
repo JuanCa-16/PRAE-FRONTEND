@@ -5,8 +5,19 @@ import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
 import Celda from '../Celda/Celda'; 
 import Modal from '../Modal/Modal';
 import { useUser } from '../../Contexts/UserContext';
+import Alerta from '../Alerta/Alerta';
 
 const TableDocentes = ({infoCurso, infoDocente } ) => {
+
+    function capitalizeWords(str) {
+        return str
+            .split(' ') // Divide en palabras
+            .map(word => word.length > 0 
+                ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+                : ''
+            )
+            .join(' ');
+    }
 
     const API_URL = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem('token')
@@ -18,6 +29,8 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
     const [soloApellidos, setSoloApellidos] = useState([])
     const [soloNombre,setSoloNombre] = useState([])
     const [actividadesUnicas, setActividadesUnicas] = useState([])
+
+    const [reload, setReload] = useState(false);
 
 
     useEffect(() => {
@@ -44,13 +57,13 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                     setSoloNombre(data.map(item => ` ${item.nombre}`))
                     setActividadesUnicas([
                         ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso }]))
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad }]))
                         ).values()
                     ])
 
                     console.log([
                         ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso }]))
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad }]))
                         ).values()
                     ])
 
@@ -61,11 +74,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
             }
     
             notasCursoDocente()
-        },[API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
-    
-    
-
-    
+        },[reload, API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
     
 
     //CREAR ACTIVIDAD BACK
@@ -82,13 +91,37 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
         });
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
-        console.log(nombreAct)
-        setNonombreAct({
-            actividad: "",
-            peso: "",
-        })
+
+        try {
+            const response = await fetch(`${API_URL}actividad/crear`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({nombre: nombreAct.actividad, peso: nombreAct.peso, id_materia: infoCurso.id_materia, id_docente: infoDocente})
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json(); // Obtiene respuesta del servidor
+                throw new Error(`${errorData.message || response.status}`);
+            }
+            
+            Alerta.success('Observación realizada correctamente');
+            setReload(!reload);
+            console.log(nombreAct)
+            setNonombreAct({
+                actividad: "",
+                peso: "",
+            })
+            
+        } catch (error) {
+            console.error('Error al crear actividad',error);
+            Alerta.error(error.message);
+        }
+        
         
     };
 
@@ -114,6 +147,10 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
         setModalIndexNota({ actividadIndex: null, estudianteIndex: null });
     };
 
+    const handleReload = () => {
+        setReload(prev => !prev);
+    };
+
     return (
         <div className='contenedorNotas'>
             <div className="contenedor">
@@ -135,12 +172,13 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                     <Modal
                                         isOpen={true}
                                         closeModal={closeModalAct}
+                                        recargar = {handleReload}
                                         tipo='actividad'
                                         modalTitulo='EDITAR ACTIVIDAD'
                                         modalTexto='Edita los parametros de tu actividad'
                                         valorAct={actividad.actividad}
                                         ValorPeso={actividad.peso}
-                                        extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado: infoCurso.curso }} 
+                                        extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado: infoCurso.curso, id_act: actividad.idAct, id_docente: infoDocente }} 
                                     />
                                 )}
                                 {info.map((estudiante, j) => {
@@ -184,7 +222,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                             placeholder="Nombre de la actividad"
                                             inputType="text"
                                             value={nombreAct.actividad}
-                                            onChange={(value) => handleChange('actividad', value)} // Pasamos la función que actualizará el estado
+                                            onChange={(value) => handleChange('actividad', capitalizeWords(value))} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
                             <InputContainer titulo="Peso"
