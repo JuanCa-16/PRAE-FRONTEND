@@ -1,17 +1,19 @@
 import React, {useState,useEffect, useRef } from 'react'
 import { useLocation } from "react-router-dom";
-import './VistaDocente.scss'
 import { useNavigate } from "react-router-dom";
-import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
-import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import Selector from '../../../componentes/Selector/Selector.jsx';
-
-import Modal from '../../../componentes/Modal/Modal.jsx';
-import Line from '../../../componentes/Line/Line.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
 
 import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CursosAsignadosDocente from '../../../componentes/CursosAsignadosDocente/CursosAsignadosDocente.jsx';
+import InputContainer from '../../../componentes/Input/InputContainer.jsx'
+import Line from '../../../componentes/Line/Line.jsx';
+import Modal from '../../../componentes/Modal/Modal.jsx';
+import Selector from '../../../componentes/Selector/Selector.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
+
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './VistaDocente.scss'
+
 const VistaDocente = () => {
 
     const location = useLocation();
@@ -317,19 +319,19 @@ const VistaDocente = () => {
     return (
         <div className='contenedorVistaDocente'>
             <div className="editar">
-                <TituloDes titulo='EDITAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
+                <TituloDes titulo='EDITAR PROFESOR' desc='Edita el perfil de un profesor en la plataforma y mantenlo siempre actualizado.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
-                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Nombres' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', capitalizeWords(value))}  />
-                        <InputContainer nomInput="coreo" required={false}  titulo='Correo' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Ingresa apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
+                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Ingresa nombre(s)' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', capitalizeWords(value))}  />
+                        <InputContainer nomInput="coreo" required={false}  titulo='Correo' placeholder='Ej: correo@example.com' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
                         <InputContainer nomInput="contra" required={false}  titulo='Contraseña'placeholder='*****' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
                         <InputContainer nomInput="doc" required={false} isDisabled={true} titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
-                        <InputContainer nomInput="area" required={true} placeholder='Humanidades' inputType='text' titulo='Area Enseñanza' value={formData.area} onChange={(value) => handleChange('area', value)} />
+                        <InputContainer nomInput="area" required={true} placeholder='Ej: Humanidades' inputType='text' titulo='Área Enseñanza' value={formData.area} onChange={(value) => handleChange('area', value)} />
                     </div>
                     <div className="selectorMat">
                     
-                        <Selector titulo={'Asignacion de Materias'} placeholder={"Selecciona las materias"} onChange={handleChangeMaterias} opciones={opcionesMaterias} valores={materiasSeleccionadas}></Selector>
+                        <Selector titulo={'Asignación de Materias'} placeholder={"Selecciona las materias"} onChange={handleChangeMaterias} opciones={opcionesMaterias} valores={materiasSeleccionadas}></Selector>
                         {/* <div className="selecciones">
                             <h4>Materias seleccionadas:</h4>
                             {materiasSeleccionadas.length === 0? (
@@ -347,7 +349,7 @@ const VistaDocente = () => {
                     <button type='submit' disabled={isFormUnchanged}>Guardar Cambios</button>
                 </form>
                 
-                <button onClick={openModal} className='rojo'>Eliminar</button>
+                <button onClick={openModal} className='rojo'>Eliminar Profesor</button>
                     <Modal
                         isOpen={isModalOpen}
                         closeModal={closeModal}

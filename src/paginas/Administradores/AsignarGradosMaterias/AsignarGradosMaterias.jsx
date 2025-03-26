@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import './AsignarGradosMaterias.scss'
-import { useUser } from '../../../Contexts/UserContext.jsx';
-import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
+
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import Line from '../../../componentes/Line/Line.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
-import Line from '../../../componentes/Line/Line.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
-import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
 
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './AsignarGradosMaterias.scss'
 
 const AsignarGradosMaterias = () => {
 
@@ -422,7 +424,7 @@ const AsignarGradosMaterias = () => {
     return (
         <div className='contenedorAsignarGradosMaterias'>
             <div className="crear">
-                <TituloDes titulo='ASIGNACION DE MATERIAS A GRADOS' desc='Asigna las materias correspondientes a cada grado.'></TituloDes>
+                <TituloDes titulo='ASIGNACIÓN DE MATERIAS A GRADOS' desc='Asigna las asignaturas correspondientes a cada nivel educativo.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="selectorGrado">
                         <Selector titulo={'Grado'} placeholder={"Selecciona el grado"} opciones={opcionesGrados} valores={gradosSeleccionados} onChange={handleChangeGrado}></Selector>
@@ -462,8 +464,8 @@ const AsignarGradosMaterias = () => {
             <Line></Line>
             <div className="lista">
             <TituloDes 
-                    titulo='LISTADO DE CURSOS ASIGNADOS:' 
-                    desc='Consulta los cursos que tienes asignados en los distintos grados. Gestiona las calificaciones y el progreso de tus estudiantes en cada uno de tus grupos.'
+                    titulo='LISTADO DE CURSOS ASIGNADOS' 
+                    desc='Consulta los cursos que tienes asignados en los distintos grados, gestiona las calificaciones y el progreso de tus estudiantes en cada uno de tus grupos.'
                 />
                 <div className="informacion">
                     <div className="filtros">
@@ -471,21 +473,24 @@ const AsignarGradosMaterias = () => {
                             opciones={materiasUnicas}
                             valorSeleccionado={materiaFiltro}
                             setValorSeleccionado={setMateriaFiltro}
-                            titulo='Materia'
+                            titulo='Materia:'
+                            placeholder='Seleccione una materia...'
                         />
                         <CustomSelect
                             opciones={gradosUnicos}
                             valorSeleccionado={gradoFiltro}
                             setValorSeleccionado={setGradoFiltro}
-                            titulo='Grado'
+                            titulo='Grado:'
+                            placeholder='Seleccione un grado...'
                         />
                         <CustomSelect
                             opciones={profesUnicos}
                             valorSeleccionado={profeFiltro}
                             setValorSeleccionado={setProfeFiltro}
-                            titulo='Profe'
+                            titulo='Profesor:'
+                            placeholder='Seleccione un profesor...'
                         />
-                        <button onClick={limpiarFiltros}>Limpiar</button>
+                        <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
                     <div className="contenedorAsignacion">

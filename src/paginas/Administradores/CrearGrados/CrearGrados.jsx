@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './CrearGrados.scss'
-import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import InputContainer from '../../../componentes/Input/InputContainer';
-import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import Alerta from '../../../componentes/Alerta/Alerta.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
-import Line from '../../../componentes/Line/Line.jsx';
-import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
+import InputContainer from '../../../componentes/Input/InputContainer';
+import Line from '../../../componentes/Line/Line.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './CrearGrados.scss'
 const CrearGrados = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -166,16 +168,16 @@ const CrearGrados = () => {
     return (
         <div className='grados'>
             <div className="crear">
-                <TituloDes titulo='CREAR GRADO' desc='Ingresa el curso a crear, puedes crear cursos desde 1 hasta 11' ></TituloDes>
+                <TituloDes titulo='CREAR UN GRADO ACADÉMICO' desc='Ingresa el curso a incorporar en el sistema, deben estar en el rango de 1° hasta 11°.' ></TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
-                    <InputContainer value={formData.grado} inputType='text' placeholder='6-2' titulo='Grado' required={true} onChange={(value) => handleChange('grado',  value)}></InputContainer>
+                    <InputContainer value={formData.grado} inputType='text' placeholder='Ej: 6-2' titulo='Grado' required={true} onChange={(value) => handleChange('grado',  value)}></InputContainer>
                     <button type='submit'>CREAR</button>
                 </form>
             </div>
             <Line></Line>
             <div className="todosGrados">
                 <TituloDes 
-                    titulo='LISTADO DE GRADOS:' 
+                    titulo='LISTADO DE GRADOS' 
                     desc='Eliminar un grado'
                 />
                 <div className="informacion">
@@ -185,8 +187,9 @@ const CrearGrados = () => {
                             valorSeleccionado={gradoSeleccionado}
                             setValorSeleccionado={setGradoSeleccionado}
                             titulo='Grado'
+                            placeholder='Seleccione un grado...'
                         />
-                        <button onClick={limpiarFiltros}>Limpiar</button>
+                        <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'grado'}></ContenedorPildoraMateriaGrado>
