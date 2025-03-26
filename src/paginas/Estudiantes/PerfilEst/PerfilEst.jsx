@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react';
+import { jwtDecode } from 'jwt-decode';
+
+import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import './PerfilEst.scss';
+
 import { useUser } from '../../../Contexts/UserContext';
-import { jwtDecode } from 'jwt-decode';
-import Alerta from '../../../componentes/Alerta/Alerta';
+
+import './PerfilEst.scss';
 /** 
  * Componente: PerfilEst
  * Descripción: Permite al estudiante editar su perfil, incluyendo su correo, contraseña y curso.

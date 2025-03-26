@@ -1,11 +1,14 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import './Observaciones.scss';
-import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+
 import { useUser } from '../../../Contexts/UserContext.jsx';
-import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+
+import './Observaciones.scss';
 
 const Observaciones = () => {
 
@@ -79,7 +82,7 @@ const Observaciones = () => {
     return (
         <div className='contenedorObservaciones'>
             <TituloDes 
-                titulo='LISTADO DE ESTUDIANTES :' 
+                titulo='LISTADO DE ESTUDIANTES' 
                 desc='Consulta los estudiantes que tienes asignados en los diferentes grados, y realizales observaciones'
             />
             <div className="informacion">
@@ -89,14 +92,16 @@ const Observaciones = () => {
                         valorSeleccionado={nombreEstudianteSeleccionada}
                         setValorSeleccionado={setnombreEstudianteSeleccionada}
                         titulo='Estudiantes'
+                        placeholder='Ingresa el nombre del estudiante'
                     />
                     <CustomSelect
                         opciones={gradosUnicos}
                         valorSeleccionado={gradoSeleccionado}
                         setValorSeleccionado={setGradoSeleccionado}
                         titulo='Grado'
+                        placeholder='Ingresa el grado del estudiante'
                     />
-                    <button onClick={limpiarFiltros}>Limpiar</button>
+                    <button onClick={limpiarFiltros}>Vaciar</button>
                 </div>
 
                 <div className="materias">

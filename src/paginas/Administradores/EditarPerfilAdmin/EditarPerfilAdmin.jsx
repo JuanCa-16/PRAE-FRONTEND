@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
+import { jwtDecode } from "jwt-decode";
+
+import Alerta from "../../../componentes/Alerta/Alerta";
 import InputContainer from "../../../componentes/Input/InputContainer";
 import TituloDes from "../../../componentes/TituloDes/TituloDes";
-import "./EditarPerfilAdmin.scss";
+
 import { useUser } from "../../../Contexts/UserContext";
-import { jwtDecode } from "jwt-decode";
-import Alerta from "../../../componentes/Alerta/Alerta";
+
+import "./EditarPerfilAdmin.scss";
 
 const EditarPerfilAdmin = () => {
 
@@ -110,14 +113,15 @@ const EditarPerfilAdmin = () => {
         <div className="contenedorPerfilAdmin">
             <div className="editar">
                 <TituloDes
-                    titulo="EDITAR PERFIL RECTOR"
-                    desc="Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado."
+                    titulo="EDITA TU PERFIL"
+                    desc="Accede a tu perfil y realiza cambios en tus datos personales para tener tu información siempre actualizada."
                 />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer
                             nomInput="apellidos"
                             titulo="Apellidos"
+                            placeholder="Ingresa tus apellidos"
                             value={formData.apellidos}
                             inputType="text"
                             required={true}
@@ -127,6 +131,7 @@ const EditarPerfilAdmin = () => {
                         <InputContainer
                             nomInput="nombres"
                             titulo="Nombres"
+                            placeholder="Ingresa tu(s) nombre(s)"
                             value={formData.nombre}
                             inputType="text"
                             required={true}
@@ -136,6 +141,7 @@ const EditarPerfilAdmin = () => {
                         <InputContainer
                             nomInput="coreo"
                             titulo="Correo"
+                            placeholder="Ej: correo@example.com"
                             value={formData.correo}
                             required={true}
                             onChange={(value) => handleChange("correo", value)}
@@ -143,6 +149,7 @@ const EditarPerfilAdmin = () => {
                         <InputContainer
                             nomInput="contra"
                             titulo="Contraseña"
+                            placeholder="*******"
                             value={formData.contrasena}
                             required={false}
                             inputType="password"

@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import "./VistaEst.scss";
-import { useUser } from "../../../Contexts/UserContext.jsx";
-import TituloDes from "../../../componentes/TituloDes/TituloDes.jsx";
-import InputContainer from "../../../componentes/Input/InputContainer.jsx";
-import Selector from "../../../componentes/Selector/Selector.jsx";
-import Modal from "../../../componentes/Modal/Modal.jsx";
-import Line from "../../../componentes/Line/Line.jsx";
 import { useNavigate } from "react-router-dom";
+
 import Alerta from "../../../componentes/Alerta/Alerta.jsx";
 import CursosAsignadosEstudiante from "../../../componentes/CursosAsignadosEstudiante/CursosAsignadosEstudiante.jsx";
+import InputContainer from "../../../componentes/Input/InputContainer.jsx";
+import Line from "../../../componentes/Line/Line.jsx";
+import Modal from "../../../componentes/Modal/Modal.jsx";
+import Selector from "../../../componentes/Selector/Selector.jsx";
+import TituloDes from "../../../componentes/TituloDes/TituloDes.jsx";
+
+import { useUser } from "../../../Contexts/UserContext.jsx";
+
+import "./VistaEst.scss";
+
 const VistaEst = () => {
     const location = useLocation();
     const { est } = location.state || {};
@@ -281,8 +285,8 @@ const VistaEst = () => {
         <div className="contenedorVistaEst">
             <div className="editar">
                 <TituloDes
-                    titulo="EDITAR ESTUDIANTE"
-                    desc="Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará."
+                    titulo="EDITAR UN ESTUDIANTE"
+                    desc="Edita el perfil de un estudiante en la plataforma y mantenlo siempre actualizado."
                 ></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
@@ -290,7 +294,7 @@ const VistaEst = () => {
                             nomInput="apellidos"
                             required={true}
                             titulo="Apellidos"
-                            placeholder="Apellidos"
+                            placeholder="Ingresa apellidos"
                             value={formData.apellidos}
                             inputType="text"
                             onChange={(value) => handleChange("apellidos", capitalizeWords(value))}
@@ -299,7 +303,7 @@ const VistaEst = () => {
                             nomInput="nombres"
                             required={true}
                             titulo="Nombres"
-                            placeholder="Nombres"
+                            placeholder="Ingresa nombre(s)"
                             value={formData.nombre}
                             inputType="text"
                             onChange={(value) => handleChange("nombre", capitalizeWords(value))}
@@ -308,6 +312,7 @@ const VistaEst = () => {
                             nomInput="coreo"
                             required={false}
                             titulo="Correo"
+                            placeholder="Ej: correo@example.com"
                             value={formData.correo}
                             onChange={(value) => handleChange("correo", value)}
                         />
@@ -345,7 +350,7 @@ const VistaEst = () => {
                     </button>
                 </form>
                 <button onClick={openModal} className="rojo">
-                    Eliminar
+                    Eliminar estudiante
                 </button>
                 <Modal
                     isOpen={isModalOpen}

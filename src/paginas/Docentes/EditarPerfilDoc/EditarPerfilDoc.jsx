@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import InputContainer from '../../../componentes/Input/InputContainer';
-import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import './EditarPerfilDoc.scss';
-import { useUser } from '../../../Contexts/UserContext';
 import { jwtDecode } from "jwt-decode";
-import Selector from '../../../componentes/Selector/Selector';
+
 import Alerta from '../../../componentes/Alerta/Alerta';
+import InputContainer from '../../../componentes/Input/InputContainer';
+import Selector from '../../../componentes/Selector/Selector';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import { useUser } from '../../../Contexts/UserContext';
+
+import './EditarPerfilDoc.scss';
 
 const EditarPerfilDoc = () => {
 
@@ -213,15 +215,15 @@ const EditarPerfilDoc = () => {
     return (
         <div className='contenedorPerfilDoc'>
             <div className="editar">
-                <TituloDes titulo='EDITAR PERFIL DOCENTE' desc='Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado.' />
+                <TituloDes titulo='EDITA TU PERFIL' desc='Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado.' />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />
                         <InputContainer nomInput="nombres" titulo='Nombres' value={formData.nombre} isDisabled={true}  />
-                        <InputContainer nomInput="coreo" titulo='Correo' value={formData.correo} required={true} onChange={(value) => handleChange('correo', value)} />
-                        <InputContainer nomInput="contra" titulo='Contraseña' value={formData.contrasena} required={false} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
+                        <InputContainer nomInput="coreo" titulo='Correo Electrónico' placeholder='Ej: correo@example.com' value={formData.correo} required={true} onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="contra" titulo='Contraseña' placeholder='******' value={formData.contrasena} required={false} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
                         <InputContainer nomInput="doc" titulo='Documento' inputType='text' value={formData.doc} isDisabled={true} />
-                        <InputContainer nomInput="area" required={true} placeholder='Humanidades' inputType='text' titulo='Area Enseñanza' value={formData.area} onChange={(value) => handleChange('area', capitalizeWords(value))} />
+                        <InputContainer nomInput="area" required={true} placeholder='Ej: Humanidades' inputType='text' titulo='Area Enseñanza' value={formData.area} onChange={(value) => handleChange('area', capitalizeWords(value))} />
                         <Selector
                                 titulo={'Materias Asignadas'} 
                                 isMulti

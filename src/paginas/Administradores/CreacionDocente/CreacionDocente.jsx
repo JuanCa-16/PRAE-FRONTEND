@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react'
 
-import './CreacionDocente.scss'
-import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
-import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-
-import Line from '../../../componentes/Line/Line.jsx';
-import Selector from '../../../componentes/Selector/Selector.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
-import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
+import InputContainer from '../../../componentes/Input/InputContainer.jsx'
+import Line from '../../../componentes/Line/Line.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
+import Selector from '../../../componentes/Selector/Selector.jsx';
+
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './CreacionDocente.scss'
+
 const CreacionDocente = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -242,15 +244,15 @@ const CreacionDocente = () => {
     return (
         <div className='contenedorCreacionDocente'>
             <div className="crear">
-                <TituloDes titulo='CREAR PROFESOR' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
+                <TituloDes titulo='CREAR UN PROFESOR' desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Castro Henao' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
-                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Esteban' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre',  capitalizeWords(value))}  />
-                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' value={formData.correo} placeholder='esteban@gmail.com' onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Ingresa apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
+                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Ingresa nombre(s)' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre',  capitalizeWords(value))}  />
+                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' value={formData.correo} placeholder='Ej: correo@example.com' onChange={(value) => handleChange('correo', value)} />
                         <InputContainer nomInput="contra" required={true}  titulo='Contraseña'placeholder='*****' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
-                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='1116458796' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
-                        <InputContainer nomInput="areaEnsenanza" required={true}  titulo='Area Enseñanza' inputType='text' placeholder='Humanidades' value={formData.area} onChange={(value) => handleChange('area',  capitalizeWords(value))} />
+                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Ingresa documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
+                        <InputContainer nomInput="areaEnsenanza" required={true}  titulo='Area Enseñanza' inputType='text' placeholder='Ej: Humanidades' value={formData.area} onChange={(value) => handleChange('area',  capitalizeWords(value))} />
                     </div>
                     <div className="selectorMat">
                         <Selector titulo={'Asignacion de Materias'} mensajeVacio='Crea una materia' opciones={opcionesMaterias} valores={materiasSeleccionadas} onChange={handleChangeMaterias} placeholder={"Selecciona las materias"}></Selector>
@@ -274,8 +276,8 @@ const CreacionDocente = () => {
             <Line></Line>
             <div className="lista">
             <TituloDes 
-                    titulo='LISTADO DE PROFESORES:' 
-                    desc='Seleccione un profesor para mas informacion'
+                    titulo='LISTADO DE PROFESORES' 
+                    desc='Seleccione un profesor para más información'
                 />
                 <div className="informacion">
                     <div className="filtros">
@@ -284,6 +286,7 @@ const CreacionDocente = () => {
                             valorSeleccionado={profeSeleccionado}
                             setValorSeleccionado={setProfeSeleccionado}
                             titulo='Profesores'
+                            placeholder='Seleccione un profesor'
                         />
                         <button onClick={limpiarFiltros}>Limpiar</button>
                     </div>

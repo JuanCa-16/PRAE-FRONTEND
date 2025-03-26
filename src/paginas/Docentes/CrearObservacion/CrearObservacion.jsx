@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import './CrearObservacion.scss';
+
 import Alerta from '../../../componentes/Alerta/Alerta';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+
 import { useUser } from '../../../Contexts/UserContext';
+
+import './CrearObservacion.scss';
 
 const CrearObservacion = () => {
 
@@ -93,7 +96,7 @@ const CrearObservacion = () => {
         return (
             <div className='contenedorCrearObser'>
                 <div className="editar">
-                    <TituloDes titulo='REALIZAR OBSERVACION ESTUDIANTE' desc='Realiza observacion a tu estudiante' />
+                    <TituloDes titulo='REALIZAR OBSERVACIÓN A UN ESTUDIANTE' desc='Documenta y guarda una observación académica o disciplinaria a un estudiante.' />
                     <form onSubmit={handleSubmit} className="formulario">
                         <div className="inputs">
                             <div className="input-container">

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import InputContainer from '../../../componentes/Input/InputContainer';
-import NavBarItem from '../../../componentes/NavBar/NavBarItem';
-import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
+
 import FooterCom from '../../../componentes/FooterCom/FooterCom';
-import { useUser } from '../../../Contexts/UserContext';
+import InputContainer from '../../../componentes/Input/InputContainer';
 import NavBar from '../../../componentes/NavBar/NavBar';
-import { jwtDecode } from "jwt-decode";
+import NavBarItem from '../../../componentes/NavBar/NavBarItem';
+import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+
+import { useUser } from '../../../Contexts/UserContext';
+
 import './AjustesInstitucion.scss';
-import Alerta from '../../../componentes/Alerta/Alerta';
+
 const AjustesInstitucion = () => {
 
-    const {user,setUser} = useUser()
+    const {user} = useUser()
     const API_URL = process.env.REACT_APP_API_URL; 
     const token = localStorage.getItem("token");
 
@@ -55,7 +57,6 @@ const AjustesInstitucion = () => {
         formDataToSend.append("facebook", formData.facebook);
         formDataToSend.append("telefono", formData.telefono);
         formDataToSend.append("direccion", formData.direccion);
-        formDataToSend.append("documento_identidad", user.id);
         
         if (formData.logo) {
             formDataToSend.append("logo", formData.logo);
@@ -74,21 +75,11 @@ const AjustesInstitucion = () => {
                 const errorData = await response.json();
                 throw new Error(`${errorData.message || response.status}`);
             }
-
-            const data = await response.json();
-            Alerta.success("Institución actualizada correctamente");
-            console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
-            console.log('response', data)
-
-            if (data.token) {
-                // 2. Guarda el nuevo token en localStorage
-                localStorage.setItem("token", data.token);
     
-                setUser(jwtDecode(data.token));
-            }
+            console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
 
         } catch  (error) {
-            Alerta.error(error.message);
+            //toast
             console.error(error);
         }
 
@@ -107,7 +98,7 @@ const AjustesInstitucion = () => {
             setFormData((prev) => ({ ...prev, logo: file }));
             setPreview(URL.createObjectURL(file));
         } else {
-            Alerta.info("Por favor, selecciona una imagen válida.");
+            alert("Por favor, selecciona una imagen válida.");
         }
     };
 
@@ -121,7 +112,7 @@ const AjustesInstitucion = () => {
             '--color-pildora3': formData.color_pildora3,
             '--color-fondo': formData.fondo
         }}>
-            <TituloDes titulo='PERSONALIZACIÓN INSTITUCION' desc='Personaliza tu experiencia ajustando la aplicacion con tus preferencias.' />
+            <TituloDes titulo='PERSONALIZACIÓN DE LA INSTITUCIÓN' desc='Personaliza tu experiencia ajustando la plataforma con tus preferencias.' />
             <div className="contPersonalizacion">
             <div className="editar">
                 <form onSubmit={handleSubmit} className="formulario">
@@ -132,10 +123,10 @@ const AjustesInstitucion = () => {
                         <InputContainer className={'colorInput'} nomInput="color_pildora2" titulo='Color-2' inputType='color' value={formData.color_pildora2} required={true}  onChange={(value) => handleChange('color_pildora2', value)} />
                         <InputContainer className={'colorInput'} nomInput="color_pildora3" titulo='Color-3' inputType='color' value={formData.color_pildora3} required={true} onChange={(value) => handleChange('color_pildora3', value)}/>
                         <InputContainer  className={'colorInput'} nomInput="fondo" titulo='Fondo' inputType='color' value={formData.fondo} required={true} onChange={(value) => handleChange('fondo', value)}/>
-                        <InputContainer nomInput="nombre" titulo='Institucion' inputType='text' value={formData.nombre} required={true} onChange={(value) => handleChange('nombre', value)} />
+                        <InputContainer nomInput="nombre" titulo='Institución' inputType='text' value={formData.nombre} required={true} onChange={(value) => handleChange('nombre', value)} />
                         <InputContainer nomInput="facebook" titulo='Facebook' inputType='text' value={formData.facebook} required={false} onChange={(value) => handleChange('facebook', value)} />
                         <InputContainer nomInput="instagram" titulo='Instagram' inputType='text' value={formData.instagram} required={false} onChange={(value) => handleChange('instagram', value)} />
-                        <InputContainer nomInput="telefono" titulo='Telefono' inputType='text' value={formData.telefono} required={false} onChange={(value) => handleChange('telefono', value)} />
+                        <InputContainer nomInput="telefono" titulo='Teléfono' inputType='text' value={formData.telefono} required={false} onChange={(value) => handleChange('telefono', value)} />
                         <InputContainer nomInput="direccion" titulo='Dirección' inputType='text' value={formData.direccion} required={false} onChange={(value) => handleChange('direccion', value)} />
                         <InputContainer nomInput="logo" titulo='Logo' inputType='file' accept="image/*" onChange={handleFileChange} />
 
@@ -155,14 +146,14 @@ const AjustesInstitucion = () => {
                 <div className="p1">
                     <div className="casilla input"><InputContainer
                                         titulo="Correo electrónico:"
-                                        placeholder="correo@example.com"
+                                        placeholder="Ej: correo@example.com"
                                         />
                                         </div>
-                    <div className="casilla"><button className='btn'>Boton</button></div>
+                    <div className="casilla"><button className='btn'>Botón</button></div>
                     <div className="casilla tipo"><NavBarItem tipo={true}></NavBarItem></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='azul'></PildoraMateriaGrado></div>
-                    <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='morado'></PildoraMateriaGrado></div>
-                    <div className="casilla capsula"><PildoraMateriaGrado texto='MATEMATICAS' color='amarillo'></PildoraMateriaGrado></div>
+                    <div className="casilla capsula"><PildoraMateriaGrado texto='ESPAÑOL' color='morado'></PildoraMateriaGrado></div>
+                    <div className="casilla capsula"><PildoraMateriaGrado texto='CIENCIAS SOCIALES' color='amarillo'></PildoraMateriaGrado></div>
                     <div className="p2">
                     <NavBar imagen={preview? preview:''}></NavBar>
                     </div>
