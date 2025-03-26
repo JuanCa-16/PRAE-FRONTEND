@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './CrearMateria.scss'
-import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import InputContainer from '../../../componentes/Input/InputContainer';
-import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import Alerta from '../../../componentes/Alerta/Alerta.jsx';
-import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
-import Line from '../../../componentes/Line/Line.jsx';
 
+import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
+import InputContainer from '../../../componentes/Input/InputContainer';
+import Line from '../../../componentes/Line/Line.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './CrearMateria.scss'
 
 const CrearMateria = () => {
 
@@ -152,17 +154,17 @@ const CrearMateria = () => {
     return (
         <div className='crearMaterias'>
             <div className="crear">
-                <TituloDes titulo='CREAR MATERIA' desc='Ingresa el nombre de la materia nueva' ></TituloDes>
+                <TituloDes titulo='CREAR UNA MATERIA' desc='Ingresa el nombre de la asignatura que deseas agregar.' ></TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
-                    <InputContainer value={formData.materia} inputType='text' placeholder='Materia' titulo='Materia' required={true} onChange={(value) => handleChange('materia',  capitalizeWords(value))}></InputContainer>
+                    <InputContainer value={formData.materia} inputType='text' placeholder='Ingresa la materia...' titulo='Materia' required={true} onChange={(value) => handleChange('materia',  capitalizeWords(value))}></InputContainer>
                     <button type='submit'>CREAR</button>
                 </form>
             </div>
             <Line></Line>
             <div className="todosMaterias">
                 <TituloDes 
-                    titulo='LISTADO DE MATERIAS:' 
-                    desc='Eliminar una materia.'
+                    titulo='LISTADO DE MATERIAS' 
+                    desc='Accede al listado de materias y elimina la que desees.'
                 />
                 <div className="informacion">
                     <div className="filtros">
@@ -171,8 +173,8 @@ const CrearMateria = () => {
                             valorSeleccionado={materiaSeleccionada}
                             setValorSeleccionado={setMateriaSeleccionada}
                             titulo='Materia'
-                        />
-                        <button onClick={limpiarFiltros}>Limpiar</button>
+                            placeholder='Selecciona la materia...'                        />
+                        <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>

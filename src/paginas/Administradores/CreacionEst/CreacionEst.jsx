@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
-import './CreacionEst.scss'
-import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
-import InputContainer from '../../../componentes/Input/InputContainer.jsx'
-import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
-import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
-import Line from '../../../componentes/Line/Line.jsx';
-import Selector from '../../../componentes/Selector/Selector.jsx';
-import { useUser } from '../../../Contexts/UserContext.jsx';
+
 import Alerta from '../../../componentes/Alerta/Alerta.jsx';
+import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
+import InputContainer from '../../../componentes/Input/InputContainer.jsx'
+import Line from '../../../componentes/Line/Line.jsx';
+import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
+import Selector from '../../../componentes/Selector/Selector.jsx';
+import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx'
+
+import { useUser } from '../../../Contexts/UserContext.jsx';
+
+import './CreacionEst.scss'
+
 const CreacionEst = () => {
 
     const API_URL = process.env.REACT_APP_API_URL; 
@@ -231,17 +235,17 @@ const CreacionEst = () => {
     return (
         <div className='contenedorCreacionEst'>
             <div className="crear">
-                <TituloDes titulo='CREAR ESTUDIANTE' desc='Registra un nuevo profesor en la plataforma y asígnale los cursos que gestionará.'></TituloDes>
+                <TituloDes titulo='CREAR UN ESTUDIANTE' desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará.'></TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
-                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
-                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Nombres' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', capitalizeWords(value))}  />
-                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
+                        <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Ingresa apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
+                        <InputContainer nomInput="nombres" required={true}  titulo='Nombres' placeholder='Ingresa nombre(s)' value={formData.nombre} inputType='text' onChange={(value) => handleChange('nombre', capitalizeWords(value))}  />
+                        <InputContainer nomInput="coreo" required={true}  titulo='Correo' placeholder='Ej: correo@example.com' value={formData.correo} onChange={(value) => handleChange('correo', value)} />
                         <InputContainer nomInput="contra" required={true}  titulo='Contraseña'placeholder='*****' value={formData.contrasena} inputType="password" onChange={(value) => handleChange('contrasena', value)} />
-                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
+                        <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Ingresa documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
                     </div>
                     <div className="selectorGrado">
-                        <Selector titulo={'Asignacion de Grado'} multi={false} opciones={opcionesGrados} valores={gradoAsignado ? opcionesGrados.find((opcion) => opcion.value === gradoAsignado) : null} onChange={handleChangeGrado} placeholder={"Selecciona el grado"}></Selector>
+                        <Selector titulo={'Asignación de Grado'} multi={false} opciones={opcionesGrados} valores={gradoAsignado ? opcionesGrados.find((opcion) => opcion.value === gradoAsignado) : null} onChange={handleChangeGrado} placeholder={"Selecciona el grado"}></Selector>
                     </div>
                     <button type='submit'>Guardar Cambios</button>
                 </form>
@@ -249,8 +253,8 @@ const CreacionEst = () => {
             <Line></Line>
             <div className='contenedorObservaciones'>
                 <TituloDes 
-                    titulo='LISTADO DE ESTUDIANTES :' 
-                    desc='Listado de estudiantes registrados en la institucion en sus diferentes grados'
+                    titulo='LISTADO DE ESTUDIANTES' 
+                    desc='Listado de estudiantes registrados en la institución en sus diferentes grados'
                 />
                 <div className="informacion">
                     <div className="filtros">
@@ -259,14 +263,16 @@ const CreacionEst = () => {
                             valorSeleccionado={nombreEstudianteSeleccionada}
                             setValorSeleccionado={setnombreEstudianteSeleccionada}
                             titulo='Estudiantes'
+                            placeholder='Selecciona los estudiantes'
                         />
                         <CustomSelect
                             opciones={gradosUnicos}
                             valorSeleccionado={gradoSeleccionado}
                             setValorSeleccionado={setGradoSeleccionado}
                             titulo='Grado'
+                            placeholder='Selecciona el grado'
                         />
-                        <button onClick={limpiarFiltros}>Limpiar</button>
+                        <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
                     <div className="estudiantes">

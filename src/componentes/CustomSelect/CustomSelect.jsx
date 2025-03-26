@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./CustomSelect.scss";
 import { useTheme } from "../../Contexts/UserContext";
-const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titulo = "Titulo" }) => {
+
+const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titulo = "Titulo", placeholder }) => {
     const [abierto, setAbierto] = useState(false);
     const [filtro, setFiltro] = useState(valorSeleccionado || ""); // Estado del input
     const selectRef = useRef(null);
@@ -49,7 +50,7 @@ const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titul
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onClick={() => setAbierto(true)}
-                placeholder={titulo}
+                placeholder={placeholder}
                 className="selected"
             />
             {abierto && (
