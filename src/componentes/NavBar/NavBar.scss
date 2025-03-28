@@ -72,3 +72,59 @@
         }
     }
 }
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px); // Empieza 20px abajo
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: $max-celular){
+    .contenedorNavBar{
+        height: auto;
+        padding: 0.2rem 0.625rem;
+        border-top-left-radius: $radio1;
+        border-top-right-radius: $radio1;
+        z-index: 9999;
+
+        .menuSuperior{
+            z-index: 1000;
+            flex-direction: column-reverse;
+
+            .itemBar{
+                padding-top: 1rem;
+            }
+        }
+        
+        .txtInferior{
+            display: none ;
+        }
+
+        
+
+        &.ocultar{
+
+            
+            .linea{
+                display: none;
+            }
+
+            .itemBar{
+                
+                display: none;
+            }
+        }
+
+        &:not(.ocultar) {
+            .itemBar{
+                animation: slideUp 0.2s ease-in-out;
+            }
+        }
+    }
+}

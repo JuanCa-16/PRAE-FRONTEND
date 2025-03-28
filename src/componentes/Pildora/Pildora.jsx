@@ -20,9 +20,9 @@ const Pildora = ({titulo = "CALCULO 1", txtsuperior = "Juan Manuel", txtinferior
     return (
         <div className={`pildora ${color} ${theme}`} onClick={onClick}>
             <div className="info">
-                <p className="texto superior lato">{txtsuperior}</p>
-                <h4 className="titulo inter bold">{titulo.toUpperCase()}</h4>
-                <p className="texto inferior lato"> {txtinferior}</p>
+                <div className="textos"><p className="texto superior lato">{txtsuperior}</p></div>
+                <div className="textos"><h4 className="titulo inter bold">{titulo.toUpperCase()}</h4></div>
+                <div className="textos"><p className="texto inferior lato"> {txtinferior}</p></div>
             </div>
             <div className="elipse1" />
             <div className="elipse2"/>

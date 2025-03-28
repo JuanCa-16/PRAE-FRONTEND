@@ -80,14 +80,20 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
 
           setColorIcono(colorPrincipal);
       }, [user]);
+
+
+  const [abrir, setAbrir] = useState(false)
   
 
   return (
-    <div className={`contenedorNavBar ${theme}`}>
+    <div className={`contenedorNavBar ${abrir? 'mostrar': 'ocultar'} ${theme}`}>
       <div className='menuSuperior'>
         <div className="tituloSuperior">
           <div onClick={handleClick} ><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
-          {(rol !== 'normal') && (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
+          {(rol !== 'normal') && 
+          (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
+          {(rol !== 'normal') && 
+          (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setAbrir(!abrir)}><ExitIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ExitIcon></div>)}
         </div>
         <div className="linea"></div>
         <nav className="itemBar">
@@ -97,21 +103,23 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
         </nav>
       </div>
       
-      {
+      <div className="txtInferior">
+        {
         rol === 'estudiante' ? (
 
-          <PildoraEst est={nombreUsuario} curso={grado} ></PildoraEst>
+          <PildoraEst   est={nombreUsuario} curso={grado} ></PildoraEst>
           
         ) : rol === 'docente' ? (
           
-          <NavBarItem tipo={true} texto={nombreUsuario}></NavBarItem>
+          <NavBarItem  tipo={true} texto={nombreUsuario}></NavBarItem>
           
         ) :  (
           
-          <NavBarItem tipo={true} texto={nombreUsuario} color="amarillo"></NavBarItem>
+          <NavBarItem  tipo={true} texto={nombreUsuario} color="amarillo"></NavBarItem>
           
         )
       }
+      </div>
     </div>
     
   )
