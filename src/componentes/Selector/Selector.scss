@@ -18,6 +18,8 @@
         
     }
 
+    
+
     .react-select__menu{
         border-radius: $radio1;
     }
@@ -89,6 +91,13 @@
         border-color: var(--colorPrincipal);
         outline-color: var(--colorPrincipal);
         
+    }
+
+
+    .react-select__placeholder{
+        opacity: 50%;
+        font-family: 'Lato', sans-serif; 
+        font-size: 1rem;
     }
 }
 

@@ -20,7 +20,7 @@ import { useTheme } from '../../Contexts/UserContext.jsx';
  *      - func (func): Función a ejecutar al hacer clic en el botón de salida.
  */
 
-const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func, imagen}) => {
+const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func, imagen, inst}) => {
   const menus = {
     normal: [
       { texto: "Materias", icono: StudyIcon, ruta: `#` },
@@ -99,24 +99,29 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     };
   }, []);
 
+  const itemActivo = menuSeleccionado.find(item => location.pathname.startsWith(item.ruta))?.texto || "";
+
+
   return (
     <>
     {abrir && <div className="overlay" onClick={() => setAbrir(false)}></div>}
-    <div ref={navRef} className={`contenedorNavBar ${abrir? 'mostrar': 'ocultar'} ${theme}`}>
+    <div ref={navRef} className={`contenedorNavBar ${abrir? 'mostrar': 'ocultar'} ${theme} ${inst}`}>
       <div className='menuSuperior'>
         <div className="tituloSuperior">
-          <div onClick={handleClick} ><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+          <div onClick={handleClick} className='contLogo'><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
           <div className="iconosNav">
           {(rol !== 'normal') && 
           (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}
           {(rol !== 'normal') && 
-          (<div className="iconoTheme menuHamburgesa" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setAbrir(!abrir)}><MenuIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></MenuIcon></div>)}
+          (<div className="menuHamburgesa" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setAbrir(!abrir)}> <NavBarItem tipo={true} texto={itemActivo} icono={MenuIcon}></NavBarItem> <MenuIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></MenuIcon></div>)}
           </div>
         </div>
         <div className="linea"></div>
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
-            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname.startsWith(item.ruta)} onClick={abrir ? () => setAbrir(false) : () => {}}/>))}
+            
+            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname.startsWith(item.ruta)} onClick={abrir ? () => setAbrir(false) : () => {}}/>)
+            )}
             {(rol !== 'normal') &&(<NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>)}
         </nav>
       </div>

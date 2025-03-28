@@ -11,6 +11,7 @@ const Selector = ({titulo, multi = true, disabled=false, opciones, valores, onCh
             <Select
                 // menuIsOpen={true}
                 classNamePrefix="react-select"
+                className='inputSelect'
                 isMulti = {multi}
                 options={opciones}
                 value={valores}
