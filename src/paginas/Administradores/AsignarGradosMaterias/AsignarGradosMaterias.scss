@@ -1,5 +1,5 @@
 @import '../../../global.scss';
-
+@import '../../../variables.scss';
 .contenedorAsignarGradosMaterias{
     display: flex;
     flex-direction: column;
@@ -80,10 +80,30 @@
                 gap: 1.5rem;
                 align-self: stretch;
                 flex-wrap: wrap;
+                justify-content: center;
+                padding-top: 2rem;
             }
         }
 
         
     }
 
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorAsignarGradosMaterias{
+
+        .crear{
+
+            .formulario{
+
+    
+                .selectorGrado, .selecciones{
+                    flex-direction: column;
+                }
+
+            }
+        }
+    
+    }
 }

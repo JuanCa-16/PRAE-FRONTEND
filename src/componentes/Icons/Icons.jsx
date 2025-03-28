@@ -211,5 +211,20 @@ const InstagramIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, he
   </svg>
 )
 
+const MenuIcon =  ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={15}
+    height={12}
+    fill="none"
+    {...props}
+  >
+    <path className={(estado || activo)? 'colorear':'normal'}
+      fill={dark? (estado || activo ? "#157AFE" : "#ECECEC") : (estado || activo ? color : colorApagado )}
+      d="M.833 12h13.334c.458 0 .833-.45.833-1s-.375-1-.833-1H.833C.375 10 0 10.45 0 11s.375 1 .833 1Zm0-5h13.334c.458 0 .833-.45.833-1s-.375-1-.833-1H.833C.375 5 0 5.45 0 6s.375 1 .833 1ZM0 1c0 .55.375 1 .833 1h13.334c.458 0 .833-.45.833-1s-.375-1-.833-1H.833C.375 0 0 .45 0 1Z"
+    />
+  </svg>
+)
+
 // Exporta todos los iconos
-export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon,FacebookIcon,InstagramIcon }
+export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon,FacebookIcon,InstagramIcon,MenuIcon }

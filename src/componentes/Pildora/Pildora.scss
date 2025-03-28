@@ -1,5 +1,5 @@
 @import '../../global.scss';
-
+@import '../../variables.scss';
 //Estilos de la pildora
 .pildora {
     // display: inline-flex;
@@ -244,6 +244,6 @@
         min-width: 7em;
 
         //Nuevo
-        max-width: 7rem;
+        max-width: 8.9rem;
     }
 }

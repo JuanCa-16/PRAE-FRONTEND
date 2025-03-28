@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./componentes/Alerta/Alerta.scss";
-//variables de colores
+@import './variables.scss';
 
 :root{
     --colorPrincipal:#157AFE;
@@ -44,8 +44,6 @@ $radio2: 0.875rem;
 $radio3: 1.625rem;
 $radio4: 2rem;
 
-
-$max-celular: 700px;
 
 
 *,
@@ -230,6 +228,8 @@ button{
         height: 100vh;
         padding: 0;
         margin: 0;
+        position: relative;
+        z-index: 9999;
 
          //Ocupa lo restante y scroll
         .main-content {
@@ -238,6 +238,8 @@ button{
             max-height: 100%;
             overflow: auto;
             padding: 1.5rem 1.5rem 6.875rem 1.5rem;
+            position: relative;
+            z-index: 500;
         }
     
         //Ocupa un pedazo de la pantalla
@@ -250,6 +252,7 @@ button{
             height: auto;
             position: fixed;
             bottom: 0;
+            z-index: 9999;
         }
     
     

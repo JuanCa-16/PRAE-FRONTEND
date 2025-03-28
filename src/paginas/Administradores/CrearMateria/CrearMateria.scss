@@ -1,3 +1,4 @@
+@import '../../../variables.scss';
 
 .crearMaterias{
     display: flex;
@@ -58,4 +59,10 @@
         }
     }
 
+}
+
+@media screen and (max-width: $max-celular){
+    .crearMaterias{
+        padding: 0rem 0.5rem;
+    }
 }

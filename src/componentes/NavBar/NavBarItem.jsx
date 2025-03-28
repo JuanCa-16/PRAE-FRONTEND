@@ -18,7 +18,7 @@ import { useUser } from '../../Contexts/UserContext.jsx';
  *      - activo (boolean): Indica si el ítem está activo.
  *      - func (func): Función a ejecutar al hacer clic.
  */
-const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo, func }) => {
+const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", tipo, color, activo, func, onClick = () => {}}) => {
     const navigate = useNavigate(); // Hook para redirigir
 
     const {theme} = useTheme()
@@ -32,6 +32,7 @@ const NavBarItem = ({ icono: Icon = HomeIcon, texto = "Principal", ruta = "/", t
     
         if (ruta) {
             navigate(ruta);
+            onClick()
         }
     };
 
