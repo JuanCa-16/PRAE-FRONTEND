@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./componentes/Alerta/Alerta.scss";
-//variables de colores
+@import './variables.scss';
 
 :root{
     --colorPrincipal:#157AFE;
@@ -43,6 +43,7 @@ $radio1: 0.5rem;
 $radio2: 0.875rem;
 $radio3: 1.625rem;
 $radio4: 2rem;
+
 
 
 *,
@@ -194,6 +195,76 @@ button{
     width: 100%;
 }
 
+
+
+
+
+@media screen and (max-width: $max-celular) {
+    
+    //Estilos de letra (ROBOTO por defecto)
+    h1 {
+        font-size: 3rem; /* 48px */
+    }
+
+    h2 {
+        font-size: 2.25rem; /* 36px */
+    }
+
+    h3 {
+        font-size: 1.5rem; /* 24px */
+    }
+
+    h4 {
+        font-size: 1rem; /* 24px */
+    }
+
+    p {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .App{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        z-index: 9999;
+
+         //Ocupa lo restante y scroll
+        .main-content {
+            width: 100%;
+            background-color: var(--fondo);
+            max-height: 100%;
+            overflow: auto;
+            padding: 1.5rem 1.5rem 6.875rem 1.5rem;
+            position: relative;
+            z-index: 500;
+        }
+    
+        //Ocupa un pedazo de la pantalla
+        .navbar {
+            all: unset;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            padding: 0;
+            height: auto;
+            position: fixed;
+            bottom: 0;
+            z-index: 9999;
+        }
+    
+    
+        //Si es el login toda la pantalla
+        .completo{
+            width: 100%;
+            height: 100vh;
+        }
+    }
+
+
+}
 
 .dark {
     body {

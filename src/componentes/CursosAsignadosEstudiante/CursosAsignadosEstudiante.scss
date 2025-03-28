@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .contenedorCursos{
     display: flex;
     padding: 0rem 1.5rem;
@@ -5,5 +7,10 @@
     align-items: flex-start;
     gap: 3.0625rem;
     align-self: stretch;
+}
 
+@media screen and (max-width: $max-celular){
+    .contenedorCursos{
+        padding: 0rem 0.5rem;
+    }
 }

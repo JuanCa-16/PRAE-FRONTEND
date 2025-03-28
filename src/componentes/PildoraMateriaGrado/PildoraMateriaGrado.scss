@@ -13,6 +13,10 @@
     position: relative;
     width: fit-content;
 
+    .materia{
+        position: relative;
+    }
+
     h4{
         color: color-mix(in srgb, var(--colorPildora1) 10%, rgb(255, 255, 255));
         font-weight: bold;

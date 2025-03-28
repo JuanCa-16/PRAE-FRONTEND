@@ -1,18 +1,29 @@
 @import '../../global.scss';
-
+@import '../../variables.scss';
 //Estilos de la pildora
 .pildora {
-    border-radius: $radio4;
-    box-shadow: 0px 4px 11px #00000033;
-    overflow: hidden;
-    display: inline-flex;
-    padding: 1.2rem 1rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
+    // display: inline-flex;
+    // width: fit-content;
+    display: flex;
+    width: 100%;
+
+
     position: relative;
-    min-width: 9.5rem;
+    box-shadow: 0px 4px 11px #00000033;
+    border-radius: $radio4;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    //padding: 1.2rem 1rem;
+    // min-width: 9.5rem;
+    min-width: 10.6rem;
+
+    //Nuevo
+    max-width: 13rem;
+    text-align: center;
+    flex-shrink: 0;
 
     h4{
         color: $blanco;
@@ -35,41 +46,77 @@
     
     //Estilos del texto
     .info{
-        align-items: center;
-        display: inline-flex;
         flex-direction: column;
-        gap: 6px;
+        align-items: center;
         justify-content: center;
-        position: relative;
+        // display: inline-flex;
+        gap: 0.3rem;
+        // position: relative;
+
+        //nuevo
+        display: flex;
+        align-self: stretch;
+        padding: 0.75rem 0.4rem;
+
+        .textos{
+            align-self: stretch;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-content: center;
+        }
 
         .texto{
             font-size: 0.7rem;
-            align-self: stretch;
+            //align-self: stretch;
             line-height: normal;
+            // position: relative;
+            // text-align: center;
+            //color: $blanco;
+            flex: 1;
             position: relative;
-            text-align: center;
-            color: $blanco;
+            
+        }
+
+        .titulo{
+            word-break: break-word;
         }
 
     }
 
     //Dibujar figuras del fondo
     .elipse1, .elipse2{
-        background-color: $blanco;
-        border-radius: 119.5px;
-        height: 239px;
-        left: -150px;
-        opacity: 0.1;
         position: absolute;
-        top: -150px;
-        width: 239px;
+        background-color: $blanco;
+        // border-radius: 119.5px;
+        height: 239px;
+        opacity: 0.1;
+        // left: -150px;
+        // top: -150px;
+        // width: 239px;
+        width: calc(100% + 68px);
+
+        //nuevo
+        margin: 0;
+        top: calc(50% - 232.5px);
+        right: 63px;
+        left: -131px;
+        border-radius: 50%;
+
+
     }
 
     .elipse2{
-        left: 100px;
+        // left: 100px;
         opacity: 0.05;
-        position: absolute;
-        top: 0px;
+        // top: 0px;
+        top: calc(50% - 57.5px);
+        left: 95px;
+
+        //nuevo
+        right: -163px;
     }
 
     //Efectos hover
@@ -189,5 +236,14 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .pildora{
+        min-width: 7em;
+
+        //Nuevo
+        max-width: 8.9rem;
     }
 }

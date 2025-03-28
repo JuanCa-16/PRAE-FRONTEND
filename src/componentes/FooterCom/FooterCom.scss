@@ -1,5 +1,5 @@
 @import '../../global.scss';
-
+@import '../../variables.scss';
 .contenedorFooter{
     display: flex;
     padding: 2.25rem 6rem;
@@ -85,4 +85,38 @@
         overflow-wrap: break-word;
         word-wrap: break-word;
     }
+}
+
+
+@media screen and (max-width: $max-celular){
+
+    .contenedorFooter{
+        
+        padding: 1.5rem 2.5rem;
+
+        a {
+            text-decoration: none; /* Quita el subrayado */
+            color: inherit; /* Usa el color del texto del padre */
+        }
+        
+        .contenedor{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5625rem;
+            flex-wrap: wrap;
+            width: auto;
+            max-width: 100%;
+            margin: auto;
+    
+        }
+
+        .contenedorImg{
+            max-width: 30%;
+            margin: auto;
+        }
+    
+        
+    }
+
 }

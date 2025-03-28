@@ -1,5 +1,5 @@
 @import '../../global.scss';
-
+@import '../../variables.scss';
 //Estilos de la NavBar
 .contenedorNavBar{
     background-color: var(--colorSecundario);
@@ -27,6 +27,16 @@
             align-content: center;
             justify-content: space-between;
             width: 100%;
+
+            .iconosNav{
+                display: flex;
+                width: 10%;
+                justify-content: center;
+
+                .menuHamburgesa{
+                    display: none;
+                }
+            }
             
         }
 
@@ -71,4 +81,98 @@
             background-color: $dark-blanco;
         }
     }
+}
+
+.overlay{
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px); // Empieza 20px abajo
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+@media screen and (max-width: $max-celular){
+
+    .overlay {
+
+        opacity: 1;
+        visibility: visible;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5); // Color oscuro con transparencia
+        z-index: -1; // Debe estar por debajo de la NavBar pero encima del contenido
+        transition: opacity 3s ease-in-out;
+    }
+
+    .contenedorNavBar{
+        height: auto;
+        padding: 0.2rem 0.625rem;
+        border-top-left-radius: $radio1;
+        border-top-right-radius: $radio1;
+        box-shadow:  0px -10px 11px rgba(62, 61, 61, 0.733);
+
+        .menuSuperior{
+            
+            flex-direction: column-reverse;
+
+            .itemBar{
+                padding-top: 1rem;
+            }
+
+            .tituloSuperior{
+                .iconosNav{
+                    display: flex;
+                    width: 10%;
+                    justify-content: space-between;
+    
+                    .menuHamburgesa{
+                        display: flex;
+                    }
+                }
+            }
+        }
+        
+        .txtInferior{
+            display: none ;
+        }
+
+        
+
+        &.ocultar{
+
+            box-shadow:  0px -2px 20px rgba(62, 61, 61, 0.479);
+
+            
+            .linea{
+                display: none;
+            }
+
+            .itemBar{
+                
+                display: none;
+            }
+        }
+
+        &:not(.ocultar) {
+            .itemBar{
+                animation: slideUp 0.2s ease-in-out;
+            }
+        }
+    }
+
+
 }

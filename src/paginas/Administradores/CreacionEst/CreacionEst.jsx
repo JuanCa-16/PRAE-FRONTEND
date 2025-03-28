@@ -251,7 +251,7 @@ const CreacionEst = () => {
                 </form>
             </div>
             <Line></Line>
-            <div className='contenedorObservaciones'>
+            <div className='contenedorListadoEst'>
                 <TituloDes 
                     titulo='LISTADO DE ESTUDIANTES' 
                     desc='Listado de estudiantes registrados en la institución en sus diferentes grados'

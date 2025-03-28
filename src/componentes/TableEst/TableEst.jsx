@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react'
 import './TableEst.scss'
-import InputContainer from '../Input/InputContainer';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
 import Celda from '../Celda/Celda';
 import { useUser } from '../../Contexts/UserContext';
@@ -72,7 +71,7 @@ const TableEst = ({infoMateria, idEst } ) => {
                 </div>
                 {/* {(info.length > 0)? (<h1>MAYOR</h1>) : <p>No hay actividades todavia</p>} */}
             </div>
-            <InputContainer titulo='Observaciones' isDisabled={true} value='Sin Observaciones'></InputContainer>
+
         </div>
     )
 }

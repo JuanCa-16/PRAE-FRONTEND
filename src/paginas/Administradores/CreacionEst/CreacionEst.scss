@@ -1,4 +1,5 @@
 @import '../../../global.scss';
+@import '../../../variables.scss';
 
 .contenedorCreacionEst{
     display: flex;
@@ -89,5 +90,12 @@
             align-self: stretch;
             flex-wrap: wrap;
         }
+    }
+}
+
+
+@media screen and (max-width: $max-celular){
+    .contenedorCreacionEst{
+
     }
 }
