@@ -4,7 +4,7 @@
 .logoContenedor{
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
     position: relative;
     width: 100%;
     justify-content: flex-start;
@@ -35,6 +35,10 @@
         object-position: center;
         max-width: 100%;
         max-height: 100%; // Reduce el tamaño de la imagen al 80%
+    }
+
+    .textos{
+        max-width: 100%;
     }
 
     // //Aplicar color Morado

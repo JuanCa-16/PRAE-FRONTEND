@@ -108,7 +108,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     <div ref={navRef} className={`contenedorNavBar ${abrir? 'mostrar': 'ocultar'} ${theme} ${inst}`}>
       <div className='menuSuperior'>
         <div className="tituloSuperior">
-          <div onClick={handleClick} className='contLogo'><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "PROFESORES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
+          <div onClick={handleClick} className='contLogo'><LogoPrae imagen={imagen} color = {rol === 'docente' ? "morado" : rol === 'estudiante' ? "azul" : "amarillo"} texto={rol === 'docente' ? "DOCENTES" : rol === 'estudiante' ? "ESTUDIANTES" : "RECTORES"}></LogoPrae></div>
           <div className="iconosNav">
           {(rol !== 'normal') && 
           (<div className="iconoTheme" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><ThemeIcon color={colorIcono} colorApagado={colorIcono} estado= {hovered} dark={theme === 'dark'}></ThemeIcon></div>)}

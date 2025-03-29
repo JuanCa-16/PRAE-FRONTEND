@@ -147,7 +147,8 @@
             .tituloSuperior{
                 min-height: fit-content;
                 height: 4rem;
-                gap: .5rem;
+                //gap: .3rem;
+                flex-wrap: nowrap;
                 .iconosNav{
                     display: flex;
                     width: auto;
@@ -182,6 +183,7 @@
                 }
 
                 .contLogo{
+                    max-width: 45%;
                     margin: auto;
                 }
             }
