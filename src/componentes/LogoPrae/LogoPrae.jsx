@@ -18,8 +18,10 @@ const LogoPrae = ({texto = "ESTUDIANTES", color,imagen}) => {
     return (
     <div className={`logoContenedor ${theme}`}>
         <img className="logoPrae" alt="" src={imagen? imagen : icono}/>
-        <p className="bold">PRAE</p>
-        <p className={`${color} texto`}>{texto}</p>
+        <div className="textos">
+            <p className="bold">PRAE</p>
+            <p className={`${color} texto`}>{texto}</p>
+        </div>
     </div>
     )
 }

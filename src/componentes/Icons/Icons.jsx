@@ -12,7 +12,7 @@ const HomeIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 
 
   return (
     <svg
-      className="iconos"
+      className="iconosSvg"
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
@@ -31,6 +31,7 @@ const HomeIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 
 
 const StudyIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 30, estado, activo,dark, ...props }) => (
   <svg
+    className="iconosSvg"
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
@@ -152,6 +153,7 @@ const ExitIcon = ({ color = "#000", colorApagado = '#000', width = 30, height = 
 
 const ThemeIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
   <svg
+    className="iconosSvg"
     xmlns="http://www.w3.org/2000/svg"
     width={17}
     height={17}
@@ -213,8 +215,9 @@ const InstagramIcon = ({ color = "#157AFE",colorApagado = '#000', width = 30, he
 
 const MenuIcon =  ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
   <svg
+    className="iconosSvg"
     xmlns="http://www.w3.org/2000/svg"
-    width={15}
+    width={20}
     height={12}
     fill="none"
     {...props}

@@ -245,7 +245,7 @@ const CreacionEst = () => {
                         <InputContainer nomInput="doc" required={true}  titulo='Documento' inputType='text' placeholder='Ingresa documento' value={formData.doc} onChange={(value) => handleChange('doc', value)} />
                     </div>
                     <div className="selectorGrado">
-                        <Selector titulo={'Asignación de Grado'} multi={false} opciones={opcionesGrados} valores={gradoAsignado ? opcionesGrados.find((opcion) => opcion.value === gradoAsignado) : null} onChange={handleChangeGrado} placeholder={"Selecciona el grado"}></Selector>
+                        <Selector titulo={'Asignación de Grado'} multi={false} opciones={opcionesGrados} valores={gradoAsignado ? opcionesGrados.find((opcion) => opcion.value === gradoAsignado) : null} onChange={handleChangeGrado} placeholder={"Grado"}></Selector>
                     </div>
                     <button type='submit'>Guardar Cambios</button>
                 </form>

@@ -155,7 +155,7 @@ const AjustesInstitucion = () => {
                     <div className="casilla capsula"><PildoraMateriaGrado texto='ESPAÑOL' color='morado'></PildoraMateriaGrado></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='CIENCIAS SOCIALES' color='amarillo'></PildoraMateriaGrado></div>
                     <div className="p2">
-                    <NavBar imagen={preview? preview:''}></NavBar>
+                    <NavBar imagen={preview? preview:''} inst='instNav'></NavBar>
                     </div>
                     <div className="casilla capsula"><FooterCom imagen={preview? preview:'' }></FooterCom></div>
 

@@ -1,5 +1,5 @@
 //estilos
-@import '../../../global.scss';
+@import '../../../variables.scss';
 
 .contenedorCursosDocentes{
     display: flex;
@@ -8,4 +8,10 @@
     align-items: flex-start;
     gap: 3.0625rem;
     align-self: stretch;
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorCursosDocentes{
+        padding: 0rem 0.5rem;
+    }
 }

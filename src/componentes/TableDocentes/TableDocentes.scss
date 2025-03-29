@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import '../../variables.scss';
 
 .contenedorNotas{
     display: flex;
@@ -6,7 +7,7 @@
     flex-direction: column;
     height: 100%;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 2.5rem;
     align-self: stretch;
 
     .contenedor{
@@ -84,6 +85,7 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
+        padding-top: 2rem;
 
         .titulo{
             display: flex;
@@ -114,5 +116,12 @@
             height: 50%;
             width: 50%;
         }
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorNotas{
+        .contenedorAct{
+            width: 100%; }
     }
 }

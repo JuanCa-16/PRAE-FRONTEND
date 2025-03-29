@@ -104,6 +104,43 @@
 
             }
         }
+        .lista{
+
+            .informacion{
+
+        
+                .filtros{
+                    display: flex;
+                    width: 100%;
+                    align-items: flex-end;
+                    gap: 2.75rem;
+                    align-self: stretch;
+                    flex-wrap: wrap;
+
+                    .custom-select{
+                        width: 40%;
+                        
+
+                        p{
+                            width: 100%;
+                        }
+
+                        input{
+                            width: 100%;
+                        }
+                    }
+        
+                    button{
+                        width: fit-content;
+                    }
+        
+                }
+        
+
+            }
+    
+            
+        }
     
     }
 }

@@ -136,6 +136,7 @@ function App() {
     catch (error) {
       console.error("Error al iniciar sesión:", error);
       Alerta.error(error.message);
+      window.scrollTo(0, 0);
       return null;
     }
 

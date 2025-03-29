@@ -1,5 +1,5 @@
 //estilos
-@import '../../../global.scss';
+@import '../../../variables.scss';
 
 .contenedorObservaciones{
     display: flex;
@@ -38,5 +38,11 @@
             align-self: stretch;
             flex-wrap: wrap;
         }
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorObservaciones{
+        padding: 0rem 0.5rem;
     }
 }
