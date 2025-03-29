@@ -218,11 +218,12 @@
                 align-self: stretch;
                 flex-shrink: 0;
                 background-color: var(--fondo);
-                border-radius: 2rem;
+                border-top-left-radius: 2rem;
+                border-top-right-radius: 2rem;
                 position: relative;
                 margin-top: -2rem; // Ajusta según cuánto quieras que se solape
                 z-index: 1; // Asegura que esté por encima de .izq
-                box-shadow:  0px -10px 11px rgba(170, 167, 167, 0.733);
+                box-shadow:  0px -10px 11px rgba(170, 167, 167, 0.548);
                 min-height: fit-content;
 
                 .title{
