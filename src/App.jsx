@@ -11,6 +11,7 @@ import Alerta from "./componentes/Alerta/Alerta.jsx";
 import VistaMateria from './paginas/Estudiantes/VistaMateria/VistaMateria.jsx';
 import PerfilEst from './paginas/Estudiantes/PerfilEst/PerfilEst.jsx';
 import CursosEst from './paginas/Estudiantes/CursosEst/CursosEst.jsx';
+import ObservacionesEst from './paginas/Estudiantes/ObservacionesEst/ObservacionesEst.jsx';
 
 //DOCENTES
 import CursosDocentes from './paginas/Docentes/CursosDocentes/CursosDocentes.jsx';
@@ -220,6 +221,7 @@ function App() {
                 
                 <Route path="/materias/:nombreEst" element={<CursosEst/>} />
                 <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
+                <Route path="/observacionesEst" element={<ObservacionesEst></ObservacionesEst>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
             </Route>
 

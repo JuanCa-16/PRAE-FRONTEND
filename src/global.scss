@@ -142,9 +142,9 @@ button{
     }
 
     &:disabled {
-        background-color: $contraste-azul;  // Color gris para deshabilitado
+        background-color: var(--colorPrincipal);;  // Color gris para deshabilitado
         cursor: not-allowed;     // Cambia el cursor para indicar que no es interactivo
-        opacity: 0.7;            // Menor opacidad
+        opacity: 0.1;            // Menor opacidad
         box-shadow: none;
         color: black;
     }

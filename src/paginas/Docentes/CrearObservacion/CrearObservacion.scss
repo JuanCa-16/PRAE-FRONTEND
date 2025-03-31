@@ -53,7 +53,7 @@
                         resize: none;
 
                         &:focus {
-                            outline: 1px solid $azul; 
+                            outline: 1px solid var(--colorPrincipal);; 
                         }
                     }
                 }
@@ -65,7 +65,17 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        gap: 2rem;
+        gap: 1rem;
+
+        p{
+            background-color: $contraste-blanco;
+            padding: 1rem;
+            border-radius: $radio1;
+        }
+
+        .fuerte{
+            color: var(--colorPrincipal);
+        }
     }
 
     button{

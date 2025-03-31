@@ -29,6 +29,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     estudiante: [
       { texto: "Materias", icono: StudyIcon, ruta: `/materias/${nombreUsuario}` },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
+      { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observacionesEst" }
     ],
     docente: [
       { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
@@ -45,6 +46,8 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
     ],
   };
+
+  
 
   const menuSeleccionado = menus[rol] || menus.normal; // Usa el menú según el rol
 
@@ -99,7 +102,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     };
   }, []);
 
-  const itemActivo = menuSeleccionado.find(item => location.pathname.startsWith(item.ruta))?.texto || "";
+  const itemActivo = menuSeleccionado.find(item => decodeURIComponent(location.pathname).startsWith(item.ruta))?.texto || "";
 
 
   return (
@@ -120,7 +123,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
         <nav className="itemBar">
           {menuSeleccionado.map((item, index) => (
             
-            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={location.pathname.startsWith(item.ruta)} onClick={abrir ? () => setAbrir(false) : () => {}}/>)
+            <NavBarItem key={index} icono={item.icono} texto={item.texto}  ruta={item.ruta} activo={decodeURIComponent(location.pathname).startsWith(item.ruta)} onClick={abrir ? () => setAbrir(false) : () => {}}/>)
             )}
             {(rol !== 'normal') &&(<NavBarItem func={func} icono={ExitIcon} texto={"Salir"} ruta='/login'/>)}
         </nav>
