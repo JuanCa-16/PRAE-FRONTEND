@@ -1,0 +1,26 @@
+@import '../../../global.scss';
+
+.contenedorObservacionesEst{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    align-self: stretch;
+    .observaciones{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+
+        p{
+            background-color: $contraste-blanco;
+            padding: 1rem;
+            border-radius: $radio1;
+        }
+
+        .fuerte{
+            color: var(--colorPrincipal);
+        }
+    }
+} 

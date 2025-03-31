@@ -113,7 +113,23 @@ const CrearObservacion = () => {
                 </div>
                 <div className="observaciones">
                     {(observacionesEst.length > 0)? (
-                        observacionesEst.map((observacionesEst, index) => (<TituloDes key={index} desc={observacionesEst.comentario} titulo={`Observacion #${index + 1}`} ></TituloDes>))
+                        <>
+                        <h4>Observaciones</h4>
+                        {observacionesEst.map((observacion, index) => {
+                          // Convertir fecha
+                        const fechaFormateada = new Date(observacion.fecha).toLocaleDateString("es-CO", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        });
+                    
+                        return (
+                            <p key={index}>
+                              <strong className='fuerte'>{fechaFormateada}:</strong> {observacion.comentario}
+                            </p>
+                          );
+                        })}
+                      </>
                     ):(
                         <p className="">
                             El estudiante todavia no tiene observaciones

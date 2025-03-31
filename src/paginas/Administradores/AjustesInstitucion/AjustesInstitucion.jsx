@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-
+import { jwtDecode } from 'jwt-decode';
 import FooterCom from '../../../componentes/FooterCom/FooterCom';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import NavBar from '../../../componentes/NavBar/NavBar';
 import NavBarItem from '../../../componentes/NavBar/NavBarItem';
 import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
-
+import Alerta from '../../../componentes/Alerta/Alerta';
 import { useUser } from '../../../Contexts/UserContext';
 
 import './AjustesInstitucion.scss';
 
 const AjustesInstitucion = () => {
 
-    const {user} = useUser()
+    const {user,setUser} = useUser()
     const API_URL = process.env.REACT_APP_API_URL; 
     const token = localStorage.getItem("token");
 
@@ -57,6 +57,7 @@ const AjustesInstitucion = () => {
         formDataToSend.append("facebook", formData.facebook);
         formDataToSend.append("telefono", formData.telefono);
         formDataToSend.append("direccion", formData.direccion);
+        formDataToSend.append("documento_identidad", user.id);
         
         if (formData.logo) {
             formDataToSend.append("logo", formData.logo);
@@ -73,13 +74,25 @@ const AjustesInstitucion = () => {
     
             if (!response.ok) {
                 const errorData = await response.json();
+                console.log(errorData)
                 throw new Error(`${errorData.message || response.status}`);
             }
     
-            console.log("INSTITUCIÓN EDITADA EXITOSAMENTE");
+            const data = await response.json();
+            console.log("INSTITUCIÓN EDITADA EXITOSAMENTE", data);
+    
+            Alerta.success("Datos actualizados correctamente");
+
+            if (data.token) {
+                // 2. Guarda el nuevo token en localStorage
+                localStorage.setItem("token", data.token);
+    
+                setUser(jwtDecode(data.token));
+            }
 
         } catch  (error) {
             //toast
+            Alerta.error(error.message);
             console.error(error);
         }
 
