@@ -49,7 +49,7 @@ cd prae-frontend
 npm install
 
 # Corre el proyecto en desarrollo
-npm run dev
+npm start
 ```
 
 
