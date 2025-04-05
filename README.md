@@ -25,14 +25,15 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
 
 ## 🛠️ Tecnologías Utilizadas
 
-- ⚛️ **Framework**: React.js + Vite
-- 🎨 **Estilos**: Bootstrap 5 + Sass
+- ⚛️ **Framework**: React.js
+- 🎨 **Estilos**: Sass
 - 🔄 **Gestión de Estado**: Context API
 - 📡 **Comunicación Backend**: API REST con Axios
 - 📈 **Gráficas y Reportes**: Chart.js o Victory.js
 - 🔐 **Autenticación**: Firebase Authentication
 - ☁️ **Servicios Cloud**: Firebase Firestore + Google Cloud
 - 📲 **Notificaciones Push**: Firebase Cloud Messaging (FCM)
+- 🚀 **Despliegue**: Vercel, Netlify
 
 ---
 
