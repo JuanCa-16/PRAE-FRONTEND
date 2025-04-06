@@ -201,7 +201,10 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                                     valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
                                                     modalTitulo='EDITAR NOTA'
                                                     modalTexto='Edita la nota de esta actividad'
-                                                    extraData={{materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0] }}
+                                                    extraData={{notaOriginal:  actividadEncontrada.nota, 
+                                                        materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
+                                                        id_actividad: actividad.idAct,
+                                                        id_estudiante: estudiante.documento_identidad,}}
                                                 />
                                             )}
                                         </div>
