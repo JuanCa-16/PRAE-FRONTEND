@@ -23,6 +23,16 @@
     margin-bottom: 10px;
 }
 
+.my-toast-large {
+    white-space: pre-line;
+    max-width: 2000px;
+    min-width: 1500px;
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+    font-size: 17px;
+}
+
 .my-toast-success {
     background-color: #4caf50;
     color: white;
