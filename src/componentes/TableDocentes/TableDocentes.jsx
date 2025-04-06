@@ -195,20 +195,20 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                             {/* Modal de nota específico para la combinación de actividad y estudiante */}
                                             {modalIndexNota.actividadIndex === i && modalIndexNota.estudianteIndex === j && (
                                                 <Modal
-                                                isOpen={true}
-                                                closeModal={closeModalNota}
-                                                tipo='nota'
-                                                valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
-                                                modalTitulo='EDITAR NOTA'
-                                                modalTexto='Edita la nota de esta actividad'
-                                                recargar = {handleReload}
-                                                extraData={{
-                                                    notaOriginal:  actividadEncontrada.nota, 
-                                                    materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
-                                                    id_actividad: actividad.idAct,
-                                                    id_estudiante: estudiante.documento_identidad,
-                                                }}
-                                            />
+                                                    isOpen={true}
+                                                    closeModal={closeModalNota}
+                                                    tipo='nota'
+                                                    valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
+                                                    modalTitulo='EDITAR NOTA'
+                                                    modalTexto='Edita la nota de esta actividad'
+                                                    recargar = {handleReload}
+                                                    extraData={{
+                                                        notaOriginal:  actividadEncontrada.nota, 
+                                                        materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
+                                                        id_actividad: actividad.idAct,
+                                                        id_estudiante: estudiante.documento_identidad,
+                                                    }}
+                                                />
                                             )}
                                         </div>
                                     );
