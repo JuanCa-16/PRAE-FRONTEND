@@ -4,7 +4,7 @@ import WebSocketListener from "../WebSocketListener/WebSocketListener";
 
 const CantMaterias = () => {
   const [cantidadMaterias, setCantidadMaterias] = useState(null);
-  const idInstitucion = "2"; // ID de la institución
+  const idInstitucion = `institucion_2`; // ID de la institución
 
   const handleData = (data) => {
     if (data.id_institucion === idInstitucion) {
@@ -15,7 +15,8 @@ const CantMaterias = () => {
   return (
     <WebSocketListener
 
-      nombreSala={`institucion_${idInstitucion}`}
+      // nombreSala={`institucion_${idInstitucion}`}
+      nombreSala={idInstitucion}
       eventoEscuchar="cantidadMateriasInstitucion"
       onData={handleData}
     >
