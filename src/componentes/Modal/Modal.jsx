@@ -128,16 +128,75 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
         setNota(newNota); // Actualiza el estado 'email' con el nuevo valor
         };
 
-        const handleSubmit2 = () => {
+        const handleSubmit2 = async(e) => {
+            e.preventDefault()
             // Crear el objeto JSON con los valores de los inputs
             const formData = {
                 ...extraData,
                 nota: nota,
-            };
+            };  
+            if (formData.notaOriginal === '0') {
+                try {
+                        
+                
+                    const response = await fetch(`${API_URL}calificacion/asignar`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            id_actividad: formData.id_actividad,
+                            id_estudiante: formData.id_estudiante,
+                            nota: formData.nota,
+                        }),
+                    });
+            
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Error al registrar nota');
+                    }
+            
+                    Alerta.success("Nota registrada correctamente");
+                
+                } catch (error) {
+                    console.error('Error al guardar nota:', error);
+                    Alerta.error(error.message);
+                }
+            }
+            // else{ try {
+                        
+                
+            //     const response = await fetch(`${API_URL}calificacion/actualizar/${}`, {
+            //         method: 'PUT',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             'Authorization': `Bearer ${token}`,
+            //         },
+            //         body: JSON.stringify({
+            //             id_actividad: formData.id_actividad,
+            //             id_estudiante: formData.id_estudiante,
+            //             nota: formData.nota,
+            //         }),
+            //     });
         
+            //     if (!response.ok) {
+            //         const errorData = await response.json();
+            //         throw new Error(errorData.message || 'Error al registrar nota');
+            //     }
+        
+            //     Alerta.success("Nota registrada correctamente");
+            
+            // } catch (error) {
+            //     console.error('Error al guardar nota:', error);
+            //     Alerta.error(error.message);
+            // }
+            // }
+
             // Mostrar el objeto JSON en la consola (o enviarlo al servidor)
             console.log("Datos del formulario NOTAS:", JSON.stringify(formData));
             closeModal()
+            recargar()
             // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
         };
 
