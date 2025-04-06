@@ -10,6 +10,7 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 
 import './CrearMateria.scss'
+import CantMaterias from '../../../componentes/Estadisticas/CantMaterias/CantMaterias.jsx';
 
 const CrearMateria = () => {
 
@@ -180,6 +181,7 @@ const CrearMateria = () => {
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
+            <CantMaterias></CantMaterias>
         </div>
     )
 }
