@@ -11,6 +11,7 @@ import { io } from "socket.io-client";
  * - eventoEscuchar: Nombre del evento a escuchar (ej: 'cantidadMateriasInstitucion')
  * - onData: Función que procesa los datos recibidos
  */
+
 const WebSocketListener = ({
   nombreSala,
   eventoEscuchar,
@@ -28,8 +29,8 @@ const WebSocketListener = ({
     });
 
     socket.on(eventoEscuchar, (data) => {
-      console.log(`Evento recibido (${eventoEscuchar}):`, data);
-      onData(data);
+        console.log(`Evento recibido (${eventoEscuchar}):`, data);
+        onData(data);
     });
 
     socket.on("connect_error", (error) => {

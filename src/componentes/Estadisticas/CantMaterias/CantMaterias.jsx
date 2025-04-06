@@ -7,8 +7,9 @@ const CantMaterias = () => {
   const idInstitucion = `institucion_2`; // ID de la institución
 
   const handleData = (data) => {
-    if (data.id_institucion === idInstitucion) {
-      setCantidadMaterias(data.cantidadMaterias);
+    if (data.identificador === '2') {
+      
+      setCantidadMaterias(data.estadisticas.materias_activas);
     }
   };
 
