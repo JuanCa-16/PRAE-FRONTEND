@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './Contexts/UserContext';
 import { Toaster } from 'react-hot-toast';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights(); // <-- Esto inicializa Speed Insights en CRA
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +16,6 @@ root.render(
     <ContextProvider>
       <App />
       <Toaster />
-      <SpeedInsights />
     </ContextProvider>
   </React.StrictMode>
 );
