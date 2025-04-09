@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 import { useUser } from '../../Contexts/UserContext';
 import Alerta from '../Alerta/Alerta';
 
-const TableDocentes = ({infoCurso, infoDocente } ) => {
+const TableDocentes = ({infoCurso, infoDocente}) => {
 
     function capitalizeWords(str) {
         return str
@@ -57,13 +57,13 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                     setSoloNombre(data.map(item => ` ${item.nombre}`))
                     setActividadesUnicas([
                         ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad }]))
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))
                         ).values()
                     ])
 
                     console.log([
                         ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad }]))
+                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))
                         ).values()
                     ])
 
@@ -74,7 +74,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
             }
     
             notasCursoDocente()
-        },[reload, API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
+    },[reload, API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
     
 
     //CREAR ACTIVIDAD BACK
@@ -93,7 +93,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
     
     const handleSubmit = async(e) => {
         e.preventDefault()
-
+        
         try {
             const response = await fetch(`${API_URL}actividad/crear`,{
                 method: "POST",
@@ -101,7 +101,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 },
-                body: JSON.stringify({nombre: nombreAct.actividad, peso: nombreAct.peso, id_materia: infoCurso.id_materia, id_docente: infoDocente})
+                body: JSON.stringify({nombre: nombreAct.actividad, peso: nombreAct.peso, id_materia: infoCurso.id_materia, id_docente: infoDocente, id_curso: infoCurso.id_curso})
             });
 
             if (!response.ok) {
@@ -183,6 +183,7 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                 )}
                                 {info.map((estudiante, j) => {
                                     const actividadEncontrada = estudiante.actividades.find(act => act.actividad === actividad.actividad);
+                                    
                                     return (
                                         <div className='full' key={j}>
                                             <Celda 
@@ -204,10 +205,12 @@ const TableDocentes = ({infoCurso, infoDocente } ) => {
                                                     recargar = {handleReload}
                                                     extraData={{
                                                         notaOriginal:  actividadEncontrada.nota, 
+                                                        id_nota: actividadEncontrada.id_calificacion,
                                                         materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
                                                         id_actividad: actividad.idAct,
                                                         id_estudiante: estudiante.documento_identidad,
                                                     }}
+                                                    
                                                 />
                                             )}
                                         </div>

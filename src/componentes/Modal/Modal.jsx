@@ -85,7 +85,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
             pesoAct: pesoAct,
         };
 
-        console.log(formData)
+        console.log("Datos del formulario ACTIVIDAD:", JSON.stringify(formData));
 
         try {
             const response = await fetch(`${API_URL}actividad/actualizar/${formData.id_act}`,{
@@ -104,7 +104,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
             
             Alerta.success('Actividad actualizada');
             
-            console.log("Datos del formulario ACTIVIDAD:", JSON.stringify(formData));
+            
             closeModal()
             recargar()
 
@@ -135,6 +135,8 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                 ...extraData,
                 nota: nota,
             };  
+
+            
             if (formData.notaOriginal === '0') {
                 try {
                         
@@ -164,34 +166,35 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                     Alerta.error(error.message);
                 }
             }
-            // else{ try {
-                        
+            else{
+                try {
+                            
+                    
+                    const response = await fetch(`${API_URL}calificacion/actualizar/${formData.id_nota}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({
+                            id_actividad: formData.id_actividad,
+                            id_estudiante: formData.id_estudiante,
+                            nota: formData.nota,
+                        }),
+                    });
                 
-            //     const response = await fetch(`${API_URL}calificacion/actualizar/${}`, {
-            //         method: 'PUT',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             'Authorization': `Bearer ${token}`,
-            //         },
-            //         body: JSON.stringify({
-            //             id_actividad: formData.id_actividad,
-            //             id_estudiante: formData.id_estudiante,
-            //             nota: formData.nota,
-            //         }),
-            //     });
-        
-            //     if (!response.ok) {
-            //         const errorData = await response.json();
-            //         throw new Error(errorData.message || 'Error al registrar nota');
-            //     }
-        
-            //     Alerta.success("Nota registrada correctamente");
-            
-            // } catch (error) {
-            //     console.error('Error al guardar nota:', error);
-            //     Alerta.error(error.message);
-            // }
-            // }
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Error al editar nota');
+                    }
+                
+                    Alerta.success("Nota registrada correctamente");
+                
+                } catch (error) {
+                    console.error('Error al guardar nota:', error);
+                    Alerta.error(error.message);
+                }
+                }
 
             // Mostrar el objeto JSON en la consola (o enviarlo al servidor)
             console.log("Datos del formulario NOTAS:", JSON.stringify(formData));
