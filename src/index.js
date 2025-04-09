@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './Contexts/UserContext';
 import { Toaster } from 'react-hot-toast';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ContextProvider>
       <App />
       <Toaster />
+      <SpeedInsights />
     </ContextProvider>
   </React.StrictMode>
 );
