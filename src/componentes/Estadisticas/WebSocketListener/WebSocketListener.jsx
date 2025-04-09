@@ -1,44 +1,32 @@
-import React, { useEffect} from "react";
-import { io } from "socket.io-client";
+import React, { useEffect } from "react";
+import socket from "./Socket.jsx"; // o la ruta correcta
 
-/**
- * Componente WebSocketListener
- *
- * Props:
- * - socketUrl: URL del servidor WebSocket (ej: 'wss://prae-backend.up.railway.app')
- * - eventoJoin: Nombre del evento para unirse a la sala (ej: 'join')
- * - nombreSala: Nombre de la sala a unirse (ej: 'institucion_2')
- * - eventoEscuchar: Nombre del evento a escuchar (ej: 'cantidadMateriasInstitucion')
- * - onData: Función que procesa los datos recibidos
- */
+const WebSocketListener = ({ nombreSala, eventoEscuchar, onData, children }) => {
+  useEffect(() => {
+    if (!socket.connected) {
+      socket.connect();
+    }
 
-const WebSocketListener = ({
-  nombreSala,
-  eventoEscuchar,
-  onData,
-  children,
-}) => {
-    useEffect(() => {
-    const socket = io("wss://prae-backend.up.railway.app", {
-            transports: ["websocket", "polling"],
-    });
+    socket.emit("join", nombreSala);
+
+    const handleEvent = (data) => {
+      console.log(`Evento recibido (${eventoEscuchar}):`, data);
+      onData(data);
+    };
+
+    socket.on(eventoEscuchar, handleEvent);
 
     socket.on("connect", () => {
-        console.log("Conectado al servidor WebSocket:");
-        socket.emit('join', nombreSala);
+      console.log("Conectado al servidor WebSocket");
     });
-
-    socket.on(eventoEscuchar, (data) => {
-        console.log(`Evento recibido (${eventoEscuchar}):`, data);
-        onData(data);
-    });
-
+    
     socket.on("connect_error", (error) => {
       console.error("Error de conexión al WebSocket:", error);
     });
 
     return () => {
-      socket.disconnect();
+      socket.off(eventoEscuchar, handleEvent);
+      socket.emit("leave", nombreSala);
     };
   }, [nombreSala, eventoEscuchar, onData]);
 

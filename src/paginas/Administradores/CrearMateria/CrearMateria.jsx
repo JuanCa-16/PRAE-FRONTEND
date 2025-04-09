@@ -152,6 +152,11 @@ const CrearMateria = () => {
         }
     }
 
+    const manejarReload = () => {
+        
+        setReload(prev => !prev);
+    };
+
     return (
         <div className='crearMaterias'>
             <div className="crear">
@@ -181,7 +186,7 @@ const CrearMateria = () => {
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
-            <CantMaterias></CantMaterias>
+            <CantMaterias funcionRecarga={manejarReload}></CantMaterias>
         </div>
     )
 }
