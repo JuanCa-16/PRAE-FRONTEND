@@ -186,7 +186,7 @@ const CreacionEst = () => {
                             if (data.length >= 1) {
                                 const dataPildora = data.map(est => ({
                                     ...est,
-                                    nombreCompleto: `${est.apellido.split(" ")[0]} ${est.nombre.split(" ")[0]}`
+                                    nombreCompleto: `${est.apellido} ${est.nombre}`
                                 })).sort((a, b) => a.nombreCompleto.localeCompare(b.nombreCompleto));
                                 console.log("Respuesta completa:", dataPildora);
                                 setInfoPildoras(dataPildora);

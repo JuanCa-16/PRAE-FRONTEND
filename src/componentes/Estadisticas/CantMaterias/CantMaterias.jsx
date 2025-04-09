@@ -1,14 +1,15 @@
 import React, { useState,useEffect } from "react";
-
 import WebSocketListener from "../WebSocketListener/WebSocketListener";
+import { useUser } from "../../../Contexts/UserContext";
 
 const CantMaterias = ({funcionRecarga}) => {
   const [cantidadMaterias, setCantidadMaterias] = useState(null);
-  const idInstitucion = `institucion_2`; // ID de la institución
+  const {user} = useUser();
+  const idInstitucion = user.institucion.id_institucion;
 
 
   const handleData = (data) => {
-    if (data.identificador === '2') {
+    if (data.identificador === `${idInstitucion}`) {
       setCantidadMaterias(data.estadisticas.materias_activas);
   }
 
@@ -24,8 +25,7 @@ const CantMaterias = ({funcionRecarga}) => {
   return (
     <WebSocketListener
 
-      // nombreSala={`institucion_${idInstitucion}`}
-      nombreSala={idInstitucion}
+      nombreSala={`institucion_${idInstitucion}`}
       eventoEscuchar="emitStats"
       onData={handleData}
     >

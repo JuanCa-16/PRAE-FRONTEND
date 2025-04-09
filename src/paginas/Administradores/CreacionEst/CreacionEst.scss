@@ -65,36 +65,46 @@
         }
     }
 
-    .informacion{
+    .contenedorListadoEst{
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         align-items: flex-start;
-        gap: 1.5rem;
+        gap: 2rem;
         align-self: stretch;
 
-        .filtros{
+        .informacion{
             display: flex;
-            width: 100%;
-            align-items: flex-end;
-            gap: 2.75rem;
-            align-self: stretch;
-            flex-wrap: wrap;
-
-            button{
-                width: fit-content;
-            }
-
-        }
-
-        .estudiantes{
-            display: flex;
-            align-items: center;
-            align-content: center;
+            flex-direction: column;
+            align-items: flex-start;
             gap: 1.5rem;
             align-self: stretch;
-            flex-wrap: wrap;
+    
+            .filtros{
+                display: flex;
+                width: 100%;
+                align-items: flex-end;
+                gap: 2.75rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+    
+                button{
+                    width: fit-content;
+                }
+    
+            }
+    
+            .estudiantes{
+                display: flex;
+                align-items: center;
+                align-content: center;
+                gap: 1.5rem;
+                align-self: stretch;
+                flex-wrap: wrap;
+            }
         }
     }
+    
 }
 
 
