@@ -186,7 +186,7 @@ const CrearMateria = () => {
                     <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
-            <CantMaterias funcionRecarga={manejarReload}></CantMaterias>
+            <CantMaterias funcionRecargaCantMaterias={manejarReload}></CantMaterias>
         </div>
     )
 }
