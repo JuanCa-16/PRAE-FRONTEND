@@ -12,15 +12,18 @@ import { useTheme } from '../../Contexts/UserContext';
  *      - clase (string) [opcional]: Tamaño de la píldora, puede ser "grande" o "peque" (por defecto "grande").
  *      - onClick (func): Función a ejecutar cuando se hace clic en la píldora.
  */
-const PildoraEst = ({color = "azul", est = "JUAN CAMILO HENAO GALLEGO", curso = "11-2", clase="grande", onClick}) => {
+const PildoraEst = ({color = "azul", est = "JUAN CAMILO HENAO GALLEGO", curso = "11-2", clase="grande", onClick, estadistica=false,children}) => {
     
     const {theme} = useTheme()
     
     return (
+
+
         <div className={`pildoraEst ${clase} ${color} ${theme}`} onClick={onClick}>
             <div className="contenedor">
                 <p className="nombre bold">{est.toUpperCase()}</p>
-                <h4 className="inter curso">{curso}</h4>
+                {!estadistica? (<h4 className="inter curso">{curso}</h4>):<h4 className="inter curso">{children}</h4>}
+                
             </div>
                 <div className="elipse2" />
                 <div className="elipse1" />
@@ -33,7 +36,10 @@ PildoraEst.propTypes = {
     est: PropTypes.string.isRequired, 
     curso: PropTypes.string.isRequired, 
     clase: PropTypes.oneOf(["grande", "peque"]),
-    onClick: PropTypes.func   
+    onClick: PropTypes.func,
+    estadistica: PropTypes.bool,
+    children: PropTypes.node
 };
+
 
 export default PildoraEst
