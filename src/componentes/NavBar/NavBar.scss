@@ -124,6 +124,7 @@
         transition: opacity 3s ease-in-out;
     }
 
+    //El not es para la navBar de personalizacion
     .contenedorNavBar:not(.instNav){
         height: auto;
         padding: 0.2rem 0.625rem;
@@ -138,7 +139,7 @@
             
             .itemBar{
                 height: fit-content;
-                max-height: 30rem;
+                max-height: 33rem;
                 overflow-y: auto;
                 padding: 1rem 0.5rem;
                 
