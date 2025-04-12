@@ -192,7 +192,7 @@ const CrearGrados = () => {
                         <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
-                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'grado'}></ContenedorPildoraMateriaGrado>
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'grado'} clase={'grado'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>

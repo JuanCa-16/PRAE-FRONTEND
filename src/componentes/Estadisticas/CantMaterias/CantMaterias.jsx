@@ -4,7 +4,7 @@ import AnimatedCounter from "../Animacion/AnimatedNumber";
 import PildoraEst from "../../PildoraEst/PildoraEst";
 import { useUser } from "../../../Contexts/UserContext";
 
-const CantMaterias = ({funcionRecargaCantMaterias}) => {
+const CantMaterias = ({funcionRecargaCantMaterias = () =>{}}) => {
   const {user} = useUser();
   const idInstitucion = user.institucion.id_institucion;
   const [cantidadMaterias, setCantidadMaterias] = useState(null);
@@ -51,11 +51,10 @@ const CantMaterias = ({funcionRecargaCantMaterias}) => {
       eventoEscuchar="emitStats"
       onData={handleData}
     >
-      <div>
-        <h3>ESTADISTICAS</h3>
+      <div className="contenedorData">
         {cantidadMaterias !== null ? (
           <>
-            <PildoraEst clase="peque" est="MATERIAS:" estadistica><AnimatedCounter from={0} to={cantidadMaterias} duration={duracion} /></PildoraEst>
+            <PildoraEst clase="peque pildoraEstadistica" est="MATERIAS:" estadistica><AnimatedCounter from={0} to={cantidadMaterias} duration={duracion} /></PildoraEst>
           </>
           
         ) : (
@@ -63,7 +62,7 @@ const CantMaterias = ({funcionRecargaCantMaterias}) => {
         )}
         {cantidadGrados !== null ? (
           <>
-            <PildoraEst clase="peque" est="GRADOS:" estadistica><AnimatedCounter from={0} to={cantidadGrados} duration={duracion} /></PildoraEst>
+            <PildoraEst clase="peque pildoraEstadistica" est="GRADOS:" estadistica><AnimatedCounter from={0} to={cantidadGrados} duration={duracion} /></PildoraEst>
           </>
           
         ) : (

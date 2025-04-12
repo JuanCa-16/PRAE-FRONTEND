@@ -24,6 +24,7 @@
     max-width: 13rem;
     text-align: center;
     flex-shrink: 0;
+    min-height: 6.5rem;
 
     h4{
         color: $blanco;
@@ -241,8 +242,7 @@
 
 @media screen and (max-width: $max-celular){
     .pildora{
-        min-width: 7em;
-
+        min-width: 7rem;
         //Nuevo
         max-width: 8.9rem;
     }
