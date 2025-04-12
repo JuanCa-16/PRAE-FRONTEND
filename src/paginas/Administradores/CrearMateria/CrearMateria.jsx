@@ -10,7 +10,7 @@ import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 
 import './CrearMateria.scss'
-import CantMaterias from '../../../componentes/Estadisticas/CantMaterias/CantMaterias.jsx';
+// import CantMaterias from '../../../componentes/Estadisticas/CantMaterias/CantMaterias.jsx';
 
 const CrearMateria = () => {
 
@@ -152,10 +152,10 @@ const CrearMateria = () => {
         }
     }
 
-    const manejarReload = () => {
+    // const manejarReload = () => {
         
-        setReload(prev => !prev);
-    };
+    //     setReload(prev => !prev);
+    // };
 
     return (
         <div className='crearMaterias'>
