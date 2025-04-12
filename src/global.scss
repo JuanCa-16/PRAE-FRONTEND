@@ -201,12 +201,6 @@ button{
 }
 
 
-input, select, textarea {
-    @supports (-webkit-touch-callout: none) {
-        -webkit-text-size-adjust: 100%;
-        touch-action: manipulation;
-    }
-}
 
 
 
@@ -255,7 +249,6 @@ input, select, textarea {
 
             &.mostrar{
                 overflow: hidden;
-                pointer-events: none;
             }
         }
     

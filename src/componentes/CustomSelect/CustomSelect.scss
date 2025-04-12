@@ -39,6 +39,9 @@
         outline: none; // Elimina el contorno azul predeterminado
         transition: border 0.3s ease;
         height: 2.8rem;
+
+        font-size: 1rem;
+        
         
         &::placeholder {
             opacity: 50%;
