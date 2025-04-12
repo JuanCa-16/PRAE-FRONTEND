@@ -31,14 +31,13 @@
     &.titulo2{
         font-weight: bold;
         color: var(--colorPildora1);
-        padding: 0.3125rem 1.3125rem;
-        background-color: var(--colorSecundario);
+        background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-        //Si tiene rol de ver
+        //si tiene rol de ver
         &.ver{
             &:hover{
                 cursor: pointer;
-                color: var(--colorSecundario);
+                color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
                 background-color: var(--colorPildora1);
             }
         }
@@ -81,14 +80,13 @@
         &.titulo2{
             font-weight: bold;
             color: var(--colorPildora2);
-            padding: 0.3125rem 1.3125rem;
-            background-color: var(--colorSecundario);
+            background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
 
-            //Si tiene rol de ver
+            //si tiene rol de ver
             &.ver{
                 &:hover{
                     cursor: pointer;
-                    color: var(--colorSecundario);
+                    color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
                     background-color: var(--colorPildora2);
                 }
             }
@@ -132,14 +130,13 @@
         &.titulo2{
             font-weight: bold;
             color: var(--colorPildora3);
-            padding: 0.3125rem 1.3125rem;
-            background-color: var(--colorSecundario);
+            background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
 
-            //Si tiene rol de ver
+            //si tiene rol de ver
             &.ver{
                 &:hover{
                     cursor: pointer;
-                    color: var(--colorSecundario);
+                    color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
                     background-color: var(--colorPildora3);
                 }
             }
@@ -178,7 +175,7 @@
             &.ver{
                 &:hover{
                     
-                    color: $dark-contraste-azul;
+                    color: $dark-negro;
                     background-color: $dark-azul;
                 }
             }
@@ -189,13 +186,13 @@
             
             color: $dark-azul;
             
-            background-color: $dark-contraste-blanco;
+            background-color: $dark-contraste-azul;
     
             //Si tiene rol de ver
             &.ver{
                 &:hover{
                     
-                    color: $dark-contraste-blanco;
+                    color: $dark-negro;
                     background-color: $dark-azul;
                 }
             }
@@ -205,14 +202,116 @@
         &.normal{
             
             
-            background-color: $dark-contraste-negro;
+            background-color: $dark-super-negro;
     
             //si tiene el rol de ver
             &.ver{
                 &:hover{
 
                     color: $dark-azul;
-                    background-color: $dark-contraste-blanco;
+                    background-color: $dark-contraste-negro;
+                }
+            }
+        }
+
+        &.morado{
+            //Si es de tipo titulo
+            &.titulo{
+                
+                color: $dark-morado;
+                background-color: $dark-contraste-morado;
+        
+                //si tiene rol de ver
+                &.ver{
+                    &:hover{
+                        
+                        color: $dark-negro;
+                        background-color: $dark-morado;
+                    }
+                }
+            }
+        
+            //Si es de tipo titulo2
+            &.titulo2{
+                
+                color: $dark-morado;
+                
+                background-color: $dark-contraste-morado;
+        
+                //Si tiene rol de ver
+                &.ver{
+                    &:hover{
+                        
+                        color: $dark-negro;
+                        background-color: $dark-morado;
+                    }
+                }
+            }
+        
+            //Si es de tipo normal
+            &.normal{
+                
+                
+                background-color: $dark-super-negro;
+        
+                //si tiene el rol de ver
+                &.ver{
+                    &:hover{
+
+                        color: $dark-morado;
+                        background-color: $dark-contraste-negro;
+                    }
+                }
+            }
+        }
+
+        &.amarillo{
+            //Si es de tipo titulo
+            &.titulo{
+                
+                color: $dark-amarillo;
+                background-color: $dark-contraste-amarillo;
+        
+                //si tiene rol de ver
+                &.ver{
+                    &:hover{
+                        
+                        color: $dark-negro;
+                        background-color: $dark-amarillo;
+                    }
+                }
+            }
+        
+            //Si es de tipo titulo2
+            &.titulo2{
+                
+                color: $dark-amarillo;
+                
+                background-color: $dark-contraste-amarillo;
+        
+                //Si tiene rol de ver
+                &.ver{
+                    &:hover{
+                        
+                        color: $dark-negro;
+                        background-color: $dark-amarillo;
+                    }
+                }
+            }
+        
+            //Si es de tipo normal
+            &.normal{
+                
+                
+                background-color: $dark-super-negro;
+        
+                //si tiene el rol de ver
+                &.ver{
+                    &:hover{
+
+                        color: $dark-amarillo;
+                        background-color: $dark-contraste-negro;
+                    }
                 }
             }
         }

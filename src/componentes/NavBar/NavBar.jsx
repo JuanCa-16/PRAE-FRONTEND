@@ -70,7 +70,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
   
   // const grado= jwtDecode(token).email;
 
-  const { user} = useUser();
+  const { user,abrir,setAbrir} = useUser();
   const grado = user.curso
 
 
@@ -86,7 +86,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       }, [user]);
 
   const navRef = useRef(null);
-  const [abrir, setAbrir] = useState(false)
+  
   
    // Detectar clic fuera del menú
   useEffect(() => {
@@ -101,7 +101,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     return () => {
       document.removeEventListener("mousedown", handleClickOutside); // Limpia el evento al desmontar
     };
-  }, []);
+  }, [setAbrir]);
 
   const itemActivo = menuSeleccionado.find(item => decodeURIComponent(location.pathname).startsWith(item.ruta))?.texto || "";
 

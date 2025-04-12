@@ -86,6 +86,17 @@
         .linea{
             background-color: $dark-blanco;
         }
+
+        .menuSuperior{
+            .tituloSuperior{
+                .iconoTheme{
+                    .normal, .colorear{
+                        fill: $dark-azul;
+                        
+                    }
+                }
+            }
+        }
     }
 }
 
