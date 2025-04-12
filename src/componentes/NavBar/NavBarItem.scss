@@ -134,18 +134,43 @@
 
         background: none;
 
+        .etiqueta{
+
+            .logoNav, .texto{
+                color: $dark-azul;
+
+                .normal{
+                    fill: $dark-azul;
+                }
+
+                .normal[stroke]{
+                    fill: none;
+                    stroke: $dark-azul;
+                }
+            }
+        }
+
 
         //Estilos para el Hover
         &:hover{
 
             outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-negro;
+            background-color: $dark-contraste-azul;
             
             .etiqueta{
                 opacity: 1;
             
-                .logo, .texto{
+                .logoNav, .texto{
                     color: $dark-azul;
+
+                    .colorear{
+                        fill: $dark-azul;
+                    }
+
+                    .colorear[stroke]{
+                        fill: none;
+                        stroke: $dark-azul;
+                    }
                 }
             }
 
@@ -154,12 +179,22 @@
         //Estilo cuando el menu este activo
         &.activar{
             outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-negro;
+            background-color: $dark-contraste-azul;
             
             .etiqueta{
+                opacity: 1;
             
-                .logo, .texto{
+                .logoNav, .texto{
                     color: $dark-azul;
+
+                    .colorear{
+                        fill: $dark-azul;
+                    }
+
+                    .colorear[stroke]{
+                        fill: none;
+                        stroke: $dark-azul;
+                    }
                 }
             }
         }
@@ -168,28 +203,28 @@
     //Estilos cuando es tipo existe (solo es nombre e iluminacion)
     .tipo-existe{
 
-        outline: 0.0625rem solid $dark-morado;
-        background-color: $dark-contraste-morado;
+        outline: 0.0625rem solid $dark-azul;
+        background-color: $dark-contraste-azul;
 
         //Estilo letra
         .etiqueta{
 
-            .logo, .texto{
-                color: $dark-morado;
+            .logoNav, .texto{
+                color: $dark-azul;
             }
 
         }
 
-        //colores
-        &.amarillo{
-            outline: 0.0625rem solid $dark-amarillo;
-            background-color: $dark-contraste-amarillo;
+        // //colores
+        // &.amarillo{
+        //     outline: 0.0625rem solid $dark-amarillo;
+        //     background-color: $dark-contraste-amarillo;
 
-            .logo, .texto{
-                color: $dark-amarillo;
+        //     .logo, .texto{
+        //         color: $dark-amarillo;
 
                 
-            }
-        }
+        //     }
+        // }
     }
 }

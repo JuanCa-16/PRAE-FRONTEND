@@ -57,7 +57,7 @@ function App() {
   const API_URL = process.env.REACT_APP_API_URL; 
 
   //ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
-  const { user, setUser } = useUser();
+  const { user, setUser, abrir } = useUser();
   const { theme} = useTheme();
 
   //VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
@@ -203,7 +203,7 @@ function App() {
           </nav>): null
         }
 
-        <main className={user? "main-content": "completo"}>
+        <main className={user? `main-content ${abrir? 'mostrar': 'ocultar'}`: "completo"}>
 
           <ScrollToTop></ScrollToTop>
           <Routes>

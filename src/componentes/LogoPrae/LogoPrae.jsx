@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import "./LogoPrae.scss";
-import icono from "../../assets/icono.svg"
+// import icono from "../../assets/icono.svg"
 import { useTheme } from '../../Contexts/UserContext';
 
 /** 
@@ -17,7 +17,7 @@ const LogoPrae = ({texto = "ESTUDIANTES", color,imagen}) => {
 
     return (
     <div className={`logoContenedor ${theme}`}>
-        <img className="logoPrae" alt="" src={imagen? imagen : icono}/>
+        <img className="logoPrae" alt="" src={imagen? imagen : 'https://firebasestorage.googleapis.com/v0/b/praeweb-a1526.firebasestorage.app/o/logos%2FLOGO_SOMBRERO.svg?alt=media&token=d2e2d361-8a9f-45e0-857d-2e7408c9422d '}/>
         <div className="textos">
             <p className="bold">PRAE</p>
             <p className={`${color} texto`}>{texto}</p>

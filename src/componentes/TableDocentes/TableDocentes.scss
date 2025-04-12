@@ -46,6 +46,7 @@
                 overflow-y: hidden; /* Evita el scroll vertical */
                 white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
                 display: flex; 
+                padding-bottom: 1rem; /* o lo que veas que se ve mejor */
             }
 
             .notas::-webkit-scrollbar {
@@ -123,5 +124,26 @@
     .contenedorNotas{
         .contenedorAct{
             width: 100%; }
+    }
+}
+
+.dark{
+    .contenedorNotas{
+        .contenedor{
+            .tabla{
+                .notas::-webkit-scrollbar-thumb:hover {
+                    
+                    background: $dark-azul;/* Un poco más visible al pasar el mouse */
+                }
+    
+                .notas.morado::-webkit-scrollbar-thumb:hover {
+                    background: $dark-morado;/* Un poco más visible al pasar el mouse */
+                }
+    
+                .notas.amarillo::-webkit-scrollbar-thumb:hover {
+                    background: $dark-amarillo;/* Un poco más visible al pasar el mouse */
+                }
+            }
+        }
     }
 }

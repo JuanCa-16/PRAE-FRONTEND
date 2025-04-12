@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './FooterCom.scss'
 import { useUser } from '../../Contexts/UserContext'
-import icono from "../../assets/icono.svg"
+// import icono from "../../assets/icono.svg"
 import { FacebookIcon, InstagramIcon } from '../Icons/Icons'
 const FooterCom = ({imagen}) => {
 
@@ -83,7 +83,7 @@ const FooterCom = ({imagen}) => {
         </div>
       </div>
       <div className="contenedorImg">
-        {imagen? <img className="logo" alt="" src={imagen}/>:(<img className="logo" alt="" src={user.institucion.logo? user.institucion.logo : icono}/>)}
+        {imagen? <img className="logo" alt="" src={imagen}/>:(<img className="logo" alt="" src={user.institucion.logo? user.institucion.logo : 'https://firebasestorage.googleapis.com/v0/b/praeweb-a1526.firebasestorage.app/o/logos%2FLOGO_SOMBRERO.svg?alt=media&token=d2e2d361-8a9f-45e0-857d-2e7408c9422d '}/>)}
       </div>
     </footer>
   )

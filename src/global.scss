@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./componentes/Alerta/Alerta.scss";
 @import './variables.scss';
-
+//
 :root{
     --colorPrincipal:#157AFE;
     --colorSecundario: #F5F7F9;
@@ -25,16 +25,21 @@ $contraste-blanco: #F5F7F9;
 $rojo: #de4337ff;
 
 
-$dark-azul: #2077E9;
-$dark-contraste-azul: #BDCDE5;
-$dark-morado: #5250CE;
-$dark-contraste-morado: #C9C8E6;
-$dark-amarillo: #e99220;
-$dark-contraste-amarillo: #e6ccae;
+$dark-azul: color-mix(in srgb, var(--colorPrincipal) 50%, rgb(145, 145, 145));
+$dark-contraste-azul: color-mix(in srgb, $dark-azul 25%, rgba(128, 128, 128, 0.1));
+
+$dark-morado: color-mix(in srgb, var(--colorPildora2) 50%, rgb(145, 145, 145));
+$dark-contraste-morado: color-mix(in srgb, $dark-morado 25%,rgba(128, 128, 128, 0.1));
+
+$dark-amarillo: color-mix(in srgb, var(--colorPildora3) 50%, rgb(145, 145, 145));
+$dark-contraste-amarillo: color-mix(in srgb, $dark-amarillo 25%, rgba(128, 128, 128, 0.1));
+
 $dark-blanco: #ECECEC;
 $dark-contraste-blanco: #CCCCCC;
-$dark-rojo: #3b2420;
-$dark-contraste-rojo: #D7B1AB;
+
+$dark-rojo: #7e4242;
+$dark-contraste-rojo: #a33838;
+
 $dark-negro: #23232B;
 $dark-contraste-negro: #2E2E3F;
 $dark-super-negro: #1B1C21;
@@ -215,11 +220,11 @@ button{
     }
 
     h4 {
-        font-size: 1rem; /* 16px */
+        font-size: 1.25rem; /* 1x */
     }
 
     p {
-        font-size: 0.875rem; /* 14px */
+        font-size: 1rem; /* 16px */
     }
 
     .App{
@@ -240,6 +245,10 @@ button{
             padding: 1.5rem 1.5rem 6.875rem 1.5rem;
             position: relative;
             z-index: 500;
+
+            &.mostrar{
+                overflow: hidden;
+            }
         }
     
         //Ocupa un pedazo de la pantalla
@@ -288,6 +297,7 @@ button{
             background-color: $dark-rojo;
 
             &:hover {
+                background-color: $dark-contraste-rojo;
                 box-shadow: 0px 4px 10px $dark-rojo;
             }
         }
