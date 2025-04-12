@@ -183,10 +183,10 @@ const CrearMateria = () => {
                         <button onClick={limpiarFiltros}>Vaciar</button>
                     </div>
 
-                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
+                    <ContenedorPildoraMateriaGrado clase={'materia'} info={pildorasFiltradas} docente={false} eliminar={handleEliminar} txt={'materia'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
-            <CantMaterias funcionRecargaCantMaterias={manejarReload}></CantMaterias>
+            {/* <CantMaterias funcionRecargaCantMaterias={manejarReload}></CantMaterias> */}
         </div>
     )
 }

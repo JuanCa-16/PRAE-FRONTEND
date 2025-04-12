@@ -292,7 +292,7 @@ const CreacionDocente = () => {
                     </div>
 
 
-                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true}></ContenedorPildoraMateriaGrado>
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true} clase={'docente'}></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import PildoraMateriaGrado from "../PildoraMateriaGrado/PildoraMateriaGrado";
 import Modal from "../Modal/Modal";
 import './ContenedorPildoraMateriaGrado.scss'
 
-const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt }) => {
+const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, clase }) => {
   const pildorasFiltradas = info;
   const navigate = useNavigate();
   const manejarClick = (profe) => {
@@ -29,6 +29,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt })
         pildorasFiltradas.length > 0 ? (
           pildorasFiltradas.map((item, index) => (
             <PildoraMateriaGrado
+              clase={clase}
               texto={item.nombreCompleto}
               color={item.color}
               key={index}
@@ -45,6 +46,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt })
             pildorasFiltradas.map((item, index) => (
               <React.Fragment key={index}>
                 <PildoraMateriaGrado
+                  clase={clase}
                   texto={item.nombre}
                   color={item.color}
                   key={index}

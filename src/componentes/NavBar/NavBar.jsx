@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NavBarItem from './NavBarItem';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
-import { StudyIcon, AjustesIcon, InstitucionIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon, ThemeIcon,MenuIcon } from '../Icons/Icons.jsx';
+import { StudyIcon, AjustesIcon, InstitucionIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon, ExitIcon, ThemeIcon,MenuIcon, DataIcon } from '../Icons/Icons.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser } from '../../Contexts/UserContext.jsx';
 import { useTheme } from '../../Contexts/UserContext.jsx';
@@ -44,6 +44,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
       { texto: "Institucion", icono: InstitucionIcon, ruta: "/institucion" },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
+      { texto: "Estadisticas", icono: DataIcon, ruta: "/estadisticasRector" },
     ],
   };
 

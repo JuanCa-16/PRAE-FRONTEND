@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import '../../variables.scss';
 
 //Estilos del componente
 .contenedorPildoraG{
@@ -14,13 +15,37 @@
     width: fit-content;
 
     .materia{
+        width: 100%;
         position: relative;
     }
+
+    
 
     h4{
         color: color-mix(in srgb, var(--colorPildora1) 10%, rgb(255, 255, 255));
         font-weight: bold;
         margin: 0;
+        word-wrap: break-word;
+    }
+
+    &.docente{
+        min-width: 16.5rem;
+        max-width: fit-content;
+        height: 3.7rem;
+
+        .materia{
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            width: 100%;
+
+            h4{
+                position: relative;
+                text-align: center;
+                width: fit-content;
+                max-width: 13rem;
+            }
+        }
     }
 
     background-color: var(--colorPildora1);
@@ -164,6 +189,31 @@
         
                 .elipse1, .elipse2{
                     background-color: $dark-amarillo;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorPildoraG{
+
+        &.docente{
+            min-width: 10rem;
+            max-width: fit-content;
+            height: 3.2rem;
+    
+            .materia{
+                align-items: center;
+                display: inline-flex;
+                justify-content: center;
+                width: 100%;
+    
+                h4{
+                    position: relative;
+                    text-align: center;
+                    width: fit-content;
+                    max-width: 10rem;
                 }
             }
         }

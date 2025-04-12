@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import '../../variables.scss';
 
 
 //Estilos de la pildora
@@ -87,7 +88,8 @@
         overflow: hidden;
         padding: 0.625rem 0.75rem;
         position: relative;
-        width: fit-content;
+        min-width: 16.5rem;
+        max-width: fit-content;
         //width: 13rem;
         height: 3.5rem;
 
@@ -110,27 +112,40 @@
                 position: relative;
                 text-align: center;
                 width: fit-content;
-                max-width: 9rem;
+                max-width: 10.5rem;
+            }
+        }
+
+        &.pildoraEstadistica{
+            min-width: 3rem;
+
+            .contenedor{
+
+                .nombre{
+                    width: fit-content;
+                    max-width: 8rem;
+                }
             }
         }
         
 
         .elipse1, .elipse2{
             background-color: #ffffff;
-            border-radius: 119.5px;
-            height: 239px;
-            left: 140px;
+            border-radius: 50%;
+            height: 138px;
+            width: 138px;
+            
             opacity: 0.1;
             position: absolute;
-            top: -95px;
-            width: 239px;
+            top: calc(50% - 69px);
+            right: -72px;
         }
 
         .elipse2{
-            left: 150px;
+            
             opacity: 0.05;
             position: absolute;
-            top: -95px;
+            right: -64px;
         }
 
         //Estilos Hover
@@ -267,4 +282,34 @@
             }
         }
     }
+}
+
+@media screen and (max-width: $max-celular){
+    //Estilos de la pildora
+.pildoraEst{
+
+    //Estilos si es peque
+    &.peque{
+        min-width: 2rem;
+        max-width: fit-content;
+        height: 4.5rem;
+
+        p {
+            font-size: 0.8rem;
+        }
+
+        .contenedor{
+            gap: 7px;
+
+            .nombre{
+                width: fit-content;
+                max-width: 7.5rem;
+            }
+        }
+        
+
+
+
+    }
+}
 }

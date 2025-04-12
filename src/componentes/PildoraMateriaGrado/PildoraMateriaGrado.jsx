@@ -12,11 +12,11 @@ import { useTheme } from '../../Contexts/UserContext';
  *      - onClick (func): Función opcional que se ejecuta al hacer clic en la píldora.
  */
 
-const PildoraMateriaGrado = ({color = "azul", texto = "CALCULO I", onClick}) => {
+const PildoraMateriaGrado = ({color = "azul", texto = "CALCULO I", onClick, clase}) => {
     
     const {theme} = useTheme()
     return (
-        <div className= {`contenedorPildoraG ${color} ${theme}`} onClick={onClick}>  
+        <div className= {`contenedorPildoraG ${color} ${theme} ${clase}`} onClick={onClick}>  
             <div className="materia">
                     <h4 className='inter'>{texto}</h4>
                     <div className='elipse1'></div>

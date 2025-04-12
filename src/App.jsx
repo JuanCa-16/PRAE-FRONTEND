@@ -36,6 +36,7 @@ import EditarPerfilAdmin from './paginas/Administradores/EditarPerfilAdmin/Edita
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 import AjustesInstitucion from './paginas/Administradores/AjustesInstitucion/AjustesInstitucion.jsx';
+import EstadisticasAdmin from './paginas/Administradores/Estadisticas/EstadisticasAdmin.jsx';
 
 
 /** 
@@ -246,6 +247,7 @@ function App() {
                 <Route path='/asignarGradosMaterias' element={<AsignarGradosMaterias/>} />
                 <Route path='/editarPerfilRector' element={<EditarPerfilAdmin/>} />
                 <Route path='/institucion' element={<AjustesInstitucion/>} />
+                <Route path='/estadisticasRector' element={<EstadisticasAdmin/>} />
             </Route>
 
             <Route path="/*" element={<Navigate to="/login"/>} />
