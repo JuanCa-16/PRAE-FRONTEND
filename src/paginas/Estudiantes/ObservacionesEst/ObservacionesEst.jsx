@@ -43,7 +43,7 @@ const ObservacionesEst = () => {
 
   return (
     <div className='contenedorObservacionesEst'>
-      <TituloDes titulo='MIS OBSERVACIONES' desc='Lee las observaciones que han realizado los docentes sobre ti.' />
+      <TituloDes titulo='MIS OBSERVACIONES' desc='Lee las observaciones que los docentes han realizado sobre tu desempeño académico. Estas te ayudarán a conocer tus fortalezas y tus áreas a mejorar.' />
       <div className="observaciones">
                     {(observacionesEst.length > 0)? (
                         <>

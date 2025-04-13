@@ -6,7 +6,13 @@ import './EstadisticasAdmin.scss'
 const EstadisticasAdmin = () => {
   return (
     <div className='contenedorEstAdmin'>
-        <TituloDes titulo='ESTADISTICAS INSTITUCION' desc='Aca podras observar estadisticas relacionadas con tu institución.'></TituloDes>
+        <TituloDes 
+          titulo='ESTADÍSTICAS DE LAINSTITUCIÓN' 
+          desc='Aquí podrás consultar diversas estadísticas relacionadas con tu institución, 
+          lo que te permitirá obtener información detallada sobre el rendimiento académico y 
+          otros aspectos clave para una mejor toma de decisiones.'>
+            
+          </TituloDes>
         <CantMaterias></CantMaterias>
     </div>
   )

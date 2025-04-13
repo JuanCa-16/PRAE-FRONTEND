@@ -42,9 +42,9 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Profesores", icono: TeacherIcon, ruta: "/profesores" },
       { texto: "Estudiantes", icono: EstudianteIcon, ruta: "/estudiantes" },
       { texto: "Cursos", icono: GradosIcon, ruta: "/asignarGradosMaterias" },
-      { texto: "Institucion", icono: InstitucionIcon, ruta: "/institucion" },
+      { texto: "Institución", icono: InstitucionIcon, ruta: "/institucion" },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilRector" },
-      { texto: "Estadisticas", icono: DataIcon, ruta: "/estadisticasRector" },
+      { texto: "Estadísticas", icono: DataIcon, ruta: "/estadisticasRector" },
     ],
   };
 
