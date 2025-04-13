@@ -215,7 +215,10 @@ const EditarPerfilDoc = () => {
     return (
         <div className='contenedorPerfilDoc'>
             <div className="editar">
-                <TituloDes titulo='EDITA TU PERFIL' desc='Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado.' />
+                <TituloDes 
+                titulo='EDITA TU PERFIL' 
+                desc='Accede a tu perfil para revisar y actualizar tus datos personales. Mantener tu información
+                      actualizada es esencial para garantizar una correcta gestión y comunicación dentro de la plataforma.' />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />

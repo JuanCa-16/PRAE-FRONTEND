@@ -235,7 +235,13 @@ const CreacionEst = () => {
     return (
         <div className='contenedorCreacionEst'>
             <div className="crear">
-                <TituloDes titulo='CREAR UN ESTUDIANTE' desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará.'></TituloDes>
+                <TituloDes 
+                    titulo='CREAR UN ESTUDIANTE' 
+                    desc='Registra un nuevo profesor en la plataforma proporcionando la información necesaria y 
+                    asigna los cursos que gestionará. Asegúrate de que todos los datos estén correctos para una 
+                    correcta asignación de los cursos.'>
+
+                </TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Ingresa apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
@@ -254,7 +260,9 @@ const CreacionEst = () => {
             <div className='contenedorListadoEst'>
                 <TituloDes 
                     titulo='LISTADO DE ESTUDIANTES' 
-                    desc='Listado de estudiantes registrados en la institución en sus diferentes grados'
+                    desc='Consulta el listado completo de estudiantes registrados en la institución, organizados
+                     por los diferentes grados. Esta información te permitirá gestionar y revisar el progreso académico 
+                    de los estudiantes en cada nivel educativo.'
                 />
                 <div className="informacion">
                     <div className="filtros">

@@ -94,50 +94,50 @@ const CrearObservacion = () => {
         },[reload,API_URL,est.estudiante_id,user.id,token])
     
         return (
-            <div className='contenedorCrearObser'>
-                <div className="editar">
-                    <TituloDes titulo='REALIZAR OBSERVACIÓN A UN ESTUDIANTE' desc='Documenta y guarda una observación académica o disciplinaria a un estudiante.' />
-                    <form onSubmit={handleSubmit} className="formulario">
-                        <div className="inputs">
-                            <div className="input-container">
-                                <label htmlFor='observacionDocente'>Observaciones</label>
-                                <textarea
-                                    id='observacionDocente'
-                                    value={formData.observacion}
-                                    onChange={(e) => handleChange('observacion',  e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        <button type='submit' >Guardar Cambios</button>
-                    </form>
-                </div>
-                <div className="observaciones">
-                    {(observacionesEst.length > 0)? (
-                        <>
-                        <h4>Observaciones</h4>
-                        {observacionesEst.map((observacion, index) => {
-                          // Convertir fecha
-                        const fechaFormateada = new Date(observacion.fecha).toLocaleDateString("es-CO", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                        });
-                    
-                        return (
-                            <p key={index}>
-                              <strong className='fuerte'>{fechaFormateada}:</strong> {observacion.comentario}
-                            </p>
-                          );
-                        })}
-                      </>
-                    ):(
-                        <p className="">
-                            El estudiante todavia no tiene observaciones
-                        </p>
-                        )}
-                </div>
+            <div className="contenedorCrearObser">
+              <TituloDes
+                titulo="REALIZAR OBSERVACIÓN A UN ESTUDIANTE"
+                desc="Documenta y guarda una observación académica o disciplinaria a un estudiante."
+              />
+          
+              <form onSubmit={handleSubmit} className="formulario">
+                <label htmlFor="observacionDocente" className="label">
+                  Observaciones
+                </label>
+                <textarea
+                  id="observacionDocente"
+                  placeholder="Escribe una observación..."
+                  value={formData.observacion}
+                  onChange={(e) => handleChange('observacion', e.target.value)}
+                />
+                <button type="submit" className="btn-guardar">
+                  Guardar Cambios
+                </button>
+              </form>
+          
+              <div className="observaciones">
+                <h4>Observaciones</h4>
+                {observacionesEst.length > 0 ? (
+                  observacionesEst.map((obs, index) => {
+                    const fecha = new Date(obs.fecha).toLocaleDateString('es-CO', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    });
+                    return (
+                      <div key={index} className="observacion-item">
+                        <span className="fecha">{fecha}</span>
+                        <p>{obs.comentario}</p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className="sin-observaciones">El estudiante todavía no tiene observaciones.</p>
+                )}
+              </div>
             </div>
-        );
+          );
+          
     };
 
 

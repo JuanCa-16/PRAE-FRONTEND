@@ -125,7 +125,7 @@ const AjustesInstitucion = () => {
             '--color-pildora3': formData.color_pildora3,
             '--color-fondo': formData.fondo
         }}>
-            <TituloDes titulo='PERSONALIZACIÓN DE LA INSTITUCIÓN' desc='Personaliza tu experiencia ajustando la plataforma con tus preferencias.' />
+            <TituloDes titulo='PERSONALIZACIÓN DE LA INSTITUCIÓN' desc='PPersonaliza tu experiencia ajustando la plataforma según tus preferencias. Modifica las configuraciones para adaptar la interfaz y funcionalidades a tus necesidades y facilitar tu uso diario.' />
             <div className="contPersonalizacion">
             <div className="editar">
                 <form onSubmit={handleSubmit} className="formulario">

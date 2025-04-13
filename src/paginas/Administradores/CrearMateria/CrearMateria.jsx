@@ -160,7 +160,12 @@ const CrearMateria = () => {
     return (
         <div className='crearMaterias'>
             <div className="crear">
-                <TituloDes titulo='CREAR UNA MATERIA' desc='Ingresa el nombre de la asignatura que deseas agregar.' ></TituloDes>
+                <TituloDes 
+                    titulo='CREAR UNA MATERIA' 
+                    desc='Ingresa el nombre de la asignatura que deseas agregar al sistema para su incorporación. 
+                    Asegúrate de que el nombre sea preciso para evitar duplicados o confusiones.' >
+            
+                </TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
                     <InputContainer value={formData.materia} inputType='text' placeholder='Ingresa la materia...' titulo='Materia' required={true} onChange={(value) => handleChange('materia',  capitalizeWords(value))}></InputContainer>
                     <button type='submit'>CREAR</button>
@@ -170,7 +175,8 @@ const CrearMateria = () => {
             <div className="todosMaterias">
                 <TituloDes 
                     titulo='LISTADO DE MATERIAS' 
-                    desc='Accede al listado de materias y elimina la que desees.'
+                    desc='Accede al listado de materias disponibles y elimina aquella que ya no sea necesaria. 
+                    Ten en cuenta que esta acción eliminará todos los datos asociados a la materia seleccionada.'
                 />
                 <div className="informacion">
                     <div className="filtros">

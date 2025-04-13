@@ -244,7 +244,13 @@ const CreacionDocente = () => {
     return (
         <div className='contenedorCreacionDocente'>
             <div className="crear">
-                <TituloDes titulo='CREAR UN PROFESOR' desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará.'></TituloDes>
+                <TituloDes 
+                    titulo='CREAR UN PROFESOR' 
+                    desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará. 
+                    Asegúrate de ingresar toda la información requerida para completar el registro de manera 
+                    correcta y asignar adecuadamente los cursos correspondientes.'>
+
+                </TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" required={true} titulo='Apellidos' placeholder='Ingresa apellidos' value={formData.apellidos} inputType='text' onChange={(value) => handleChange('apellidos', capitalizeWords(value))}  />
@@ -277,7 +283,7 @@ const CreacionDocente = () => {
             <div className="lista">
             <TituloDes 
                     titulo='LISTADO DE PROFESORES' 
-                    desc='Seleccione un profesor para más información'
+                    desc='Selecciona un profesor para obtener más información detallada sobre su perfil y los cursos que gestiona.'
                 />
                 <div className="informacion">
                     <div className="filtros">
