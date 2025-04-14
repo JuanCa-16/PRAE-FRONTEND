@@ -8,6 +8,8 @@ const ScrollToTop = () => {
       const mainContent = document.querySelector(".main-content");
       if (mainContent) {
         mainContent.scrollTo(0, 0);
+      }else{
+        window.scrollTo(0, 0);
       }
     }, [pathname]);
   

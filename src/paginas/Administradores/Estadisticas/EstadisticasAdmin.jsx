@@ -1,6 +1,6 @@
 import React from 'react'
 import TituloDes from '../../../componentes/TituloDes/TituloDes'
-import CantMaterias from '../../../componentes/Estadisticas/CantMaterias/CantMaterias'
+import AdminEstadisticas from '../../../componentes/Estadisticas/AdminEstadisticas/AdminEstadisticas/AdminEstadisticas'
 import './EstadisticasAdmin.scss'
 
 const EstadisticasAdmin = () => {
@@ -13,7 +13,7 @@ const EstadisticasAdmin = () => {
           otros aspectos clave para una mejor toma de decisiones.'>
             
           </TituloDes>
-        <CantMaterias></CantMaterias>
+        <AdminEstadisticas></AdminEstadisticas>
     </div>
   )
 }

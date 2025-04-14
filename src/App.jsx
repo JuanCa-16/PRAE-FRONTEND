@@ -57,7 +57,7 @@ function App() {
   const API_URL = process.env.REACT_APP_API_URL; 
 
   //ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
-  const { user, setUser, abrir } = useUser();
+  const { user, setUser, abrir,setAbrir } = useUser();
   const { theme} = useTheme();
 
   //VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
@@ -148,6 +148,7 @@ function App() {
   const cerrarSesion = () => {
     localStorage.removeItem("token"); // Eliminar del localStorage
     Alerta.success("Sesión cerrada exitosamente");
+    setAbrir(false);
     setUser(null);
   };
 
