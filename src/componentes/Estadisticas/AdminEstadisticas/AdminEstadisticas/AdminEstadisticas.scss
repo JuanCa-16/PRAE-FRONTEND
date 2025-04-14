@@ -1,0 +1,43 @@
+@import '../../../../global.scss'; 
+
+.contenedorData {
+
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: 100%;
+
+    
+}
+
+.contenedorDataColumn {
+
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+}
+
+.contenedorDataColumn > div { /* change div to reference your elements you put in <Masonry> */
+    background: var(--colorSecundario);
+    border-radius: $radio2;
+    margin-bottom: 30px;
+}
+
+.graficoBarras{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+
+    p{
+        font-weight: 500;
+    }
+}
+
+
+.dark{
+    .contenedorDataColumn > div { /* change div to reference your elements you put in <Masonry> */
+        background: $dark-super-negro;
+    }
+}

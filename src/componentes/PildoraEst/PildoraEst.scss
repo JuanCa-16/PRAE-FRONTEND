@@ -117,13 +117,13 @@
         }
 
         &.pildoraEstadistica{
-            min-width: 3rem;
+            min-width: 100%;
 
             .contenedor{
 
                 .nombre{
-                    width: fit-content;
-                    max-width: 8rem;
+                    width: 100%;
+                    max-width: 100%;
                 }
             }
         }

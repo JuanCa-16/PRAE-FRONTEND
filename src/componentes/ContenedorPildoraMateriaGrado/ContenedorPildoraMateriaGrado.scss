@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .materiasGrados{
     display: flex;
     align-items: center;
@@ -6,3 +8,9 @@
     align-self: stretch;
     flex-wrap: wrap;
 }
+
+@media screen and (max-width: $max-celular){
+    .materiasGrados{
+        justify-content: center;}
+}
+    
