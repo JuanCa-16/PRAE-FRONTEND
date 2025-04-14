@@ -16,6 +16,8 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
 
   const [cantidadMaterias, setCantidadMaterias] = useState(null);
   const [cantidadGrados, setCantidadGrados] = useState(null);
+  const [cantidadEst, setCantidadEst] = useState(null);
+  const [cantidadDocentes, setCantidadDocentes] = useState(null);
   const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
 
   const duracion = 1.5; // Duración de la animación en segundos
@@ -24,7 +26,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
   const handleData = (data) => {
     if (data.identificador === `${idInstitucion}`) {
 
-      //METERIAS
+      //MATERIAS
       const nuevasMaterias = data.estadisticas.materias.materias_activas;
       setCantidadMaterias(prev => {
         if (prev === nuevasMaterias) {
@@ -33,7 +35,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
         return nuevasMaterias; // Solo actualizar si realmente cambió
       });
 
-      //DOCENTES
+      //GRADOS
       const nuevosGrados= data.estadisticas.cursos.cursos_activos;
       setCantidadGrados(prev => {
         if (prev === nuevosGrados) {
@@ -42,6 +44,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
         return nuevosGrados; // Solo actualizar si realmente cambió
       });
 
+      //PROMEDIO X GRADO
       const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_notas_por_grado).map(([grado, promedio]) => ({
         grado,
         promedio: parseFloat(promedio),
@@ -55,6 +58,24 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
         }
         return nuevosPromedioGrados;
       });
+
+      //EST
+      const nuevosEst = data.estadisticas.usuarios.estudiantes_activos;
+      setCantidadEst(prev => {
+        if (prev === nuevosEst) {
+          return prev; // No hacer nada si no cambió
+        }
+        return nuevosEst; // Solo actualizar si realmente cambió
+      });
+
+      //DOCENTES
+      const nuevosDoc = data.estadisticas.usuarios.docentes_activos;
+      setCantidadDocentes(prev => {
+        if (prev === nuevosDoc) {
+          return prev; // No hacer nada si no cambió
+        }
+        return nuevosDoc; // Solo actualizar si realmente cambió
+      });
       
     }
   };
@@ -62,7 +83,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
 
   useEffect(() => {
     if (cantidadMaterias !== null) {
-      funcionRecargaCantMaterias();
+      // funcionRecargaCantMaterias();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [cantidadMaterias]);
@@ -85,7 +106,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
         
         {cantidadMaterias !== null ? (
           <div>
-            <PildoraEst clase="peque pildoraEstadistica" est="MATERIAS:" estadistica><AnimatedCounter from={0} to={cantidadMaterias} duration={duracion} /></PildoraEst>
+            <PildoraEst  clase="peque pildoraEstadistica" est="MATERIAS:" estadistica><AnimatedCounter from={0} to={cantidadMaterias} duration={duracion}  /></PildoraEst>
           </div>
           
         ) : (
@@ -94,16 +115,19 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
 
         {cantidadGrados !== null ? (
           <div>
-            <PildoraEst clase="peque pildoraEstadistica" est="GRADOS:" estadistica><AnimatedCounter from={0} to={cantidadGrados} duration={duracion} /></PildoraEst>
+            <PildoraEst color="morado" clase="peque pildoraEstadistica" est="GRADOS:" estadistica><AnimatedCounter from={0} to={cantidadGrados} duration={duracion} /></PildoraEst>
           </div>
           
         ) : (
           <p>Cargando...</p>
         )}
 
+        
+
         {promedioNotasCurso !== null ? (
           promedioNotasCurso.length > 0 ? (
-            <div>
+            <div className="graficoBarras">
+              <p>Promedio x Grado</p>
               <GraficoBarras data={promedioNotasCurso} />
             </div>
         
@@ -114,6 +138,23 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           <p>Cargando...</p>
         )}
 
+        {cantidadEst !== null ? (
+          <div>
+            <PildoraEst color="amarillo" clase="peque pildoraEstadistica" est="ESTUDIANTES:" estadistica><AnimatedCounter from={0} to={cantidadEst} duration={duracion} /></PildoraEst>
+          </div>
+          
+        ) : (
+          <p>Cargando...</p>
+        )} 
+
+        {cantidadDocentes !== null ? (
+          <div>
+            <PildoraEst clase="peque pildoraEstadistica" est="DOCENTES:" estadistica><AnimatedCounter from={0} to={cantidadDocentes} duration={duracion} /></PildoraEst>
+          </div>
+          
+        ) : (
+          <p>Cargando...</p>
+        )}     
 
     </Masonry>
     </WebSocketListener>

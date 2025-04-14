@@ -13,8 +13,9 @@ import React from "react";
 import { useTheme } from "../../../../Contexts/UserContext";
 import "./GraficoBarras.scss";
 
-const GraficoBarras = ({ data }) => {
-  const alturaGrafico = data.length * 50;
+
+const GraficoBarras = ({data}) => {
+  const alturaGrafico = Math.min(data.length * 90, 500); 
   const { theme } = useTheme();
 
   return (

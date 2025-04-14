@@ -1,4 +1,5 @@
 @import '../../../../global.scss'; 
+
 .contenedorData {
 
     display: -webkit-box; /* Not needed if autoprefixing */
@@ -20,6 +21,18 @@
     background: var(--colorSecundario);
     border-radius: $radio2;
     margin-bottom: 30px;
+}
+
+.graficoBarras{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+
+    p{
+        font-weight: 500;
+    }
 }
 
 
