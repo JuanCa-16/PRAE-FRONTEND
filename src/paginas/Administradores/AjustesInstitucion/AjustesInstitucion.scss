@@ -223,6 +223,7 @@
             .p2{
                 display: flex;
                 width: 18.0625rem;
+                max-width: 100%;
                 padding: 0.625rem;
                 align-items: center;
                 justify-content: center;
@@ -282,7 +283,7 @@
                     }
                 }
     
-                .contenedorNavBar{
+                .contenedorNavBarPreview{
                     border-radius: 0.5rem;
                     background-color: var(--color-secundario);
     

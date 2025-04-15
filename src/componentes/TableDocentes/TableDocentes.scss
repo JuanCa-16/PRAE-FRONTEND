@@ -59,6 +59,11 @@
                 background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
                 border-radius: 4px; /* Bordes redondeados */
             }
+
+            .notas::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
+                border-radius: 4px; /* Bordes redondeados */
+            }
             
             .notas::-webkit-scrollbar-thumb:hover {
                 background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
@@ -72,10 +77,7 @@
                 background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
             }
             
-            .notas::-webkit-scrollbar-track {
-                background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
-                border-radius: 4px; /* Bordes redondeados */
-            }
+            
         }
     }
 

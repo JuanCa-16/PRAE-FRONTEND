@@ -13,9 +13,14 @@ import React from "react";
 import { useTheme } from "../../../../Contexts/UserContext";
 import "./GraficoBarras.scss";
 
-
+// const data = [
+//      { grado: '8-2', promedio: 4.3 },
+//      { grado: '8-2', promedio: 4.3 },
+//      { grado: '8-2', promedio: 4.3 },
+//    ];
 const GraficoBarras = ({data}) => {
-  const alturaGrafico = Math.min(data.length * 90, 500); 
+  const alturaGrafico = Math.min(data.length * 60, 800); 
+  
   const { theme } = useTheme();
 
   return (
@@ -23,17 +28,17 @@ const GraficoBarras = ({data}) => {
       style={{
         width: "100%",
         height: `${alturaGrafico}px`,
-        paddingTop: "1rem",
+        paddingTop: "0.5rem",
       }}
-      className={theme}
+      className={`graficoBarrasData ${theme}`}	
     >
-      <ResponsiveContainer>
+      <ResponsiveContainer height={alturaGrafico}>
         <BarChart
           layout="vertical"
           data={data}
           margin={{ top: 5, right: 50, left: 5, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.5} />
+          <CartesianGrid className="cartesianoGrid" strokeDasharray="3 3" strokeOpacity={0.5} />
           <XAxis
             type="number"
             domain={[0, 5]}
@@ -55,6 +60,7 @@ const GraficoBarras = ({data}) => {
             activeBar={<Rectangle className="colorHover" />}
           >
             <LabelList
+              className="labelList"
               dataKey="promedio"
               position="right"
               fill="var(--colorPildora2)"

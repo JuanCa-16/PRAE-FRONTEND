@@ -1,0 +1,67 @@
+@import '../../../../global.scss';
+
+.graficoTortaData{
+
+    overflow: visible !important;
+
+    .recharts-responsive-container{
+        .recharts-wrapper{
+            display: flex  !important;
+            justify-content: center !important;
+            align-items: center !important;
+            overflow: visible !important;
+    
+            .recharts-surface{
+                width: 100% !important;
+                height: 100% !important;
+                overflow: visible !important;
+
+                // .graficoPie{
+                //     .recharts-sector{
+                //         stroke: red;
+
+                //     }
+
+                // }
+            }
+
+            
+        }
+    }
+
+    
+}
+
+.dark{
+    &.graficoTortaData{
+        .graficoPie{
+            fill:$dark-azul;
+
+            .recharts-sector{
+                stroke: $dark-negro;
+            }
+
+            .graficoRender{
+                .graficoTorta-label{
+                    fill: $dark-morado;
+                }
+
+                .graficoTorta-sector{
+                    fill: $dark-morado;
+                }
+
+                .graficoTorta-linea{
+                    stroke: $dark-morado;
+                }
+
+                .graficoTorta-circle{
+                    fill: $dark-morado;
+                }
+
+                .graficoTorta-value, .graficoTorta-percent{
+                    fill: $dark-amarillo;
+                }
+            }
+        }
+    }
+}

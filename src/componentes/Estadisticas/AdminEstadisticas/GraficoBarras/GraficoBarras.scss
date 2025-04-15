@@ -1,31 +1,43 @@
 @import '../../../../global.scss';
 
-.recharts-cartesian-axis-tick-value {
-    fill:  var(--colorPildora1);  // Variable CSS para color eje X
-
-}
-
-
-
-.colorBarra{
-    fill: var(--colorPildora1);
-
-    .colorHover{
-        fill: var(--colorPildora2);
-    }
-}
-
-.dark{
-
+.graficoBarrasData{
     .recharts-cartesian-axis-tick-value {
-        fill: $dark-azul;  // Variable CSS para color eje X
+        fill:  var(--colorPildora1);  // Variable CSS para color eje X
+    
     }
-
+    
     .colorBarra{
-        fill: $dark-azul;
+        fill: var(--colorPildora1);
     
         .colorHover{
-            fill: $dark-morado;
+            fill: var(--colorPildora2);
         }
     }
+
+
+    &.dark{
+
+        .recharts-cartesian-axis-tick-value {
+            fill: $dark-azul;  // Variable CSS para color eje X
+        }
+    
+        .colorBarra{
+            fill: $dark-azul;
+        
+            .colorHover{
+                fill: $dark-morado;
+            }
+    
+            .labelList{
+                fill: $dark-morado;
+            }
+    
+        }
+
+        .cartesianoGrid{
+            stroke-opacity: 0.2;
+        }
+    }
+    
 }
+
