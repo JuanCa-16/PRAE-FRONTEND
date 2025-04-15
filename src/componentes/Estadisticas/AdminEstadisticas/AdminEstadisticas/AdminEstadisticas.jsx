@@ -7,6 +7,8 @@ import "./AdminEstadisticas.scss";
 import { useUser } from "../../../../Contexts/UserContext";
 import { useTheme } from "../../../../Contexts/UserContext";
 import Masonry from "react-masonry-css";
+import GraficoTorta from "../GraficoTorta/GraficoTorta";
+
 
 
 const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
@@ -19,8 +21,29 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
   const [cantidadEst, setCantidadEst] = useState(null);
   const [cantidadDocentes, setCantidadDocentes] = useState(null);
   const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
+  const [estudiantesCurso, setEstudiantesCurso] = useState(null);
 
   const duracion = 1.5; // Duración de la animación en segundos
+
+  const ordenarGrados = (a, b) => {
+    const [gradoA, subgradoA] = a.name.split('-');
+    const [gradoB, subgradoB] = b.name.split('-');
+  
+    // Convertir los grados en números
+    const gradoANum = Number(gradoA);
+    const gradoBNum = Number(gradoB);
+  
+    // Primero ordenar por el número del grado
+    if (gradoANum !== gradoBNum) {
+      return gradoANum - gradoBNum;  // Comparar los grados
+    } else {
+      // Si los grados son iguales, ordenar alfabéticamente por la letra
+      if (subgradoA < subgradoB) return -1;
+      if (subgradoA > subgradoB) return 1;
+      return 0;
+    }
+};
+
 
 
   const handleData = (data) => {
@@ -57,6 +80,22 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           return prev;
         }
         return nuevosPromedioGrados;
+      });
+
+      //ESTUDIANTES X GRADO
+      const nuevosEstGrados = Object.entries(data.estadisticas.estudiantes_por_grado).map(([grado, cant]) => ({
+        name:grado,
+        value: Number(cant),
+      }));
+
+      setEstudiantesCurso(prev => {
+        const nuevo = JSON.stringify(nuevosEstGrados.sort(ordenarGrados));
+        const anterior = JSON.stringify(prev);
+        
+        if (nuevo === anterior) {
+          return prev;
+        }
+        return nuevosEstGrados.sort(ordenarGrados);
       });
 
       //EST
@@ -138,6 +177,24 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           <p>Cargando...</p>
         )}
 
+        {estudiantesCurso !== null ? (
+          estudiantesCurso.length > 0 ? (
+            <div className="graficoTorta">
+              <p>Estudiantes x Grado</p>
+              <GraficoTorta data={estudiantesCurso}></GraficoTorta>
+            </div>
+        
+          ) : (
+            <p>No hay datos para mostrar</p>
+          )
+        ) : (
+          <p>Cargando...</p>
+        )}
+
+        
+
+        
+
         {cantidadEst !== null ? (
           <div>
             <PildoraEst color="amarillo" clase="peque pildoraEstadistica" est="ESTUDIANTES:" estadistica><AnimatedCounter from={0} to={cantidadEst} duration={duracion} /></PildoraEst>
@@ -154,7 +211,9 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           
         ) : (
           <p>Cargando...</p>
-        )}     
+        )}    
+
+      
 
     </Masonry>
     </WebSocketListener>

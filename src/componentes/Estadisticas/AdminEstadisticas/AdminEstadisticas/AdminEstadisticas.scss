@@ -8,7 +8,33 @@
     margin-left: -30px; /* gutter size offset */
     width: 100%;
 
+    .graficoBarras{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 15rem;
+        overflow-y: scroll;
     
+        p{
+            padding-top: 0.5rem;
+            font-weight: 500;
+        }
+    }
+    
+    .graficoTorta{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 15rem;
+        padding-top: 1rem;
+        overflow: visible;
+    
+        p{
+            font-weight: 500;
+        }
+    }
 }
 
 .contenedorDataColumn {
@@ -23,17 +49,7 @@
     margin-bottom: 30px;
 }
 
-.graficoBarras{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
 
-    p{
-        font-weight: 500;
-    }
-}
 
 
 .dark{

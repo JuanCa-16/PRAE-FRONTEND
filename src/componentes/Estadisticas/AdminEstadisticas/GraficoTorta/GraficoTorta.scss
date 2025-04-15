@@ -1,0 +1,23 @@
+.graficoTortaData{
+
+    overflow: visible !important;
+
+    .recharts-responsive-container{
+        .recharts-wrapper{
+            display: flex  !important;
+            justify-content: center !important;
+            align-items: center !important;
+            overflow: visible !important;
+
+            
+    
+            .recharts-surface{
+                width: 100% !important;
+                height: 100% !important;
+                overflow: visible !important;
+            }
+        }
+    }
+
+    
+}
