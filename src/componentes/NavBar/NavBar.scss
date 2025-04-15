@@ -136,7 +136,7 @@
     }
 
     //El not es para la navBar de personalizacion
-    .contenedorNavBar:not(.instNav){
+    .contenedorNavBar{
         height: auto;
         padding: 0.2rem 0.625rem;
         border-top-left-radius: $radio1;
@@ -231,6 +231,5 @@
             }
         }
     }
-
 
 }

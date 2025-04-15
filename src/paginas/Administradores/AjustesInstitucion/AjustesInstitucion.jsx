@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import FooterCom from '../../../componentes/FooterCom/FooterCom';
 import InputContainer from '../../../componentes/Input/InputContainer';
-import NavBar from '../../../componentes/NavBar/NavBar';
+import NavBarPreview from '../../../componentes/NavBar/NavBarPreview';
 import NavBarItem from '../../../componentes/NavBar/NavBarItem';
 import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
@@ -168,7 +168,7 @@ const AjustesInstitucion = () => {
                     <div className="casilla capsula"><PildoraMateriaGrado texto='ESPAÑOL' color='morado'></PildoraMateriaGrado></div>
                     <div className="casilla capsula"><PildoraMateriaGrado texto='CIENCIAS SOCIALES' color='amarillo'></PildoraMateriaGrado></div>
                     <div className="p2">
-                    <NavBar imagen={preview? preview:''} inst='instNav'></NavBar>
+                    <NavBarPreview imagen={preview? preview:''}></NavBarPreview>
                     </div>
                     <div className="casilla capsula"><FooterCom imagen={preview? preview:'' }></FooterCom></div>
 
