@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import './GraficoTorta.scss';
+import { useTheme } from '../../../../Contexts/UserContext';
 
 // Datos de ejemplo
 // const data = [
@@ -11,7 +12,8 @@ import './GraficoTorta.scss';
 // ];
 
 // Función personalizada para el "ActiveShape" cuando se pasa el mouse sobre una sección
-const renderActiveShape = (props) => {
+const renderActiveShape = (props, theme) => {
+
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, payload, percent, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -25,11 +27,12 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
 
   return (
-    <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill="var(--colorPildora2)">
+    <g className={`graficoRender ${theme}`}>
+      <text className="graficoTorta-label" x={cx} y={cy} dy={8} textAnchor="middle" fill="var(--colorPildora2)">
         {payload.name}
       </text>
       <Sector
+        className="graficoTorta-sector"
         cx={cx}
         cy={cy}
         innerRadius={innerRadius}
@@ -39,6 +42,7 @@ const renderActiveShape = (props) => {
         fill="var(--colorPildora2)"
       />
       <Sector
+        className="graficoTorta-sector"
         cx={cx}
         cy={cy}
         startAngle={startAngle}
@@ -47,10 +51,10 @@ const renderActiveShape = (props) => {
         outerRadius={outerRadius + 10}
         fill="var(--colorPildora2)"
       />
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke="var(--colorPildora2)" fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill="var(--colorPildora2)" stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 5} y={ey} textAnchor={textAnchor} fill="var(--colorPildora3)">{`${value}`}</text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 5} y={ey} dy={18} textAnchor={textAnchor} fill="var(--colorPildora3)">
+      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} className="graficoTorta-linea" stroke="var(--colorPildora2)" fill="none" />
+      <circle cx={ex} cy={ey} r={2} className="graficoTorta-circle" fill="var(--colorPildora2)" stroke="none" />
+      <text x={ex + (cos >= 0 ? 1 : -1) * 5} y={ey} className="graficoTorta-value" textAnchor={textAnchor} fill="var(--colorPildora3)">{`${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 5} y={ey} dy={18} className="graficoTorta-percent" textAnchor={textAnchor} fill="var(--colorPildora3)">
         {`${(percent * 100).toFixed(1)}%`}
       </text>
     </g>
@@ -60,22 +64,25 @@ const renderActiveShape = (props) => {
 const GraficoTorta = ({data}) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const {theme} = useTheme(); // Obtiene el tema actual del contexto
   // Función para manejar el evento cuando el mouse entra en un sector del gráfico
   const onPieEnter = (_, index) => {
     setActiveIndex(index);
   };
 
   return (
-    <div className="graficoTortaData" style={{
+    <div className={`graficoTortaData ${theme}`} // Clase para el contenedor del gráfico
+    style={{
         width: "100%",
         height: `100%`,
-      }}>
+      }}
+    >
       <ResponsiveContainer>
         <PieChart>
           <Pie
+            className='graficoPie'
             activeIndex={activeIndex}
-            activeShape={renderActiveShape}
+            activeShape={(props) => renderActiveShape(props, theme)} 
             data={data}
             cx="50%" // Centra el gráfico
             cy="50%" // Centra el gráfico
@@ -83,6 +90,7 @@ const GraficoTorta = ({data}) => {
             outerRadius={55}
             fill="var(--colorPildora1)" // Color de las porciones
             dataKey="value"
+            
             onMouseEnter={onPieEnter} // Evento para cuando el mouse pasa por encima
           />
         </PieChart>

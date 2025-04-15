@@ -13,13 +13,35 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        height: 15rem;
+
+        max-height: 15rem;
+        
         overflow-y: scroll;
     
         p{
             padding-top: 0.5rem;
             font-weight: 500;
         }
+    }
+
+    .graficoBarras::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 2rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
+        border-radius: 4px; /* Bordes redondeados */
+    }
+    
+    .graficoBarras::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
+        border-radius: 4px; /* Bordes redondeados */
+    }
+
+    .graficoBarras::-webkit-scrollbar-track {
+        background: rgba(229, 229, 229, 0); /* Color del fondo del scrollbar */
+        border-radius: 1px; /* Bordes redondeados */
+    }
+    
+    .graficoBarras::-webkit-scrollbar-thumb:hover {
+        background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
     }
     
     .graficoTorta{
@@ -55,5 +77,11 @@
 .dark{
     .contenedorDataColumn > div { /* change div to reference your elements you put in <Masonry> */
         background: $dark-super-negro;
+    }
+
+    .contenedorData{
+        .graficoBarras::-webkit-scrollbar-thumb:hover {
+            background: $dark-azul;/* Un poco más visible al pasar el mouse */
+        }
     }
 }
