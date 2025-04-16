@@ -70,6 +70,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                     
                 } catch (error) {
                     console.error(error);
+                    Alerta.error(`Error al obtener notas: ${error.message}`, true);
                 }
             }
     
@@ -82,7 +83,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
             actividad: "",
             peso: "",
         })
-    
+
     //captar info de los inputs
     const handleChange = (titulo, value) => { 
         setNonombreAct({
@@ -93,6 +94,13 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
     
     const handleSubmit = async(e) => {
         e.preventDefault()
+
+        const peso = parseFloat(nombreAct.peso);
+
+        if (isNaN(peso) || peso < 0 || peso > 100) {
+            Alerta.error('El peso debe ser un número entre 0 y 100.');
+            return;
+        }
         
         try {
             const response = await fetch(`${API_URL}actividad/crear`,{
@@ -235,7 +243,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
                             <InputContainer titulo="Peso"
-                                            placeholder="Nuevo Peso"
+                                            placeholder="Valor entre 0 - 100"
                                             inputType="text"
                                             value={nombreAct.peso} // El valor del input viene del estado del componente padre
                                             onChange={(value) => handleChange('peso', value)} // Pasamos la función que actualizará el estado
