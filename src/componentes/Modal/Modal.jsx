@@ -131,6 +131,12 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
         const handleSubmit2 = async(e) => {
             e.preventDefault()
             // Crear el objeto JSON con los valores de los inputs
+            // Validación: solo números entre 0 y 5, incluyendo decimales
+            const notaNumerica = parseFloat(nota);
+            if (isNaN(notaNumerica) || notaNumerica < 0 || notaNumerica > 5) {
+                Alerta.error("La nota debe ser un número entre 0 y 5");
+                return;
+    }
             const formData = {
                 ...extraData,
                 nota: nota,
@@ -241,6 +247,9 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                             <InputContainer titulo="Peso"
                                             placeholder="Nuevo Peso"
                                             inputType="number"
+                                            min="0"
+                                            max="5"
+                                            step="0.01"
                                             value={pesoAct} // El valor del input viene del estado del componente padre
                                             onChange={handlePesoChange} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
@@ -257,7 +266,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                     <div className="crearAct">
                         <div className="campos">
                             <InputContainer titulo="Nota"
-                                            placeholder="Nota"
+                                            placeholder="Nueva nota"
                                             inputType="text"
                                             value={nota} // El valor del input viene del estado del componente padre
                                             onChange={handleNotaChange} // Pasamos la función que actualizará el estado
