@@ -149,7 +149,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           </div>
           
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )}
 
         {cantidadGrados !== null ? (
@@ -158,7 +158,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           </div>
           
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )}
 
         
@@ -174,7 +174,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
             <p>No hay datos para mostrar</p>
           )
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )}
 
         {estudiantesCurso !== null ? (
@@ -188,7 +188,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
             <p>No hay datos para mostrar</p>
           )
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )}
 
         
@@ -201,7 +201,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           </div>
           
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )} 
 
         {cantidadDocentes !== null ? (
@@ -210,7 +210,7 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
           </div>
           
         ) : (
-          <p>Cargando...</p>
+          <span className="loader"></span>
         )}    
 
       

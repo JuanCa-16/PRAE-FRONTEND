@@ -34,6 +34,8 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
+        width: 100%;
+        max-width: 100%;
   
         .titulo{
           display: flex;
@@ -42,6 +44,20 @@
           align-items: flex-start;
           gap: 0.75rem;
           align-self: stretch;
+          width: 100%;
+          max-width: 100%;
+          
+        }
+
+        .textoEli{
+          display: flex;
+          width: 100%;
+        }
+
+        p{
+          overflow-wrap: break-word;  /* corta palabras largas */
+          word-break: break-word;     /* refuerzo extra */
+          white-space: normal;  
         }
       }
   
@@ -100,6 +116,12 @@
     &.nota{
       .modal-content{
         max-width: 20.75rem; 
+      }
+    }
+
+    &.confirm{
+      .modal-content{
+        max-width: 18rem; 
       }
     }
 }

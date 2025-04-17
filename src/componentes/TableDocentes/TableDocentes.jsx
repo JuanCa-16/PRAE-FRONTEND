@@ -24,6 +24,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
     const {user} = useUser();
     
     const [info, setInfo] = useState([])
+    const [infoNota, setInfoNota] = useState([])
     
     const [nombres, setNombres] = useState([])
     const [soloApellidos, setSoloApellidos] = useState([])
@@ -52,20 +53,15 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                     const data = await response.json();
                     console.log('info',data)
                     setInfo(data)
-                    setNombres(data.map(item=> ` ${item.apellido} ${item.nombre}`)) 
+                    setNombres((data.map(item=> ` ${item.apellido} ${item.nombre}`)).sort((a, b) =>
+                        a.trim().localeCompare(b.trim(), 'es', {
+                          sensitivity: 'base',       // ignora mayúsculas / tildes
+                          ignorePunctuation: true
+                        })
+                      )) 
                     setSoloApellidos(data.map(item => ` ${item.apellido}`))
                     setSoloNombre(data.map(item => ` ${item.nombre}`))
-                    setActividadesUnicas([
-                        ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))
-                        ).values()
-                    ])
-
-                    console.log([
-                        ...new Map(
-                            data.flatMap(estudiante => estudiante.actividades.map(act => [act.actividad, { actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))
-                        ).values()
-                    ])
+                    setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat())
 
                     
                 } catch (error) {
@@ -77,6 +73,35 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
             notasCursoDocente()
     },[reload, API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia,infoDocente])
     
+
+    useEffect(() =>{
+        const promedioCurso = async () => {
+            try {
+                const response = await fetch(`${API_URL}calificacion/promedio/materia/${infoCurso.id_materia}/curso/${infoCurso.id_curso}`,{
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Obtiene respuesta del servidor
+                    console.log(errorData)
+                    throw new Error(`${errorData.error || response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log(data)
+                setInfoNota(data.promedio.promedioCurso)
+                
+            } catch (error) {
+                Alerta.error(`Error al obtener nota promedio: ${error.message}`, true);
+            }
+        }
+
+        promedioCurso()
+    },[reload,API_URL,token,user.institucion.id_institucion,infoCurso.id_curso,infoCurso.id_materia])
 
     //CREAR ACTIVIDAD BACK
     const [nombreAct, setNonombreAct] = useState({
@@ -162,7 +187,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
     return (
         <div className='contenedorNotas'>
             <div className="contenedor">
-                <PildoraTitulo materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
+                <PildoraTitulo nota={infoNota} materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
                 <div className="tabla">
                     <div className="col ">
                         <Celda txt='Actividad' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
@@ -190,7 +215,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                                     />
                                 )}
                                 {info.map((estudiante, j) => {
-                                    const actividadEncontrada = estudiante.actividades.find(act => act.actividad === actividad.actividad);
+                                    const actividadEncontrada = estudiante.actividades.find(act => act.id_actividad === actividad.idAct);
                                     
                                     return (
                                         <div className='full' key={j}>

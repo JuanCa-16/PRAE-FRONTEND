@@ -64,6 +64,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     //La logica del modal eliminar se le hace es al boton que llega por children.
     
     //Envio datos modal actividad.
+    const [step, setStep] = useState('form'); 
     const [nombreAct, setNonombreAct] = useState(valorAct); // Estado para manejar el valor de la actividad
     const [pesoAct, setPesoAct] = useState(ValorPeso); // Estado para manejar el valor del peso
 
@@ -119,6 +120,9 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     
         // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
     };
+
+    const abrirConfirmacion = () => setStep('confirm');
+    const volverAlForm      = () => setStep('form');
 
     //Envio datos modal notas
     const [nota, setNota] = useState(valorNota); // Estado para manejar el valor del email
@@ -220,19 +224,59 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
         }
     };
 
-    return (
-        <div className={`modal-overlay ${tipo} ${theme}`} onClick={handleClickOutside}>
+    const handleEliminarAct = async () => {
+
+        const formData = {
+            ...extraData,
+            nombreAct: nombreAct,
+            pesoAct: pesoAct,
+        };
+
+        console.log("Datos del formulario ELIMINAR:", JSON.stringify(formData));
+
+        try {
+            const response = await fetch(`${API_URL}actividad/eliminar/${formData.id_act}`,{
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json(); // Obtiene respuesta del servidor
+                throw new Error(`${errorData.message || response.status}`);
+            }
+            
+            Alerta.success('Actividad eliminada');
+            
+            
+            closeModal()
+            recargar()
+
+            
+        } catch (error) {
+            console.error('Error al crear actividad',error);
+            Alerta.error(error.message);
+        }
+        
+    };
+
+        return (
+        <div className={`modal-overlay ${tipo} ${theme} ${step}`} onClick={handleClickOutside}>
         <div className={`modal-content ${theme}`}>
             {tipo === "eliminar"? (
                 <div className="modalContenedor">
                 <div className="titulo">
                     <p className='bold'>{modalTitulo.toUpperCase()} </p>
                 </div>
-                <p className='lato'>{modalTexto} </p>
+                <p className='lato textoEli'>{modalTexto} </p>
                 {children}
             </div>
             ): tipo === "actividad"? (
-                <div className="modalAct">
+                <>
+                {step === 'form' ? (
+                    <div className="modalAct">
                     <div className="titulo">
                         <p className='bold'>{modalTitulo}</p>
                     </div>
@@ -254,10 +298,25 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                                             onChange={handlePesoChange} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
-                            <button type='submit'>Crear</button>
+                            <button type='submit'>Editar</button>
+                            <button type="button" className="rojo" onClick={abrirConfirmacion}>Eliminar</button>
+                            
+                            
+                            
                         </div>
                     </form>
                 </div>
+                ):(
+                    <div className="modalContenedor">
+                    <div className="titulo">
+                        <p className='bold'> CONFIRMACIÓN </p>
+                    </div>
+                    <p className='lato textoEli'>Esta acción no se podra revertir.</p>
+                    <button type="button" className='rojo' onClick={() => handleEliminarAct()}>Si, Eliminar</button>
+                    <button type="button"  onClick={volverAlForm}>Cancelar</button>
+                </div>
+                )}
+                </>
             ):(
                 <div className="modalAct">
                     <div className="titulo">

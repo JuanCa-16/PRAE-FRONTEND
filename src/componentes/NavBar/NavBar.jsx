@@ -35,6 +35,7 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
       { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
       { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observaciones" },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/editarPerfilDocente" },
+      { texto: "Estadísticas", icono: DataIcon, ruta: "/estadisticasDocente" },
     ],
     admin: [
       { texto: "Grados", icono: StudyIcon, ruta: "/crearGrados" },
