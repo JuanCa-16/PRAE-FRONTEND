@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import './GraficoTorta.scss';
-import { useTheme } from '../../../../Contexts/UserContext';
+import { useTheme } from '../../../Contexts/UserContext';
 
 // Datos de ejemplo
 // const data = [

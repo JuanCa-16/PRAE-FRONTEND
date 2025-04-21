@@ -1,6 +1,6 @@
 import React from 'react'
 import TituloDes from '../../../componentes/TituloDes/TituloDes'
-import AdminEstadisticas from '../../../componentes/Estadisticas/AdminEstadisticas/AdminEstadisticas/AdminEstadisticas'
+import AdminEstadisticas from '../../../componentes/Estadisticas/AdminEstadisticas/AdminEstadisticas'
 import './EstadisticasAdmin.scss'
 
 const EstadisticasAdmin = () => {

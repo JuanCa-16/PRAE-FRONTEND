@@ -10,7 +10,7 @@ import {
   Rectangle,
 } from "recharts";
 import React from "react";
-import { useTheme } from "../../../../Contexts/UserContext";
+import { useTheme } from "../../../Contexts/UserContext";
 import "./GraficoBarras.scss";
 
 // const data = [

@@ -37,7 +37,7 @@ import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 import AjustesInstitucion from './paginas/Administradores/AjustesInstitucion/AjustesInstitucion.jsx';
 import EstadisticasAdmin from './paginas/Administradores/Estadisticas/EstadisticasAdmin.jsx';
-import ProfeEstadisticas from './componentes/Estadisticas/ProfeEstadisticas/ProfeEstadisticas.jsx';
+import EstadisticasDocentes from './paginas/Docentes/EstadisticasDocente/EstadisticasDocentes.jsx';
 
 
 /** 
@@ -234,7 +234,7 @@ function App() {
                 <Route path='/observaciones' element={<Observaciones/>} />
                 <Route path='/observaciones/:nombreEst' element={<CrearObservacion/>} />
                 <Route path='/editarPerfilDocente' element={<EditarPerfilDoc/>} />
-                <Route path='/estadisticasDocente' element={<ProfeEstadisticas/>} />
+                <Route path='/estadisticasDocente' element={<EstadisticasDocentes/>} />
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'admin'}/>} >
