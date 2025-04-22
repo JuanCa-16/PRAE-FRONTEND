@@ -44,6 +44,25 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
     }
 };
 
+const ordenarGrados2 = (a, b) => {
+  const [gradoA, subgradoA] = a.grado.split('-');
+  const [gradoB, subgradoB] = b.grado.split('-');
+
+  // Convertir los grados en números
+  const gradoANum = Number(gradoA);
+  const gradoBNum = Number(gradoB);
+
+  // Primero ordenar por el número del grado
+  if (gradoANum !== gradoBNum) {
+    return gradoANum - gradoBNum;  // Comparar los grados
+  } else {
+    // Si los grados son iguales, ordenar alfabéticamente por la letra
+    if (subgradoA < subgradoB) return -1;
+    if (subgradoA > subgradoB) return 1;
+    return 0;
+  }
+};
+
 
 
   const handleData = (data) => {
@@ -74,12 +93,12 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
       }));
 
       setPromedioNotasCurso(prev => {
-        const nuevo = JSON.stringify(nuevosPromedioGrados);
+        const nuevo = JSON.stringify(nuevosPromedioGrados.sort(ordenarGrados2));
         const anterior = JSON.stringify(prev);
         if (nuevo === anterior) {
           return prev;
         }
-        return nuevosPromedioGrados;
+        return nuevosPromedioGrados.sort(ordenarGrados2);
       });
 
       //ESTUDIANTES X GRADO

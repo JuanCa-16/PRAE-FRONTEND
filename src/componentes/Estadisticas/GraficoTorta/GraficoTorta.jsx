@@ -90,7 +90,8 @@ const GraficoTorta = ({data}) => {
             outerRadius={55}
             fill="var(--colorPildora1)" // Color de las porciones
             dataKey="value"
-            
+            startAngle={90} 
+            endAngle={450}
             onMouseEnter={onPieEnter} // Evento para cuando el mouse pasa por encima
           />
         </PieChart>
