@@ -1,0 +1,69 @@
+@import '../../../global.scss';
+
+.graficoRadar{
+
+    .recharts-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recharts-surface{
+        width: 100% !important;
+        overflow: hidden;
+    }
+
+    .radiusAxis{
+        stroke: var(--colorPildora2); 
+    }
+
+    .recharts-text{
+        &.recharts-polar-radius-axis-tick-value{
+            fill: var(--colorPildora2); 
+            font-size: 0.7rem;
+        }
+
+        &.recharts-polar-angle-axis-tick-value{
+            fill: var(--colorPildora3); 
+            font-size: 0.6rem;
+
+        }
+    } 
+
+    .figuraRadar{
+        fill:  var(--colorPildora2); 
+        stroke: var(--colorPildora2); 
+    }
+
+    .gridRadar{
+        stroke: var(--colorPildora2); 
+        opacity: 0.5;
+    }
+
+
+
+    &.dark{
+        .figuraRadar{
+            fill:  $dark-morado;
+            stroke: $dark-morado; 
+        }
+
+        .gridRadar{
+            stroke: $dark-morado; 
+        }
+
+        .radiusAxis{
+            stroke: $dark-morado;
+        }
+
+        .recharts-text{
+            &.recharts-polar-radius-axis-tick-value{
+                fill: $dark-morado;
+            }
+
+            &.recharts-polar-angle-axis-tick-value{
+                fill: $dark-amarillo; 
+            }
+        } 
+    }
+}

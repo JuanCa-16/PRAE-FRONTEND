@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from "react";
-import WebSocketListener from "../../WebSocketListener/WebSocketListener";
-import AnimatedCounter from "../../Animacion/AnimatedNumber";
-import PildoraEst from "../../../PildoraEst/PildoraEst";
+import WebSocketListener from "../WebSocketListener/WebSocketListener";
+import AnimatedCounter from "../Animacion/AnimatedNumber";
+import PildoraEst from "../../PildoraEst/PildoraEst";
 import GraficoBarras from "../GraficoBarras/GraficoBarras";
 import "./AdminEstadisticas.scss";
-import { useUser } from "../../../../Contexts/UserContext";
-import { useTheme } from "../../../../Contexts/UserContext";
+import { useUser } from "../../../Contexts/UserContext";
+import { useTheme } from "../../../Contexts/UserContext";
 import Masonry from "react-masonry-css";
 import GraficoTorta from "../GraficoTorta/GraficoTorta";
 
@@ -68,8 +68,8 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
       });
 
       //PROMEDIO X GRADO
-      const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_notas_por_grado).map(([grado, promedio]) => ({
-        grado,
+      const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_notas_por_grado).map(([titulo, promedio]) => ({
+        titulo,
         promedio: parseFloat(promedio),
       }));
 

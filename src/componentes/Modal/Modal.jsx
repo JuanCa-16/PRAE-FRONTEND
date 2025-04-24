@@ -67,7 +67,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     const [step, setStep] = useState('form'); 
     const [nombreAct, setNonombreAct] = useState(valorAct); // Estado para manejar el valor de la actividad
     const [pesoAct, setPesoAct] = useState(ValorPeso); // Estado para manejar el valor del peso
-
+    const [cargando,setCargando] = useState(false);
 
     const handleNombreChange = (newNombre) => {
         setNonombreAct(capitalizeWords(newNombre)); // Actualiza el estado 'email'
@@ -150,7 +150,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
             if (formData.notaOriginal === '0') {
                 try {
                         
-                
+                    setCargando(true)
                     const response = await fetch(`${API_URL}calificacion/asignar`, {
                         method: 'POST',
                         headers: {
@@ -170,10 +170,12 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                     }
             
                     Alerta.success("Nota registrada correctamente");
+                    setCargando(false)
                 
                 } catch (error) {
                     console.error('Error al guardar nota:', error);
                     Alerta.error(error.message);
+                    setCargando(false)
                 }
             }
             else{
@@ -331,7 +333,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                                             onChange={handleNotaChange} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
-                            <button onClick={handleSubmit2}>Ingresar</button>
+                            <button onClick={handleSubmit2} disabled={cargando}>{cargando? 'cargando...':'Ingresar' }</button>
                         </div>
                     </div>
                 </div>

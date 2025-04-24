@@ -1,4 +1,4 @@
-
+@import '../../../variables.scss';
 .contenedorCreacionDocente{
     display: flex;
     flex-direction: column-reverse;
@@ -32,6 +32,7 @@
                 flex-wrap: wrap;
 
                 .input-container{
+                    flex: 1; //solo esta linea hace que crezca
                     width: 30%;
                     min-width: 12.5rem;
                     padding: 1rem;
@@ -88,6 +89,31 @@
         }
 
         
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .contenedorCreacionDocente{
+        .crear{
+            .formulario{
+                .inputs{
+                    .input-container{
+            
+                        min-width: 10rem;
+                        
+                    }
+                }
+
+                .selectorMat{
+                    display: flex;
+                    width: 100%;
+                    max-width: 100%;
+                    align-self: flex-start;
+
+                }
+            }
+        }
+
     }
 }
 
