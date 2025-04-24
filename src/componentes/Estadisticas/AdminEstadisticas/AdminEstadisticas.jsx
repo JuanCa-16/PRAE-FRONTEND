@@ -44,25 +44,6 @@ const AdminEstadisticas = ({funcionRecargaCantMaterias = () =>{}}) => {
     }
 };
 
-const ordenarGrados2 = (a, b) => {
-  const [gradoA, subgradoA] = a.grado.split('-');
-  const [gradoB, subgradoB] = b.grado.split('-');
-
-  // Convertir los grados en números
-  const gradoANum = Number(gradoA);
-  const gradoBNum = Number(gradoB);
-
-  // Primero ordenar por el número del grado
-  if (gradoANum !== gradoBNum) {
-    return gradoANum - gradoBNum;  // Comparar los grados
-  } else {
-    // Si los grados son iguales, ordenar alfabéticamente por la letra
-    if (subgradoA < subgradoB) return -1;
-    if (subgradoA > subgradoB) return 1;
-    return 0;
-  }
-};
-
 
 
   const handleData = (data) => {
@@ -87,18 +68,18 @@ const ordenarGrados2 = (a, b) => {
       });
 
       //PROMEDIO X GRADO
-      const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_notas_por_grado).map(([grado, promedio]) => ({
-        grado,
+      const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_notas_por_grado).map(([titulo, promedio]) => ({
+        titulo,
         promedio: parseFloat(promedio),
       }));
 
       setPromedioNotasCurso(prev => {
-        const nuevo = JSON.stringify(nuevosPromedioGrados.sort(ordenarGrados2));
+        const nuevo = JSON.stringify(nuevosPromedioGrados);
         const anterior = JSON.stringify(prev);
         if (nuevo === anterior) {
           return prev;
         }
-        return nuevosPromedioGrados.sort(ordenarGrados2);
+        return nuevosPromedioGrados;
       });
 
       //ESTUDIANTES X GRADO

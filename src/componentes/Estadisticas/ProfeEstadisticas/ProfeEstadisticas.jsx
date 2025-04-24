@@ -7,6 +7,7 @@ import { useTheme } from "../../../Contexts/UserContext";
 import Masonry from "react-masonry-css";
 import GraficoBarras from "../GraficoBarras/GraficoBarras";
 import "./ProfeEstadisticas.scss";
+import GraficoRadar from "../GraficoRadar/GraficoRadar";
 
 const ProfeEstadisticas = () => {
     const {theme} = useTheme()
@@ -18,6 +19,7 @@ const ProfeEstadisticas = () => {
     const [cantidadGrados, setCantidadGrados] = useState(null);
     const [cantidadEst, setCantidadEst] = useState(null);
     const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
+    const [promedioGrados, setPromedioGrados] = useState(null);
     const handleData = (data) => {
       if (data.identificador === `${idProfe}`){
         //MATERIAS
@@ -48,14 +50,21 @@ const ProfeEstadisticas = () => {
           return nuevosEst; // Solo actualizar si realmente cambió
         });
 
-        //PROMEDIO X GRADO
-      const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_por_curso).map(([curso, info]) => ({
-        curso,
-        informacion: Object.entries(info).map(([grado, prom]) => ({
-          grado,
-          promedio: parseFloat(prom.promedioCurso)
-        }))
-      }));
+        //PROMEDIO MATERIAS X GRADO
+        const nuevosPromedioGrados = Object.entries(data.estadisticas.promedio_por_curso).map(([curso, info]) => ({
+          curso,
+          informacion: Object.entries(info).map(([titulo, prom]) => {
+            // Solo incluir las materias que no sean la excluida
+            if (titulo === 'promedioCurso') {
+              return null;  // Retorna null para excluir la materia
+            }
+        
+            return {
+              titulo,
+              promedio: parseFloat(prom.promedioMateria)
+            };
+          }).filter(item => item !== null) // Elimina los nulls (materias excluidas)
+        }));
 
       setPromedioNotasCurso(prev => {
         const nuevo = JSON.stringify(nuevosPromedioGrados);
@@ -65,6 +74,22 @@ const ProfeEstadisticas = () => {
         }
         return nuevosPromedioGrados;
       });
+
+
+      //PROMEDIO  X GRADO
+      const nuevoPromGrado = Object.entries(data.estadisticas.promedio_por_curso).map(([curso, info]) => ({
+        titulo:curso,
+        promedio:parseFloat(info.promedioCurso)
+      }));
+
+    setPromedioGrados(prev => {
+      const nuevo = JSON.stringify(nuevoPromGrado);
+      const anterior = JSON.stringify(prev);
+      if (nuevo === anterior) {
+        return prev;
+      }
+      return nuevoPromGrado;
+    });
 
 
       }
@@ -113,23 +138,51 @@ const ProfeEstadisticas = () => {
           <span className="loader"></span>
         )} 
 
+
+        {promedioGrados !== null ? (
+          promedioGrados.length > 0 ? (
+            <div className="graficoTorta">
+              <p>Promedio Grados</p>
+              <GraficoBarras data={promedioGrados} />:
+            </div>
+        
+          ) : (
+            <p>No hay datos para mostrar</p>
+          )
+        ) : (
+          <span className="loader"></span>
+        )}
+
         
         {promedioNotasCurso !== null ? (
           promedioNotasCurso.length > 0 ? (
-
+            
             promedioNotasCurso.map(({ curso, informacion }) => {
-              console.log(informacion)
+
               return (
-                <div key={curso} className="graficoBarras">
+                <>
+
+                  {informacion.length > 0 ?
+                  <div key={curso} className="graficoBarras">
                   <p>Promedio {curso}</p>
-                  <GraficoBarras data={informacion} />
-                </div>
+                  {(informacion.length <=3)?
+                    <GraficoBarras data={informacion} />:
+                    <GraficoRadar data={informacion} />
+                  }
+                  
+                  </div>
+                :
+                
+                <PildoraEst color="amarillo" clase="peque pildoraEstadistica" est={`Grado ${curso} sin materias`} estadistica/>
+                }
+                </>
+                
               );
             })
             
         
           ) : (
-            <p>No hay datos para mostrar</p>
+            <PildoraEst color="amarillo" clase="peque pildoraEstadistica" est="NO HAY DATOS PROM X GRADOS" estadistica/>
           )
         ) : (
           <span className="loader"></span>

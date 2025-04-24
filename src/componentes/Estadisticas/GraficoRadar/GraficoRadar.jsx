@@ -3,27 +3,18 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 import { useTheme } from '../../../Contexts/UserContext';
 import "./GraficoRadar.scss";
 
-const data = [
-    { grado: 'Artistica analitica', promedio: 4.5 },
-    { grado: 'Sociales', promedio: 3.8 },
-    { grado: 'Competencias ciudadanas', promedio: 4.2 },
-    { grado: 'sistemas', promedio: 4.0 },
-    { grado: 'matematica aaaaaaadddd', promedio: 3.9 },
-    { grado: 'tecnologia1', promedio: 2.3 },
-    { grado: 'tecnologia2', promedio: 1.3 },
-    { grado: 'tecnologia4', promedio: 3.3 },
-    { grado: 'tecnologia5', promedio: 2.3 },
-    { grado: 'tecnologia6', promedio: 4.3 },
-    { grado: 'tecnologia7', promedio: 5 },
-];
+// const data = [
+//     { materia: 'Artistica analitica', promedio: 4.5 },
 
-const GraficoRadar = () => {
+// ];
+
+const GraficoRadar = ({data}) => {
   const { theme } = useTheme();
 
   // Generamos un identificador único por grado (puedes usar el índice o cualquier otro método único)
   const radarData = data.map((item, index) => ({
-    id: `${index}. ${item.grado}`, // Asignamos un id único basado en el nombre y el índice
-    subject: item.grado,           // Nombre completo del grado
+    id: `${index}. ${item.titulo}`, // Asignamos un id único basado en el nombre y el índice
+    subject: item.titulo,           // Nombre completo del grado
     A: item.promedio,              // El promedio es el valor que se graficará
   }));
 

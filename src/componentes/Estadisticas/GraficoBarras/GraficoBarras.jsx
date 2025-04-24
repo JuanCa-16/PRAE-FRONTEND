@@ -45,7 +45,7 @@ const GraficoBarras = ({data}) => {
             ticks={[0, 1, 2, 3, 4, 5]}
             className="xAxisText"
           />
-          <YAxis dataKey="grado" type="category" className="yAxisText" />
+          <YAxis dataKey="titulo" type="category" className="yAxisText" />
           <Tooltip
             itemStyle={{ color: "var(--colorPildora2)" }}
             labelStyle={{ color: "var(--colorPildora1)" }}
