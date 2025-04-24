@@ -33,6 +33,8 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
 
     const [reload, setReload] = useState(false);
 
+    const [cargando,setCargando] = useState(false);
+
 
     useEffect(() => {
             const notasCursoDocente = async () => {
@@ -56,14 +58,14 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                     setNombres((data.map(item=> ` ${item.apellido} ${item.nombre}`)).sort((a, b) =>
                         a.trim().localeCompare(b.trim(), 'es', {
                           sensitivity: 'base',       // ignora mayúsculas / tildes
-                          ignorePunctuation: true
+                            ignorePunctuation: true
                         })
-                      )) 
+                    )) 
                     setSoloApellidos(data.map(item => ` ${item.apellido}`))
                     setSoloNombre(data.map(item => ` ${item.nombre}`))
-                    setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat())
+                    setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat().sort((a, b) => a.actividad.localeCompare(b.actividad)))
 
-                    
+                
                 } catch (error) {
                     console.error(error);
                     Alerta.error(`Error al obtener notas: ${error.message}`, true);
@@ -128,6 +130,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
         }
         
         try {
+            setCargando(true)
             const response = await fetch(`${API_URL}actividad/crear`,{
                 method: "POST",
                 headers: {
@@ -142,7 +145,8 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                 throw new Error(`${errorData.message || response.status}`);
             }
             
-            Alerta.success('Observación realizada correctamente');
+            Alerta.success('Actividad realizada correctamente');
+            setCargando(false)
             setReload(!reload);
             console.log(nombreAct)
             setNonombreAct({
@@ -153,6 +157,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
         } catch (error) {
             console.error('Error al crear actividad',error);
             Alerta.error(error.message);
+            setCargando(false)
         }
         
         
@@ -199,7 +204,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
 
                         {actividadesUnicas.map((actividad, i) => (
                             <div key={i} className="col nota">
-                                <Celda color={infoCurso.color} txt={actividad.actividad} tipo='titulo' onClick={() => openModalAct(i)} />
+                                <Celda color={infoCurso.color} txt={actividad.actividad + ' - '+actividad.peso+ ' % '} tipo='titulo' onClick={() => openModalAct(i)} />
                                 {/* Modal específico para la actividad seleccionada */}
                                 {modalIndexAbierto === i && (
                                     <Modal
@@ -274,7 +279,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                                             onChange={(value) => handleChange('peso', value)} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
-                            <button type='submit'>Crear</button>
+                            <button type='submit' disabled={cargando}>{cargando? 'cargando...':'Crear' } </button>
                         </div>
                     </div>
                 </form>
