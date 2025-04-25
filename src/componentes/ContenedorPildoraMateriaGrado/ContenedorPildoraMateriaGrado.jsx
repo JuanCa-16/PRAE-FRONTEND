@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import PildoraMateriaGrado from "../PildoraMateriaGrado/PildoraMateriaGrado";
 import Modal from "../Modal/Modal";
-import './ContenedorPildoraMateriaGrado.scss'
-
+import './ContenedorPildoraMateriaGrado.scss';
+import Masonry from "react-masonry-css";
 const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, clase }) => {
   const pildorasFiltradas = info;
   const navigate = useNavigate();
@@ -22,9 +22,35 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, c
       const closeModal = () => setIsModalOpen(null);
 
 
+      const breakpointSet1 = {
+        default: 7,
+        300: 1,
+        450: 2,
+        570: 4,
+        700: 5,
+        750: 1,
+        950: 2,
+        1100: 4,
+        1350: 5,
+        1600: 6,
+      };
+      
+      const breakpointSet2 = {
+        default: 5,
+        400: 1,
+        550: 2,
+        700: 3,
+        950: 1,
+        1100: 2,
+        1350: 3,
+        1600: 4,
+      };
+
+      const breakpoints = clase === 'grado' ? breakpointSet1 : breakpointSet2;
+
   
   return (
-    <div className="materiasGrados">
+    <Masonry className="layautMateriasGrados" columnClassName="layautMateriasGradosColumn" breakpointCols={breakpoints} >
       {docente ? (
         pildorasFiltradas.length > 0 ? (
           pildorasFiltradas.map((item, index) => (
@@ -81,7 +107,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, c
           )
         
       )}
-    </div>
+    </Masonry>
   );
 };
 
