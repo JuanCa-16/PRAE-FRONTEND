@@ -194,8 +194,8 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
             <div className="contenedor">
                 <PildoraTitulo nota={infoNota} materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
                 <div className="tabla">
-                    <div className="col ">
-                        <Celda txt='Actividad' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
+                    <div className="col colListado">
+                        <Celda txt='Listado' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
                         {nombres.map((nombre, index) => (
                             <Celda key={index} tipo='titulo2' color={infoCurso.color} txt={nombre} rol='NoVer'></Celda>
                         ))}
