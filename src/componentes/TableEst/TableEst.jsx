@@ -50,7 +50,7 @@ const TableEst = ({infoMateria, idEst } ) => {
     return (
         <div className='contenedorVistaMateria'>
             <div className="contenedor">
-                <PildoraTitulo nota={info.promedio} materia= {infoMateria.materia} nombre={infoMateria.nombre_completo} color={infoMateria.color} grado={infoMateria.curso}></PildoraTitulo>
+                <PildoraTitulo nota={info.promedio_general} materia= {infoMateria.materia} nombre={infoMateria.nombre_completo} color={infoMateria.color} grado={infoMateria.curso}></PildoraTitulo>
                 {info.actividades? (
                     <div className="tabla">
                     <div className="col 1">

@@ -15,8 +15,12 @@ const ContenedorMaterias = ({url, info, est=true, nombre,idEst, idProfe}) => {
 
     //pasa los datos de la materia a la pagina de notas de la materias
     const manejarClick = (item,materia, profesor) => {
+
         const datos = { item,idEst  }; // Datos a enviar
+
+        //item ya tiene el doc del idProfe en teoria podria quitar el idProfe
         const datos2 = { item, idProfe }; // Datos a enviar
+
 
         if(est){
             navigate(`${url}/${nombre? nombre : user.nombre + ' ' +user.apellido}/${materia}`, { state: datos }); // Navegar con los datos
