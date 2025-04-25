@@ -252,6 +252,8 @@ button{
         display: flex;
         flex-direction: column;
         height: 100vh;
+        height: 100dvh;
+        
         padding: 0;
         margin: 0;
         position: relative;
@@ -290,6 +292,7 @@ button{
         .completo{
             width: 100%;
             height: 100vh;
+            height: 100dvh;
         }
     }
 
@@ -334,4 +337,8 @@ button{
         border-bottom-color: $dark-azul;
 
         }
+
+    h1,h2,h3,h4,p{
+        color: $dark-blanco;
+    }
 }
