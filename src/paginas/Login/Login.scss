@@ -168,7 +168,8 @@
                 // height: 100%;
                 height: auto;
                 max-height: 28%;
-                padding: 1.5rem 2rem;
+                padding: 1.2rem 1.5rem;
+                padding-bottom: 1.5rem;
                 align-items: center;
                 gap: 10px;
                 align-self: stretch;
@@ -243,7 +244,7 @@
                 position: relative;
                 margin-top: -2rem; // Ajusta según cuánto quieras que se solape
                 z-index: 1; // Asegura que esté por encima de .izq
-                box-shadow:  0px -10px 11px rgba(170, 167, 167, 0.548);
+                box-shadow:  0px -5px 11px rgba(170, 167, 167, 0.548);
                 overflow-y: auto;
                 .title{
                     display: flex;
