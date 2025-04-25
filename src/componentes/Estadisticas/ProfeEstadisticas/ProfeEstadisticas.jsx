@@ -141,7 +141,7 @@ const ProfeEstadisticas = () => {
 
         {promedioGrados !== null ? (
           promedioGrados.length > 0 ? (
-            <div className="graficoTorta">
+            <div className="graficoBarras">
               <p>Promedio Grados</p>
               <GraficoBarras data={promedioGrados} />:
             </div>

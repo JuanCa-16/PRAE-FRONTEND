@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-
+import React, {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
@@ -18,7 +18,7 @@ const AsignarGradosMaterias = () => {
     const token = localStorage.getItem("token");
     const {user} = useUser();
     const [reload, setReload] = useState(false);
-
+    const navigate = useNavigate();
      //Datos inciales a mostrar
     const [formData, setFormData] = useState({
         grados: [],
@@ -341,6 +341,7 @@ const AsignarGradosMaterias = () => {
                     Alerta.success('Asignacion eliminada exitosamente');
                     console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
 
+                    setIsModalOpenConfirmacion(false);
                     closeModal()
                     setReload(!reload);
                     
@@ -353,82 +354,72 @@ const AsignarGradosMaterias = () => {
 
             }
 
-//Envio del formulario
-const handleSubmit = async (e) => {
-    e.preventDefault();
+        const handleNavegar = (item) =>{
+            const datos = { item,  idProfe: item?.profesor_documento}; 
 
-    if (materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0) {
-        Alerta.info('Debes seleccionar al menos una materia y grado');
-        return;
-    }
-    console.log('Datos enviados:', formData);
-
-    const combinaciones = formData.grados.flatMap(id_curso =>
-        formData.materias.map(([id_materia, id_docente]) => ({ id_curso, id_materia, id_docente }))
-    );
-
-    console.log('aaaaa', combinaciones);
-
-    try {
-        const respuestas = await Promise.allSettled(
-            combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
-                const response = await fetch(`${API_URL}asignar/asignarMateria`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({ id_curso, id_materia, id_docente })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error);
-                }
-
-                return response.json();
-            })
-        );
-
-        console.log('Respuestas del backend:', respuestas);
-
-        const errores = respuestas
-        .filter(result => result.status === "rejected")
-        .map((result, index) => ({ 
-            errorMsg: result.reason.message, 
-            id_curso: combinaciones[index].id_curso, 
-            id_materia: combinaciones[index].id_materia 
-        }));
-        
-
-        const exitosos = respuestas
-    .map((result, index) => ({ result, combinacion: combinaciones[index] }))
-    .filter(({ result }) => result.status === "fulfilled");
-
-const exitos = exitosos.length;
-
-if (exitos > 0) {
-    const exitosPorMateria = exitosos.reduce((acc, { combinacion }) => {
-        const { id_curso, id_materia } = combinacion;
-        const nombreMateria = materiasSeleccionadas.find(m => Number(m.value[0]) === Number(id_materia))?.label || `Materia ${id_materia}`;
-        const nombreCurso = gradosSeleccionados.find(g => Number(g.value) === Number(id_curso))?.label || `Curso ${id_curso}`;
-
-        if (!acc[nombreMateria]) {
-            acc[nombreMateria] = [];
+            navigate(`/profesores/${item?.nombre_completo}/${item?.materia}`, { state: datos });
         }
-        acc[nombreMateria].push(nombreCurso);
-        return acc;
-    }, {});
 
-    const mensajeExito = Object.entries(exitosPorMateria)
-        .map(([materia, cursos]) => `${materia}: ${cursos.join(", ")}`)
-        .join("\n");
+        //Modal Confirmacion
+        const [isModalConfirmacion, setIsModalOpenConfirmacion] = useState(false);
+            
+        //Envio del formulario
+        const handleSubmit = async (e) => {
+            e.preventDefault();
 
-    Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`, true);
-}
+            if (materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0) {
+                Alerta.info('Debes seleccionar al menos una materia y grado');
+                return;
+            }
+            console.log('Datos enviados:', formData);
 
-        if (errores.length > 0) {
-            const erroresPorMateria = errores.reduce((acc, { id_curso, id_materia }) => {
+            const combinaciones = formData.grados.flatMap(id_curso =>
+                formData.materias.map(([id_materia, id_docente]) => ({ id_curso, id_materia, id_docente }))
+            );
+
+            console.log('aaaaa', combinaciones);
+
+            try {
+                const respuestas = await Promise.allSettled(
+                    combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
+                        const response = await fetch(`${API_URL}asignar/asignarMateria`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            },
+                            body: JSON.stringify({ id_curso, id_materia, id_docente })
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.error);
+                        }
+
+                        return response.json();
+                    })
+                );
+
+                console.log('Respuestas del backend:', respuestas);
+
+                const errores = respuestas
+                .filter(result => result.status === "rejected")
+                .map((result, index) => ({ 
+                    errorMsg: result.reason.message, 
+                    id_curso: combinaciones[index].id_curso, 
+                    id_materia: combinaciones[index].id_materia 
+                }));
+                
+
+                const exitosos = respuestas
+            .map((result, index) => ({ result, combinacion: combinaciones[index] }))
+            .filter(({ result }) => result.status === "fulfilled");
+
+        const exitos = exitosos.length;
+
+        if (exitos > 0) {
+            const exitosPorMateria = exitosos.reduce((acc, { combinacion }) => {
+                const { id_curso, id_materia } = combinacion;
                 const nombreMateria = materiasSeleccionadas.find(m => Number(m.value[0]) === Number(id_materia))?.label || `Materia ${id_materia}`;
                 const nombreCurso = gradosSeleccionados.find(g => Number(g.value) === Number(id_curso))?.label || `Curso ${id_curso}`;
 
@@ -439,29 +430,51 @@ if (exitos > 0) {
                 return acc;
             }, {});
 
-            const mensajeError = Object.entries(erroresPorMateria)
+            const mensajeExito = Object.entries(exitosPorMateria)
                 .map(([materia, cursos]) => `${materia}: ${cursos.join(", ")}`)
                 .join("\n");
 
-            Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
+            Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`, true);
         }
 
-        // Limpiar el formulario solo si hubo éxitos
-        if (exitos > 0) {
-            setReload(!reload);
-            setFormData({
-                grados: [],
-                materias: []
-            });
-            setMateriasSeleccionadas([]);
-            setGradosSeleccionados([]);
-        }
+                if (errores.length > 0) {
+                    const erroresPorMateria = errores.reduce((acc, { id_curso, id_materia }) => {
+                        const nombreMateria = materiasSeleccionadas.find(m => Number(m.value[0]) === Number(id_materia))?.label || `Materia ${id_materia}`;
+                        const nombreCurso = gradosSeleccionados.find(g => Number(g.value) === Number(id_curso))?.label || `Curso ${id_curso}`;
 
-    } catch (error) {
-        console.error('Error en las peticiones:', error);
-        Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');
-    }
-};
+                        if (!acc[nombreMateria]) {
+                            acc[nombreMateria] = [];
+                        }
+                        acc[nombreMateria].push(nombreCurso);
+                        return acc;
+                    }, {});
+
+                    const mensajeError = Object.entries(erroresPorMateria)
+                        .map(([materia, cursos]) => `${materia}: ${cursos.join(", ")}`)
+                        .join("\n");
+
+                    Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
+                }
+
+                // Limpiar el formulario solo si hubo éxitos
+                if (exitos > 0) {
+                    setReload(!reload);
+                    setFormData({
+                        grados: [],
+                        materias: []
+                    });
+                    setMateriasSeleccionadas([]);
+                    setGradosSeleccionados([]);
+                }
+
+            } catch (error) {
+                console.error('Error en las peticiones:', error);
+                Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');
+            }
+        };
+
+
+
 
 
     return (
@@ -550,17 +563,35 @@ if (exitos > 0) {
                                     onClick={() => openModal(index)}
                                 />
                                 
-                                    {isModalOpen === index && (
+                                    {(isModalOpen === index && !isModalConfirmacion)? (
                                         <Modal
                                         isOpen={true}
                                         closeModal={closeModal}
                                         tipo='eliminar'
-                                        modalTexto='¿Estás seguro de continuar con la acción? Eliminar este curso será permanente y no se podrá cancelar.'
-                                        modalTitulo = {`ELIMINAR CURSO ${item.materia} ${item.curso} de ${item.nombre_completo}`}
+                                        modalTexto='Navega o elimina el curso seleccionado'
+                                        modalTitulo = {`${item.materia} ${item.curso} de ${item.nombre_completo}`}
                                         >
-                                        <button onClick={() => handleEliminar(index,item.id_asignacion, item.curso, item.materia, item.nombre_completo)} className='rojo'>ELIMINAR</button>
+                                        <div className='botonesJuntos'>
+                                        <button onClick={() => handleNavegar(item)} >Ir</button>
+                                        <button onClick={() => setIsModalOpenConfirmacion(true)} className='rojo'>ELIMINAR</button>
+                                        </div>
+
                                         </Modal>
-                                        )}
+                                        ):(isModalOpen === index && (<Modal
+                                            isOpen={true}
+                                            closeModal={() => {setIsModalOpenConfirmacion(false);setIsModalOpen(null);}}
+                                            tipo='eliminar'
+                                            modalTexto='Eliminar este curso sera permanente y no se podra deshacer.'
+                                            modalTitulo = {`ELIMINAR CURSO DE ${item.materia} ${item.curso} de ${item.nombre_completo}`}
+                                            >
+                                                <div className='botonesJuntos'>
+                                                <button onClick={() => handleEliminar(index,item.id_asignacion, item.curso, item.materia, item.nombre_completo)} className='rojo'>ELIMINAR</button>
+                                                <button type="button"  onClick={() => setIsModalOpenConfirmacion(false)}>Cancelar</button>
+                                                </div>
+                                                
+                                            </Modal>))
+                                        
+                                            }
                                 </React.Fragment>
                                     
                             ))

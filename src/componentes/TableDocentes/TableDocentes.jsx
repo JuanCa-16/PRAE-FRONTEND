@@ -19,6 +19,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
             .join(' ');
     }
 
+    console.log('AQUITOY',infoCurso,infoDocente)
     const API_URL = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem('token')
     const {user} = useUser();
