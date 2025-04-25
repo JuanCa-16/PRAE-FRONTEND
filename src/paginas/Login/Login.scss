@@ -147,6 +147,7 @@
         flex-direction: column;
         width: 100%;
         height: 100dvh;
+        height: 100vh;
     
 
         .pagLogin{
@@ -157,6 +158,7 @@
             background-color: var(--fondo);
             //height: 100vh;
             max-height: 100dvh;
+            max-height: 100vh;
             //min-height: 100vh;
             //overflow-y: auto;
     
