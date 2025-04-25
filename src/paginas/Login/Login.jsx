@@ -64,7 +64,7 @@ export default function Login({func}) {
 
                 <div className="der">
                     <div className='title'>
-                        <TituloDes titulo="Bienvenido" desc='Accede a tu información académica, consulta tus cursos y gestiona calificaciones en un solo lugar.'></TituloDes>
+                        <TituloDes titulo="Bienvenido" desc='Accede a tu información académica en un solo lugar.'></TituloDes>
                     </div>
                     <form onSubmit={handlerLogin} className='Form_login'>
                         <div  className='inputs'>
