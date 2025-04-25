@@ -11,6 +11,10 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+
+    p{
+        text-align: center;  
+    }
     
     //Si es de tipo titulo
     &.titulo{
