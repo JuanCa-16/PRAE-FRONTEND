@@ -19,7 +19,7 @@ export default function ResetClave() {
     useEffect(()=>{
         const checkTokenReset = async () =>{
             try {
-                const response = await fetch(`${API_URL}auth/validate/${token}`, {
+                const response = await fetch(`${API_URL}auth/validateResetToken`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,
