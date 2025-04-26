@@ -55,18 +55,18 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
     
                     const data = await response.json();
                     console.log('info',data)
-                    setInfo(data)
-                    setNombres((data.map(item=> ` ${item.apellido} ${item.nombre}`)).sort((a, b) =>
-                        a.trim().localeCompare(b.trim(), 'es', {
-                          sensitivity: 'base',       // ignora mayúsculas / tildes
-                            ignorePunctuation: true
-                        })
-                    )) 
-                    setSoloApellidos(data.map(item => ` ${item.apellido}`))
-                    setSoloNombre(data.map(item => ` ${item.nombre}`))
-                    setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat().sort((a, b) => a.actividad.localeCompare(b.actividad)))
-
-                
+                    if(data.length > 0){
+                        setInfo(data)
+                        setNombres((data.map(item=> ` ${item.apellido} ${item.nombre}`)).sort((a, b) =>
+                            a.trim().localeCompare(b.trim(), 'es', {
+                              sensitivity: 'base',       // ignora mayúsculas / tildes
+                                ignorePunctuation: true
+                            })
+                        )) 
+                        setSoloApellidos(data.map(item => ` ${item.apellido}`))
+                        setSoloNombre(data.map(item => ` ${item.nombre}`))
+                        setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat().sort((a, b) => a.actividad.localeCompare(b.actividad)))
+                    }
                 } catch (error) {
                     console.error(error);
                     Alerta.error(`Error al obtener notas: ${error.message}`, true);

@@ -38,6 +38,8 @@ import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 import AjustesInstitucion from './paginas/Administradores/AjustesInstitucion/AjustesInstitucion.jsx';
 import EstadisticasAdmin from './paginas/Administradores/Estadisticas/EstadisticasAdmin.jsx';
 import EstadisticasDocentes from './paginas/Docentes/EstadisticasDocente/EstadisticasDocentes.jsx';
+import RecuperarClave from './paginas/RecuperarClave/RecuperarClave.jsx';
+import ResetClave from './paginas/ResetClave/ResetClave.jsx';
 
 
 /** 
@@ -210,18 +212,38 @@ function App() {
           <ScrollToTop></ScrollToTop>
           <Routes>
             
-          <Route path='/login' element={
-            <ProtectedRoute isAllowed={!user} redireccionar={user ? {
-              estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
-              docente: "/listadoCursos",
-              admin: "/crearGrados"
-            }[user.rol] || "/" : "/"}> 
-              <Login func={iniciarSesion} />
-            </ProtectedRoute>
-          }/>
+            <Route path='/login' element={
+              <ProtectedRoute isAllowed={!user} redireccionar={user ? {
+                estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
+                docente: "/listadoCursos",
+                admin: "/crearGrados"
+              }[user.rol] || "/" : "/"}> 
+                <Login func={iniciarSesion} />
+              </ProtectedRoute>
+            }/>
+
+            <Route path='/recuperar-clave' element={
+              <ProtectedRoute isAllowed={!user} redireccionar={user ? {
+                estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
+                docente: "/listadoCursos",
+                admin: "/crearGrados"
+              }[user.rol] || "/" : "/"}> 
+                <RecuperarClave/>
+              </ProtectedRoute>
+            }/>
+
+
+            <Route path='/reset-password/:token' element={
+              <ProtectedRoute isAllowed={!user} redireccionar={user ? {
+                estudiante: `/materias/${user.nombre + ' ' +user.apellido}`,
+                docente: "/listadoCursos",
+                admin: "/crearGrados"
+              }[user.rol] || "/" : "/"}> 
+                <ResetClave/>
+              </ProtectedRoute>
+            }/>
+
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'estudiante'}/>} >
-                
-                
                 <Route path="/materias/:nombreEst" element={<CursosEst/>} />
                 <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
                 <Route path="/observacionesEst" element={<ObservacionesEst></ObservacionesEst>} />

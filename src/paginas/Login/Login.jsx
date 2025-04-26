@@ -88,7 +88,7 @@ export default function Login({func}) {
                             />
 
                         </div>
-                        <p className='lato_1' onClick={() => navigate("/")}>Olvidaste tu contraseña?</p>
+                        <p className='lato_1' onClick={() => navigate("/recuperar-clave")}>Olvidaste tu contraseña?</p>
                         <div className='btn_login'><button type='submit'>Ingresar</button></div>
                     </form>
                 </div>
