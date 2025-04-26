@@ -434,7 +434,7 @@ const AsignarGradosMaterias = () => {
                 .map(([materia, cursos]) => `${materia}: ${cursos.join(", ")}`)
                 .join("\n");
 
-            Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`, true);
+            Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`);
         }
 
                 if (errores.length > 0) {
