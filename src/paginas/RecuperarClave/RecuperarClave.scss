@@ -2,7 +2,7 @@
 @import '../../variables.scss';
 
 //Estilos Login
-.contenedorLogin{
+.contenedorRecuperarClave{
     display: flex;
     width: 100%;
     height: 100vh;
@@ -10,8 +10,9 @@
     align-items: flex-start;
     gap: 10px;
 
-    .pagLogin{
+    .pagRecuperar{
         display: flex;
+        flex-direction: row-reverse;
         justify-content: space-between;
         align-items: center;
         height: 100%;
@@ -114,11 +115,11 @@
 }
 
 .dark{
-    .contenedorLogin{
+    .contenedorRecuperarClave{
 
         background-color: $dark-negro;
     
-        .pagLogin{
+        .pagRecuperar{
 
             background-color: $dark-negro;
     
@@ -141,7 +142,7 @@
 }
 
 @media screen and (max-width: $max-celular){
-    .contenedorLogin{
+    .contenedorRecuperarClave{
         all: unset;
         display: flex;
         flex-direction: column;
@@ -151,7 +152,7 @@
         max-height: 100%;
     
 
-        .pagLogin{
+        .pagRecuperar{
             display: flex;
             flex-direction: column;
             max-height: 100%;

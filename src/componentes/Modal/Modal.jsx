@@ -67,37 +67,38 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     const [step, setStep] = useState('form'); 
     const [nombreAct, setNonombreAct] = useState(valorAct); // Estado para manejar el valor de la actividad
     const [pesoAct, setPesoAct] = useState(ValorPeso); // Estado para manejar el valor del peso
-    const [observacionEditada, setObservacionEditada] = useState(valorObs || "");
+const [observacionEditada, setObservacionEditada] = useState(valorObs || "");
+const [cargando, setCargando] = useState(false);  // Estado para manejar si la observación está siendo editada
 
-    const handleEliminarObservacion = async () => {
-        try {
-          const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
-      
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Error al eliminar observación");
-          }
-      
-          Alerta.success("Observación eliminada");
-          closeModal();
-          recargar();
-        } catch (error) {
-          console.error("Error al eliminar observación:", error);
-          Alerta.error(error.message);
-        }
-      };
-    
-    const handleObservacionChange = (value) => {
-        console.log('Nuevo valor de observación:', value);  // Esto ayuda a ver qué valor llega
-        setObservacionEditada(value);  // Cambia el estado cuando el usuario escriba
-    };
-      
+const handleEliminarObservacion = async () => {
+    try {
+      const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error al eliminar observación");
+      }
+  
+      Alerta.success("Observación eliminada");
+      closeModal();
+      recargar();
+    } catch (error) {
+      console.error("Error al eliminar observación:", error);
+      Alerta.error(error.message);
+    }
+};
+
+const handleObservacionChange = (value) => {
+    console.log('Nuevo valor de observación:', value);  // Esto ayuda a ver qué valor llega
+    setObservacionEditada(value);  // Cambia el estado cuando el usuario escriba
+};
+
     const handleNombreChange = (newNombre) => {
         setNonombreAct(capitalizeWords(newNombre)); // Actualiza el estado 'email'
     };
@@ -179,7 +180,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
             if (formData.notaOriginal === '0') {
                 try {
                         
-                
+                    setCargando(true)
                     const response = await fetch(`${API_URL}calificacion/asignar`, {
                         method: 'POST',
                         headers: {
@@ -199,10 +200,12 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                     }
             
                     Alerta.success("Nota registrada correctamente");
+                    setCargando(false)
                 
                 } catch (error) {
                     console.error('Error al guardar nota:', error);
                     Alerta.error(error.message);
+                    setCargando(false)
                 }
             }
             else{
@@ -421,7 +424,7 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                                             onChange={handleNotaChange} // Pasamos la función que actualizará el estado
                                             required={true} // Hacemos que el campo sea obligatorio
                             />
-                            <button onClick={handleSubmit2}>Ingresar</button>
+                            <button onClick={handleSubmit2} disabled={cargando}>{cargando? 'cargando...':'Ingresar' }</button>
                         </div>
                     </div>
                 </div>

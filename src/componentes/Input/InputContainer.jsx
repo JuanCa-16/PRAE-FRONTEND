@@ -4,7 +4,7 @@ import './InputContainer.scss'
 import { useState } from 'react';
 import { useId } from 'react';
 import { useTheme } from '../../Contexts/UserContext';
-
+import { EyeIcon, EyeIconBlock } from '../Icons/Icons';
 /** 
  * Componente: InputContainer
  * Descripción: Renderiza un Input personalizado.
@@ -37,25 +37,39 @@ function InputContainer({className, placeholder = "correo@gmail.com", titulo = "
 
     const uniqueId = useId();
 
+    const [ver,setVer] = useState(false);
+
+    const manejarClick = () => {
+        setVer(!ver)
+    }
+
     return (
         <div className={`${theme} ${className} input-container ${isDisabled? 'NoHover' : 'siHover'}`}>
 
             <p htmlFor="input-field" className={`input-title lato ${isFocused? 'focused' : ''}`}>
             {titulo}</p>
     
-            <input
-                type={inputType}
-                id={uniqueId} 
-                placeholder={placeholder}
-                className={`input-field`}
-                value= {value}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                onChange={handleInputChange} 
-                required={required} 
-                disabled={isDisabled} 
-                name={nomInput}
-            />
+            <div className="agruparInput">
+                <input
+                    type={inputType==='password'? (ver? 'text':'password'):inputType}
+                    id={uniqueId} 
+                    placeholder={placeholder}
+                    className={`input-field ${inputType==='password'? 'contra': ''}`}
+                    value= {value}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    onChange={handleInputChange} 
+                    required={required} 
+                    disabled={isDisabled} 
+                    name={nomInput}
+    
+                />
+                
+                {inputType==='password' && value.length>0 &&
+                <div className="logoOjo" onClick={manejarClick}>
+                    {ver? <EyeIconBlock></EyeIconBlock>: <EyeIcon></EyeIcon>}
+                </div>}
+            </div>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import '../../variables.scss';
 
 //Oscurecer el fondo
 .modal-overlay {
@@ -124,6 +125,54 @@
         max-width: 18rem; 
       }
     }
+}
+
+@media screen and (max-width: $max-celular){
+  .modal-overlay {
+    
+    .modal-content {
+      
+      //Estilos elementos del modal
+      .modalContenedor{
+
+      }
+  
+    }
+
+    //Modal si es de tipo actividad y notas
+    &.actividad, &.nota{
+      
+      .modal-content{
+        width: 70%;
+        .modalAct{
+          
+          .titulo{
+
+          }
+
+          .crearAct{
+
+            .campos{
+              flex-direction: column;
+            }
+          }
+        }
+      } 
+    }
+
+    //Modal si es tipo nota
+    &.nota{
+      .modal-content{
+        max-width: 20.75rem; 
+      }
+    }
+
+    &.confirm{
+      .modal-content{
+        max-width: 18rem; 
+      }
+    }
+}
 }
 
 .dark{

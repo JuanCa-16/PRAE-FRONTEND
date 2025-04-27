@@ -13,6 +13,8 @@ const TableEst = ({infoMateria, idEst } ) => {
     const token = localStorage.getItem('token')
     const {user} = useUser();
 
+        
+
     const [info, setInfo] = useState([])
 
     useEffect(() => {
@@ -48,27 +50,29 @@ const TableEst = ({infoMateria, idEst } ) => {
     return (
         <div className='contenedorVistaMateria'>
             <div className="contenedor">
-                <PildoraTitulo materia= {infoMateria.materia} nombre={infoMateria.nombre_completo} color={infoMateria.color} grado={infoMateria.curso}></PildoraTitulo>
-                <div className="tabla">
+                <PildoraTitulo nota={info.promedio_general} materia= {infoMateria.materia} nombre={infoMateria.nombre_completo} color={infoMateria.color} grado={infoMateria.curso}></PildoraTitulo>
+                {info.actividades? (
+                    <div className="tabla">
                     <div className="col 1">
                         <Celda color={infoMateria.color} txt='Actividad' tipo='titulo' rol='NoVer'></Celda>
-                        {info.map((item, index) => (
+                        {info.actividades.map((item, index) => (
                             <Celda color={infoMateria.color} key={index} tipo='titulo2' txt={item.actividad} rol='NoVer'></Celda>
                         ))}
                     </div>
                     <div className="col 2">
                     <Celda color={infoMateria.color} txt='Notas' tipo='titulo' rol='NoVer'></Celda>
-                        {info.map((item, index) => (
+                        {info.actividades.map((item, index) => (
                             <Celda color={infoMateria.color} key={index} tipo='normal' txt={item.nota} rol='NoVer'></Celda>
                         ))}
                     </div>
                     <div className="col 3">
                     <Celda color={infoMateria.color} txt='Peso' tipo='titulo' rol='NoVer'></Celda>
-                        {info.map((item, index) => (
+                        {info.actividades.map((item, index) => (
                             <Celda color={infoMateria.color} key={index} tipo='normal' txt={item.peso + '%'} rol='NoVer'></Celda>
                         ))}
                     </div>
                 </div>
+                ):(<div>Sin datos</div>)}
                 {/* {(info.length > 0)? (<h1>MAYOR</h1>) : <p>No hay actividades todavia</p>} */}
             </div>
 

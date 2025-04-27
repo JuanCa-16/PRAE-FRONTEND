@@ -88,6 +88,13 @@
         
     }
 
+    .botonesJuntos{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 1rem;
+    }
+
 }
 
 @media screen and (max-width: $max-celular){

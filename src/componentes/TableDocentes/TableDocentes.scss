@@ -35,11 +35,16 @@
                 
             }
 
+            .colListado{
+                justify-content: flex-start;
+            }
+
 
             .notas{
                 display: flex;
                 width: 100%;
-                align-items: center;
+                // align-items: center;
+                align-items: flex-start;
                 gap: 1.5625rem;
                 flex: 1 0 0;
                 overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
@@ -124,8 +129,23 @@
 
 @media screen and (max-width: $max-celular){
     .contenedorNotas{
-        .contenedorAct{
-            width: 100%; }
+        .contenedor{
+
+            .tabla{
+                height: fit-content;
+                .colListado{
+                    height: 100%;
+                    width: 40%;
+                }
+
+                .notas{
+                    height: 100%;
+                }
+            }
+            .contenedorAct{
+                width: 100%; }
+        }
+        
     }
 }
 

@@ -12,7 +12,8 @@
     overflow: hidden;
     padding: 0.625rem 0.75rem;
     position: relative;
-    width: fit-content;
+    width: 100%;
+    text-align: center;
 
     .materia{
         width: 100%;
@@ -29,9 +30,7 @@
     }
 
     &.docente{
-        min-width: 16.5rem;
-        max-width: fit-content;
-        height: 3.7rem;
+
 
         .materia{
             align-items: center;
@@ -198,8 +197,7 @@
     .contenedorPildoraG{
 
         &.docente{
-            min-width: 5rem;
-            max-width: fit-content;
+            
             height: auto;
     
             .materia{
@@ -212,7 +210,7 @@
                     position: relative;
                     text-align: center;
                     width: fit-content;
-                    max-width: 8rem;
+                    
                 }
             }
         }
