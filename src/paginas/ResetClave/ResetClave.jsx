@@ -50,6 +50,7 @@ export default function ResetClave() {
     //Valores de los inputs
     const [getClave, setGetClave] = useState({
         clave: "",
+        clave2: "",
     })
 
     
@@ -66,6 +67,11 @@ export default function ResetClave() {
     const handlerReset = async (e) => {
         e.preventDefault()
         console.log(getClave)
+
+        if (getClave.clave !== getClave.clave2) {
+            Alerta.error("Las contraseñas no coinciden");
+            return;
+        }
 
         try {
             const response = await fetch(`${API_URL}usuario/updatePassword`, {
@@ -88,7 +94,7 @@ export default function ResetClave() {
 
             Alerta.success('Contraseña actualizada correctamente');
             console.log('contraseña exitosa', data);
-            navigate("/login")
+            navigate("/login", { replace: true });
 
 
         } catch (error) {
@@ -125,6 +131,16 @@ export default function ResetClave() {
                                 required={true}  
                                 nomInput="password"
                                 onChange={(value) => handleChange('clave', value)} 
+                            />
+
+                            <InputContainer
+                                placeholder="*******"
+                                titulo="Confirmar Clave:"
+                                inputType="password"
+                                value={getClave.clave2} 
+                                required={true}  
+                                nomInput="password2"
+                                onChange={(value) => handleChange('clave2', value)} 
                             />
                         </div>
                         <div className='btn_login'><button type='submit'>Enviar</button></div>
