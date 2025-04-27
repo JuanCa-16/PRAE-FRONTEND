@@ -248,5 +248,47 @@ const MenuIcon =  ({ color = "#157AFE",colorApagado = '#000', width = 30, height
   </svg>
 )
 
+const EyeIcon =  ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={12}
+    fill="none"
+    {...props}
+  >
+    <path
+      className={(estado || activo)? 'colorear':'ojo'}
+      stroke={(estado || activo ? color : colorApagado )}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M1 7c3.6-8 14.4-8 18 0"
+    />
+    <path
+      className={(estado || activo)? 'colorear':'normal'}
+      fill={(estado || activo ? color : colorApagado )}
+      stroke={(estado || activo ? color : colorApagado )}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M10 11a3 3 0 1 1 0-5.999A3 3 0 0 1 10 11Z"
+    />
+  </svg>
+)
+const EyeIconBlock =  ({ color = "#157AFE",colorApagado = '#000', width = 30, height = 30, estado,activo,dark, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={18}
+    height={18}
+    fill="none"
+    {...props}
+  >
+    <path className={(estado || activo)? 'colorear':'normal'}
+      fill={(estado || activo ? color : colorApagado )}
+      d="m11.726 12.634 5.175 5.177a.643.643 0 1 0 .91-.91L1.1.19a.644.644 0 1 0-.91.91L4.34 5.25c-.565.4-1.074.876-1.512 1.412A8.614 8.614 0 0 0 1.393 9.21c-.027.078-.06.186-.06.186l-.023.08s-.098.639.456.785a.643.643 0 0 0 .785-.456l.002-.004.01-.032.045-.14a7.328 7.328 0 0 1 1.215-2.152c.413-.505.9-.945 1.445-1.304l2.029 2.029a3.214 3.214 0 1 0 4.43 4.43M6.84 4.113 7.94 5.21A8.01 8.01 0 0 1 9 5.143c2.628 0 4.225 1.173 5.178 2.336a7.327 7.327 0 0 1 1.215 2.152c.022.063.037.11.045.14l.01.032v.004l.002.002a.643.643 0 0 0 1.242-.33v-.005l-.002-.005-.005-.016a2.594 2.594 0 0 0-.077-.24 8.614 8.614 0 0 0-1.436-2.549c-1.152-1.406-3.092-2.806-6.17-2.806a8.82 8.82 0 0 0-2.16.254Z"
+    />
+  </svg>
+)
+
 // Exporta todos los iconos
-export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon,FacebookIcon,InstagramIcon,MenuIcon, DataIcon }
+export { HomeIcon, StudyIcon, AjustesIcon, ListadoIcon, EstudianteIcon, TeacherIcon, GradosIcon,ExitIcon,ThemeIcon, InstitucionIcon,FacebookIcon,InstagramIcon,MenuIcon, DataIcon,EyeIcon,EyeIconBlock }
