@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './Contexts/UserContext';
 import { Toaster } from 'react-hot-toast';
-
+import "./componentes/Alerta/Alerta.scss";
 import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
