@@ -7,10 +7,45 @@
     flex-direction: column;
     width: 100%;
     gap: 0.5rem;
+    
     //height: 5.375rem;
 
     
+    .agruparInput{
+        margin: 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+
+        .logoOjo{
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.8rem;
+            height: 1.8rem;
+            position: absolute;
+            margin: 0 !important;
+            top: calc(50% - 0.8rem);
+            right: 0.5rem;
+            z-index: 1;
     
+            &:hover{
+                cursor: pointer;
+            }
+    
+            .normal{
+                
+                stroke: var(--colorPrincipal);
+                fill: var(--colorPrincipal);
+                
+            }
+    
+            .ojo{
+                stroke: var(--colorPrincipal);
+            }
+        }
+    }
 
     //Estilo del titulo
     & .input-title{
@@ -36,6 +71,10 @@
 
         font-size: 1rem;
         
+        &.contra{
+            padding-right: 2.5rem !important;
+        }
+        
 
         &::placeholder {
             opacity: 50%;
@@ -47,7 +86,24 @@
             outline: 0.0625rem solid var(--colorPrincipal);;
         }
 
+        input[type="password"] {
+            -webkit-appearance: none; 
+            -moz-appearance: none;
+            appearance: none;
+            background-image: none !important;
+            display: none;
+        }
+        
+          /* Forzar que el input no muestre el ojo por defecto */
+        input[type="password"]:focus {
+            display: none;
+            outline: none; /* Para quitar el contorno predeterminado */
+            background-image: none !important; /* Eliminar imagen */ }
+
     }
+
+
+    
 
     //Estilo del Input container cuando se hace hover.
     &.siHover{
@@ -57,6 +113,9 @@
             }
         }
     }
+
+    
+    
 
 }
 
@@ -79,6 +138,20 @@
                 outline: 0.0625rem solid $dark-super-negro;
             }
     
+        }
+
+        .logoOjo{
+    
+            .normal{
+                
+                stroke: $dark-azul;
+                fill: $dark-azul;
+                
+            }
+    
+            .ojo{
+                stroke: $dark-azul;
+            }
         }
     
     }
