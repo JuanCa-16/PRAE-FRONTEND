@@ -1,5 +1,19 @@
 //Estilos de la pagina
 @import '../../../global.scss';
+
+.clickable-observacion {
+  cursor: pointer;
+  transition:  0.2s ease;
+  padding: 0.5rem;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: #f9f9f9; // o usa $gris-claro si tienes variable
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #dcdcdc;
+  }
+}
+
 .contenedorCrearObser {
   display: flex;
   flex-direction: column;

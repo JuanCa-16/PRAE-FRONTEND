@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import Alerta from '../../../componentes/Alerta/Alerta';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import Modal from '../../../componentes/Modal/Modal';
 
 import { useUser } from '../../../Contexts/UserContext';
 
@@ -24,7 +25,23 @@ const CrearObservacion = () => {
             observacion: '',
         });
     
-        //Actualizar inputs
+
+        const [modalObsIndex, setModalObsIndex] = useState(null);
+        const [obsSeleccionada, setObsSeleccionada] = useState(null);
+
+        const openModalObs = (index) => {
+          setModalObsIndex(index);
+          setObsSeleccionada(observacionesEst[index]);
+        };
+
+        const closeModalObs = () => {
+          setModalObsIndex(null);
+          setObsSeleccionada(null);
+        };
+
+        const handleReload = () => setReload((r) => !r);
+
+        //Actualizar inputs 
         const handleChange = (titulo, value) => {
             setFormData({
                 ...formData,
@@ -125,10 +142,27 @@ const CrearObservacion = () => {
                       day: 'numeric',
                     });
                     return (
-                      <div key={index} className="observacion-item">
-                        <span className="fecha">{fecha}</span>
-                        <p>{obs.comentario}</p>
-                      </div>
+                      <div key={index} className="observacion-item clicable-observacion">
+                      <span className="fecha">{fecha}</span>
+                      <p className="texto-observacion" onClick={() => openModalObs(index)}>
+                        {obs.comentario}
+                      </p>
+                      
+
+                      {modalObsIndex === index && (
+                        <Modal
+                          isOpen={true}
+                          closeModal={closeModalObs}
+                          tipo="observacion"
+                          modalTitulo="EDITAR OBSERVACIÓN"
+                          modalTexto="Edita el contenido de la observación"
+                          valorObs={obsSeleccionada?.comentario || ""}
+                          recargar={handleReload}
+                          extraData={{ id_observacion: obsSeleccionada?.id_comentario }}
+                        />
+                      )}
+                    </div>
+
                     );
                   })
                 ) : (
