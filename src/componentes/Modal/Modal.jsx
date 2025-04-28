@@ -67,36 +67,32 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     const [step, setStep] = useState('form'); 
     const [nombreAct, setNonombreAct] = useState(valorAct); // Estado para manejar el valor de la actividad
     const [pesoAct, setPesoAct] = useState(ValorPeso); // Estado para manejar el valor del peso
-const [observacionEditada, setObservacionEditada] = useState(valorObs || "");
-const [cargando, setCargando] = useState(false);  // Estado para manejar si la observación está siendo editada
+    const [observacionEditada, setObservacionEditada] = useState(valorObs || '');
+    const [cargando, setCargando] = useState(false);  // Estado para manejar si la observación está siendo editada
+
 
 const handleEliminarObservacion = async () => {
     try {
-      const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+    const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
         },
-      });
-  
-      if (!response.ok) {
+    });
+
+    if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Error al eliminar observación");
-      }
-  
-      Alerta.success("Observación eliminada");
-      closeModal();
-      recargar();
-    } catch (error) {
-      console.error("Error al eliminar observación:", error);
-      Alerta.error(error.message);
     }
-};
 
-const handleObservacionChange = (value) => {
-    console.log('Nuevo valor de observación:', value);  // Esto ayuda a ver qué valor llega
-    setObservacionEditada(value);  // Cambia el estado cuando el usuario escriba
+    Alerta.success("Observación eliminada");
+    closeModal();
+    recargar();
+    } catch (error) {
+    console.error("Error al eliminar observación:", error);
+    Alerta.error(error.message);
+    }
 };
 
     const handleNombreChange = (newNombre) => {
@@ -134,8 +130,6 @@ const handleObservacionChange = (value) => {
             }
             
             Alerta.success('Actividad actualizada');
-            
-            
             closeModal()
             recargar()
 
@@ -244,34 +238,37 @@ const handleObservacionChange = (value) => {
             recargar()
             // Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
         };
+        
+        const handleObservacionChange = (value) => {
+            setObservacionEditada(value);  // Cambia el estado
+        };
 
         const handleSubmit3 = async (e) => {
             e.preventDefault();
-          
             try {
-              const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+            const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
                 method: 'PUT',
                 headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({ comentario: observacionEditada }),
-              });
-          
-              if (!response.ok) {
+            });
+        
+            if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || response.status);
-              }
-          
-              Alerta.success('Observación actualizada correctamente');
-              closeModal();
+            }
+        
+            Alerta.success('Observación actualizada correctamente');
+            closeModal();
               recargar(); // Actualiza la lista de observaciones si quieres
             } catch (error) {
-              console.error('Error al actualizar observación', error);
-              Alerta.error(error.message);
+            console.error('Error al actualizar observación', error);
+            Alerta.error(error.message);
             }
-          };
-          
+        };
+
 
     //MANEJO LOGICA MODAL 
     if (!isOpen) return null; // No renderiza el modal si isOpen es false
@@ -379,38 +376,37 @@ const handleObservacionChange = (value) => {
             ): tipo === "observacion" ? (
                 step === 'form' ? (
                     <div className="modalAct">
-                      <div className="titulo">
+                    <div className="titulo">
                         <p className="bold">{modalTitulo}</p>
-                      </div>
-                      <form onSubmit={handleSubmit3} className="crearAct">
+                    </div>
+                    <form onSubmit={handleSubmit3} className="crearAct">
                         <div className="campos">
-                          <InputContainer
-                            titulo="Observación"
-                            placeholder="Escribe tu observación"
-                            inputType="text"
-                            value={observacionEditada}
-                            onChange={(e) => handleObservacionChange(e.target.value)}
-                            required={true}
-                          />
-                          <div className="botones-acciones">
+                        <InputContainer
+                        titulo="Observación"
+                        placeholder="Escribe tu observación"
+                        inputType="text"
+                         value={observacionEditada}  // Asegúrate de pasar el valor del estado aquí
+                         onChange={(value) => handleObservacionChange(value)}  // La función que actualizará el estado del componente principal
+                        required={true}
+                        />
+                        <div className="botones-acciones">
                             <button type="submit">Editar</button>
                             <button type="button" className="rojo" onClick={() => setStep('confirm')}>Eliminar</button>
-                          </div>
                         </div>
-                      </form>
+                        </div>
+                    </form>
                     </div>
-                  ) : (
+                ) : (
                     <div className="modalContenedor">
-                      <div className="titulo">
+                    <div className="titulo">
                         <p className="bold">CONFIRMACIÓN</p>
-                      </div>
-                      <p className="lato textoEli">¿Deseas eliminar esta observación? Esta acción no se puede revertir.</p>
-                      <button type="button" className="rojo" onClick={handleEliminarObservacion}>Sí, Eliminar</button>
-                      <button type="button" onClick={() => setStep('form')}>Cancelar</button>
                     </div>
-                  )
-
-              ):(
+                    <p className="lato textoEli">¿Deseas eliminar esta observación? Esta acción no se puede revertir.</p>
+                    <button type="button" className="rojo" onClick={handleEliminarObservacion}>Sí, Eliminar</button>
+                    <button type="button" onClick={() => setStep('form')}>Cancelar</button>
+                    </div>
+                )
+            ):(
                 <div className="modalAct">
                     <div className="titulo">
                         <p className='bold'>{modalTitulo}</p>
