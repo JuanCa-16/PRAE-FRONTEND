@@ -246,9 +246,7 @@ const CreacionDocente = () => {
             <div className="crear">
                 <TituloDes 
                     titulo='CREAR UN PROFESOR' 
-                    desc='Registra un nuevo profesor en la plataforma y asigna los cursos que gestionará. 
-                    Asegúrate de ingresar toda la información requerida para completar el registro de manera 
-                    correcta y asignar adecuadamente los cursos correspondientes.'>
+                    desc='Registra un nuevo profesor y asigna los cursos que gestionará, asegurándote de ingresar toda la información requerida correctamente.'>
 
                 </TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">

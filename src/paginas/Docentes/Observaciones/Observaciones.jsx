@@ -83,8 +83,7 @@ const Observaciones = () => {
         <div className='contenedorObservaciones'>
             <TituloDes 
                 titulo='LISTADO DE ESTUDIANTES' 
-                desc='Consulta los estudiantes asignados en los distintos grados y realiza observaciones sobre
-                 su rendimiento académico para brindar retroalimentación precisa y orientada a su mejora continua."'
+                desc='Consulta los estudiantes por grado y realiza observaciones sobre su rendimiento para ofrecer retroalimentación.'
             />
             <div className="informacion">
                 <div className="filtros">

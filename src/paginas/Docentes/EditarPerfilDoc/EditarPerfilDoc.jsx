@@ -217,8 +217,7 @@ const EditarPerfilDoc = () => {
             <div className="editar">
                 <TituloDes 
                 titulo='EDITA TU PERFIL' 
-                desc='Accede a tu perfil para revisar y actualizar tus datos personales. Mantener tu información
-                      actualizada es esencial para garantizar una correcta gestión y comunicación dentro de la plataforma.' />
+                desc='Accede a tu perfil para revisar y actualizar tus datos personales, asegurando una correcta gestión y comunicación.' />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">
                         <InputContainer nomInput="apellidos" titulo='Apellidos' value={formData.apellidos} isDisabled={true} />

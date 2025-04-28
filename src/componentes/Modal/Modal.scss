@@ -24,7 +24,7 @@
       border-radius: $radio2;
       gap: 2rem;
       width: 90%;
-      max-width: 31.25rem; /* Ajusta el tamaño máximo según tus necesidades */
+      max-width: 25rem; /* Ajusta el tamaño máximo según tus necesidades */
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       z-index: 1001; /* Asegura que el contenido del modal esté sobre el fondo */
   
@@ -61,8 +61,43 @@
           white-space: normal;  
         }
       }
-  
+
+      .campo-observacion {
+        width: 100%;                /* El campo de texto ocupará todo el ancho disponible */
+        min-height: 200px;          /* Aumentamos la altura mínima del campo de texto */
+        height: auto;               /* Deja que la altura se ajuste automáticamente según el texto */
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        resize: none;               /* Evita que el usuario pueda redimensionar el campo de texto */
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        white-space: pre-wrap;      /* Permite que las líneas de texto se ajusten dentro del campo */
+        word-wrap: break-word;      /* Permite que las palabras largas se dividan correctamente */
+      }
+      .campos {
+        display: flex;
+        justify-content: space-between; /* Espacio entre el campo de texto y los botones */
+        align-items: center;
+        gap: 1rem; /* Un poco de espacio entre el campo y los botones */
+
+      }
+      
+      .botones-acciones {
+        display: flex;           /* Usa flexbox para que los botones se alineen horizontalmente */
+        justify-content: flex-end; /* Alinea los botones a la derecha */
+        gap: 1rem;               /* Añade un pequeño espacio entre los botones */
+        
+        button {
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+          
+        }
+      }
     }
+    
 
     //Modal si es de tipo actividad y notas
     &.actividad, &.nota{

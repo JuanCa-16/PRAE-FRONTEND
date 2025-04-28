@@ -237,9 +237,7 @@ const CreacionEst = () => {
             <div className="crear">
                 <TituloDes 
                     titulo='CREAR UN ESTUDIANTE' 
-                    desc='Registra un nuevo profesor en la plataforma proporcionando la información necesaria y 
-                    asigna los cursos que gestionará. Asegúrate de que todos los datos estén correctos para una 
-                    correcta asignación de los cursos.'>
+                    desc='Registra un nuevo profesor proporcionando la información necesaria y asigna los cursos correspondientes, asegurate de que los datos sean correctos.'>
 
                 </TituloDes>
                 <form onSubmit={handleSubmit} className="formulario">
@@ -260,9 +258,7 @@ const CreacionEst = () => {
             <div className='contenedorListadoEst'>
                 <TituloDes 
                     titulo='LISTADO DE ESTUDIANTES' 
-                    desc='Consulta el listado completo de estudiantes registrados en la institución, organizados
-                     por los diferentes grados. Esta información te permitirá gestionar y revisar el progreso académico 
-                    de los estudiantes en cada nivel educativo.'
+                    desc='Consulta el listado de estudiantes registrados, organizados por grados, para gestionar y revisar su progreso académico.'
                 />
                 <div className="informacion">
                     <div className="filtros">

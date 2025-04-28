@@ -71,29 +71,29 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
     const [cargando, setCargando] = useState(false);  // Estado para manejar si la observación está siendo editada
 
 
-const handleEliminarObservacion = async () => {
-    try {
-    const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
-        method: "DELETE",
-        headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        },
-    });
+    const handleEliminarObservacion = async () => {
+        try {
+        const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+            method: "DELETE",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            },
+        });
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Error al eliminar observación");
-    }
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Error al eliminar observación");
+        }
 
-    Alerta.success("Observación eliminada");
-    closeModal();
-    recargar();
-    } catch (error) {
-    console.error("Error al eliminar observación:", error);
-    Alerta.error(error.message);
-    }
-};
+        Alerta.success("Observación eliminada");
+        closeModal();
+        recargar();
+        } catch (error) {
+        console.error("Error al eliminar observación:", error);
+        Alerta.error(error.message);
+        }
+    };
 
     const handleNombreChange = (newNombre) => {
         setNonombreAct(capitalizeWords(newNombre)); // Actualiza el estado 'email'
@@ -385,9 +385,10 @@ const handleEliminarObservacion = async () => {
                         titulo="Observación"
                         placeholder="Escribe tu observación"
                         inputType="text"
-                         value={observacionEditada}  // Asegúrate de pasar el valor del estado aquí
-                         onChange={(value) => handleObservacionChange(value)}  // La función que actualizará el estado del componente principal
+                        value={observacionEditada}  // Asegúrate de pasar el valor del estado aquí
+                        onChange={(value) => handleObservacionChange(value)}  // La función que actualizará el estado del componente principal
                         required={true}
+                        className="campo-observacion"
                         />
                         <div className="botones-acciones">
                             <button type="submit">Editar</button>
