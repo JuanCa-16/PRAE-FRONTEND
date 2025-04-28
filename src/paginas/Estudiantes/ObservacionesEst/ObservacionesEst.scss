@@ -23,4 +23,22 @@
             color: var(--colorPrincipal);
         }
     }
-} 
+}
+
+.dark{
+
+    .contenedorObservacionesEst{
+
+        .observaciones{
+
+            p{
+                background-color: $dark-super-negro;
+            }
+    
+            .fuerte{
+                color:  $dark-azul;
+            }
+        }
+    }
+
+}

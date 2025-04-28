@@ -62,38 +62,21 @@
         }
       }
 
-      .campo-observacion {
-        width: 100%;                /* El campo de texto ocupará todo el ancho disponible */
-        min-height: 200px;          /* Aumentamos la altura mínima del campo de texto */
-        height: auto;               /* Deja que la altura se ajuste automáticamente según el texto */
-        padding: 1rem;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        resize: none;               /* Evita que el usuario pueda redimensionar el campo de texto */
-        font-family: "Roboto", sans-serif;
-        font-size: 1rem;
-        white-space: pre-wrap;      /* Permite que las líneas de texto se ajusten dentro del campo */
-        word-wrap: break-word;      /* Permite que las palabras largas se dividan correctamente */
-      }
-      .campos {
-        display: flex;
-        justify-content: space-between; /* Espacio entre el campo de texto y los botones */
-        align-items: center;
-        gap: 1rem; /* Un poco de espacio entre el campo y los botones */
+      .modalObservacion{
+        width: 100%;
 
-      }
-      
-      .botones-acciones {
-        display: flex;           /* Usa flexbox para que los botones se alineen horizontalmente */
-        justify-content: flex-end; /* Alinea los botones a la derecha */
-        gap: 1rem;               /* Añade un pequeño espacio entre los botones */
-        
-        button {
-          padding: 0.5rem 1rem;
-          border-radius: 5px;
-          border: none;
-          cursor: pointer;
-          
+        .campos{
+          .campo-observacion{
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+          }
+          .botones-acciones{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+          }
         }
       }
     }
@@ -165,14 +148,6 @@
 @media screen and (max-width: $max-celular){
   .modal-overlay {
     
-    .modal-content {
-      
-      //Estilos elementos del modal
-      .modalContenedor{
-
-      }
-  
-    }
 
     //Modal si es de tipo actividad y notas
     &.actividad, &.nota{
@@ -181,9 +156,6 @@
         width: 70%;
         .modalAct{
           
-          .titulo{
-
-          }
 
           .crearAct{
 
