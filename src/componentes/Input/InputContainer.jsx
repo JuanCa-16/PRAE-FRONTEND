@@ -62,6 +62,7 @@ function InputContainer({className, placeholder = "correo@gmail.com", titulo = "
                     required={required} 
                     disabled={isDisabled} 
                     name={nomInput}
+                    
     
                 />
                 
