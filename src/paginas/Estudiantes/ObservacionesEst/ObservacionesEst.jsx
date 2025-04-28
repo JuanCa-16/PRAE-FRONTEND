@@ -57,8 +57,8 @@ const ObservacionesEst = () => {
                         });
                     
                         return (
-                            <p key={index}>
-                              <strong className='fuerte'>Profesor(a):</strong> {observacion.nombre_profesor}<br />
+                            <p key={index} >
+                              <strong className='fuerte'>Docente:</strong> {observacion.nombre_docente + ' '+ observacion.apellido_docente}<br />
                               <strong className='fuerte'>{fechaFormateada}:</strong> {observacion.comentario}
                             </p>
                           );

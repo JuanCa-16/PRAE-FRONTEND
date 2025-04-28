@@ -119,7 +119,7 @@ const CrearObservacion = () => {
           
               <form onSubmit={handleSubmit} className="formulario">
                 <label htmlFor="observacionDocente" className="label">
-                  Observaciones
+                  Ingresar observación:
                 </label>
                 <textarea
                   id="observacionDocente"

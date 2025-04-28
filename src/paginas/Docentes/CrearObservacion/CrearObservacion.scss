@@ -1,16 +1,15 @@
 //Estilos de la pagina
 @import '../../../global.scss';
+@import '../../../variables.scss';
 
-.clickable-observacion {
+.clicable-observacion {
   cursor: pointer;
   transition:  0.2s ease;
   padding: 0.5rem;
   border-radius: 6px;
 
   &:hover {
-    background-color: #f9f9f9; // o usa $gris-claro si tienes variable
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #dcdcdc;
   }
 }
 
@@ -33,7 +32,7 @@
     textarea {
       padding: 1rem;
       border-radius: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--colorSecundario);
       width: 100%;
       min-height: 120px;
       resize: none;
@@ -73,10 +72,10 @@
 
     .observacion-item {
       transition: all 0.3s ease;  /* Transición suave para el efecto de hover */
-      background-color: #f9f9f9;
+      background-color: var(--colorSecundario);
       padding: 1rem;
       border-radius: 10px;
-      border: 1px solid #ddd;
+      //border: 1px solid #ddd;
       justify-content: space-between;  /* Esto coloca los elementos de la izquierda y derecha */
 
       .btn-editar {
@@ -102,8 +101,66 @@
     }
 
     .sin-observaciones {
-      color: #999;
       font-style: italic;
     }
   }
+}
+
+.dark{
+
+  .clicable-observacion {
+
+  
+    &:hover {
+      box-shadow: 0 1px 7px $dark-azul;
+    }
+  }
+
+  .contenedorCrearObser {
+
+  
+    .formulario {
+
+
+      textarea {
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: $dark-super-negro;
+        border: 1px solid $dark-contraste-negro;
+        width: 100%;
+        min-height: 120px;
+        resize: none;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+  
+        &:focus {
+          outline: 2px solid $dark-azul;
+        }
+      }
+  
+      .btn-guardar {
+          background-color: $dark-azul;
+        }
+        
+    }
+  
+    .observaciones {
+
+  
+      .observacion-item {
+
+        background-color:$dark-super-negro;
+
+        
+        .fecha {
+          color: $dark-azul;
+        }
+  
+
+      }
+  
+
+    }
+  }
+
 }

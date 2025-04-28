@@ -375,11 +375,11 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                 </>
             ): tipo === "observacion" ? (
                 step === 'form' ? (
-                    <div className="modalAct">
+                    <div className="modalObservacion">
                     <div className="titulo">
                         <p className="bold">{modalTitulo}</p>
                     </div>
-                    <form onSubmit={handleSubmit3} className="crearAct">
+                    <form onSubmit={handleSubmit3} className="crearObservacion">
                         <div className="campos">
                         <InputContainer
                         titulo="Observación"
