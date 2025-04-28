@@ -8,9 +8,7 @@ const EstadisticasAdmin = () => {
     <div className='contenedorEstAdmin'>
         <TituloDes 
           titulo='ESTADÍSTICAS DE LAINSTITUCIÓN' 
-          desc='Aquí podrás consultar diversas estadísticas relacionadas con tu institución, 
-          lo que te permitirá obtener información detallada sobre el rendimiento académico y 
-          otros aspectos clave para una mejor toma de decisiones.'>
+          desc='Consulta estadísticas de tu institución para obtener información detallada sobre el rendimiento académico y otros aspectos clave para tomar mejores decisiones.'>
             
           </TituloDes>
         <AdminEstadisticas></AdminEstadisticas>

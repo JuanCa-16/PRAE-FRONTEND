@@ -114,8 +114,7 @@ const EditarPerfilAdmin = () => {
             <div className="editar">
                 <TituloDes
                     titulo="EDITA TU PERFIL"
-                    desc="Accede a tu perfil y actualiza tus datos personales para mantener tu información siempre actualizada. 
-                    Esto garantiza que tu registro esté correcto y facilite una gestión más eficiente dentro de la plataforma."
+                    desc="Accede a tu perfil y actualiza tus datos personales para mantener tu información actualizada y garantizar una gestión eficiente en la plataforma."
                 />
                 <form onSubmit={handleSubmit} className="formulario">
                     <div className="inputs">

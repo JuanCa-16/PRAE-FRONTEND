@@ -72,11 +72,22 @@
     }
 
     .observacion-item {
+      transition: all 0.3s ease;  /* Transición suave para el efecto de hover */
       background-color: #f9f9f9;
       padding: 1rem;
       border-radius: 10px;
       border: 1px solid #ddd;
+      justify-content: space-between;  /* Esto coloca los elementos de la izquierda y derecha */
 
+      .btn-editar {
+        padding: 0.5rem 1rem;  
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-left: auto; 
+        width: 100px; 
+      }
+      
       .fecha {
         color: var(--colorPrincipal);
         font-weight: 600;

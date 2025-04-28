@@ -144,10 +144,14 @@ const CrearObservacion = () => {
                     return (
                       <div key={index} className="observacion-item clicable-observacion">
                       <span className="fecha">{fecha}</span>
-                      <p className="texto-observacion" onClick={() => openModalObs(index)}>
+                      <p className="texto-observacion">
                         {obs.comentario}
                       </p>
                       
+                      <button 
+                        type="button"
+                        onClick={() => openModalObs(index)} // Abre el modal cuando se hace clic en el botón
+                        className="btn-editar">Editar</button>
 
                       {modalObsIndex === index && (
                         <Modal

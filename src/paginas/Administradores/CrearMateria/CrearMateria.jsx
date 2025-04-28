@@ -162,8 +162,7 @@ const CrearMateria = () => {
             <div className="crear">
                 <TituloDes 
                     titulo='CREAR UNA MATERIA' 
-                    desc='Ingresa el nombre de la asignatura que deseas agregar al sistema para su incorporación. 
-                    Asegúrate de que el nombre sea preciso para evitar duplicados o confusiones.' >
+                    desc='Ingresa el nombre de la asignatura para agregarla al sistema, asegurate de que sea preciso y evita duplicados.' >
             
                 </TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
@@ -175,8 +174,7 @@ const CrearMateria = () => {
             <div className="todosMaterias">
                 <TituloDes 
                     titulo='LISTADO DE MATERIAS' 
-                    desc='Accede al listado de materias disponibles y elimina aquella que ya no sea necesaria. 
-                    Ten en cuenta que esta acción eliminará todos los datos asociados a la materia seleccionada.'
+                    desc='Accede al listado de materias y elimina la que ya no sea necesaria. Ten en cuenta que se eliminarán todos los datos asociados.'
                 />
                 <div className="informacion">
                     <div className="filtros">

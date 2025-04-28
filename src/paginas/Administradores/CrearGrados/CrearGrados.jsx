@@ -170,9 +170,7 @@ const CrearGrados = () => {
             <div className="crear">
                 <TituloDes 
                     titulo='CREAR UN GRADO ACADÉMICO' 
-                    desc='Ingresa el curso que deseas incorporar en el sistema, 
-                    asegurándote de que esté dentro del rango de 1° a 11°. Esta acción permitirá organizar correctamente la 
-                    estructura académica según el grado correspondiente.' >
+                    desc='Ingresa el curso (1° a 11°) para organizar correctamente la estructura académica.' >
 
                 </TituloDes>
                 <form onSubmit={handleSubmit} className='formulario'>
@@ -184,9 +182,7 @@ const CrearGrados = () => {
             <div className="todosGrados">
                 <TituloDes 
                     titulo='LISTADO DE GRADOS' 
-                    desc='Elimina un grado de manera sencilla para mantener actualizada la estructura académica. 
-                    Esta acción eliminará todos los datos relacionados con el grado seleccionado, así que asegúrate 
-                    de que no haya información importante asociada antes de proceder.'
+                    desc='Elimina un grado para actualizar la estructura académica. Asegúrate de que no haya información importante antes de proceder.'
                 />
                 <div className="informacion">
                     <div className="filtros">
