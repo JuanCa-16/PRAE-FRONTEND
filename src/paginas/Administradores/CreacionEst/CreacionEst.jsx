@@ -63,6 +63,7 @@ const CreacionEst = () => {
                         label: materia.nombre
                     }));
                     setOpcionesGrados(opciones)
+                    console.log("Respuesta del servidor grados 2:", opciones);
                     
     
                 } catch (error) {
@@ -206,7 +207,7 @@ const CreacionEst = () => {
     
         //Elimina opciones duplicadas para el selector
         const nombreEstudiante = [...new Set(infoPildoras.map(item => item.nombreCompleto))];
-        const gradosUnicos = [...new Set(infoPildoras.map(item => item.curso))];
+        const gradosUnicos = [...new Set(opcionesGrados.map(item => item.label))];
     
         const [nombreEstudianteSeleccionada, setnombreEstudianteSeleccionada] = useState('');
         const [gradoSeleccionado, setGradoSeleccionado] = useState('');

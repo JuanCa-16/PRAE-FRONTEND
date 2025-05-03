@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import '../../variables.scss';
 
 //Estilos del componente por defecto azul
 .logoContenedor{
@@ -71,5 +72,16 @@
         .amarillo{
             color: $dark-amarillo
         }
+    }
+}
+
+@media screen and (max-width: $max-celular){
+    .logoContenedor{
+    
+        .textos{
+            display: none;
+        }
+    
+
     }
 }

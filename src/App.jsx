@@ -40,6 +40,7 @@ import EstadisticasAdmin from './paginas/Administradores/Estadisticas/Estadistic
 import EstadisticasDocentes from './paginas/Docentes/EstadisticasDocente/EstadisticasDocentes.jsx';
 import RecuperarClave from './paginas/RecuperarClave/RecuperarClave.jsx';
 import ResetClave from './paginas/ResetClave/ResetClave.jsx';
+import EstadisticasEst from './paginas/Estudiantes/EstadisticasEst/EstadisticasEst.jsx';
 
 
 /** 
@@ -248,6 +249,7 @@ function App() {
                 <Route path="/materias/:nombreEst/:materia" element={<VistaMateria/>} />
                 <Route path="/observacionesEst" element={<ObservacionesEst></ObservacionesEst>} />
                 <Route path="/ajustesEstudiante" element={<PerfilEst></PerfilEst>} />
+                <Route path="/estadisticasEstudiante" element={<EstadisticasEst></EstadisticasEst>} />
             </Route>
 
             <Route element={<ProtectedRoute isAllowed={user && user.rol === 'docente'}/>} >

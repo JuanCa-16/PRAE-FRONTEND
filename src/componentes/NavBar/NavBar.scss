@@ -99,6 +99,12 @@
                         
                     }
                 }
+                .menuHamburgesa{
+                    .normal, .colorear{
+                        fill: $dark-azul;
+                        
+                    }
+                }
             }
         }
     }
@@ -170,18 +176,19 @@
                 flex-wrap: nowrap;
                 .iconosNav{
                     display: flex;
-                    width: auto;
-                    gap: 0.8rem;
-                    justify-content: space-between;
+                    width: 100%;
+                    gap: 1rem;
+                    justify-content: space-evenly;
                     margin-right: 0.1rem;
 
-                    margin: auto;
+                    //margin: auto;
     
                     .menuHamburgesa{
 
                         display: flex;
                         align-items: center;
-                        gap: 0.8rem;
+                        gap: 1rem;
+                        width: 80%;
                         opacity: 1;
                         &:hover{
                             
@@ -202,8 +209,16 @@
                 }
 
                 .contLogo{
-                    max-width: 45%;
-                    margin: auto;
+                    width: 20%;
+                    max-width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    //margin: auto;
+
+                    .logoContenedor{
+                        justify-content: center;
+                    }
                 }
             }
         }

@@ -15,7 +15,11 @@ const AnimatedCounter = ({ from = 0, to = 0, duration = 1 }) => {
       duration: duration,
       ease: "easeInOut",
       onUpdate: (value) => {
-        setCurrent(Math.round(value));
+        if (Number.isInteger(toNumber)) {
+          setCurrent(Math.round(value)); // muestra solo enteros
+        } else {
+          setCurrent(parseFloat(value.toFixed(2))); // muestra 2 decimales
+        }
       }
     });
 
