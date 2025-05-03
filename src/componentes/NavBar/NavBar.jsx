@@ -29,7 +29,8 @@ const NavBar = ({rol = "normal", nombreUsuario="JUAN CAMILO HENAO GALLEGO", func
     estudiante: [
       { texto: "Materias", icono: StudyIcon, ruta: `/materias/${nombreUsuario}` },
       { texto: "Ajustes", icono: AjustesIcon, ruta: "/ajustesEstudiante" },
-      { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observacionesEst" }
+      { texto: "Observaciones", icono: EstudianteIcon, ruta: "/observacionesEst" },
+      { texto: "Estadisticas", icono: DataIcon, ruta: "/estadisticasEstudiante" },
     ],
     docente: [
       { texto: "Listado", icono: ListadoIcon, ruta: "/listadoCursos" },
