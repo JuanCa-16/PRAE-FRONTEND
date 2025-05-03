@@ -13,7 +13,21 @@
         width: 100%;
         gap: 1rem;
 
-        p{
+        .filtros{
+            display: flex;
+            width: 100%;
+            align-items: flex-end;
+            gap: 2.75rem;
+            align-self: stretch;
+            flex-wrap: wrap;
+
+            button{
+                width: fit-content;
+            }
+
+        }
+
+        .fondo{
             background-color: $contraste-blanco;
             padding: 1rem;
             border-radius: $radio1;
@@ -31,7 +45,7 @@
 
         .observaciones{
 
-            p{
+            .fondo{
                 background-color: $dark-super-negro;
             }
     

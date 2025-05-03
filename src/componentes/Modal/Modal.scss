@@ -143,6 +143,21 @@
         max-width: 18rem; 
       }
     }
+
+    textarea {
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--colorSecundario);
+      width: 100%;
+      min-height: 120px;
+      resize: none;
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+
+      &:focus {
+        outline: 2px solid var(--colorPrincipal);
+      }
+    }
 }
 
 @media screen and (max-width: $max-celular){
