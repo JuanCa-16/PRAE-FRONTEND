@@ -15,6 +15,7 @@ const CrearObservacion = () => {
         const token = localStorage.getItem("token");
         const location = useLocation();
         const {est} = location.state || {};
+        const [cargando,setCargando] = useState(false)
 
         const {user} = useUser()
 
@@ -54,6 +55,7 @@ const CrearObservacion = () => {
             e.preventDefault()
 
             try {
+              setCargando(true)
                 const response = await fetch(`${API_URL}comentarios/`,{
                     method: "POST",
                     headers: {
@@ -69,10 +71,12 @@ const CrearObservacion = () => {
                 }
                 console.log('Datos enviados:', formData);
                 Alerta.success('Observación realizada correctamente');
+                setCargando(false)
                 setReload(!reload);
                 setFormData({observacion: ''})
             } catch (error) {
                 console.error('Error al crear observacion',error);
+                setCargando(false)
                 Alerta.error(error.message);
             }
 
@@ -109,6 +113,8 @@ const CrearObservacion = () => {
 
             listaObservaciones()
         },[reload,API_URL,est.estudiante_id,user.id,token])
+
+        
     
         return (
             <div className="contenedorCrearObser">
@@ -127,7 +133,7 @@ const CrearObservacion = () => {
                   value={formData.observacion}
                   onChange={(e) => handleChange('observacion', e.target.value)}
                 />
-                <button type="submit" className="btn-guardar">
+                <button type="submit" className="btn-guardar" disabled={cargando}>
                   Guardar Cambios
                 </button>
               </form>

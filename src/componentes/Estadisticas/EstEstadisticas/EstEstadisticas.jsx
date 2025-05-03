@@ -71,14 +71,12 @@ const EstEstadisticas = () => {
 
         //PROMEDIO X MATERIA
 
-        const nuevoPromedioCurso  = data.estadisticas.promedios_por_materia.map(obj => {
-            const materia = Object.keys(obj)[0]; // obtiene el nombre de la materia
-            const nota = obj[materia];           // accede al valor de esa materia
-            return {
-                titulo: materia,
-                promedio: parseFloat(nota)
-            };
-        });
+        const nuevoPromedioCurso = data.estadisticas.promedios_por_materia.map(obj => {
+          return {
+              titulo: obj.materia,   // Accede a la propiedad 'materia'
+              promedio: parseFloat(obj.promedio)  // Convierte 'promedio' a número
+          };
+      });
         setPromedioCursos(prev => {
             const nuevo = JSON.stringify(nuevoPromedioCurso);
             const anterior = JSON.stringify(prev);

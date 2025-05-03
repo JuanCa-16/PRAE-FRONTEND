@@ -381,12 +381,12 @@ const Modal = ({ isOpen, recargar, closeModal, tipo, modalTitulo="Eliminar", mod
                     </div>
                     <form onSubmit={handleSubmit3} className="crearObservacion">
                         <div className="campos">
-                        <InputContainer
+                        <textarea
                         titulo="Observación"
                         placeholder="Escribe tu observación"
                         inputType="text"
                         value={observacionEditada}  // Asegúrate de pasar el valor del estado aquí
-                        onChange={(value) => handleObservacionChange(value)}  // La función que actualizará el estado del componente principal
+                        onChange={(e) => handleObservacionChange(e.target.value)}  // La función que actualizará el estado del componente principal
                         required={true}
                         className="campo-observacion"
                         />
