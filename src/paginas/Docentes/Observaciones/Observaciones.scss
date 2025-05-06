@@ -28,6 +28,10 @@
                 width: fit-content;
             }
 
+            .input-container{
+                max-width: fit-content;
+            }
+
         }
 
         .materias{
@@ -44,5 +48,12 @@
 @media screen and (max-width: $max-celular){
     .contenedorObservaciones{
         padding: 0rem 0.5rem;
+        .informacion{
+
+                .materias{
+                    justify-content: center;
+                }
+            
+        }
     }
 }
