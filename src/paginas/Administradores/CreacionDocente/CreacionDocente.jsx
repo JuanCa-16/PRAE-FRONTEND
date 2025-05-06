@@ -230,16 +230,27 @@ const CreacionDocente = () => {
             //Elimina opciones duplicadas para el selector
     const profesUnicos = [...new Set(infoPildoras.map(item => item.nombreCompleto))];
     const [profeSeleccionado, setProfeSeleccionado] = useState('');
+
+
+    const [filtroKey, setFiltroKey] = useState('')
+    const handleFiltroKeyChange = (nuevoValor) =>{
+        setFiltroKey(nuevoValor)
+        setProfeSeleccionado('');
+    }
         
             // Función para limpiar los filtros
     const limpiarFiltros = () => {
             setProfeSeleccionado('');
+            setFiltroKey('')
         };
         
         const pildorasFiltradas = infoPildoras.filter(item =>
-            (profeSeleccionado === '' || item.nombreCompleto === profeSeleccionado)
+            (profeSeleccionado === '' || item.nombreCompleto === profeSeleccionado) &&  // Filtra por profesor seleccionado
+            (filtroKey === '' || item.documento_identidad.toLowerCase().includes(filtroKey.toLowerCase()))  // Filtra por cédula
         );
+        
 
+    
     
     return (
         <div className='contenedorCreacionDocente'>
@@ -285,6 +296,7 @@ const CreacionDocente = () => {
                 />
                 <div className="informacion">
                     <div className="filtros">
+                        <InputContainer nomInput="busqueda" required={false} titulo='Busqueda por Cedula' placeholder='Ingresa cedula' value={filtroKey} inputType='text' onChange={handleFiltroKeyChange}  />
                         <CustomSelect
                             opciones={profesUnicos}
                             valorSeleccionado={profeSeleccionado}
@@ -296,7 +308,7 @@ const CreacionDocente = () => {
                     </div>
 
 
-                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true} clase={'docente'}></ContenedorPildoraMateriaGrado>
+                    <ContenedorPildoraMateriaGrado info={pildorasFiltradas} docente={true} clase={'docente'} ></ContenedorPildoraMateriaGrado>
                 </div>
             </div>
         </div>

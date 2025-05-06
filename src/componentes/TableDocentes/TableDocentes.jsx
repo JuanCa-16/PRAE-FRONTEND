@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './TableDocentes.scss';
+import PildoraMateriaGrado from '../PildoraMateriaGrado/PildoraMateriaGrado';
 import InputContainer from '../Input/InputContainer';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo'; 
 import Celda from '../Celda/Celda'; 
@@ -31,6 +32,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
     const [soloApellidos, setSoloApellidos] = useState([])
     const [soloNombre,setSoloNombre] = useState([])
     const [actividadesUnicas, setActividadesUnicas] = useState([])
+    const [totalPorcentajes, setTotalPorcentaje] = useState([])
 
     const [reload, setReload] = useState(false);
 
@@ -66,6 +68,10 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                         setSoloApellidos(data.map(item => ` ${item.apellido}`))
                         setSoloNombre(data.map(item => ` ${item.nombre}`))
                         setActividadesUnicas(data.map(est => est.actividades.map(act => [{ actividad: act.actividad, peso: act.peso, idAct: act.id_actividad, idNota: act.id_calificacion }]))[0].flat().sort((a, b) => a.actividad.localeCompare(b.actividad)))
+
+                        const total = data.map(est => est.actividades.map(act => [{peso: act.peso}]))[0].flat().reduce((sum, actividad) => sum + actividad.peso, 0);  // Suma los pesos
+
+                        setTotalPorcentaje(total);  // Guarda el resultado en el estado
                     }
                 } catch (error) {
                     console.error(error);
@@ -127,6 +133,11 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
 
         if (isNaN(peso) || peso < 0 || peso > 100) {
             Alerta.error('El peso debe ser un número entre 0 y 100.');
+            return;
+        }
+
+        if ((totalPorcentajes + peso) > 100) {
+            Alerta.error('Excederas el 100%');
             return;
         }
         
@@ -192,98 +203,104 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
 
     return (
         <div className='contenedorNotas'>
-            <div className="contenedor">
-                <PildoraTitulo nota={infoNota} materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
-                <div className="tabla">
-                    <div className="col colListado">
-                        <Celda txt='Listado' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
-                        {nombres.map((nombre, index) => (
-                            <Celda key={index} tipo='titulo2' color={infoCurso.color} txt={nombre} rol='NoVer'></Celda>
-                        ))}
-                    </div>
-                    <div className={`notas ${infoCurso.color}`}>
+            <div className='grupo'>
+                <PildoraMateriaGrado texto='PERIODO 1' color={infoCurso.color}></PildoraMateriaGrado>
+                <div className="contenedor">
+                    <PildoraTitulo nota={infoNota} materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
+                    <div className="tabla">
+                        <div className="col colListado">
+                            <Celda txt='Listado' color={infoCurso.color} tipo='titulo' rol='NoVer'></Celda>
+                            {nombres.map((nombre, index) => (
+                                <Celda key={index} tipo='titulo2' color={infoCurso.color} txt={nombre} rol='NoVer'></Celda>
+                            ))}
+                        </div>
+                        <div className={`notas ${infoCurso.color}`}>
 
-                        {actividadesUnicas.map((actividad, i) => (
-                            <div key={i} className="col nota">
-                                <Celda color={infoCurso.color} txt={actividad.actividad + ' - '+actividad.peso+ ' % '} tipo='titulo' onClick={() => openModalAct(i)} />
-                                {/* Modal específico para la actividad seleccionada */}
-                                {modalIndexAbierto === i && (
-                                    <Modal
-                                        isOpen={true}
-                                        closeModal={closeModalAct}
-                                        recargar = {handleReload}
-                                        tipo='actividad'
-                                        modalTitulo='EDITAR ACTIVIDAD'
-                                        modalTexto='Edita los parametros de tu actividad'
-                                        valorAct={actividad.actividad}
-                                        ValorPeso={actividad.peso}
-                                        extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado: infoCurso.curso, id_act: actividad.idAct, id_docente: infoDocente }} 
-                                    />
-                                )}
-                                {info.map((estudiante, j) => {
-                                    const actividadEncontrada = estudiante.actividades.find(act => act.id_actividad === actividad.idAct);
-                                    
-                                    return (
-                                        <div className='full' key={j}>
-                                            <Celda 
-                                                tipo="normal" 
-                                                color={infoCurso.color}
-                                                txt={actividadEncontrada ? actividadEncontrada.nota : "N/A"} 
-                                                onClick={() => openModalNota(i, j)} // Ahora pasa ambos índices
-                                            />
-                                            
-                                            {/* Modal de nota específico para la combinación de actividad y estudiante */}
-                                            {modalIndexNota.actividadIndex === i && modalIndexNota.estudianteIndex === j && (
-                                                <Modal
-                                                    isOpen={true}
-                                                    closeModal={closeModalNota}
-                                                    tipo='nota'
-                                                    valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
-                                                    modalTitulo='EDITAR NOTA'
-                                                    modalTexto='Edita la nota de esta actividad'
-                                                    recargar = {handleReload}
-                                                    extraData={{
-                                                        notaOriginal:  actividadEncontrada.nota, 
-                                                        id_nota: actividadEncontrada.id_calificacion,
-                                                        materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
-                                                        id_actividad: actividad.idAct,
-                                                        id_estudiante: estudiante.documento_identidad,
-                                                    }}
-                                                    
+                            {actividadesUnicas.map((actividad, i) => (
+                                <div key={i} className="col nota">
+                                    <Celda color={infoCurso.color} txt={actividad.actividad + ' - '+actividad.peso+ ' % '} tipo='titulo' onClick={() => openModalAct(i)} />
+                                    {/* Modal específico para la actividad seleccionada */}
+                                    {modalIndexAbierto === i && (
+                                        <Modal
+                                            isOpen={true}
+                                            closeModal={closeModalAct}
+                                            recargar = {handleReload}
+                                            tipo='actividad'
+                                            modalTitulo='EDITAR ACTIVIDAD'
+                                            modalTexto='Edita los parametros de tu actividad'
+                                            valorAct={actividad.actividad}
+                                            ValorPeso={actividad.peso}
+                                            extraData={{ materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado: infoCurso.curso, id_act: actividad.idAct, id_docente: infoDocente }} 
+                                        />
+                                    )}
+                                    {info.map((estudiante, j) => {
+                                        const actividadEncontrada = estudiante.actividades.find(act => act.id_actividad === actividad.idAct);
+                                        
+                                        return (
+                                            <div className='full' key={j}>
+                                                <Celda 
+                                                    tipo="normal" 
+                                                    color={infoCurso.color}
+                                                    txt={actividadEncontrada ? actividadEncontrada.nota : "N/A"} 
+                                                    onClick={() => openModalNota(i, j)} // Ahora pasa ambos índices
                                                 />
-                                            )}
-                                        </div>
-                                    );
-                        
-                                })}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <form onSubmit={handleSubmit} className="contenedorAct">
-                    <div className="titulo">
-                        <p className='bold'>CREAR ACTIVIDAD:</p>
-                    </div>
-                    <div className="crearAct">
-                        <div className="campos">
-                            <InputContainer titulo="Nombre"
-                                            placeholder="Nombre de la actividad"
-                                            inputType="text"
-                                            value={nombreAct.actividad}
-                                            onChange={(value) => handleChange('actividad', capitalizeWords(value))} // Pasamos la función que actualizará el estado
-                                            required={true} // Hacemos que el campo sea obligatorio
-                            />
-                            <InputContainer titulo="Peso"
-                                            placeholder="Valor entre 0 - 100"
-                                            inputType="text"
-                                            value={nombreAct.peso} // El valor del input viene del estado del componente padre
-                                            onChange={(value) => handleChange('peso', value)} // Pasamos la función que actualizará el estado
-                                            required={true} // Hacemos que el campo sea obligatorio
-                            />
-                            <button type='submit' disabled={cargando}>{cargando? 'cargando...':'Crear' } </button>
+                                                
+                                                {/* Modal de nota específico para la combinación de actividad y estudiante */}
+                                                {modalIndexNota.actividadIndex === i && modalIndexNota.estudianteIndex === j && (
+                                                    <Modal
+                                                        isOpen={true}
+                                                        closeModal={closeModalNota}
+                                                        tipo='nota'
+                                                        valorNota={actividadEncontrada ? actividadEncontrada.nota : "N/A"}
+                                                        modalTitulo='EDITAR NOTA'
+                                                        modalTexto='Edita la nota de esta actividad'
+                                                        recargar = {handleReload}
+                                                        extraData={{
+                                                            notaOriginal:  actividadEncontrada.nota, 
+                                                            id_nota: actividadEncontrada.id_calificacion,
+                                                            materia: infoCurso.materia, profesor: infoCurso.nombre_completo, grado:  infoCurso.curso, nombreEst: soloNombre[j], apellidosEst: soloApellidos[j], actividad:actividadesUnicas[i][0],
+                                                            id_actividad: actividad.idAct,
+                                                            id_estudiante: estudiante.documento_identidad,
+                                                        }}
+                                                        
+                                                    />
+                                                )}
+                                            </div>
+                                        );
+                            
+                                    })}
+                                </div>
+                            ))}
                         </div>
                     </div>
-                </form>
+                    <form onSubmit={handleSubmit} className="contenedorAct">
+                        <div className="titulo">
+                            <p className='bold'>CREAR ACTIVIDAD:</p>
+                            <p>Total de porcentaje ocupado: {totalPorcentajes}%, disponible para asignar: {100 - totalPorcentajes}%</p>
+                            {(totalPorcentajes === 100) && 
+                            <p className='alertaTxt'>Edita el peso de actividades para poder asignar más.</p>}
+                        </div>
+                        <div className="crearAct">
+                            <div className="campos">
+                                <InputContainer titulo="Nombre"
+                                                placeholder="Nombre de la actividad"
+                                                inputType="text"
+                                                value={nombreAct.actividad}
+                                                onChange={(value) => handleChange('actividad', capitalizeWords(value))} // Pasamos la función que actualizará el estado
+                                                required={true} // Hacemos que el campo sea obligatorio
+                                />
+                                <InputContainer titulo="Peso"
+                                                placeholder="Valor entre 0 - 100"
+                                                inputType="text"
+                                                value={nombreAct.peso} // El valor del input viene del estado del componente padre
+                                                onChange={(value) => handleChange('peso', value)} // Pasamos la función que actualizará el estado
+                                                required={true} // Hacemos que el campo sea obligatorio
+                                />
+                                <button type='submit' disabled={cargando || (totalPorcentajes === 100)}>{cargando? 'cargando...': ((totalPorcentajes === 100)? 'Sin Espacio': 'Crear') } </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

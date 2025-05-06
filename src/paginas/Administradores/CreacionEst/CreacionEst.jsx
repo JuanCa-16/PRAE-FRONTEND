@@ -212,15 +212,25 @@ const CreacionEst = () => {
         const [nombreEstudianteSeleccionada, setnombreEstudianteSeleccionada] = useState('');
         const [gradoSeleccionado, setGradoSeleccionado] = useState('');
     
+
+        const [filtroKey, setFiltroKey] = useState('')
+            const handleFiltroKeyChange = (nuevoValor) =>{
+                setFiltroKey(nuevoValor)
+                setnombreEstudianteSeleccionada('');
+                setGradoSeleccionado('');
+            }
+
         // Función para limpiar los filtros
         const limpiarFiltros = () => {
             setnombreEstudianteSeleccionada('');
             setGradoSeleccionado('');
+            setFiltroKey('')
         };
     
         const pildorasFiltradas = infoPildoras.filter(item =>
             (nombreEstudianteSeleccionada === '' || item.nombreCompleto === nombreEstudianteSeleccionada) &&
-            (gradoSeleccionado === '' || item.curso === gradoSeleccionado)
+            (gradoSeleccionado === '' || item.curso === gradoSeleccionado) &&
+            (filtroKey === '' || item.documento_identidad.toLowerCase().includes(filtroKey.toLowerCase())) 
         );
     
         const navigate = useNavigate();
@@ -263,6 +273,7 @@ const CreacionEst = () => {
                 />
                 <div className="informacion">
                     <div className="filtros">
+                        <InputContainer nomInput="busqueda" required={false} titulo='Busqueda por Cedula' placeholder='Ingresa cedula' value={filtroKey} inputType='text' onChange={handleFiltroKeyChange}  />
                         <CustomSelect
                             opciones={nombreEstudiante}
                             valorSeleccionado={nombreEstudianteSeleccionada}

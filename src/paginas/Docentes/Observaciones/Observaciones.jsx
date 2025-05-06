@@ -5,7 +5,7 @@ import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-
+import InputContainer from '../../../componentes/Input/InputContainer.jsx';
 import { useUser } from '../../../Contexts/UserContext.jsx';
 
 import './Observaciones.scss';
@@ -60,15 +60,24 @@ const Observaciones = () => {
     const [nombreEstudianteSeleccionada, setnombreEstudianteSeleccionada] = useState('');
     const [gradoSeleccionado, setGradoSeleccionado] = useState('');
 
+
+     const [filtroKey, setFiltroKey] = useState('')
+                const handleFiltroKeyChange = (nuevoValor) =>{
+                    setFiltroKey(nuevoValor)
+                    setnombreEstudianteSeleccionada('');
+                    setGradoSeleccionado('');
+                }
     // Función para limpiar los filtros
     const limpiarFiltros = () => {
         setnombreEstudianteSeleccionada('');
         setGradoSeleccionado('');
+        setFiltroKey('');
     };
 
     const pildorasFiltradas = infoPildoras.filter(item =>
         (nombreEstudianteSeleccionada === '' || item.nombre_completo === nombreEstudianteSeleccionada) &&
-        (gradoSeleccionado === '' || item.curso_nombre === gradoSeleccionado)
+        (gradoSeleccionado === '' || item.curso_nombre === gradoSeleccionado) &&
+        (filtroKey === '' || item.estudiante_id.toLowerCase().includes(filtroKey.toLowerCase()))
     );
 
     const navigate = useNavigate();
@@ -87,6 +96,7 @@ const Observaciones = () => {
             />
             <div className="informacion">
                 <div className="filtros">
+                    <InputContainer nomInput="busqueda" required={false} titulo='Busqueda por Cedula' placeholder='Ingresa cedula' value={filtroKey} inputType='text' onChange={handleFiltroKeyChange}  />
                     <CustomSelect
                         opciones={nombreEstudiante}
                         valorSeleccionado={nombreEstudianteSeleccionada}
