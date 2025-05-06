@@ -10,140 +10,156 @@
     gap: 2.5rem;
     align-self: stretch;
 
-    .contenedor{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
-
-        .tabla{
+    .grupo{
+        width: 100%;
+        gap: 1rem;
+        .contenedorPildoraG{
+            margin-bottom: 1rem;
+        }
+        .contenedor{
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 1.5625rem;
+            gap: 0.625rem;
             align-self: stretch;
-
-            
-
-            .col{
+    
+            .tabla{
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 1.0625rem;
-
-                
-            }
-
-            .colListado{
-                justify-content: flex-start;
-            }
-
-
-            .notas{
-                display: flex;
-                width: 100%;
-                // align-items: center;
                 align-items: flex-start;
                 gap: 1.5625rem;
-                flex: 1 0 0;
-                overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
-                overflow-y: hidden; /* Evita el scroll vertical */
-                white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
-                display: flex; 
-                padding-bottom: 1rem; /* o lo que veas que se ve mejor */
-            }
-
-            .notas::-webkit-scrollbar {
+                align-self: stretch;
+    
                 
-                height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
-                border-radius: 4px; /* Bordes redondeados */
+    
+                .col{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1.0625rem;
+    
+                    
+                }
+    
+                .colListado{
+                    justify-content: flex-start;
+                }
+    
+    
+                .notas{
+                    display: flex;
+                    width: 100%;
+                    // align-items: center;
+                    align-items: flex-start;
+                    gap: 1.5625rem;
+                    flex: 1 0 0;
+                    overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
+                    overflow-y: hidden; /* Evita el scroll vertical */
+                    white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
+                    display: flex; 
+                    padding-bottom: 1rem; /* o lo que veas que se ve mejor */
+                }
+    
+                .notas::-webkit-scrollbar {
+                    
+                    height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
+                    border-radius: 4px; /* Bordes redondeados */
+                }
+                
+                .notas::-webkit-scrollbar-thumb {
+                    background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
+                    border-radius: 4px; /* Bordes redondeados */
+                }
+    
+                .notas::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
+                    border-radius: 4px; /* Bordes redondeados */
+                }
+                
+                .notas::-webkit-scrollbar-thumb:hover {
+                    background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
+                }
+    
+                .notas.morado::-webkit-scrollbar-thumb:hover {
+                    background: var(--colorPildora2);/* Un poco más visible al pasar el mouse */
+                }
+    
+                .notas.amarillo::-webkit-scrollbar-thumb:hover {
+                    background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
+                }
+                
+                
             }
-            
-            .notas::-webkit-scrollbar-thumb {
-                background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
-                border-radius: 4px; /* Bordes redondeados */
-            }
-
-            .notas::-webkit-scrollbar-track {
-                background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
-                border-radius: 4px; /* Bordes redondeados */
-            }
-            
-            .notas::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
-            }
-
-            .notas.morado::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora2);/* Un poco más visible al pasar el mouse */
-            }
-
-            .notas.amarillo::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
-            }
-            
-            
         }
-    }
-
-    .contenedorAct{
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding-top: 2rem;
-
-        .titulo{
+    
+        .contenedorAct{
+            width: 80%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
-            gap: 0.75rem;
-            align-self: stretch;
-        }
-
-        .crearAct{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
-            align-self: stretch;
-
-            .campos{
-                width: 100%;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 2rem;
+    
+            
+    
+            .titulo{
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
-                align-items: center;
-                gap: 1.625rem;
+                align-items: flex-start;
+                gap: 0.75rem;
+                align-self: stretch;
+                margin-bottom: 1rem;
             }
-        }
-
-        button{
-            height: 50%;
-            width: 50%;
+    
+            .crearAct{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                align-self: stretch;
+    
+                .campos{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1.625rem;
+                }
+            }
+    
+            button{
+                height: 50%;
+                width: 50%;
+            }
+    
+            .alertaTxt{
+                color: var(--colorPrincipal);
+            }
         }
     }
 }
 
 @media screen and (max-width: $max-celular){
     .contenedorNotas{
-        .contenedor{
+        .grupo{
+            .contenedor{
 
-            .tabla{
-                height: fit-content;
-                .colListado{
-                    height: 100%;
-                    width: 40%;
+                .tabla{
+                    height: fit-content;
+                    .colListado{
+                        height: 100%;
+                        width: 40%;
+                    }
+    
+                    .notas{
+                        height: 100%;
+                    }
                 }
-
-                .notas{
-                    height: 100%;
-                }
+                .contenedorAct{
+                    width: 100%; }
             }
-            .contenedorAct{
-                width: 100%; }
         }
         
     }
@@ -151,6 +167,7 @@
 
 .dark{
     .contenedorNotas{
+        .grupo{
         .contenedor{
             .tabla{
                 .notas::-webkit-scrollbar-thumb:hover {
@@ -166,6 +183,7 @@
                     background: $dark-amarillo;/* Un poco más visible al pasar el mouse */
                 }
             }
+        }
         }
     }
 }
