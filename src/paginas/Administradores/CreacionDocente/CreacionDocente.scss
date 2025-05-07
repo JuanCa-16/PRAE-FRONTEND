@@ -1,123 +1,113 @@
-@import '../../../variables.scss';
-.contenedorCreacionDocente{
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 2rem;
-    align-self: stretch;
+@use '../../../variables.scss' as *;
 
-    .crear{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
+.contenedorCreacionDocente {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	gap: 2rem;
+	align-self: stretch;
 
-        .formulario{
-            display: flex;
-            width: 100%;
-            max-width: 100%;
-            padding: 1.5rem 0rem;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.25rem;
+	.crear {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.625rem;
+		align-self: stretch;
 
-            .inputs{
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                align-content: center;
-                row-gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
+		.formulario {
+			display: flex;
+			width: 100%;
+			max-width: 100%;
+			padding: 1.5rem 0rem;
+			flex-direction: column;
+			align-items: center;
+			gap: 2.25rem;
 
-                .input-container{
-                    flex: 1; //solo esta linea hace que crezca
-                    width: 30%;
-                    min-width: 12.5rem;
-                    padding: 1rem;
-                }
+			.inputs {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
+				row-gap: 1.5rem;
+				align-self: stretch;
+				flex-wrap: wrap;
 
-            }
+				.input-container {
+					flex: 1; //solo esta linea hace que crezca
+					width: 30%;
+					min-width: 12.5rem;
+					padding: 1rem;
+				}
+			}
 
-            .selectorMat{
-                display: flex;
-                width: 100%;
-                max-width: 100%;
-                justify-content: space-between;
-                padding: 1rem;
-                gap: 1rem;
-            }
+			.selectorMat {
+				display: flex;
+				width: 100%;
+				max-width: 100%;
+				justify-content: space-between;
+				padding: 1rem;
+				gap: 1rem;
+			}
 
-            button{
-                width: auto;
-            }
-        }
-    }
+			button {
+				width: auto;
+			}
+		}
+	}
 
-    .lista{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 2rem;
-        align-self: stretch;
-        // min-height: 20rem;
+	.lista {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 2rem;
+		align-self: stretch;
+		// min-height: 20rem;
 
-        .informacion{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-            align-self: stretch;
-    
-            .filtros{
-                display: flex;
-                width: 100%;
-                align-items: flex-end;
-                gap: 2.75rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-    
-                button{
-                    width: fit-content;
-                }
+		.informacion {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5rem;
+			align-self: stretch;
 
-                .input-container{
-                    max-width: fit-content;
-                }
-    
-            }
-    
-            
-        }
+			.filtros {
+				display: flex;
+				width: 100%;
+				align-items: flex-end;
+				gap: 2.75rem;
+				align-self: stretch;
+				flex-wrap: wrap;
 
-        
-    }
+				button {
+					width: fit-content;
+				}
+
+				.input-container {
+					max-width: fit-content;
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .contenedorCreacionDocente{
-        .crear{
-            .formulario{
-                .inputs{
-                    .input-container{
-            
-                        min-width: 10rem;
-                        
-                    }
-                }
+@media screen and (max-width: $max-celular) {
+	.contenedorCreacionDocente {
+		.crear {
+			.formulario {
+				.inputs {
+					.input-container {
+						min-width: 10rem;
+					}
+				}
 
-                .selectorMat{
-                    display: flex;
-                    width: 100%;
-                    max-width: 100%;
-                    align-self: flex-start;
-
-                }
-            }
-        }
-
-    }
+				.selectorMat {
+					display: flex;
+					width: 100%;
+					max-width: 100%;
+					align-self: flex-start;
+				}
+			}
+		}
+	}
 }
-

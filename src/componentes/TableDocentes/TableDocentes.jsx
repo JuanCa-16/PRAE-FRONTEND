@@ -55,8 +55,9 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
+				console.log('AAAAAA')
 				const data = await response.json();
-				console.log('info', data);
+				console.log('infoooo', data);
 				if (data.length > 0) {
 					setInfo(data);
 					setNombres(

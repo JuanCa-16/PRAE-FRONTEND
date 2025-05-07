@@ -114,6 +114,9 @@
 
 		background-color: var(--dark-super-negro);
 	}
+	.react-select--is-disabled{
+		background-color: var(--dark-super-negro);
+	}
 
 	.react-select__control--is-focused {
 		border-color: var(--dark-contraste-negro);
@@ -149,4 +152,18 @@
 	.react-select__single-value {
 		color: var(--dark-blanco);
 	}
+
+	.selector {
+		border-radius: var(--radio1);
+		.react-select--is-disabled {
+			border-radius: var(--radio1);
+			.react-select__control--is-disabled {
+				background-color: var(--dark-super-negro);
+				border-radius: var(--radio1);
+			}
+		}
+	}
+	
+		
+		
 }

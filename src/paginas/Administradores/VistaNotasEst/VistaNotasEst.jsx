@@ -1,16 +1,17 @@
-import React from 'react'
-import { useLocation } from "react-router-dom";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import TableEst from '../../../componentes/TableEst/TableEst';
 
 const VistaNotasEst = () => {
+	const location = useLocation();
+	const { item, idEst } = location.state || {};
 
-    const location = useLocation();
-    const {item, idEst} = location.state || {};
+	return (
+		<TableEst
+			infoMateria={item}
+			idEst={idEst}
+		></TableEst>
+	);
+};
 
-
-    return (
-        <TableEst infoMateria = {item} idEst={idEst}></TableEst>
-    )
-}
-
-export default VistaNotasEst
+export default VistaNotasEst;

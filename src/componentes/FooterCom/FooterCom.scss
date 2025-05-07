@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
 .contenedorFooter {
 	display: flex;
 	padding: 2.25rem 6rem;

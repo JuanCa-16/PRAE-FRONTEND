@@ -1,6 +1,6 @@
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
 
-@keyframes slideDown {
+@keyframes slideDownTable {
 	from {
 		transform: translateY(-20px); /* Empieza un poco más arriba */
 		opacity: 0; /* Empieza invisible */
@@ -13,7 +13,7 @@
 	}
 }
 
-@keyframes slideUp {
+@keyframes slideUpTable {
 	from {
 		transform: translateY(0); /* Empieza desde la posición original */
 		opacity: 1; /* Empieza visible */
@@ -158,13 +158,13 @@
 			&.noExpandir {
 				opacity: 0; /* Se hace invisible */
 				max-height: 0; /* Se colapsa */
-				animation: slideUp 0.2s ease-out; /* Animación para el deslizamiento hacia arriba */
+				animation: slideUpTable 0.2s ease-out; /* Animación para el deslizamiento hacia arriba */
 			}
 
 			&.expandir {
 				opacity: 1; /* Se hace visible */
 				max-height: auto; /* Ajustar a un valor adecuado para tu contenido */
-				animation: slideDown 0.3s ease-in-out; /* Animación al expandirse */
+				animation: slideDownTable 0.3s ease-in-out; /* Animación al expandirse */
 				//margin-bottom: 2rem;
 			}
 		}

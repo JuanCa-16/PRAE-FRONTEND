@@ -168,7 +168,7 @@ const ProfeEstadisticas = () => {
 					promedioGrados.length > 0 ? (
 						<div className='graficoBarras'>
 							<p>Promedio Grados</p>
-							<GraficoBarras data={promedioGrados} />:
+							<GraficoBarras data={promedioGrados} />
 						</div>
 					) : (
 						<p>No hay datos para mostrar</p>
