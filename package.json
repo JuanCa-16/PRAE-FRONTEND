@@ -48,6 +48,14 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "eslint": "^8.57.1"
+    "@babel/plugin-transform-optional-chaining": "^7.27.1",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@typescript-eslint/utils": "^8.32.0",
+    "eslint": "^8.57.1",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.37.5",
+    "postcss": "^8.5.3",
+    "resolve-url-loader": "^5.0.0",
+    "svgo": "^3.3.2"
   }
 }

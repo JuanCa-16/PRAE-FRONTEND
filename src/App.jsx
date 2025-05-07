@@ -153,10 +153,21 @@ function App() {
 				document.documentElement.style.setProperty(`--${key}`, value);
 			});
 
-			// Forzar actualización de las variables que usan color-mix
-			// const principal = getComputedStyle(document.documentElement).getPropertyValue("--colorPrincipal");
-			// document.documentElement.style.setProperty("--colorMezclado", `color-mix(in srgb, ${principal} 20%, rgb(255, 255, 255))`);
-			// document.documentElement.style.setProperty("--colorMezclado2", `color-mix(in srgb, ${principal} 5%, rgb(255, 255, 255))`);
+			if (user.institucion.logo) {
+				const faviconLink = document.querySelector("link[rel*='icon']");
+
+				if (faviconLink) {
+					faviconLink.href = user.institucion.logo; // Cambia esta URL dinámicamente si lo deseas
+				}
+			}
+
+			if (user.institucion.nombre) {
+				if (user.institucion.nombre === 'PRAE') {
+					document.title = `PRAE`; // Cambiar el título dinámicamente
+				} else {
+					document.title = `PRAE - ${user.institucion.nombre.toUpperCase()}`; // Cambiar el título dinámicamente
+				}
+			}
 		} else {
 			const valoresPorDefecto = {
 				'--colorPrincipal': '#157AFE', // Reemplázalo con el valor real de tu root
@@ -170,6 +181,15 @@ function App() {
 			Object.entries(valoresPorDefecto).forEach(([key, value]) => {
 				document.documentElement.style.setProperty(key, value);
 			});
+
+			const faviconLink = document.querySelector("link[rel*='icon']");
+
+			if (faviconLink) {
+				faviconLink.href =
+					'https://firebasestorage.googleapis.com/v0/b/praeweb-a1526.firebasestorage.app/o/logos%2FLOGO-PRAE.png?alt=media&token=8900f817-2353-4bcc-81cf-df9f2b8e90d2'; // Cambia esta URL dinámicamente si lo deseas
+			}
+
+			document.title = `PRAE`;
 		}
 	}, [user]);
 

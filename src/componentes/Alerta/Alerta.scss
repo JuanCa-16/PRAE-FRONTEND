@@ -1,11 +1,18 @@
-@keyframes fadeInUp {
+@keyframes bounceInFromTop  {
 	from {
-		opacity: 0;
-		transform: translateY(10px);
+		transform: translateY(-50px); /* Comienza desde arriba */
+	}
+	20% {
+		transform: translateY(10px); /* Subida inicial */
+	}
+	40% {
+		transform: translateY(-5px); /* Rebote hacia arriba */
+	}
+	60% {
+		transform: translateY(3px); /* Rebote pequeño */
 	}
 	to {
-		opacity: 1;
-		transform: translateY(0);
+		transform: translateY(0); /* Termina en su posición normal */
 	}
 }
 
@@ -18,7 +25,7 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	animation: fadeInUp 1s ease-in-out;
+	animation: bounceInFromTop  1s ease-in-out;
 	max-width: 400px;
 	margin-bottom: 10px;
 }
