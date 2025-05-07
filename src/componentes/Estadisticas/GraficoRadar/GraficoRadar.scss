@@ -1,69 +1,63 @@
-@import '../../../global.scss';
+.graficoRadar {
+	.recharts-wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-.graficoRadar{
+	.recharts-surface {
+		width: 100% !important;
+		overflow: hidden;
+	}
 
-    .recharts-wrapper{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+	.radiusAxis {
+		stroke: var(--colorPildora2);
+	}
 
-    .recharts-surface{
-        width: 100% !important;
-        overflow: hidden;
-    }
+	.recharts-text {
+		&.recharts-polar-radius-axis-tick-value {
+			fill: var(--colorPildora2);
+			font-size: 0.7rem;
+		}
 
-    .radiusAxis{
-        stroke: var(--colorPildora2); 
-    }
+		&.recharts-polar-angle-axis-tick-value {
+			fill: var(--colorPildora3);
+			font-size: 0.6rem;
+		}
+	}
 
-    .recharts-text{
-        &.recharts-polar-radius-axis-tick-value{
-            fill: var(--colorPildora2); 
-            font-size: 0.7rem;
-        }
+	.figuraRadar {
+		fill: var(--colorPildora2);
+		stroke: var(--colorPildora2);
+	}
 
-        &.recharts-polar-angle-axis-tick-value{
-            fill: var(--colorPildora3); 
-            font-size: 0.6rem;
+	.gridRadar {
+		stroke: var(--colorPildora2);
+		opacity: 0.5;
+	}
 
-        }
-    } 
+	&.dark {
+		.figuraRadar {
+			fill: var(--dark-morado);
+			stroke: var(--dark-morado);
+		}
 
-    .figuraRadar{
-        fill:  var(--colorPildora2); 
-        stroke: var(--colorPildora2); 
-    }
+		.gridRadar {
+			stroke: var(--dark-morado);
+		}
 
-    .gridRadar{
-        stroke: var(--colorPildora2); 
-        opacity: 0.5;
-    }
+		.radiusAxis {
+			stroke: var(--dark-morado);
+		}
 
+		.recharts-text {
+			&.recharts-polar-radius-axis-tick-value {
+				fill: var(--dark-morado);
+			}
 
-
-    &.dark{
-        .figuraRadar{
-            fill:  $dark-morado;
-            stroke: $dark-morado; 
-        }
-
-        .gridRadar{
-            stroke: $dark-morado; 
-        }
-
-        .radiusAxis{
-            stroke: $dark-morado;
-        }
-
-        .recharts-text{
-            &.recharts-polar-radius-axis-tick-value{
-                fill: $dark-morado;
-            }
-
-            &.recharts-polar-angle-axis-tick-value{
-                fill: $dark-amarillo; 
-            }
-        } 
-    }
+			&.recharts-polar-angle-axis-tick-value {
+				fill: var(--dark-amarillo);
+			}
+		}
+	}
 }

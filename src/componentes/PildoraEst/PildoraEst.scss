@@ -1,315 +1,309 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 
+.pildoraEst {
+	.nombre {
+		text-align: center;
+		color: var(--blanco);
+	}
 
-//Estilos de la pildora
-.pildoraEst{
+	background-color: var(--colorPildora1);
+	color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-    .nombre{
-        text-align: center;
-        color: $blanco;
-    }
+	//colores
+	&.morado {
+		background-color: var(--colorPildora2);
+		color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+	}
 
-    background-color: var(--colorPildora1);
-    color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
-    
+	&.amarillo {
+		background-color: var(--colorPildora3);
+		color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+	}
 
-    //colores
-    &.morado {
-        background-color: var(--colorPildora2);
-        color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-    }
+	&.grande {
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radio3);
+		box-shadow: 0px 4px 11px #00000033;
+		display: inline-flex;
+		overflow: hidden;
+		padding: 1.5rem;
+		position: relative;
+		max-width: 11rem;
 
-    &.amarillo {
-        background-color: var(--colorPildora3);
-        color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-    }
-    
-    &.grande{
-        align-items: center;
-        justify-content: center;
-        border-radius: $radio3;
-        box-shadow: 0px 4px 11px #00000033;
-        display: inline-flex;
-        overflow: hidden;
-        padding: 1.5rem;
-        position: relative;
-        max-width: 11rem;
+		h4 {
+			color: var(--blanco);
+			font-weight: bold;
+			margin: 0;
+			font-size: 3rem;
+			letter-spacing: 0;
+			line-height: normal;
+			position: relative;
+			width: fit-content;
+		}
 
-        h4{
-            color: $blanco;
-            font-weight: bold;
-            margin: 0;
-            font-size: 3rem;
-            letter-spacing: 0;
-            line-height: normal;
-            position: relative;
-            width: fit-content;
-            
-        }
+		.contenedor {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			flex: 0 0 auto;
+			gap: 10px;
+			position: relative;
+			width: 100%;
+		}
 
-        .contenedor{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            flex: 0 0 auto;
-            gap: 10px;
-            position: relative;
-            width: 100%; 
-        }
+		.elipse1,
+		.elipse2 {
+			background-color: var(--blanco);
+			border-radius: 119.5px;
+			height: 239px;
+			left: -100px;
+			opacity: 0.05;
+			position: absolute;
+			top: -100px;
+			width: 239px;
+		}
 
-        .elipse1, .elipse2{
-            background-color: $blanco;
-            border-radius: 119.5px;
-            height: 239px;
-            left: -100px;
-            opacity: 0.05;
-            position: absolute;
-            top: -100px;
-            width: 239px;
-        }
+		.elipse2 {
+			left: 50px;
+			opacity: 0.1;
+			position: absolute;
+			top: 50px;
+		}
+	}
 
-        .elipse2{
-            left: 50px;
-            opacity: 0.1;
-            position: absolute;
-            top: 50px;
-        }
-    }
+	//Estilos si es peque
+	&.peque {
+		display: inline-flex;
+		border-radius: var(--radio2);
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		padding: 0.625rem 0.75rem;
+		position: relative;
+		min-width: 16.5rem;
+		max-width: fit-content;
+		//width: 13rem;
+		height: 3.5rem;
 
-    //Estilos si es peque
-    &.peque{
-        display: inline-flex;
-        border-radius: $radio2;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        padding: 0.625rem 0.75rem;
-        position: relative;
-        min-width: 16.5rem;
-        max-width: fit-content;
-        //width: 13rem;
-        height: 3.5rem;
+		.contenedor {
+			align-items: center;
+			display: inline-flex;
+			flex: 0 0 auto;
+			gap: 26px;
+			justify-content: center;
+			position: relative;
 
-        .contenedor{
-            align-items: center;
-            display: inline-flex;
-            flex: 0 0 auto;
-            gap: 26px;
-            justify-content: center;
-            position: relative;
+			.curso {
+				position: relative;
+				white-space: nowrap;
+				width: fit-content;
+				color: var(--blanco);
+			}
 
-            .curso{
-                position: relative;
-                white-space: nowrap;
-                width: fit-content;
-                color: $blanco;
-            }
+			.nombre {
+				position: relative;
+				text-align: center;
+				width: fit-content;
+				max-width: 10.5rem;
+			}
+		}
 
-            .nombre{
-                position: relative;
-                text-align: center;
-                width: fit-content;
-                max-width: 10.5rem;
-            }
-        }
+		&.pildoraEstadistica {
+			min-width: 100%;
 
-        &.pildoraEstadistica{
-            min-width: 100%;
+			.contenedor {
+				.nombre {
+					width: 100%;
+					max-width: 100%;
+				}
+			}
+		}
 
-            .contenedor{
+		.elipse1,
+		.elipse2 {
+			background-color: #ffffff;
+			border-radius: 50%;
+			height: 138px;
+			width: 138px;
 
-                .nombre{
-                    width: 100%;
-                    max-width: 100%;
-                }
-            }
-        }
-        
+			opacity: 0.1;
+			position: absolute;
+			top: calc(50% - 69px);
+			right: -72px;
+		}
 
-        .elipse1, .elipse2{
-            background-color: #ffffff;
-            border-radius: 50%;
-            height: 138px;
-            width: 138px;
-            
-            opacity: 0.1;
-            position: absolute;
-            top: calc(50% - 69px);
-            right: -72px;
-        }
+		.elipse2 {
+			opacity: 0.05;
+			position: absolute;
+			right: -64px;
+		}
 
-        .elipse2{
-            
-            opacity: 0.05;
-            position: absolute;
-            right: -64px;
-        }
+		//Estilos Hover
+		&:hover {
+			cursor: pointer;
+			background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-        //Estilos Hover
-        &:hover{
-            cursor: pointer;
-            background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+			.nombre,
+			.curso {
+				color: var(--colorPildora1);
+			}
 
-            
-            .nombre, .curso{
-                color: var(--colorPildora1);
-            }
-    
-            .elipse1, .elipse2{
-                background-color: var(--colorPildora1);
-            }
-    
-            &.morado {
-                background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-                color: var(--colorPildora2);
-    
-                .nombre, .curso{
-                    color:var(--colorPildora2);
-                }
-        
-                .elipse1, .elipse2{
-                    background-color: var(--colorPildora2);
-                }
-            }
-    
-            &.amarillo {
-                background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-                color: var(--colorPildora3);
-    
-                .nombre, .curso{
-                    color:var(--colorPildora3);
-                }
-        
-                .elipse1, .elipse2{
-                    background-color: var(--colorPildora3);
-                }
-            }
-        }
-    }
+			.elipse1,
+			.elipse2 {
+				background-color: var(--colorPildora1);
+			}
+
+			&.morado {
+				background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+				color: var(--colorPildora2);
+
+				.nombre,
+				.curso {
+					color: var(--colorPildora2);
+				}
+
+				.elipse1,
+				.elipse2 {
+					background-color: var(--colorPildora2);
+				}
+			}
+
+			&.amarillo {
+				background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+				color: var(--colorPildora3);
+
+				.nombre,
+				.curso {
+					color: var(--colorPildora3);
+				}
+
+				.elipse1,
+				.elipse2 {
+					background-color: var(--colorPildora3);
+				}
+			}
+		}
+	}
 }
 
-.dark{
-    .pildoraEst{
+.dark {
+	.pildoraEst {
+		.nombre {
+			color: var(--dark-blanco);
+		}
 
-        .nombre{
-            color: $dark-blanco;
-        }
-    
-        background-color: $dark-azul;
-        color: $dark-contraste-azul;
-        
-    
-        //colores
-        &.morado {
-            background-color: $dark-morado;
-            color: $dark-contraste-morado;
-        }
-    
-        &.amarillo {
-            background-color: $dark-amarillo;
-            color: $dark-contraste-amarillo;
-        }
-        
-        &.grande{
-            box-shadow: 0px 4px 11px $dark-super-negro;
-    
-            h4{
-                color: $dark-blanco;
-            }
-    
-            .elipse1, .elipse2{
-                background-color: $dark-blanco;
-            }
-        }
-    
-        //Estilos si es peque
-        &.peque{
-    
-            .contenedor{
+		background-color: var(--dark-azul);
+		color: var(--dark-contraste-azul);
 
-                .curso{
-                    color: $dark-blanco;
-                }
-    
-            }
-            
-    
-            .elipse1, .elipse2{
-                background-color: $dark-blanco;
-            }
-    
-            //Estilos Hover
-            &:hover{
-                
-                background-color: $dark-contraste-azul;
-                
-                .nombre, .curso{
-                    color: $dark-azul;
-                }
-        
-                .elipse1, .elipse2{
-                    background-color: $dark-azul;
-                }
-        
-                &.morado {
-                    background-color: $dark-contraste-morado;
-                    color: $dark-morado;
-        
-                    .nombre, .curso{
-                        color: $dark-morado;
-                    }
-            
-                    .elipse1, .elipse2{
-                        background-color: $dark-morado;
-                    }
-                }
-        
-                &.amarillo {
-                    background-color: $dark-contraste-amarillo;
-                    color: $dark-amarillo;
-        
-                    .nombre, .curso{
-                        color: $dark-amarillo;
-                    }
-            
-                    .elipse1, .elipse2{
-                        background-color: $dark-amarillo;
-                    }
-                }
-            }
-        }
-    }
+		//colores
+		&.morado {
+			background-color: var(--dark-morado);
+			color: var(--dark-contraste-morado);
+		}
+
+		&.amarillo {
+			background-color: var(--dark-amarillo);
+			color: var(--dark-contraste-amarillo);
+		}
+
+		&.grande {
+			box-shadow: 0px 4px 11px var(--dark-super-negro);
+
+			h4 {
+				color: var(--dark-blanco);
+			}
+
+			.elipse1,
+			.elipse2 {
+				background-color: var(--dark-blanco);
+			}
+		}
+
+		//Estilos si es peque
+		&.peque {
+			.contenedor {
+				.curso {
+					color: var(--dark-blanco);
+				}
+			}
+
+			.elipse1,
+			.elipse2 {
+				background-color: var(--dark-blanco);
+			}
+
+			//Estilos Hover
+			&:hover {
+				background-color: var(--dark-contraste-azul);
+
+				.nombre,
+				.curso {
+					color: var(--dark-azul);
+				}
+
+				.elipse1,
+				.elipse2 {
+					background-color: var(--dark-azul);
+				}
+
+				&.morado {
+					background-color: var(--dark-contraste-morado);
+					color: var(--dark-morado);
+
+					.nombre,
+					.curso {
+						color: var(--dark-morado);
+					}
+
+					.elipse1,
+					.elipse2 {
+						background-color: var(--dark-morado);
+					}
+				}
+
+				&.amarillo {
+					background-color: var(--dark-contraste-amarillo);
+					color: var(--dark-amarillo);
+
+					.nombre,
+					.curso {
+						color: var(--dark-amarillo);
+					}
+
+					.elipse1,
+					.elipse2 {
+						background-color: var(--dark-amarillo);
+					}
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    //Estilos de la pildora
-.pildoraEst{
+@media screen and (max-width: $max-celular) {
+	//Estilos de la pildora
+	.pildoraEst {
+		//Estilos si es peque
+		&.peque {
+			min-width: 2rem;
+			max-width: fit-content;
+			height: 4.5rem;
 
-    //Estilos si es peque
-    &.peque{
-        min-width: 2rem;
-        max-width: fit-content;
-        height: 4.5rem;
+			p {
+				font-size: 0.8rem;
+			}
 
-        p {
-            font-size: 0.8rem;
-        }
+			.contenedor {
+				gap: 7px;
 
-        .contenedor{
-            gap: 7px;
-
-            .nombre{
-                width: fit-content;
-                max-width: 5rem;
-            }
-        }
-        
-
-
-
-    }
-}
+				.nombre {
+					width: fit-content;
+					max-width: 5rem;
+				}
+			}
+		}
+	}
 }

@@ -1,230 +1,212 @@
-@import '../../global.scss';
+.contenedorNavBarItem {
+	width: 100%;
+	border-radius: var(--radio1);
+	background-color: var(--colorSecundario);
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0.5rem 1rem;
+	text-align: left;
+	position: relative;
+	cursor: pointer;
+	min-height: 2.87rem;
 
+	//Estilos logo y texto
+	.etiqueta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 10px;
+		opacity: 0.5;
+		position: relative;
 
-//Estilos del componente cuando es NavBarItemn
-.contenedorNavBarItem{
+		.logoNav {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 1.8rem;
+			height: 1.8rem;
+		}
 
-    width: 100%;
-    border-radius: $radio1;
-    background-color: var(--colorSecundario);
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0.5rem 1rem;
-    text-align: left;
-    position: relative;
-    cursor: pointer;
-    min-height: 2.87rem;
+		.texto {
+			color: var(--colorPrincipal);
+			word-break: break-word; //salto de linea en caso de exceder el contenedor
+		}
+	}
 
-    //Estilos logo y texto
-    .etiqueta{
+	//Estilos para el Hover
+	&:hover {
+		outline: 0.0625rem solid var(--colorPrincipal);
+		background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
 
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 10px;
-        opacity: 0.5;
-        position: relative;
+		.etiqueta {
+			opacity: 1;
 
-        .logoNav{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 1.8rem;
-            height: 1.8rem;
-        }
+			.logo,
+			.texto {
+				color: var(--colorPrincipal);
+			}
+		}
+	}
 
-        .texto{
-            color: var(--colorPrincipal);
-            word-break: break-word; //salto de linea en caso de exceder el contenedor
-        }
+	//Estilo cuando el menu este activo
+	&.activar {
+		outline: 0.0625rem solid var(--colorPrincipal);
+		background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
 
-    }
+		.etiqueta {
+			opacity: 1;
 
-    //Estilos para el Hover
-    &:hover{
-
-        outline: 0.0625rem solid var(--colorPrincipal);
-        background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
-        
-        .etiqueta{
-            opacity: 1;
-        
-            .logo, .texto{
-                color: var(--colorPrincipal);
-            }
-        }
-
-    }
-
-    //Estilo cuando el menu este activo
-    &.activar{
-        outline: 0.0625rem solid var(--colorPrincipal);
-        background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));;
-        
-        .etiqueta{
-            opacity: 1;
-        
-            .logo, .texto{
-                color: var(--colorPrincipal);
-            }
-        }
-    }
+			.logo,
+			.texto {
+				color: var(--colorPrincipal);
+			}
+		}
+	}
 }
 
 //Estilos cuando es tipo existe (solo es nombre e iluminacion)
-.tipo-existe{
+.tipo-existe {
+	width: 100%;
+	border-radius: var(--radio1);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem 1rem;
+	text-align: left;
+	position: relative;
+	outline: 0.0625rem solid var(--colorPrincipal);
+	background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
 
-    width: 100%;
-    border-radius: $radio1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    text-align: left;
-    position: relative;
-    outline: 0.0625rem solid var(--colorPrincipal);
-    background-color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
+	//Estilo letra
+	.etiqueta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		opacity: 1;
+		position: relative;
 
-    //Estilo letra
-    .etiqueta{
+		.logo {
+			width: 1.8rem;
+			height: 1.8rem;
+		}
 
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        opacity: 1;
-        position: relative;
+		.texto {
+			word-break: break-word; //salto de linea en caso de exceder el contenedor
+			text-align: center;
+		}
 
-        .logo{
-            width: 1.8rem;
-            height: 1.8rem;
-        }
+		.logo,
+		.texto {
+			color: var(--colorPrincipal);
+		}
+	}
 
-        .texto{
-            word-break: break-word; //salto de linea en caso de exceder el contenedor
-            text-align: center;
-        }
+	//colores
+	// &.amarillo{
+	//     outline: 0.0625rem solid var(--colorPildora3);;
+	//     background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
 
-        .logo, .texto{
-            color: var(--colorPrincipal);
+	//     .logo, .texto{
+	//         color: var(--colorPildora3);
 
-            
-        }
-
-    }
-
-    //colores
-    // &.amarillo{
-    //     outline: 0.0625rem solid var(--colorPildora3);;
-    //     background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-
-    //     .logo, .texto{
-    //         color: var(--colorPildora3);
-
-            
-    //     }
-    // }
+	//     }
+	// }
 }
 
+.dark {
+	//Estilos del componente cuando es NavBarItemn
+	.contenedorNavBarItem {
+		background: none;
 
-.dark{
-    //Estilos del componente cuando es NavBarItemn
-    .contenedorNavBarItem{
+		.etiqueta {
+			.logoNav,
+			.texto {
+				color: var(--dark-azul);
 
-        background: none;
+				.normal {
+					fill: var(--dark-azul);
+				}
 
-        .etiqueta{
+				.normal[stroke] {
+					fill: none;
+					stroke: var(--dark-azul);
+				}
+			}
+		}
 
-            .logoNav, .texto{
-                color: $dark-azul;
+		//Estilos para el Hover
+		&:hover {
+			outline: 0.0625rem solid var(--dark-azul);
+			background-color: var(--dark-contraste-azul);
 
-                .normal{
-                    fill: $dark-azul;
-                }
+			.etiqueta {
+				opacity: 1;
 
-                .normal[stroke]{
-                    fill: none;
-                    stroke: $dark-azul;
-                }
-            }
-        }
+				.logoNav,
+				.texto {
+					color: var(--dark-azul);
 
+					.colorear {
+						fill: var(--dark-azul);
+					}
 
-        //Estilos para el Hover
-        &:hover{
+					.colorear[stroke] {
+						fill: none;
+						stroke: var(--dark-azul);
+					}
+				}
+			}
+		}
 
-            outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-azul;
-            
-            .etiqueta{
-                opacity: 1;
-            
-                .logoNav, .texto{
-                    color: $dark-azul;
+		//Estilo cuando el menu este activo
+		&.activar {
+			outline: 0.0625rem solid var(--dark-azul);
+			background-color: var(--dark-contraste-azul);
 
-                    .colorear{
-                        fill: $dark-azul;
-                    }
+			.etiqueta {
+				opacity: 1;
 
-                    .colorear[stroke]{
-                        fill: none;
-                        stroke: $dark-azul;
-                    }
-                }
-            }
+				.logoNav,
+				.texto {
+					color: var(--dark-azul);
 
-        }
+					.colorear {
+						fill: var(--dark-azul);
+					}
 
-        //Estilo cuando el menu este activo
-        &.activar{
-            outline: 0.0625rem solid $dark-azul;
-            background-color: $dark-contraste-azul;
-            
-            .etiqueta{
-                opacity: 1;
-            
-                .logoNav, .texto{
-                    color: $dark-azul;
+					.colorear[stroke] {
+						fill: none;
+						stroke: var(--dark-azul);
+					}
+				}
+			}
+		}
+	}
 
-                    .colorear{
-                        fill: $dark-azul;
-                    }
+	//Estilos cuando es tipo existe (solo es nombre e iluminacion)
+	.tipo-existe {
+		outline: 0.0625rem solid var(--dark-azul);
+		background-color: var(--dark-contraste-azul);
 
-                    .colorear[stroke]{
-                        fill: none;
-                        stroke: $dark-azul;
-                    }
-                }
-            }
-        }
-    }
+		//Estilo letra
+		.etiqueta {
+			.logoNav,
+			.texto {
+				color: var(--dark-azul);
+			}
+		}
 
-    //Estilos cuando es tipo existe (solo es nombre e iluminacion)
-    .tipo-existe{
+		// //colores
+		// &.amarillo{
+		//     outline: 0.0625rem solid var(--dark-amarillo);
+		//     background-color: var(--dark-contraste-amarillo);
 
-        outline: 0.0625rem solid $dark-azul;
-        background-color: $dark-contraste-azul;
+		//     .logo, .texto{
+		//         color: var(--dark-amarillo);
 
-        //Estilo letra
-        .etiqueta{
-
-            .logoNav, .texto{
-                color: $dark-azul;
-            }
-
-        }
-
-        // //colores
-        // &.amarillo{
-        //     outline: 0.0625rem solid $dark-amarillo;
-        //     background-color: $dark-contraste-amarillo;
-
-        //     .logo, .texto{
-        //         color: $dark-amarillo;
-
-                
-        //     }
-        // }
-    }
+		//     }
+		// }
+	}
 }

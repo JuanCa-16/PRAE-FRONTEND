@@ -1,250 +1,253 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 //Estilos de la pildora
 .pildora {
-    // display: inline-flex;
-    // width: fit-content;
-    display: flex;
-    width: 100%;
+	// display: inline-flex;
+	// width: fit-content;
+	display: flex;
+	width: 100%;
 
+	position: relative;
+	box-shadow: 0px 4px 11px #00000033;
+	border-radius: var(--radio4);
+	overflow: hidden;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
-    position: relative;
-    box-shadow: 0px 4px 11px #00000033;
-    border-radius: $radio4;
-    overflow: hidden;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	//padding: 1.2rem 1rem;
+	// min-width: 9.5rem;
+	min-width: 10.6rem;
 
-    //padding: 1.2rem 1rem;
-    // min-width: 9.5rem;
-    min-width: 10.6rem;
+	//Nuevo
+	max-width: 13rem;
+	text-align: center;
 
-    //Nuevo
-    max-width: 13rem;
-    text-align: center;
+	min-height: 6.5rem;
 
+	h4 {
+		color: var(--blanco);
+		font-weight: 800;
+	}
 
-    min-height: 6.5rem;
-    
-    h4{
-        color: $blanco;
-        font-weight: 800
-    }
+	background-color: var(--colorPildora1);
+	color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-    background-color: var(--colorPildora1);
-    color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+	//cambiar colores
+	&.morado {
+		background-color: var(--colorPildora2);
+		color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+	}
 
-    //cambiar colores
-    &.morado {
-        background-color: var(--colorPildora2);
-        color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-    }
-    
-    &.amarillo {
-        background-color: var(--colorPildora3);
-        color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-    }
-    
-    //Estilos del texto
-    .info{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        // display: inline-flex;
-        gap: 0.3rem;
-        // position: relative;
+	&.amarillo {
+		background-color: var(--colorPildora3);
+		color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+	}
 
-        //nuevo
-        display: flex;
-        align-self: stretch;
-        padding: 0.75rem 0.4rem;
+	//Estilos del texto
+	.info {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		// display: inline-flex;
+		gap: 0.3rem;
+		// position: relative;
 
-        .textos{
-            align-self: stretch;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            align-content: center;
-        }
+		//nuevo
+		display: flex;
+		align-self: stretch;
+		padding: 0.75rem 0.4rem;
 
-        .texto{
-            font-size: 0.7rem;
-            //align-self: stretch;
-            line-height: normal;
-            // position: relative;
-            // text-align: center;
-            //color: $blanco;
-            flex: 1;
-            position: relative;
-            
-        }
+		.textos {
+			align-self: stretch;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			align-content: center;
+		}
 
-        .titulo{
-            word-break: break-word;
-        }
+		.texto {
+			font-size: 0.7rem;
+			//align-self: stretch;
+			line-height: normal;
+			// position: relative;
+			// text-align: center;
+			//color: var(--blanco);
+			flex: 1;
+			position: relative;
+		}
 
-    }
+		.titulo {
+			word-break: break-word;
+		}
+	}
 
-    //Dibujar figuras del fondo
-    .elipse1, .elipse2{
-        position: absolute;
-        background-color: $blanco;
-        // border-radius: 119.5px;
-        height: 239px;
-        opacity: 0.1;
-        // left: -150px;
-        // top: -150px;
-        // width: 239px;
-        width: calc(100% + 68px);
+	//Dibujar figuras del fondo
+	.elipse1,
+	.elipse2 {
+		position: absolute;
+		background-color: var(--blanco);
+		// border-radius: 119.5px;
+		height: 239px;
+		opacity: 0.1;
+		// left: -150px;
+		// top: -150px;
+		// width: 239px;
+		width: calc(100% + 68px);
 
-        //nuevo
-        margin: 0;
-        top: calc(50% - 232.5px);
-        right: 63px;
-        left: -131px;
-        border-radius: 50%;
+		//nuevo
+		margin: 0;
+		top: calc(50% - 232.5px);
+		right: 63px;
+		left: -131px;
+		border-radius: 50%;
+	}
 
+	.elipse2 {
+		// left: 100px;
+		opacity: 0.05;
+		// top: 0px;
+		top: calc(50% - 57.5px);
+		left: 95px;
 
-    }
+		//nuevo
+		right: -163px;
+	}
 
-    .elipse2{
-        // left: 100px;
-        opacity: 0.05;
-        // top: 0px;
-        top: calc(50% - 57.5px);
-        left: 95px;
+	//Efectos hover
+	&:hover {
+		cursor: pointer;
 
-        //nuevo
-        right: -163px;
-    }
+		cursor: pointer;
+		background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-    //Efectos hover
-    &:hover{
-        cursor: pointer;
+		h4,
+		.texto {
+			color: var(--colorPildora1);
+		}
 
-        cursor: pointer;
-        background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
-        
-        h4, .texto{
-            color: var(--colorPildora1);
-        }
+		.elipse1,
+		.elipse2 {
+			background-color: var(--colorPildora1);
+		}
 
-        .elipse1, .elipse2{
-            background-color: var(--colorPildora1);
-        }
+		&.morado {
+			background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+			color: var(--colorPildora2);
 
-        &.morado {
-            background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-            color: var(--colorPildora2);
+			h4,
+			.texto {
+				color: var(--colorPildora2);
+			}
 
-            h4, .texto{
-                color: var(--colorPildora2);
-            }
-    
-            .elipse1, .elipse2{
-                background-color: var(--colorPildora2);
-            }
-        }
+			.elipse1,
+			.elipse2 {
+				background-color: var(--colorPildora2);
+			}
+		}
 
-        &.amarillo {
-            background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-            color: var(--colorPildora3);
+		&.amarillo {
+			background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+			color: var(--colorPildora3);
 
-            h4, .texto{
-                color: var(--colorPildora3);
-            }
-    
-            .elipse1, .elipse2{
-                background-color: var(--colorPildora3);
-            }
-        }
-    }
+			h4,
+			.texto {
+				color: var(--colorPildora3);
+			}
+
+			.elipse1,
+			.elipse2 {
+				background-color: var(--colorPildora3);
+			}
+		}
+	}
 }
 
-.dark{
-    .pildora {
-    
-        h4{
-            color: $dark-blanco;
-        }
-    
-        background-color: $dark-azul;
-        color: $dark-contraste-azul;
-    
-        //cambiar colores
-        &.morado {
-            background-color: $dark-morado;
-            color: $dark-contraste-morado;
-        }
-        
-        &.amarillo {
-            background-color: $dark-amarillo;
-            color: $dark-contraste-amarillo;
-        }
-        
-        //Estilos del texto
-        .info{
+.dark {
+	.pildora {
+		h4 {
+			color: var(--dark-blanco);
+		}
 
-            .texto{
-                color: $dark-blanco;
-            }
-    
-        }
-    
-        //Dibujar figuras del fondo
-        .elipse1, .elipse2{
-            background-color: $dark-blanco;
-        }
-    
-    
-        //Efectos hover
-        &:hover{
-            background-color: $dark-contraste-azul;
-            
-            h4, .texto{
-                color: $dark-azul;
-            }
-    
-            .elipse1, .elipse2{
-                background-color: $dark-azul;
-            }
-    
-            &.morado {
-                background-color: $dark-contraste-morado;
-                color: $dark-morado;
-    
-                h4, .texto{
-                    color: $dark-morado;
-                }
-        
-                .elipse1, .elipse2{
-                    background-color: $dark-morado;
-                }
-            }
-    
-            &.amarillo {
-                background-color: $dark-contraste-amarillo;
-                color: $dark-amarillo;
-    
-                h4, .texto{
-                    color: $dark-amarillo;
-                }
-        
-                .elipse1, .elipse2{
-                    background-color: $dark-amarillo;
-                }
-            }
-        }
-    }
+		background-color: var(--dark-azul);
+		color: var(--dark-contraste-azul);
+
+		//cambiar colores
+		&.morado {
+			background-color: var(--dark-morado);
+			color: var(--dark-contraste-morado);
+		}
+
+		&.amarillo {
+			background-color: var(--dark-amarillo);
+			color: var(--dark-contraste-amarillo);
+		}
+
+		//Estilos del texto
+		.info {
+			.texto {
+				color: var(--dark-blanco);
+			}
+		}
+
+		//Dibujar figuras del fondo
+		.elipse1,
+		.elipse2 {
+			background-color: var(--dark-blanco);
+		}
+
+		//Efectos hover
+		&:hover {
+			background-color: var(--dark-contraste-azul);
+
+			h4,
+			.texto {
+				color: var(--dark-azul);
+			}
+
+			.elipse1,
+			.elipse2 {
+				background-color: var(--dark-azul);
+			}
+
+			&.morado {
+				background-color: var(--dark-contraste-morado);
+				color: var(--dark-morado);
+
+				h4,
+				.texto {
+					color: var(--dark-morado);
+				}
+
+				.elipse1,
+				.elipse2 {
+					background-color: var(--dark-morado);
+				}
+			}
+
+			&.amarillo {
+				background-color: var(--dark-contraste-amarillo);
+				color: var(--dark-amarillo);
+
+				h4,
+				.texto {
+					color: var(--dark-amarillo);
+				}
+
+				.elipse1,
+				.elipse2 {
+					background-color: var(--dark-amarillo);
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .pildora{
-        min-width: 7rem;
-        //Nuevo
-        max-width: 10.5rem;
-    }
+@media screen and (max-width: $max-celular) {
+	.pildora {
+		min-width: 7rem;
+		//Nuevo
+		max-width: 10.5rem;
+	}
 }

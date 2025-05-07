@@ -1,124 +1,110 @@
-@import '../../global.scss';
-
-//Estilos
 .custom-select {
-    
-    position: relative;
-    width: fit-content;
+	position: relative;
+	width: fit-content;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    p{
-        padding-bottom: 0.5rem;
-    }
+	p {
+		padding-bottom: 0.5rem;
+	}
 
-    & .input-title{
-        opacity: 50%;
-    }
+	& .input-title {
+		opacity: 50%;
+	}
 
-    &:hover{
-            
-        .input-title{
-            opacity: 100%;
-        }
-        
-    }
+	&:hover {
+		.input-title {
+			opacity: 100%;
+		}
+	}
 
-    //Estilo del titulo cuando esta activo
-    .input-title.focused {
-        opacity: 100%;
-        color: var(--colorPrincipal);;
-    }
+	//Estilo del titulo cuando esta activo
+	.input-title.focused {
+		opacity: 100%;
+		color: var(--colorPrincipal);
+	}
 
-    //Del input
-    .selected {
-        background: var(--colorSecundario);;
-        padding: 0.6rem 1rem;
-        border-radius: $radio1;
-        border: 1px solid transparent; // Mantiene el grosor del borde
-        outline: none; // Elimina el contorno azul predeterminado
-        transition: border 0.3s ease;
-        height: 2.8rem;
+	//Del input
+	.selected {
+		background: var(--colorSecundario);
+		padding: 0.6rem 1rem;
+		border-radius: var(--radio1);
+		border: 1px solid transparent; // Mantiene el grosor del borde
+		outline: none; // Elimina el contorno azul predeterminado
+		transition: border 0.3s ease;
+		height: 2.8rem;
 
-        font-size: 1rem;
-        
-        
-        &::placeholder {
-            opacity: 50%;
-            font-family: 'Lato', sans-serif; 
-            font-size: 1rem;
-        }
+		font-size: 1rem;
 
-        &:focus {
-            border-color: var(--colorPrincipal);; // Solo cambia el color, no el grosor
-        }
-    }
-    
-    
-    //Del menu de opciones
-    .options {
-        position: absolute;
-        width: 100%;
-        background: $blanco;
-        border-radius: $radio1;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        margin-top: 5px;
-        z-index: 10;
+		&::placeholder {
+			opacity: 50%;
+			font-family: 'Lato', sans-serif;
+			font-size: 1rem;
+		}
 
-        //De cada opcion
-        .option {
-            padding: 0.6rem 1rem;
-            transition: background 0.3s;
-            overflow-wrap: break-word; 
-            &:hover {
-                background: var(--colorPrincipal);;
-                color: color-mix(in srgb, var(--colorPrincipal) 10%, rgb(255, 255, 255));
-            }
+		&:focus {
+			border-color: var(--colorPrincipal); // Solo cambia el color, no el grosor
+		}
+	}
 
-            // Aplica bordes redondeados SOLO al primero y último
-            &:first-child {
-                border-top-left-radius: $radio1;
-                border-top-right-radius: $radio1;
-            }
+	//Del menu de opciones
+	.options {
+		position: absolute;
+		width: 100%;
+		background: var(--blanco);
+		border-radius: var(--radio1);
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		margin-top: 5px;
+		z-index: 10;
 
-            &:last-child {
-                border-bottom-left-radius: $radio1;
-                border-bottom-right-radius: $radio1;
-            }
-        }
-    }
+		//De cada opcion
+		.option {
+			padding: 0.6rem 1rem;
+			transition: background 0.3s;
+			overflow-wrap: break-word;
+			&:hover {
+				background: var(--colorPrincipal);
+				color: color-mix(in srgb, var(--colorPrincipal) 10%, rgb(255, 255, 255));
+			}
+
+			// Aplica bordes redondeados SOLO al primero y último
+			&:first-child {
+				border-top-left-radius: var(--radio1);
+				border-top-right-radius: var(--radio1);
+			}
+
+			&:last-child {
+				border-bottom-left-radius: var(--radio1);
+				border-bottom-right-radius: var(--radio1);
+			}
+		}
+	}
 }
 
-.dark{
+.dark {
+	.custom-select {
+		//Del input
 
-    
-    .custom-select {
-        //Del input
-        
-        .selected {
-            
-            color: $dark-blanco;
-            
-            background: $dark-super-negro;
-            &:focus {
-                background: $dark-contraste-negro;
-                border-color:$dark-super-negro; // Solo cambia el color, no el grosor
-            }
-        }
-        
-        
-        //Del menu de opciones
-        .options {
-            
-            background: $dark-contraste-negro;
-            //De cada opcion
-            .option {
-                
-                &:hover {
-                    background: $dark-azul;
-                    color: $dark-blanco;
-                }
-            }
-        }
-    }
+		.selected {
+			color: var(--dark-blanco);
+
+			background: var(--dark-super-negro);
+			&:focus {
+				background: var(--dark-contraste-negro);
+				border-color: var(--dark-super-negro); // Solo cambia el color, no el grosor
+			}
+		}
+
+		//Del menu de opciones
+		.options {
+			background: var(--dark-contraste-negro);
+			//De cada opcion
+			.option {
+				&:hover {
+					background: var(--dark-azul);
+					color: var(--dark-blanco);
+				}
+			}
+		}
+	}
 }

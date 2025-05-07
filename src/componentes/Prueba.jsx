@@ -1,5 +1,5 @@
-import '../global.scss'
-import React, { useState } from "react";
+import '../global.scss';
+import React, { useState } from 'react';
 import InputContainer from './Input/InputContainer';
 import PildoraMateriaGrado from './PildoraMateriaGrado/PildoraMateriaGrado';
 import PildoraEst from './PildoraEst/PildoraEst';
@@ -13,92 +13,141 @@ import Modal from './Modal/Modal';
 import Celda from './Celda/Celda';
 
 const Prueba = () => {
+	// PRUEBAS INPUT
+	const [email, setEmail] = useState(''); // Estado para manejar el valor del email
 
+	// Función para manejar el cambio en el campo del email
+	const handleEmailChange = (newEmail) => {
+		setEmail(newEmail); // Actualiza el estado 'email' con el nuevo valor
+	};
 
-// PRUEBAS INPUT
-    const [email, setEmail] = useState(""); // Estado para manejar el valor del email
+	//PRUEBAS MODAL
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Función para manejar el cambio en el campo del email
-    const handleEmailChange = (newEmail) => {
-    setEmail(newEmail); // Actualiza el estado 'email' con el nuevo valor
-    };
+	const openModal = () => setIsModalOpen(true);
+	const closeModal = () => setIsModalOpen(false);
 
+	const [isModalOpen2, setIsModalOpen2] = useState(false);
 
-//PRUEBAS MODAL
-    const [isModalOpen, setIsModalOpen] = useState(false);
+	const openModal2 = () => setIsModalOpen2(true);
+	const closeModal2 = () => setIsModalOpen2(false);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+	const [isModalOpen3, setIsModalOpen3] = useState(false);
 
-    const [isModalOpen2, setIsModalOpen2] = useState(false);
+	const openModal3 = () => setIsModalOpen3(true);
+	const closeModal3 = () => setIsModalOpen3(false);
 
-    const openModal2 = () => setIsModalOpen2(true);
-    const closeModal2 = () => setIsModalOpen2(false);
+	return (
+		<div>
+			<div className='prueba'>
+				<button>Hola</button>
 
-    const [isModalOpen3, setIsModalOpen3] = useState(false);
+				<div>
+					<InputContainer
+						titulo='Correo electrónico:'
+						placeholder='correo@example.com'
+						inputType='email'
+						value={email} // El valor del input viene del estado del componente padre
+						onChange={handleEmailChange} // Pasamos la función que actualizará el estado
+						required={true} // Hacemos que el campo sea obligatorio
+					/>
+					<button onClick={() => console.log(email)}>Mostrar Email</button>
+				</div>
 
-    const openModal3 = () => setIsModalOpen3(true);
-    const closeModal3 = () => setIsModalOpen3(false);
+				<PildoraMateriaGrado
+					texto='6-2'
+					color='amarillo'
+				></PildoraMateriaGrado>
 
+				<PildoraMateriaGrado
+					texto='MATEMATICAS'
+					color='morado'
+				></PildoraMateriaGrado>
 
-    return (
-        <div>
-            <div className="prueba">
-                <button>Hola</button>
+				<PildoraEst
+					color='morado'
+					clase='peque'
+					est='jose maria esteban'
+				></PildoraEst>
 
-                <div>
-                    <InputContainer
-                    titulo="Correo electrónico:"
-                    placeholder="correo@example.com"
-                    inputType="email"
-                    value={email} // El valor del input viene del estado del componente padre
-                    onChange={handleEmailChange} // Pasamos la función que actualizará el estado
-                    required={true} // Hacemos que el campo sea obligatorio
-                    />
-                <button onClick={() => console.log(email)}>Mostrar Email</button>
+				<PildoraEst color='morado'></PildoraEst>
 
-                </div>
+				<Pildora
+					titulo='INGLES'
+					txtsuperior='Esteban Castro Henao'
+					txtinferior='6-2'
+					color='morado'
+				></Pildora>
 
-                <PildoraMateriaGrado texto='6-2' color='amarillo'></PildoraMateriaGrado>
+				<Pildora
+					titulo='Ingles'
+					txtsuperior='julian castro Henao'
+					txtinferior='11-2'
+					color='amarillo'
+				></Pildora>
 
-                <PildoraMateriaGrado texto='MATEMATICAS' color='morado'></PildoraMateriaGrado>
+				<LogoPrae></LogoPrae>
 
-                <PildoraEst color='morado' clase="peque" est='jose maria esteban'></PildoraEst>
+				<NavBarItem></NavBarItem>
 
-                <PildoraEst color='morado'></PildoraEst>
+				<NavBarItem tipo={true}></NavBarItem>
 
-                <Pildora titulo = "INGLES" txtsuperior = "Esteban Castro Henao" txtinferior="6-2" color="morado"></Pildora>
+				<NavBar rol='admin'></NavBar>
 
-                <Pildora titulo = "Ingles" txtsuperior = "julian castro Henao" txtinferior="11-2" color="amarillo"></Pildora>
+				<TituloDes
+					titulo='LISTADO DE CURSOS ASIGNADOS'
+					desc='Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso'
+				></TituloDes>
 
-                <LogoPrae></LogoPrae>
+				<PildoraTitulo></PildoraTitulo>
 
-                <NavBarItem></NavBarItem>
+				<button onClick={openModal}>Abrir Modal ELIMINAR</button>
+				<Modal
+					isOpen={isModalOpen}
+					closeModal={closeModal}
+					tipo='eliminar'
+					modalTexto='Estas seguro de continuar con la accion? eliminar este curso sera de forma permanenete y no se podra cancelar la accion realizada. '
+					modalTitulo='ELIMINAR GRADO O CURSO'
+				>
+					<button
+						onClick={closeModal}
+						className='rojo'
+					>
+						Cerrar Modal
+					</button>
+				</Modal>
 
-                <NavBarItem tipo={true}></NavBarItem>
+				<button onClick={openModal2}>Abrir Modal ACTIVIDAD</button>
+				<Modal
+					isOpen={isModalOpen2}
+					closeModal={closeModal2}
+					tipo='actividad'
+					modalTitulo='ELIMINAR GRADO O CURSO'
+				></Modal>
 
-                <NavBar rol='admin'></NavBar>
+				<button onClick={openModal3}>Abrir Modal NOTAS</button>
+				<Modal
+					isOpen={isModalOpen3}
+					closeModal={closeModal3}
+					tipo='nota'
+					modalTitulo='ELIMINAR GRADO O CURSO'
+				></Modal>
 
-                <TituloDes titulo='LISTADO DE CURSOS ASIGNADOS' desc='Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso Listado detallado de los cursos de este curso'></TituloDes>
-                
-                <PildoraTitulo></PildoraTitulo>
-
-                <button onClick={openModal}>Abrir Modal ELIMINAR</button>
-                <Modal isOpen={isModalOpen} closeModal={closeModal} tipo='eliminar' modalTexto='Estas seguro de continuar con la accion? eliminar este curso sera de forma permanenete y no se podra cancelar la accion realizada. ' modalTitulo='ELIMINAR GRADO O CURSO'>
-                    <button onClick={closeModal} className='rojo'>Cerrar Modal</button>
-                </Modal>
-
-                <button onClick={openModal2}>Abrir Modal ACTIVIDAD</button>
-                <Modal isOpen={isModalOpen2} closeModal={closeModal2} tipo='actividad' modalTitulo='ELIMINAR GRADO O CURSO'></Modal>
-                
-                <button onClick={openModal3}>Abrir Modal NOTAS</button>
-                <Modal isOpen={isModalOpen3} closeModal={closeModal3} tipo="nota" modalTitulo='ELIMINAR GRADO O CURSO'></Modal>
-
-                <Celda txt='Hola' tipo='titulo'></Celda>
-                <Celda txt='Hola' tipo='titulo2'></Celda>
-                <Celda txt='Hola' tipo='normal'></Celda>
-            </div>
-        </div>);
+				<Celda
+					txt='Hola'
+					tipo='titulo'
+				></Celda>
+				<Celda
+					txt='Hola'
+					tipo='titulo2'
+				></Celda>
+				<Celda
+					txt='Hola'
+					tipo='normal'
+				></Celda>
+			</div>
+		</div>
+	);
 };
 
 export default Prueba;

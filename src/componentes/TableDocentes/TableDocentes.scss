@@ -1,228 +1,228 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 
 @keyframes slideDown {
-    from {
-        transform: translateY(-20px); /* Empieza un poco más arriba */
-        opacity: 0; /* Empieza invisible */
-        max-height: 0; /* Empieza con altura 0 */
-    }
-    to {
-        transform: translateY(0); /* Llega a su posición original */
-        opacity: 1; /* Se hace visible */
-        max-height: 1000px; /* Ajusta este valor según el tamaño del contenido */
-    }
+	from {
+		transform: translateY(-20px); /* Empieza un poco más arriba */
+		opacity: 0; /* Empieza invisible */
+		max-height: 0; /* Empieza con altura 0 */
+	}
+	to {
+		transform: translateY(0); /* Llega a su posición original */
+		opacity: 1; /* Se hace visible */
+		max-height: 1000rem; /* Ajusta este valor según el tamaño del contenido */
+	}
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(0); /* Empieza desde la posición original */
-        opacity: 1; /* Empieza visible */
-        max-height: 1000px; /* El contenedor tiene su altura completa */
-    }
-    to {
-        transform: translateY(-20px); /* Se mueve hacia arriba */
-        opacity: 0; /* Se hace invisible */
-        max-height: 0; /* Se colapsa */
-    }
+	from {
+		transform: translateY(0); /* Empieza desde la posición original */
+		opacity: 1; /* Empieza visible */
+		max-height: 1000rem; /* El contenedor tiene su altura completa */
+	}
+	to {
+		transform: translateY(-20px); /* Se mueve hacia arriba */
+		opacity: 0; /* Se hace invisible */
+		max-height: 0; /* Se colapsa */
+	}
 }
-.contenedorNotas{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    height: 100%;
-    align-items: flex-start;
-    gap: 0.5rem;
-    align-self: stretch;
+.contenedorNotas {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	height: auto;
+	align-items: flex-start;
+	gap: 0.5rem;
+	align-self: stretch;
 
-    .grupo{
-        width: 100%;
-        gap: 1rem;
-        .contenedorPildoraG{
-            margin-bottom: 2rem;
-        }
-        .contenedor{
-            animation: slideUp 0.2s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.625rem;
-            align-self: stretch;
-    
-            .tabla{
-                display: flex;
-                align-items: flex-start;
-                gap: 1.5625rem;
-                align-self: stretch;
-    
-                
-    
-                .col{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 1.0625rem;
-    
-                    
-                }
-    
-                .colListado{
-                    justify-content: flex-start;
-                }
-    
-    
-                .notas{
-                    display: flex;
-                    width: 100%;
-                    // align-items: center;
-                    align-items: flex-start;
-                    gap: 1.5625rem;
-                    flex: 1 0 0;
-                    overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
-                    overflow-y: hidden; /* Evita el scroll vertical */
-                    white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
-                    display: flex; 
-                    padding-bottom: 1rem; /* o lo que veas que se ve mejor */
-                }
-    
-                .notas::-webkit-scrollbar {
-                    
-                    height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
-                    border-radius: 4px; /* Bordes redondeados */
-                }
-                
-                .notas::-webkit-scrollbar-thumb {
-                    background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
-                    border-radius: 4px; /* Bordes redondeados */
-                }
-    
-                .notas::-webkit-scrollbar-track {
-                    background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
-                    border-radius: 4px; /* Bordes redondeados */
-                }
-                
-                .notas::-webkit-scrollbar-thumb:hover {
-                    background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
-                }
-    
-                .notas.morado::-webkit-scrollbar-thumb:hover {
-                    background: var(--colorPildora2);/* Un poco más visible al pasar el mouse */
-                }
-    
-                .notas.amarillo::-webkit-scrollbar-thumb:hover {
-                    background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
-                }
-                
-                
-            }
-        }
-    
-        .contenedorAct{
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            padding-top: 2rem;
-    
-            
-    
-            .titulo{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                gap: 0.75rem;
-                align-self: stretch;
-                margin-bottom: 1rem;
-            }
-    
-            .crearAct{
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-                align-self: stretch;
-    
-                .campos{
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 1.625rem;
-                }
-            }
-    
-            button{
-                height: 50%;
-                width: 50%;
-            }
-    
-            .alertaTxt{
-                color: var(--colorPrincipal);
-            }
-        }
+	.grupo {
+		width: 100%;
+		gap: 1rem;
+		height: fit-content;
+		.contenedorPildoraG {
+			margin-bottom: 2rem;
+		}
+		.contenedor {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.625rem;
+			align-self: stretch;
+			transition: all 0.3s ease-out; /* Suavizar la transición del cambio de altura y contenido */
 
-        .expandir {
-            opacity: 1; /* Se hace visible */
-            max-height: auto; /* Ajustar a un valor adecuado para tu contenido */
-            animation: slideDown 0.3s ease-out; /* Animación al expandirse */
-            margin-bottom: 2rem;
-        }
+			.tabla {
+				display: flex;
+				align-items: flex-start;
+				gap: 1.5625rem;
+				align-self: stretch;
 
-        .noExpandir{
-            opacity: 0; /* Se hace invisible */
-            max-height: 0; /* Se colapsa */
-            animation: slideUp 0.3s ease-out; /* Animación para el deslizamiento hacia arriba */
-        }
-    }
+				.col {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 1.0625rem;
+				}
+
+				.colListado {
+					justify-content: flex-start;
+				}
+
+				.notas {
+					display: flex;
+					width: 100%;
+					// align-items: center;
+					align-items: flex-start;
+					gap: 1.5625rem;
+					flex: 1 0 0;
+					overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
+					overflow-y: hidden; /* Evita el scroll vertical */
+					white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
+					display: flex;
+					padding-bottom: 1rem; /* o lo que veas que se ve mejor */
+				}
+
+				.notas::-webkit-scrollbar {
+					height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
+					border-radius: 4px; /* Bordes redondeados */
+				}
+
+				.notas::-webkit-scrollbar-thumb {
+					background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
+					border-radius: 4px; /* Bordes redondeados */
+				}
+
+				.notas::-webkit-scrollbar-track {
+					background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
+					border-radius: 4px; /* Bordes redondeados */
+				}
+
+				.notas::-webkit-scrollbar-thumb:hover {
+					background: var(--colorPildora1); /* Un poco más visible al pasar el mouse */
+				}
+
+				.notas.morado::-webkit-scrollbar-thumb:hover {
+					background: var(--colorPildora2); /* Un poco más visible al pasar el mouse */
+				}
+
+				.notas.amarillo::-webkit-scrollbar-thumb:hover {
+					background: var(--colorPildora3); /* Un poco más visible al pasar el mouse */
+				}
+			}
+
+			.contenedorAct {
+				width: 80%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+				padding-top: 2rem;
+				margin-bottom: 2rem;
+
+				.titulo {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: flex-start;
+					gap: 0.75rem;
+					align-self: stretch;
+					margin-bottom: 1rem;
+				}
+
+				.crearAct {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.75rem;
+					align-self: stretch;
+
+					.campos {
+						width: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						gap: 1.625rem;
+					}
+				}
+
+				button {
+					height: 50%;
+					width: 50%;
+				}
+
+				.alertaTxt {
+					color: var(--colorPrincipal);
+				}
+			}
+
+			&.noExpandir {
+				opacity: 0; /* Se hace invisible */
+				max-height: 0; /* Se colapsa */
+				animation: slideUp 0.2s ease-out; /* Animación para el deslizamiento hacia arriba */
+			}
+
+			&.expandir {
+				opacity: 1; /* Se hace visible */
+				max-height: auto; /* Ajustar a un valor adecuado para tu contenido */
+				animation: slideDown 0.3s ease-in-out; /* Animación al expandirse */
+				//margin-bottom: 2rem;
+			}
+		}
+
+		.noMostrar {
+			opacity: 0; /* Se hace invisible */
+			max-height: 0; /* Se colapsa */
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .contenedorNotas{
-        .grupo{
-            .contenedor{
+@media screen and (max-width: $max-celular) {
+	.contenedorNotas {
+		.grupo {
+			.contenedor {
+				.tabla {
+					height: fit-content;
+					.colListado {
+						height: 100%;
+						width: 45%;
+					}
 
-                .tabla{
-                    height: fit-content;
-                    .colListado{
-                        height: 100%;
-                        width: 45%;
-                    }
-    
-                    .notas{
-                        height: 100%;
-                    }
-                }
-                .contenedorAct{
-                    width: 100%; }
-            }
-        }
-        
-    }
+					.notas {
+						height: 100%;
+					}
+				}
+				.contenedorAct {
+					width: 100%;
+				}
+			}
+		}
+	}
 }
 
-.dark{
-    .contenedorNotas{
-        .grupo{
-        .contenedor{
-            .tabla{
-                .notas::-webkit-scrollbar-thumb:hover {
-                    
-                    background: $dark-azul;/* Un poco más visible al pasar el mouse */
-                }
-    
-                .notas.morado::-webkit-scrollbar-thumb:hover {
-                    background: $dark-morado;/* Un poco más visible al pasar el mouse */
-                }
-    
-                .notas.amarillo::-webkit-scrollbar-thumb:hover {
-                    background: $dark-amarillo;/* Un poco más visible al pasar el mouse */
-                }
-            }
-        }
-        }
-    }
+.dark {
+	.contenedorNotas {
+		.grupo {
+			.contenedor {
+				.tabla {
+					.notas::-webkit-scrollbar-thumb:hover {
+						background: var(
+							--dark-azul
+						); /* Un poco más visible al pasar el mouse */
+					}
+
+					.notas.morado::-webkit-scrollbar-thumb:hover {
+						background: var(
+							--dark-morado
+						); /* Un poco más visible al pasar el mouse */
+					}
+
+					.notas.amarillo::-webkit-scrollbar-thumb:hover {
+						background: var(
+							--dark-amarillo
+						); /* Un poco más visible al pasar el mouse */
+					}
+				}
+			}
+		}
+	}
 }

@@ -1,87 +1,77 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 
 //Estilos del componente por defecto azul
-.logoContenedor{
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
-    width: 100%;
-    justify-content: flex-start;
-    text-align: left;
-    cursor: pointer;
-    max-width: 100%;
-    flex-wrap: wrap;
+.logoContenedor {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	position: relative;
+	width: 100%;
+	justify-content: flex-start;
+	text-align: left;
+	cursor: pointer;
+	max-width: 100%;
+	flex-wrap: wrap;
 
+	p {
+		color: var(--azul);
 
+		&.texto {
+			color: var(--colorPrincipal);
+		}
+	}
 
-    p{
-        color: $azul;
+	//Estilos para el logo
+	.logoPrae {
+		border-radius: var(--radio1);
+		width: 2.6rem;
+		position: relative;
+		height: 2.6rem;
+		object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
+		object-position: center;
+		max-width: 100%;
+		max-height: 100%; // Reduce el tamaño de la imagen al 80%
+	}
 
-        &.texto{
-            color: var(--colorPrincipal);
-        }
-    }
+	.textos {
+		max-width: 100%;
+	}
 
-    
+	// //Aplicar color Morado
+	// .morado{
+	//     color: var(--colorPildora2);
+	// }
 
-    //Estilos para el logo
-    .logoPrae{
-        border-radius: $radio1;
-        width: 2.6rem;
-        position: relative;
-        height: 2.6rem;
-        object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
-        object-position: center;
-        max-width: 100%;
-        max-height: 100%; // Reduce el tamaño de la imagen al 80%
-    }
-
-    .textos{
-        max-width: 100%;
-    }
-
-    // //Aplicar color Morado
-    // .morado{
-    //     color: var(--colorPildora2);
-    // }
-
-    // //Aplicar color Amarillo
-    // .amarillo{
-    //     color: var(--colorPildora3);
-    // }
+	// //Aplicar color Amarillo
+	// .amarillo{
+	//     color: var(--colorPildora3);
+	// }
 }
 
-.dark{
-    .logoContenedor{
+.dark {
+	.logoContenedor {
+		p {
+			color: var(--azul);
+		}
 
-        p{
-            color: $azul;
-        }
-        
-        color: $dark-azul;
-    
-    
-        //Aplicar color Morado
-        .morado{
-            color: $dark-morado
-        }
-    
-        //Aplicar color Amarillo
-        .amarillo{
-            color: $dark-amarillo
-        }
-    }
+		color: var(--dark-azul);
+
+		//Aplicar color Morado
+		.morado {
+			color: var(--dark-morado);
+		}
+
+		//Aplicar color Amarillo
+		.amarillo {
+			color: var(--dark-amarillo);
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .logoContenedor{
-    
-        .textos{
-            display: none;
-        }
-    
-
-    }
+@media screen and (max-width: $max-celular) {
+	.logoContenedor {
+		.textos {
+			display: none;
+		}
+	}
 }
