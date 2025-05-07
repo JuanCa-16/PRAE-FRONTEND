@@ -20,20 +20,65 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
 - 📊 **Estadísticas Académicas**: Módulo de reportes visuales con análisis por curso, grado y materia.
 - 💬 **Chat de Ayuda con IA**: Asistente académico inteligente para resolver dudas de los estudiantes.
 - 🔔 **Notificaciones**: Alertas y recordatorios académicos importantes.
+- 🎨 **Diseño responsivo y moderno**: Estilos dinámicos adaptados a todo tipo de dispositivos.
+
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
 
-- ⚛️ **Framework**: React.js
-- 🎨 **Estilos**: Sass
-- 🔄 **Gestión de Estado**: Context API
-- 📡 **Comunicación Backend**: API REST con Axios
-- 📈 **Gráficas y Reportes**: Chart.js o Victory.js
-- 🔐 **Autenticación**: Firebase Authentication
-- ☁️ **Servicios Cloud**: Firebase Firestore + Google Cloud
-- 📲 **Notificaciones Push**: Firebase Cloud Messaging (FCM)
-- 🚀 **Despliegue**: Vercel, Netlify
+| Categoría                       | Tecnologías / Librerías                                 |
+| ------------------------------- | ------------------------------------------------------- |
+| ⚛️ Framework principal         | **React 19** (`react`, `react-dom`)                     |
+| 🚦 Ruteo                        | `react-router-dom@7` (manejo de rutas y navegación SPA) |
+| 🎨 Estilos                     | `sass`, `sass-loader`, `global.scss`, `variables.scss`  |
+| 📦 Plantilla base              | `cra-template` (Create React App)                       |
+| 💬 Notificaciones              | `react-hot-toast` (notificaciones toast personalizadas) |
+| 🎭 Animaciones                 | `framer-motion`                                         |
+| 🎨 Íconos                      | `react-icons`                                           |
+| 🧱 Diseño tipo Pinterest       | `react-masonry-css`                                     |
+| 🔍 Selects personalizables     | `react-select`                                          |
+| 📊 Gráficas                    | `recharts` (gráficos interactivos y estadísticos)       |
+| 🔐 Decodificación JWT          | `jwt-decode` (lectura del payload de tokens)            |
+| 🌐 Comunicación en tiempo real | `socket.io-client`                                      |
+| 🧪 Testing                     | `react-scripts test`, `App.test.js`, `setupTests.js`    |
+| 🚀 Desempeño y métricas        | `web-vitals`, `@vercel/speed-insights`                  |
+| 🔧 Linter                      | `eslint`, `eslintConfig`                                |
+| ⚙️ Babel Plugin                | `@babel/plugin-proposal-private-property-in-object`     |
+
+---
+
+##📁 Estructura del Proyecto
+```bash
+📦 praefrontend
+ ┣ 📂 public                # Archivos estáticos públicos
+ ┣ 📂 src                   # Código fuente principal
+ ┃ ┣ 📂 assets              # Recursos multimedia como imágenes y logos
+ ┃ ┣ 📂 componentes         # Componentes reutilizables (botones, tarjetas, etc.)
+ ┃ ┣ 📂 Contexts            # Manejo global de estado (Auth, Temas, etc.)
+ ┃ ┣ 📂 paginas             # Páginas principales según rutas
+ ┃ ┣ 📂 routes              # Definición de rutas y navegación
+ ┃ ┣ 📜 App.jsx             # Componente raíz de la aplicación
+ ┃ ┣ 📜 App.test.js         # Tests de la App
+ ┃ ┣ 📜 index.js            # Punto de entrada de React
+ ┃ ┣ 📜 global.scss         # Estilos generales
+ ┃ ┣ 📜 variables.scss      # Variables y configuración de estilos
+ ┃ ┣ 📜 reportWebVitals.js  # Métricas de rendimiento
+ ┃ ┗ 📜 setupTests.js       # Configuración inicial para pruebas
+ ┣ 📜 .env                  # Variables de entorno del frontend
+ ┣ 📜 package.json          # Dependencias y scripts
+ ┣ 📜 .gitignore            # Archivos ignorados por Git
+ ┗ 📜 README.md             # Documentación del proyecto (este archivo)
+```
+---
+
+##🚀 Despliegue
+
+El frontend puede ser desplegado fácilmente en servicios como:
+
+Vercel
+
+Netlify
 
 ---
 
@@ -52,3 +97,18 @@ npm install
 # Corre el proyecto en desarrollo
 npm start
 ```
+---
+
+##👥 Autores
+Juan Camilo Henao
+
+Jean Carlo Londoño Neira
+
+Isabella Rebellon Medina
+
+---
+
+🤝 Contribuciones
+Las contribuciones son bienvenidas. Si deseas aportar mejoras, arreglar errores o proponer nuevas funcionalidades, por favor crea un fork y abre un Pull Request.
+
+---
