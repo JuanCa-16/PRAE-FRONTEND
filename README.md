@@ -78,7 +78,8 @@ El frontend puede ser desplegado fácilmente en servicios como:
 ```bash
 Vercel:
 https://praeapp.vercel.app/login
-
+```
+```bash
 Netlify
 https://praeweb.netlify.app/login
 ```
@@ -104,13 +105,12 @@ npm start
 
 ## 👥 Autores
 
-Juan Camilo Henao
-Jean Carlo Londoño Neira
-Isabella Rebellon Medina
+- Juan Camilo Henao  
+- Jean Carlo Londoño Neira  
+- Isabella Rebellon Medina
 
 ---
 
 🤝 Contribuciones
 Las contribuciones son bienvenidas. Si deseas aportar mejoras, arreglar errores o proponer nuevas funcionalidades, por favor crea un fork y abre un Pull Request.
 
----
