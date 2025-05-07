@@ -1,80 +1,71 @@
-@import '../../../global.scss';
+.vistaDocenteAct {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	height: 100%;
+	align-items: flex-start;
+	gap: 1.5rem;
+	align-self: stretch;
 
-.vistaDocenteAct{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    height: 100%;
-    align-items: flex-start;
-    gap: 1.5rem;
-    align-self: stretch;
+	.contenedor {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.625rem;
+		align-self: stretch;
 
-    .contenedor{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
+		.tabla {
+			display: flex;
+			align-items: flex-start;
+			gap: 1.5625rem;
+			align-self: stretch;
 
-        .tabla{
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5625rem;
-            align-self: stretch;
+			.col {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 1.0625rem;
+			}
 
-            
+			.notas {
+				display: flex;
+				width: 100%;
+				align-items: center;
+				gap: 1.5625rem;
+				flex: 1 0 0;
+				overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
+				overflow-y: hidden; /* Evita el scroll vertical */
+				white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
+				display: flex;
+			}
 
-            .col{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 1.0625rem;
+			.notas::-webkit-scrollbar {
+				height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
+				border-radius: 4px; /* Bordes redondeados */
+			}
 
-                
-            }
+			.notas::-webkit-scrollbar-thumb {
+				background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
+				border-radius: 4px; /* Bordes redondeados */
+			}
 
+			.notas::-webkit-scrollbar-thumb:hover {
+				background: var(--colorPildora1); /* Un poco más visible al pasar el mouse */
+			}
 
-            .notas{
-                display: flex;
-                width: 100%;
-                align-items: center;
-                gap: 1.5625rem;
-                flex: 1 0 0;
-                overflow-x: auto; /* Habilita el scroll horizontal si es necesario */
-                overflow-y: hidden; /* Evita el scroll vertical */
-                white-space: nowrap; /* Evita que los elementos dentro se rompan en varias líneas */
-                display: flex; 
-            }
+			.notas.morado::-webkit-scrollbar-thumb:hover {
+				background: var(--colorPildora2); /* Un poco más visible al pasar el mouse */
+			}
 
-            .notas::-webkit-scrollbar {
-                
-                height: 1rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
-                border-radius: 4px; /* Bordes redondeados */
-            }
-            
-            .notas::-webkit-scrollbar-thumb {
-                background: rgba(0, 0, 0, 0.1); /* Color con transparencia */
-                border-radius: 4px; /* Bordes redondeados */
-            }
-            
-            .notas::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora1);/* Un poco más visible al pasar el mouse */
-            }
+			.notas.amarillo::-webkit-scrollbar-thumb:hover {
+				background: var(--colorPildora3); /* Un poco más visible al pasar el mouse */
+			}
 
-            .notas.morado::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora2);/* Un poco más visible al pasar el mouse */
-            }
-
-            .notas.amarillo::-webkit-scrollbar-thumb:hover {
-                background: var(--colorPildora3);/* Un poco más visible al pasar el mouse */
-            }
-            
-            .notas::-webkit-scrollbar-track {
-                background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
-                border-radius: 4px; /* Bordes redondeados */
-            }
-        }
-    }
-
+			.notas::-webkit-scrollbar-track {
+				background: rgba(0, 0, 0, 0.1); /* Color del fondo del scrollbar */
+				border-radius: 4px; /* Bordes redondeados */
+			}
+		}
+	}
 }

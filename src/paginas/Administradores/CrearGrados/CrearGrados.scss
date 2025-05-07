@@ -1,67 +1,65 @@
-@import '../../../variables.scss';
+@use '../../../variables.scss' as *;
 
-.grados{
-    display: flex;
-    padding: 0rem 1.5rem;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 3.0625rem;
-    align-self: stretch;
+.grados {
+	display: flex;
+	padding: 0rem 1.5rem;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	gap: 3.0625rem;
+	align-self: stretch;
 
-    .crear{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 1.5rem;
+	.crear {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 1.5rem;
 
-        .formulario{
-            display: flex;
-            width: 20rem;
-            align-items: flex-end;
-            gap: 1.5625rem;
+		.formulario {
+			display: flex;
+			width: 20rem;
+			align-items: flex-end;
+			gap: 1.5625rem;
 
-            button{
-                width: auto;
-            }
-        }
-    }
+			button {
+				width: auto;
+			}
+		}
+	}
 
-    .todosGrados{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 1.5rem;
-        align-self: stretch;
+	.todosGrados {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 1.5rem;
+		align-self: stretch;
 
-        .informacion{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-            align-self: stretch;
-    
-            .filtros{
-                display: flex;
-                width: 100%;
-                align-items: flex-end;
-                gap: 2.75rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-    
-                button{
-                    width: fit-content;
-                }
-    
-            }
+		.informacion {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5rem;
+			align-self: stretch;
 
-        }
-    }
+			.filtros {
+				display: flex;
+				width: 100%;
+				align-items: flex-end;
+				gap: 2.75rem;
+				align-self: stretch;
+				flex-wrap: wrap;
+
+				button {
+					width: fit-content;
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .grados{
-        padding: 0rem 0.5rem;
-    }
+@media screen and (max-width: $max-celular) {
+	.grados {
+		padding: 0rem 0.5rem;
+	}
 }

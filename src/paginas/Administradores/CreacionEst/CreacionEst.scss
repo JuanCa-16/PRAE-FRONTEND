@@ -1,147 +1,134 @@
-@import '../../../global.scss';
-@import '../../../variables.scss';
+@use '../../../variables.scss' as *;
 
-.contenedorCreacionEst{
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 2rem;
-    align-self: stretch;
+.contenedorCreacionEst {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	gap: 2rem;
+	align-self: stretch;
 
-    .crear{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
+	.crear {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.625rem;
+		align-self: stretch;
 
-        .formulario{
-            display: flex;
-            width: 100%;
-            max-width: 100%;
-            padding: 1.5rem 0rem;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.25rem;
+		.formulario {
+			display: flex;
+			width: 100%;
+			max-width: 100%;
+			padding: 1.5rem 0rem;
+			flex-direction: column;
+			align-items: center;
+			gap: 2.25rem;
 
-            .inputs{
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                align-content: center;
-                row-gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-                
-                .input-container{
-                    flex: 1;
-                    width: 30%;
-                    min-width: 15.5rem;
-                    padding: 1rem;
-                    
-                }
+			.inputs {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
+				row-gap: 1.5rem;
+				align-self: stretch;
+				flex-wrap: wrap;
 
-            }
+				.input-container {
+					flex: 1;
+					width: 30%;
+					min-width: 15.5rem;
+					padding: 1rem;
+				}
+			}
 
-            .selectorGrado{
-                display: flex;
-                width: 100%;
-                max-width: 100%;
-                justify-content: space-between;
-                padding: 1rem;
-                gap: 1rem;
-                .selector{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-            }
+			.selectorGrado {
+				display: flex;
+				width: 100%;
+				max-width: 100%;
+				justify-content: space-between;
+				padding: 1rem;
+				gap: 1rem;
+				.selector {
+					display: flex;
+					flex-direction: column;
+					gap: 1rem;
+				}
+			}
 
-            
+			button {
+				width: auto;
+			}
+		}
+	}
 
-            button{
-                width: auto;
-            }
-        }
-    }
+	.contenedorListadoEst {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 2rem;
+		align-self: stretch;
 
-    .contenedorListadoEst{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 2rem;
-        align-self: stretch;
+		.informacion {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5rem;
+			align-self: stretch;
 
-        .informacion{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-            align-self: stretch;
-    
-            .filtros{
-                display: flex;
-                width: 100%;
-                align-items: flex-end;
-                gap: 2.75rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-    
-                button{
-                    width: fit-content;
-                }
+			.filtros {
+				display: flex;
+				width: 100%;
+				align-items: flex-end;
+				gap: 2.75rem;
+				align-self: stretch;
+				flex-wrap: wrap;
 
-                .input-container{
-                    max-width: fit-content;
-                }
-    
-            }
-    
-            .estudiantes{
-                display: flex;
-                align-items: center;
-                align-content: center;
-                gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
-            }
-        }
-    }
-    
+				button {
+					width: fit-content;
+				}
+
+				.input-container {
+					max-width: fit-content;
+				}
+			}
+
+			.estudiantes {
+				display: flex;
+				align-items: center;
+				align-content: center;
+				gap: 1.5rem;
+				align-self: stretch;
+				flex-wrap: wrap;
+			}
+		}
+	}
 }
 
+@media screen and (max-width: $max-celular) {
+	.contenedorCreacionEst {
+		.crear {
+			.formulario {
+				.inputs {
+					.input-container {
+						min-width: 10rem;
+					}
+				}
 
-@media screen and (max-width: $max-celular){
-    .contenedorCreacionEst{
-        .crear{
-            .formulario{
-                .inputs{
-                    .input-container{
-            
-                        min-width: 10rem;
-                        
-                    }
-                }
+				.selectorGrado {
+					display: flex;
+					width: 50%;
+					max-width: 100%;
+					align-self: flex-start;
+				}
+			}
+		}
 
-                .selectorGrado{
-                    display: flex;
-                    width: 50%;
-                    max-width: 100%;
-                    align-self: flex-start;
-
-                }
-            }
-        }
-
-        .contenedorListadoEst{
-
-            .informacion{
-
-                .estudiantes{
-                    justify-content: center;
-                }
-            }
-        }
-    }
+		.contenedorListadoEst {
+			.informacion {
+				.estudiantes {
+					justify-content: center;
+				}
+			}
+		}
+	}
 }

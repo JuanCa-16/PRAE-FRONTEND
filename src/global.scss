@@ -1,341 +1,323 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import "./componentes/Alerta/Alerta.scss";
-@import './variables.scss';
-//
-:root{
-    --colorPrincipal:#157AFE;
-    --colorSecundario: #F5F7F9;
-    --fondo: #FFFFFF;
-    --colorPildora1:#157AFE; 
-    --colorPildora2:#4946E2;
-    --colorPildora3:#EF9131; 
+@use './variables.scss' as *;
 
-    --colorMezclado: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
-    --colorMezclado2: color-mix(in srgb, var(--colorPrincipal) 5%, rgb(255, 255, 255));
+:root {
+	--colorPrincipal: #157afe;
+	--colorSecundario: #f5f7f9;
+	--fondo: #ffffff;
+	--colorPildora1: #157afe;
+	--colorPildora2: #4946e2;
+	--colorPildora3: #ef9131;
 
-        --azul: #157AFE;
-        --blanco: #FFFFFF;
-        --contraste-blanco: #F5F7F9;
-        --rojo: #de4337ff;
+	--colorMezclado: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
+	--colorMezclado2: color-mix(in srgb, var(--colorPrincipal) 5%, rgb(255, 255, 255));
 
+	--azul: #157afe;
+	--blanco: #ffffff;
+	--contraste-blanco: #f5f7f9;
+	--rojo: #de4337ff;
 
-        --dark-azul: color-mix(in srgb, var(--colorPrincipal) 50%, rgb(145, 145, 145));
-        --dark-contraste-azul: color-mix(in srgb, var(--dark-azul) 25%, rgba(128, 128, 128, 0.1));
+	--dark-azul: color-mix(in srgb, var(--colorPrincipal) 50%, rgb(145, 145, 145));
+	--dark-contraste-azul: color-mix(in srgb, var(--dark-azul) 25%, rgba(128, 128, 128, 0.1));
 
-        --dark-morado: color-mix(in srgb, var(--colorPildora2) 50%, rgb(145, 145, 145));
-        --dark-contraste-morado: color-mix(in srgb, var(--dark-morado) 25%,rgba(128, 128, 128, 0.1));
+	--dark-morado: color-mix(in srgb, var(--colorPildora2) 50%, rgb(145, 145, 145));
+	--dark-contraste-morado: color-mix(in srgb, var(--dark-morado) 25%, rgba(128, 128, 128, 0.1));
 
-        --dark-amarillo: color-mix(in srgb, var(--colorPildora3) 50%, rgb(145, 145, 145));
-        --dark-contraste-amarillo: color-mix(in srgb, var(--dark-amarillo) 25%, rgba(128, 128, 128, 0.1));
+	--dark-amarillo: color-mix(in srgb, var(--colorPildora3) 50%, rgb(145, 145, 145));
+	--dark-contraste-amarillo: color-mix(in srgb, var(--dark-amarillo) 25%, rgba(128, 128, 128, 0.1));
 
-        --dark-blanco: #ECECEC;
+	--dark-blanco: #ececec;
 
-        --dark-rojo: #7e4242;
-        --dark-contraste-rojo: #a33838;
+	--dark-rojo: #7e4242;
+	--dark-contraste-rojo: #a33838;
 
-        --dark-negro: #23232B;
-        --dark-contraste-negro: #2E2E3F;
-        --dark-super-negro: #1B1C21;
+	--dark-negro: #23232b;
+	--dark-contraste-negro: #2e2e3f;
+	--dark-super-negro: #1b1c21;
 
-        --radio1: 0.5rem;
-        --radio2: 0.875rem;
-        --radio3: 1.625rem;
-        --radio4: 2rem;
+	--radio1: 0.5rem;
+	--radio2: 0.875rem;
+	--radio3: 1.625rem;
+	--radio4: 2rem;
 }
-
-
-
-
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 
 body {
-    font-family: "Roboto", sans-serif;
-    background-color: var(--blanco);
-    margin: 0;
+	font-family: 'Roboto', sans-serif;
+	background-color: var(--blanco);
+	margin: 0;
 }
-
 
 //Estilos de letra (ROBOTO por defecto)
 h1 {
-    font-size: 3rem; /* 48px */
-    padding: 0;
-    margin: 0;
+	font-size: 3rem; /* 48px */
+	padding: 0;
+	margin: 0;
 }
 
 h2 {
-    font-size: 2.25rem; /* 36px */
-    padding: 0;
-    margin: 0;
+	font-size: 2.25rem; /* 36px */
+	padding: 0;
+	margin: 0;
 }
 
 h3 {
-    font-size: 1.875rem; /* 30px */
-    padding: 0;
-    margin: 0;
+	font-size: 1.875rem; /* 30px */
+	padding: 0;
+	margin: 0;
 }
 
 h4 {
-    font-size: 1.5rem; /* 24px */
-    padding: 0;
-    margin: 0;
+	font-size: 1.5rem; /* 24px */
+	padding: 0;
+	margin: 0;
 }
 
 p {
-    font-size: 1rem; /* 16px */
-    padding: 0;
-    margin: 0;
-    overflow-wrap: break-word; 
+	font-size: 1rem; /* 16px */
+	padding: 0;
+	margin: 0;
+	overflow-wrap: break-word;
 }
 
 //Volverlos negrilla
 .bold {
-    font-weight: bold; /* Cambiar a negrita */
+	font-weight: bold; /* Cambiar a negrita */
 }
 
 //Cambiar tipografia
-.lato{
-    font-family: 'Lato', sans-serif; 
+.lato {
+	font-family: 'Lato', sans-serif;
 }
 
-.inter{
-    font-family: 'Inter', sans-serif; 
+.inter {
+	font-family: 'Inter', sans-serif;
 }
 
 //Estilos del Booton
-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: var(--colorPrincipal);
-    border: none;
-    border-radius: var(--radio1);
-    padding: 0.9375rem 1.25rem;
-    cursor: pointer;
+button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: var(--colorPrincipal);
+	border: none;
+	border-radius: var(--radio1);
+	padding: 0.9375rem 1.25rem;
+	cursor: pointer;
 
-    font-size: 1rem; /* 16px */;
-    font-family: 'Lato', sans-serif;
-    color: var(--blanco);
+	font-size: 1rem; /* 16px */
+	font-family: 'Lato', sans-serif;
+	color: var(--blanco);
 
-    opacity: 80%;
+	opacity: 80%;
 
-    &:hover{
-        cursor: pointer;
-        opacity: 100%;
-        box-shadow: 0px 4px 10px var(--colorPrincipal);
-    }
+	&:hover {
+		cursor: pointer;
+		opacity: 100%;
+		box-shadow: 0px 4px 10px var(--colorPrincipal);
+	}
 
-    &.rojo{
-        background-color: var(--rojo);
+	&.rojo {
+		background-color: var(--rojo);
 
-        &:hover{
-            
-            opacity: 100%;
-            box-shadow: 0px 4px 10px var(--rojo);
-        }
-    }
+		&:hover {
+			opacity: 100%;
+			box-shadow: 0px 4px 10px var(--rojo);
+		}
+	}
 
-    &:disabled {
-        background-color: var(--colorPrincipal);;  // Color gris para deshabilitado
-        cursor: not-allowed;     // Cambia el cursor para indicar que no es interactivo
-        opacity: 0.1;            // Menor opacidad
-        box-shadow: none;
-        color: black;
-    }
+	&:disabled {
+		background-color: var(--colorPrincipal); // Color gris para deshabilitado
+		cursor: not-allowed; // Cambia el cursor para indicar que no es interactivo
+		opacity: 0.1; // Menor opacidad
+		box-shadow: none;
+		color: black;
+	}
 }
 
 //Estilos de la navegacion
-.App{
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
+.App {
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
 
-    //Ocupa un pedazo de la pantalla
-    .navbar {
-        width: 16.8125rem;
-        min-width: 16.8125rem;
-        max-height: 100%;
-        padding: 0;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        top: 0;
-    }
+	//Ocupa un pedazo de la pantalla
+	.navbar {
+		width: 16.8125rem;
+		min-width: 16.8125rem;
+		max-height: 100%;
+		padding: 0;
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		top: 0;
+	}
 
-    //Ocupa lo restante y scroll
-    .main-content {
-        width: 100%;
-        padding: 24px 96px;
-        background-color: var(--fondo);
-        max-height: 100%;
-        overflow: auto;
-        scrollbar-gutter: stable;
-    }
+	//Ocupa lo restante y scroll
+	.main-content {
+		width: 100%;
+		padding: 24px 96px;
+		background-color: var(--fondo);
+		max-height: 100%;
+		overflow: auto;
+		scrollbar-gutter: stable;
+	}
 
-    //Si es el login toda la pantalla
-    .completo{
-        width: 100%;
-        height: 100vh;
-    }
+	//Si es el login toda la pantalla
+	.completo {
+		width: 100%;
+		height: 100vh;
+	}
 
-    .loader {
-        width: 48px;
-        height: 48px;
-        border: 5px solid #FFF;
-        border-bottom-color: var(--colorPildora1);
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        }
-    
-        @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-        } 
+	.loader {
+		width: 48px;
+		height: 48px;
+		border: 5px solid #fff;
+		border-bottom-color: var(--colorPildora1);
+		border-radius: 50%;
+		display: inline-block;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 }
 
-
-
-.prueba{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5rem;
-    width: 100%;
+.prueba {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5rem;
+	width: 100%;
 }
-
-
-
-
-
 
 @media screen and (max-width: $max-celular) {
-    
-    //Estilos de letra (ROBOTO por defecto)
-    h1 {
-        font-size: 2rem; /* 32px */
-    }
+	//Estilos de letra (ROBOTO por defecto)
+	h1 {
+		font-size: 2rem; /* 32px */
+	}
 
-    h2 {
-        font-size: 1.75rem; /* 28px */
-    }
+	h2 {
+		font-size: 1.75rem; /* 28px */
+	}
 
-    h3 {
-        font-size: 1.5rem; /* 24px */
-    }
+	h3 {
+		font-size: 1.5rem; /* 24px */
+	}
 
-    h4 {
-        font-size: 1.25rem; /* 1x */
-    }
+	h4 {
+		font-size: 1.25rem; /* 1x */
+	}
 
-    p {
-        font-size: 1rem; /* 16px */
-    }
+	p {
+		font-size: 1rem; /* 16px */
+	}
 
-    .App{
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        height: 100dvh;
-        
-        padding: 0;
-        margin: 0;
-        position: relative;
-        z-index: 9999;
+	.App {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		height: 100dvh;
 
-         //Ocupa lo restante y scroll
-        .main-content {
-            width: 100%;
-            background-color: var(--fondo);
-            max-height: 100%;
-            overflow: auto;
-            padding: 1.5rem 1.5rem 6.875rem 1.5rem;
-            position: relative;
-            z-index: 500;
+		padding: 0;
+		margin: 0;
+		position: relative;
+		z-index: 9999;
 
-            &.mostrar{
-                overflow: hidden;
-            }
-        }
-    
-        //Ocupa un pedazo de la pantalla
-        .navbar {
-            all: unset;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-            padding: 0;
-            height: auto;
-            position: fixed;
-            bottom: 0;
-            z-index: 9999;
-        }
-    
-    
-        //Si es el login toda la pantalla
-        .completo{
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-        }
-    }
+		//Ocupa lo restante y scroll
+		.main-content {
+			width: 100%;
+			background-color: var(--fondo);
+			max-height: 100%;
+			overflow: auto;
+			padding: 1.5rem 1.5rem 6.875rem 1.5rem;
+			position: relative;
+			z-index: 500;
 
+			&.mostrar {
+				overflow: hidden;
+			}
+		}
 
+		//Ocupa un pedazo de la pantalla
+		.navbar {
+			all: unset;
+			width: 100%;
+			padding: 0;
+			margin: 0;
+			padding: 0;
+			height: auto;
+			position: fixed;
+			bottom: 0;
+			z-index: 9999;
+		}
+
+		//Si es el login toda la pantalla
+		.completo {
+			width: 100%;
+			height: 100vh;
+			height: 100dvh;
+		}
+	}
 }
 
 .dark {
-    body {
-        background-color: var(--dark-negro);
-        color: var(--dark-blanco);
-    }
+	body {
+		background-color: var(--dark-negro);
+		color: var(--dark-blanco);
+	}
 
-    .main-content {
-        background-color: var(--dark-negro);
-    }
+	.main-content {
+		background-color: var(--dark-negro);
+	}
 
-    button {
-        background-color: var(--dark-azul);
-        color: var(--dark-blanco);
+	button {
+		background-color: var(--dark-azul);
+		color: var(--dark-blanco);
 
-        &:hover {
-            box-shadow: 0px 4px 10px var(--dark-azul);
-        }
+		&:hover {
+			box-shadow: 0px 4px 10px var(--dark-azul);
+		}
 
-        &.rojo {
-            background-color: var(--dark-rojo);
+		&.rojo {
+			background-color: var(--dark-rojo);
 
-            &:hover {
-                background-color: var(--dark-contraste-rojo);
-                box-shadow: 0px 4px 10px var(--dark-rojo);
-            }
-        }
+			&:hover {
+				background-color: var(--dark-contraste-rojo);
+				box-shadow: 0px 4px 10px var(--dark-rojo);
+			}
+		}
 
-        &:disabled {
-            background-color: var(--dark-contraste-azul);
-            color: var(--dark-contraste-negro);
-        }
-    }
+		&:disabled {
+			background-color: var(--dark-contraste-azul);
+			color: var(--dark-contraste-negro);
+		}
+	}
 
-    .loader {
-        border: 5px solid var(--dark-negro);
-        border-bottom-color: var(--dark-azul);
+	.loader {
+		border: 5px solid var(--dark-negro);
+		border-bottom-color: var(--dark-azul);
+	}
 
-        }
-
-    h1,h2,h3,h4,p{
-        color: var(--dark-blanco);
-    }
+	h1,
+	h2,
+	h3,
+	h4,
+	p {
+		color: var(--dark-blanco);
+	}
 }

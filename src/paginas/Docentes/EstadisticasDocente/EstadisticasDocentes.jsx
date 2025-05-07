@@ -1,18 +1,18 @@
-import React from 'react'
-import TituloDes from '../../../componentes/TituloDes/TituloDes'
-import './EstadisticasDocentes.scss'
-import ProfeEstadisticas from '../../../componentes/Estadisticas/ProfeEstadisticas/ProfeEstadisticas'
+import React from 'react';
+import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import ProfeEstadisticas from '../../../componentes/Estadisticas/ProfeEstadisticas/ProfeEstadisticas';
+import './EstadisticasDocentes.scss';
 
 const EstadisticasDocentes = () => {
-    return (
-        <div className='contenedorEstDocente'>
-            <TituloDes 
-            titulo='ESTADÍSTICAS' 
-            desc='Aquí podrás consultar diversas estadísticas...'>
-            </TituloDes>
-            <ProfeEstadisticas></ProfeEstadisticas>
-        </div>
-      )
-}
+	return (
+		<div className='contenedorEstDocente'>
+			<TituloDes
+				titulo='ESTADÍSTICAS'
+				desc='Aquí podrás consultar diversas estadísticas...'
+			></TituloDes>
+			<ProfeEstadisticas></ProfeEstadisticas>
+		</div>
+	);
+};
 
-export default EstadisticasDocentes
+export default EstadisticasDocentes;

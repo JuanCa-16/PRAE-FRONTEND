@@ -1,166 +1,146 @@
-//Estilos de la pagina
-@import '../../../global.scss';
-@import '../../../variables.scss';
+@use '../../../variables.scss' as *;
 
 .clicable-observacion {
-  cursor: pointer;
-  transition:  0.2s ease;
-  padding: 0.5rem;
-  border-radius: 6px;
+	cursor: pointer;
+	transition: 0.2s ease;
+	padding: 0.5rem;
+	border-radius: 6px;
 
-  &:hover {
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
-  }
+	&:hover {
+		box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+	}
 }
 
 .contenedorCrearObser {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	padding: 2rem;
 
-  .formulario {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+	.formulario {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 
-    .label {
-      font-weight: 600;
-      font-size: 1rem;
-    }
+		.label {
+			font-weight: 600;
+			font-size: 1rem;
+		}
 
-    textarea {
-      padding: 1rem;
-      border-radius: 10px;
-      border: 1px solid var(--colorSecundario);
-      width: 100%;
-      min-height: 120px;
-      resize: none;
-      font-family: "Roboto", sans-serif;
-      font-size: 1rem;
+		textarea {
+			padding: 1rem;
+			border-radius: 10px;
+			border: 1px solid var(--colorSecundario);
+			width: 100%;
+			min-height: 120px;
+			resize: none;
+			font-family: 'Roboto', sans-serif;
+			font-size: 1rem;
 
-      &:focus {
-        outline: 2px solid var(--colorPrincipal);
-      }
-    }
+			&:focus {
+				outline: 2px solid var(--colorPrincipal);
+			}
+		}
 
-    .btn-guardar {
-        background-color: var(--colorPrincipal);
-        color: #fff;
-        padding: 0.7rem 2rem;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        align-self: flex-start;
-      
-        input-title{
-            opacity: 100%;
-        }
-      }
-      
-  }
+		.btn-guardar {
+			background-color: var(--colorPrincipal);
+			color: #fff;
+			padding: 0.7rem 2rem;
+			border-radius: 8px;
+			border: none;
+			cursor: pointer;
+			align-self: flex-start;
 
-  .observaciones {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+			input-title {
+				opacity: 100%;
+			}
+		}
+	}
 
-    h4 {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
+	.observaciones {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 
-    .observacion-item {
-      transition: all 0.3s ease;  /* Transición suave para el efecto de hover */
-      background-color: var(--colorSecundario);
-      padding: 1rem;
-      border-radius: 10px;
-      //border: 1px solid #ddd;
-      justify-content: space-between;  /* Esto coloca los elementos de la izquierda y derecha */
+		h4 {
+			font-weight: 700;
+			font-size: 1.2rem;
+		}
 
-      .btn-editar {
-        padding: 0.5rem 1rem;  
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        margin-left: auto; 
-        width: 100px; 
-      }
-      
-      .fecha {
-        color: var(--colorPrincipal);
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: block;
-        margin-bottom: 0.5rem;
-      }
+		.observacion-item {
+			transition: all 0.3s ease; /* Transición suave para el efecto de hover */
+			background-color: var(--colorSecundario);
+			padding: 1rem;
+			border-radius: 10px;
+			//border: 1px solid #ddd;
+			justify-content: space-between; /* Esto coloca los elementos de la izquierda y derecha */
 
-      p {
-        margin: 0;
-      }
-    }
+			.btn-editar {
+				padding: 0.5rem 1rem;
+				border-radius: 5px;
+				border: none;
+				cursor: pointer;
+				margin-left: auto;
+				width: 100px;
+			}
 
-    .sin-observaciones {
-      font-style: italic;
-    }
-  }
+			.fecha {
+				color: var(--colorPrincipal);
+				font-weight: 600;
+				font-size: 0.9rem;
+				display: block;
+				margin-bottom: 0.5rem;
+			}
+
+			p {
+				margin: 0;
+			}
+		}
+
+		.sin-observaciones {
+			font-style: italic;
+		}
+	}
 }
 
-.dark{
+.dark {
+	.clicable-observacion {
+		&:hover {
+			box-shadow: 0 1px 7px var(--dark-azul);
+		}
+	}
 
-  .clicable-observacion {
+	.contenedorCrearObser {
+		.formulario {
+			textarea {
+				padding: 1rem;
+				border-radius: 10px;
+				background-color: var(--dark-super-negro);
+				border: 1px solid var(--dark-contraste-negro);
+				width: 100%;
+				min-height: 120px;
+				resize: none;
+				font-family: 'Roboto', sans-serif;
+				font-size: 1rem;
 
-  
-    &:hover {
-      box-shadow: 0 1px 7px var(--dark-azul);
-    }
-  }
+				&:focus {
+					outline: 2px solid var(--dark-azul);
+				}
+			}
 
-  .contenedorCrearObser {
+			.btn-guardar {
+				background-color: var(--dark-azul);
+			}
+		}
 
-  
-    .formulario {
+		.observaciones {
+			.observacion-item {
+				background-color: var(--dark-super-negro);
 
-
-      textarea {
-        padding: 1rem;
-        border-radius: 10px;
-        background-color: var(--dark-super-negro);
-        border: 1px solid var(--dark-contraste-negro);
-        width: 100%;
-        min-height: 120px;
-        resize: none;
-        font-family: "Roboto", sans-serif;
-        font-size: 1rem;
-  
-        &:focus {
-          outline: 2px solid var(--dark-azul);
-        }
-      }
-  
-      .btn-guardar {
-          background-color: var(--dark-azul);
-        }
-        
-    }
-  
-    .observaciones {
-
-  
-      .observacion-item {
-
-        background-color:var(--dark-super-negro);
-
-        
-        .fecha {
-          color: var(--dark-azul);
-        }
-  
-
-      }
-  
-
-    }
-  }
-
+				.fecha {
+					color: var(--dark-azul);
+				}
+			}
+		}
+	}
 }

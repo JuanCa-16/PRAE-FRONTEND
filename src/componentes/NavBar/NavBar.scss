@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
 //Estilos de la NavBar
 .contenedorNavBar {
 	background-color: var(--colorSecundario);

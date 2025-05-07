@@ -1,299 +1,268 @@
-@import '../../global.scss';
-@import '../../variables.scss';
+@use '../../variables.scss' as *;
 
-//Estilos Login
-.contenedorResetClave{
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+.contenedorResetClave {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
 
-    .pagReset{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        align-self: stretch;
-        background-color: var(--fondo);
+	.pagReset {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+		align-self: stretch;
+		background-color: var(--fondo);
 
-        .izq{
-            
-            display: flex;
-            width: 100%;
-            padding: 98px 74px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            align-self: stretch;
-            background: var(--colorSecundario);
-        
-        }
-            .imagen_logo{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100%;
-                margin-bottom: 15%;
-                gap: 10px;
-                padding-top: 5%;
-            }
-                .img_login{
-                    height: 60%;
-                    width: 65%;
-                }
+		.izq {
+			display: flex;
+			width: 100%;
+			padding: 98px 74px;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+			align-self: stretch;
+			background: var(--colorSecundario);
+		}
+		.imagen_logo {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			margin-bottom: 15%;
+			gap: 10px;
+			padding-top: 5%;
+		}
+		.img_login {
+			height: 60%;
+			width: 65%;
+		}
 
-                .info{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    align-items:flex-start ; 
-                    gap: 10px;
-                }
+		.info {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			gap: 10px;
+		}
 
+		.der {
+			display: flex;
+			width: 100%;
+			padding: 90px 96px;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			align-self: stretch;
 
-          
+			.title {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				width: 100%;
+				height: 40%;
+				padding: 10px;
+			}
 
-        .der{
-        
-            display: flex;
-            width: 100%;
-            padding:  90px 96px;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            align-self: stretch;
-                
-            .title{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                width: 100%;
-                height: 40%;
-                padding: 10px;
-            }
-            
+			.Form_login {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+				gap: 25px;
+				padding: 10px;
+			}
 
-                .Form_login{
-                   
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-                    height: 100%;
-                    gap: 25px;
-                    padding: 10px;
+			.inputs {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				width: 100%;
+			}
 
-                }
+			.inputs input {
+				padding: 20px;
+			}
 
-                    .inputs{
-                        display: flex;
-                        flex-direction: column;
-                        gap: 15px;
-                        width: 100%;
-                    }
+			.lato_1 {
+				display: flex;
+				justify-content: flex-end;
+				color: color-mix(in srgb, var(--colorPrincipal) 60%, rgb(255, 255, 255));
+				cursor: pointer;
 
-                   .inputs input{
-                    padding: 20px;
-                   }
-
-                    .lato_1{
-                        display: flex;
-                        justify-content: flex-end;
-                        color: color-mix(in srgb, var(--colorPrincipal) 60%, rgb(255, 255, 255));
-                        cursor: pointer;
-                        
-                        &:hover{
-                            color:var(--colorPrincipal);
-                        }
-                    }
-            
-        }
-    }
+				&:hover {
+					color: var(--colorPrincipal);
+				}
+			}
+		}
+	}
 }
 
-.dark{
-    .contenedorResetClave{
+.dark {
+	.contenedorResetClave {
+		background-color: var(--dark-negro);
 
-        background-color: var(--dark-negro);
-    
-        .pagReset{
+		.pagReset {
+			background-color: var(--dark-negro);
 
-            background-color: var(--dark-negro);
-    
-            .izq{
-                background: var(--dark-super-negro);
-            }
+			.izq {
+				background: var(--dark-super-negro);
+			}
 
-            .der{
-                background-color: var(--dark-negro);
-                .lato_1{
-                    color: var(--dark-contraste-azul);
+			.der {
+				background-color: var(--dark-negro);
+				.lato_1 {
+					color: var(--dark-contraste-azul);
 
-                    &:hover{
-                        color: var(--dark-azul);
-                        }
-                    }
-            }
-        }
-    }
+					&:hover {
+						color: var(--dark-azul);
+					}
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .contenedorResetClave{
-        all: unset;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100vh;
-        height: 100dvh;
-        max-height: 100%;
-    
+@media screen and (max-width: $max-celular) {
+	.contenedorResetClave {
+		all: unset;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100vh;
+		height: 100dvh;
+		max-height: 100%;
 
-        .pagReset{
-            display: flex;
-            flex-direction: column;
-            max-height: 100%;
-            align-self: stretch;
-            background: var(--colorSecundario);
-            //height: 100vh;
-            //min-height: 100vh;
-            //overflow-y: auto;
-    
-            .izq{
-                
-                display: flex;
-                width: 100%;
-                // height: 100%;
-                height: auto;
-                max-height: 28%;
-                padding: 1.2rem 1.5rem;
-                padding-bottom: 1.5rem;
-                align-items: center;
-                gap: 10px;
-                align-self: stretch;
-                background: var(--colorSecundario);
-                //padding-bottom: 5rem;
+		.pagReset {
+			display: flex;
+			flex-direction: column;
+			max-height: 100%;
+			align-self: stretch;
+			background: var(--colorSecundario);
+			//height: 100vh;
+			//min-height: 100vh;
+			//overflow-y: auto;
 
-            
-            }
-                .imagen_logo{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    gap: 10px;
-                    margin: 0;
-                    padding: 0;
-                    max-height: 100%;
-                }
-                    .img_login{
-                        display: none;
-                        height: 40%;
-                        width: 40%;
-                        max-height: 100%;
-                    }
-    
-                    .info{
+			.izq {
+				display: flex;
+				width: 100%;
+				// height: 100%;
+				height: auto;
+				max-height: 28%;
+				padding: 1.2rem 1.5rem;
+				padding-bottom: 1.5rem;
+				align-items: center;
+				gap: 10px;
+				align-self: stretch;
+				background: var(--colorSecundario);
+				//padding-bottom: 5rem;
+			}
+			.imagen_logo {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				gap: 10px;
+				margin: 0;
+				padding: 0;
+				max-height: 100%;
+			}
+			.img_login {
+				display: none;
+				height: 40%;
+				width: 40%;
+				max-height: 100%;
+			}
 
-                        
+			.info {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 10px;
+				height: fit-content;
+				max-height: 100%;
 
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items:flex-start ; 
-                        gap: 10px;
-                        height: fit-content;
-                        max-height: 100%;
+				.logo {
+					width: 100%;
+					padding: 0.2rem;
+					object-fit: contain;
+					object-position: center;
+					max-height: 40%;
+					display: flex;
+					align-items: flex-start;
+				}
+			}
 
-                        
+			.der {
+				display: flex;
+				width: 100%;
+				height: 70%;
+				max-height: 72%;
+				flex-grow: 1;
+				padding: 1.5rem 1.5rem;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				align-self: stretch;
+				flex-shrink: 0;
+				background-color: var(--fondo);
+				border-top-left-radius: 2rem;
+				border-top-right-radius: 2rem;
+				position: relative;
+				margin-top: -2rem; // Ajusta según cuánto quieras que se solape
+				z-index: 1; // Asegura que esté por encima de .izq
+				box-shadow: 0px -5px 11px rgba(170, 167, 167, 0.548);
+				overflow-y: auto;
+				.title {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					width: 100%;
+					height: fit-content;
+					max-height: 100%;
+					padding: 10px;
+				}
 
+				.Form_login {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					width: 100%;
+					height: 100%;
+					gap: 25px;
+					padding: 10px;
+					max-height: 100%;
+				}
 
-                        .logo{
-                            
-                            width: 100%;
-                            padding: 0.2rem;
-                            object-fit: contain;
-                            object-position: center;
-                            max-height: 40%;
-                            display: flex;
-                            align-items: flex-start;
-                        }
+				.inputs {
+					display: flex;
+					flex-direction: column;
+					gap: 15px;
+					width: 100%;
+				}
 
-                    }
-    
-    
-            .der{
-                display: flex;
-                width: 100%;
-                height: 70%;
-                max-height: 72%;
-                flex-grow: 1;
-                padding:  1.5rem 1.5rem;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                align-self: stretch;
-                flex-shrink: 0;
-                background-color: var(--fondo);
-                border-top-left-radius: 2rem;
-                border-top-right-radius: 2rem;
-                position: relative;
-                margin-top: -2rem; // Ajusta según cuánto quieras que se solape
-                z-index: 1; // Asegura que esté por encima de .izq
-                box-shadow:  0px -5px 11px rgba(170, 167, 167, 0.548);
-                overflow-y: auto;
-                .title{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    width: 100%;
-                    height: fit-content;
-                    max-height: 100%;
-                    padding: 10px;
-                }
-                
-    
-                    .Form_login{
-        
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-start;
-                        width: 100%;
-                        height: 100%;
-                        gap: 25px;
-                        padding: 10px;
-                        max-height: 100%;
-    
-                    }
-    
-                        .inputs{
-                            display: flex;
-                            flex-direction: column;
-                            gap: 15px;
-                            width: 100%;
-                        }
-    
-                       .inputs input{
-                        padding: 20px;
-                       }
-    
-                        .lato_1{
-                            display: flex;
-                            justify-content: flex-end;
-                            color: color-mix(in srgb, var(--colorPrincipal) 60%, rgb(255, 255, 255));
-                            cursor: pointer;
-                            
-                            &:hover{
-                                color:var(--colorPrincipal);
-                            }
-                        }
-                
-            }
-        }
-    }
+				.inputs input {
+					padding: 20px;
+				}
+
+				.lato_1 {
+					display: flex;
+					justify-content: flex-end;
+					color: color-mix(in srgb, var(--colorPrincipal) 60%, rgb(255, 255, 255));
+					cursor: pointer;
+
+					&:hover {
+						color: var(--colorPrincipal);
+					}
+				}
+			}
+		}
+	}
 }
