@@ -19,34 +19,60 @@
 		.izq {
 			display: flex;
 			width: 100%;
-			padding: 98px 74px;
+			padding: 2rem 2rem;
 			flex-direction: column;
 			align-items: center;
 			gap: 10px;
-			align-self: stretch;
 			background: var(--colorSecundario);
-		}
-		.imagen_logo {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
 			height: 100%;
-			margin-bottom: 15%;
-			gap: 10px;
-			padding-top: 5%;
-		}
-		.img_login {
-			height: 60%;
-			width: 65%;
-		}
+			max-height: 100vh;
 
-		.info {
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			align-items: flex-start;
-			gap: 10px;
+			.imagen_logo {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+				height: 100%;
+				margin-bottom: 2rem;
+				gap: 10px;
+				padding-top: 5%;
+				max-height: 100%;
+				overflow: hidden;
+
+				.contenedorPoster {
+					display: flex;
+					height: 100%;
+					width: 100%;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
+					max-height: 70%;
+
+					.img_login {
+						width: 100%;
+						height: 100%; // Esto mantiene la relación de aspecto de la imagen
+						object-fit: contain; // Ajusta la imagen sin deformarla
+						object-position: center;
+					}
+				}
+
+				.info {
+					display: flex;
+					height: 100%;
+					width: 100%;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
+					gap: 10px;
+					max-height: 30%;
+					.logo {
+						width: 100%;
+						height: 40%; // Esto mantiene la relación de aspecto de la imagen
+						object-fit: contain; // Ajusta la imagen sin deformarla
+						object-position: left;
+					}
+				}
+			}
 		}
 
 		.der {
@@ -159,43 +185,49 @@
 				align-self: stretch;
 				background: var(--colorSecundario);
 				//padding-bottom: 5rem;
-			}
-			.imagen_logo {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				width: 100%;
-				gap: 10px;
-				margin: 0;
-				padding: 0;
-				max-height: 100%;
-			}
-			.img_login {
-				display: none;
-				height: 40%;
-				width: 40%;
-				max-height: 100%;
-			}
 
-			.info {
-				width: 100%;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: flex-start;
-				gap: 10px;
-				height: fit-content;
-				max-height: 100%;
-
-				.logo {
-					width: 100%;
-					padding: 0.2rem;
-					object-fit: contain;
-					object-position: center;
-					max-height: 40%;
+				.imagen_logo {
 					display: flex;
-					align-items: flex-start;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					width: 100%;
+					gap: 10px;
+					margin: 0;
+					padding: 0;
+					max-height: 100%;
+
+					.contenedorPoster {
+						display: none;
+						visibility: hidden;
+						.img_login {
+							display: none;
+							height: 40%;
+							width: 40%;
+							max-height: 100%;
+						}
+					}
+
+					.info {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						gap: 10px;
+						height: fit-content;
+						max-height: 100%;
+
+						.logo {
+							width: 100%;
+							padding: 0.2rem;
+							object-fit: contain;
+							object-position: center;
+							max-height: 40%;
+							display: flex;
+							align-items: flex-start;
+						}
+					}
 				}
 			}
 

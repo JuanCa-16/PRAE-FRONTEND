@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TituloDes from '../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../componentes/Input/InputContainer';
-import imagenLogin from '../../assets/imagenLogin.png';
+import posterCel from '../../assets/posterCel.png';
 import Logo from '../../assets/logo.png';
 import './Login.scss';
 
@@ -38,11 +38,13 @@ export default function Login({ func }) {
 			<div className=' pagLogin'>
 				<div className='izq'>
 					<div className='imagen_logo'>
-						<img
-							className='img_login'
-							src={imagenLogin}
-							alt='images'
-						/>
+						<div className='contenedorPoster'>
+							<img
+								className='img_login'
+								src={posterCel}
+								alt='images'
+							/>
+						</div>
 						<div className='info'>
 							<img
 								className='logo'
