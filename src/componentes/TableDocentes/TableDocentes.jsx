@@ -38,6 +38,7 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
 
     const [cargando,setCargando] = useState(false);
 
+    
 
     useEffect(() => {
             const notasCursoDocente = async () => {
@@ -201,11 +202,13 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
         setReload(prev => !prev);
     };
 
+    const [expandir,setExpandir] = useState(false)
+
     return (
         <div className='contenedorNotas'>
             <div className='grupo'>
-                <PildoraMateriaGrado texto='PERIODO 1' color={infoCurso.color}></PildoraMateriaGrado>
-                <div className="contenedor">
+                <PildoraMateriaGrado texto='PERIODO 1' color={infoCurso.color} onClick={()=>setExpandir(!expandir)} ></PildoraMateriaGrado>
+                <div className={`contenedor ${expandir? 'expandir':'noExpandir'}`}>
                     <PildoraTitulo nota={infoNota} materia= {infoCurso.materia} nombre={infoCurso.nombre_completo} color={infoCurso.color} grado={ infoCurso.curso} ></PildoraTitulo>
                     <div className="tabla">
                         <div className="col colListado">
@@ -301,6 +304,9 @@ const TableDocentes = ({infoCurso, infoDocente}) => {
                         </div>
                     </form>
                 </div>
+            </div>
+            <div className='grupo'>
+                <PildoraMateriaGrado texto='PERIODO 1' color={infoCurso.color} onClick={()=>setExpandir(!expandir)} ></PildoraMateriaGrado>
             </div>
         </div>
     )

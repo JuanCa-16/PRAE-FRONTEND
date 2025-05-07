@@ -1,22 +1,48 @@
 @import '../../global.scss';
 @import '../../variables.scss';
 
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px); /* Empieza un poco más arriba */
+        opacity: 0; /* Empieza invisible */
+        max-height: 0; /* Empieza con altura 0 */
+    }
+    to {
+        transform: translateY(0); /* Llega a su posición original */
+        opacity: 1; /* Se hace visible */
+        max-height: 1000px; /* Ajusta este valor según el tamaño del contenido */
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0); /* Empieza desde la posición original */
+        opacity: 1; /* Empieza visible */
+        max-height: 1000px; /* El contenedor tiene su altura completa */
+    }
+    to {
+        transform: translateY(-20px); /* Se mueve hacia arriba */
+        opacity: 0; /* Se hace invisible */
+        max-height: 0; /* Se colapsa */
+    }
+}
 .contenedorNotas{
     display: flex;
     width: 100%;
     flex-direction: column;
     height: 100%;
     align-items: flex-start;
-    gap: 2.5rem;
+    gap: 0.5rem;
     align-self: stretch;
 
     .grupo{
         width: 100%;
         gap: 1rem;
         .contenedorPildoraG{
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
         .contenedor{
+            animation: slideUp 0.2s ease-in-out;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -138,6 +164,19 @@
                 color: var(--colorPrincipal);
             }
         }
+
+        .expandir {
+            opacity: 1; /* Se hace visible */
+            max-height: auto; /* Ajustar a un valor adecuado para tu contenido */
+            animation: slideDown 0.3s ease-out; /* Animación al expandirse */
+            margin-bottom: 2rem;
+        }
+
+        .noExpandir{
+            opacity: 0; /* Se hace invisible */
+            max-height: 0; /* Se colapsa */
+            animation: slideUp 0.3s ease-out; /* Animación para el deslizamiento hacia arriba */
+        }
     }
 }
 
@@ -150,7 +189,7 @@
                     height: fit-content;
                     .colListado{
                         height: 100%;
-                        width: 40%;
+                        width: 45%;
                     }
     
                     .notas{
