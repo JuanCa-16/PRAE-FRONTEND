@@ -48,7 +48,7 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
 
 ---
 
-##📁 Estructura del Proyecto
+## 📁 Estructura del Proyecto
 ```bash
 📦 praefrontend
  ┣ 📂 public                # Archivos estáticos públicos
@@ -72,13 +72,16 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
 ```
 ---
 
-##🚀 Despliegue
+## 🚀 Despliegue
 
 El frontend puede ser desplegado fácilmente en servicios como:
-
-Vercel
+```bash
+Vercel:
+https://praeapp.vercel.app/login
 
 Netlify
+https://praeweb.netlify.app/login
+```
 
 ---
 
@@ -99,11 +102,10 @@ npm start
 ```
 ---
 
-##👥 Autores
+## 👥 Autores
+
 Juan Camilo Henao
-
 Jean Carlo Londoño Neira
-
 Isabella Rebellon Medina
 
 ---
