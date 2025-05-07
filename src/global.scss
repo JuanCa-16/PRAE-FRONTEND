@@ -20,13 +20,13 @@
 
 
         --dark-azul: color-mix(in srgb, var(--colorPrincipal) 50%, rgb(145, 145, 145));
-        --dark-contraste-azul: color-mix(in srgb, --dark-azul 25%, rgba(128, 128, 128, 0.1));
+        --dark-contraste-azul: color-mix(in srgb, var(--dark-azul) 25%, rgba(128, 128, 128, 0.1));
 
         --dark-morado: color-mix(in srgb, var(--colorPildora2) 50%, rgb(145, 145, 145));
-        --dark-contraste-morado: color-mix(in srgb, --dark-morado 25%,rgba(128, 128, 128, 0.1));
+        --dark-contraste-morado: color-mix(in srgb, var(--dark-morado) 25%,rgba(128, 128, 128, 0.1));
 
         --dark-amarillo: color-mix(in srgb, var(--colorPildora3) 50%, rgb(145, 145, 145));
-        --dark-contraste-amarillo: color-mix(in srgb, --dark-amarillo 25%, rgba(128, 128, 128, 0.1));
+        --dark-contraste-amarillo: color-mix(in srgb, var(--dark-amarillo) 25%, rgba(128, 128, 128, 0.1));
 
         --dark-blanco: #ECECEC;
 
