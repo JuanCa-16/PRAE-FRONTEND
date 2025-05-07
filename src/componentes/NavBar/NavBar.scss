@@ -1,254 +1,229 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 //Estilos de la NavBar
-.contenedorNavBar{
-    background-color: var(--colorSecundario);
-    display: flex;
-    width: 100%;
-    height: 100%;
-    max-height: 100vh;
-    padding: 1.25rem 0.625rem;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    overflow-y: auto;
-    
-    //Estilos del menu Superior
-    .menuSuperior{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
+.contenedorNavBar {
+	background-color: var(--colorSecundario);
+	display: flex;
+	width: 100%;
+	height: 100%;
+	max-height: 100vh;
+	padding: 1.25rem 0.625rem;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	flex-shrink: 0;
+	overflow-y: auto;
 
-        .tituloSuperior{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-content: center;
-            justify-content: space-between;
-            width: 100%;
+	//Estilos del menu Superior
+	.menuSuperior {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.625rem;
+		align-self: stretch;
 
-            .contLogo{
-                max-width: 100%;
-            }
+		.tituloSuperior {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: space-between;
+			width: 100%;
 
-            .iconosNav{
-                display: flex;
-                width: 10%;
-                justify-content: center;
+			.contLogo {
+				max-width: 100%;
+			}
 
-                .menuHamburgesa{
-                    display: none;
-                }
-            }
-            
-        }
+			.iconosNav {
+				display: flex;
+				width: 10%;
+				justify-content: center;
 
-        .iconoTheme{
-            display: flex;
-            align-items: center;
-            opacity: 0.5;
+				.menuHamburgesa {
+					display: none;
+				}
+			}
+		}
 
-            &:hover{
-                opacity: 1;
-            }
-        }
+		.iconoTheme {
+			display: flex;
+			align-items: center;
+			opacity: 0.5;
 
-        .itemBar{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.625rem;
-            align-self: stretch;
-        }
-    }
+			&:hover {
+				opacity: 1;
+			}
+		}
 
-    .linea{
-        background-color: var(--colorPrincipal);  /* El color de la línea */
-        opacity: 0.3;
-        width: 100%;             /* Ocupa todo el ancho del contenedor */
-        height: 1px;             /* Define el grosor de la línea */
-        border-radius: 10rem;
-    }
+		.itemBar {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.625rem;
+			align-self: stretch;
+		}
+	}
 
-    .iconoTheme{
-        cursor: pointer;
-    }
+	.linea {
+		background-color: var(--colorPrincipal); /* El color de la línea */
+		opacity: 0.3;
+		width: 100%; /* Ocupa todo el ancho del contenedor */
+		height: 1px; /* Define el grosor de la línea */
+		border-radius: 10rem;
+	}
 
-    .txtInferior{
-        margin-top: 1rem;
-    }
+	.iconoTheme {
+		cursor: pointer;
+	}
 
+	.txtInferior {
+		margin-top: 1rem;
+	}
 }
 
-.dark{
-    .contenedorNavBar{
-        background-color: $dark-super-negro;
+.dark {
+	.contenedorNavBar {
+		background-color: var(--dark-super-negro);
 
-        .linea{
-            background-color: $dark-blanco;
-        }
+		.linea {
+			background-color: var(--dark-blanco);
+		}
 
-        .menuSuperior{
-            .tituloSuperior{
-                .iconoTheme{
-                    .normal, .colorear{
-                        fill: $dark-azul;
-                        
-                    }
-                }
-                .menuHamburgesa{
-                    .normal, .colorear{
-                        fill: $dark-azul;
-                        
-                    }
-                }
-            }
-        }
-    }
+		.menuSuperior {
+			.tituloSuperior {
+				.iconoTheme {
+					.normal,
+					.colorear {
+						fill: var(--dark-azul);
+					}
+				}
+				.menuHamburgesa {
+					.normal,
+					.colorear {
+						fill: var(--dark-azul);
+					}
+				}
+			}
+		}
+	}
 }
 
-.overlay{
-    opacity: 0;
-    visibility: hidden;
+.overlay {
+	opacity: 0;
+	visibility: hidden;
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(20px); // Empieza 20px abajo
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(20px); // Empieza 20px abajo
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
+@media screen and (max-width: $max-celular) {
+	.overlay {
+		opacity: 1;
+		visibility: visible;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.5); // Color oscuro con transparencia
+		z-index: -1; // Debe estar por debajo de la NavBar pero encima del contenido
+		transition: opacity 3s ease-in-out;
+	}
 
+	//El not es para la navBar de personalizacion
+	.contenedorNavBar {
+		height: auto;
+		padding: 0.2rem 0.625rem;
+		border-top-left-radius: var(--radio1);
+		border-top-right-radius: var(--radio1);
+		box-shadow: 0px -10px 11px rgba(62, 61, 61, 0.733);
 
+		.menuSuperior {
+			flex-direction: column-reverse;
 
-@media screen and (max-width: $max-celular){
+			.itemBar {
+				height: fit-content;
+				max-height: 33rem;
+				overflow-y: auto;
+				padding: 1rem 0.5rem;
+			}
 
-    .overlay {
+			.tituloSuperior {
+				min-height: fit-content;
+				height: 4rem;
+				//gap: .3rem;
+				flex-wrap: nowrap;
+				.iconosNav {
+					display: flex;
+					width: 100%;
+					gap: 1rem;
+					justify-content: space-evenly;
+					margin-right: 0.1rem;
 
-        opacity: 1;
-        visibility: visible;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5); // Color oscuro con transparencia
-        z-index: -1; // Debe estar por debajo de la NavBar pero encima del contenido
-        transition: opacity 3s ease-in-out;
-    }
+					//margin: auto;
 
-    //El not es para la navBar de personalizacion
-    .contenedorNavBar{
-        height: auto;
-        padding: 0.2rem 0.625rem;
-        border-top-left-radius: $radio1;
-        border-top-right-radius: $radio1;
-        box-shadow:  0px -10px 11px rgba(62, 61, 61, 0.733);
-    
+					.menuHamburgesa {
+						display: flex;
+						align-items: center;
+						gap: 1rem;
+						width: 80%;
+						opacity: 1;
+						&:hover {
+							cursor: pointer;
+						}
+					}
 
-        .menuSuperior{
-            
-            flex-direction: column-reverse;
-            
-            
-            .itemBar{
-                height: fit-content;
-                max-height: 33rem;
-                overflow-y: auto;
-                padding: 1rem 0.5rem;
-                
-                
-            }
+					.iconoTheme {
+						opacity: 1;
+					}
 
+					.iconosSvg {
+						transform: scale(1.3);
+					}
+				}
 
-            .tituloSuperior{
-                min-height: fit-content;
-                height: 4rem;
-                //gap: .3rem;
-                flex-wrap: nowrap;
-                .iconosNav{
-                    display: flex;
-                    width: 100%;
-                    gap: 1rem;
-                    justify-content: space-evenly;
-                    margin-right: 0.1rem;
+				.contLogo {
+					width: 20%;
+					max-width: 30%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					//margin: auto;
 
-                    //margin: auto;
-    
-                    .menuHamburgesa{
+					.logoContenedor {
+						justify-content: center;
+					}
+				}
+			}
+		}
 
-                        display: flex;
-                        align-items: center;
-                        gap: 1rem;
-                        width: 80%;
-                        opacity: 1;
-                        &:hover{
-                            
-                            cursor: pointer;
-                        }
-                        
-                    }
+		.txtInferior {
+			display: none;
+		}
 
-                    .iconoTheme{
-                        opacity: 1;
-                    }
+		&.ocultar {
+			box-shadow: 0px -2px 20px rgba(62, 61, 61, 0.479);
 
-                    .iconosSvg{
-                        transform: scale(1.3);
-                    }
+			.linea {
+				display: none;
+			}
 
-                    
-                }
+			.itemBar {
+				display: none;
+			}
+		}
 
-                .contLogo{
-                    width: 20%;
-                    max-width: 30%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    //margin: auto;
-
-                    .logoContenedor{
-                        justify-content: center;
-                    }
-                }
-            }
-        }
-        
-        .txtInferior{
-            display: none ;
-        }
-
-        
-
-        &.ocultar{
-
-            box-shadow:  0px -2px 20px rgba(62, 61, 61, 0.479);
-
-            
-            .linea{
-                display: none;
-            }
-
-            .itemBar{
-                
-                display: none;
-            }
-        }
-
-        &:not(.ocultar) {
-            .itemBar{
-                animation: slideUp 0.2s ease-in-out;
-            }
-        }
-    }
-
+		&:not(.ocultar) {
+			.itemBar {
+				animation: slideUp 0.2s ease-in-out;
+			}
+		}
+	}
 }

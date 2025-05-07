@@ -1,23 +1,20 @@
 @import '../../variables.scss';
 
+.layautMateriasGrados {
+	display: flex;
 
-.layautMateriasGrados{
-
-    display: flex;
-
-    width: 100%;
+	width: 100%;
 }
 .layautMateriasGradosColumn {
-    padding: 0 0.6rem; /* gutter size */
-
+	padding: 0 0.6rem;
 }
 
-.layautMateriasGradosColumn > div { /* change div to reference your elements you put in <Masonry> */
-    margin-bottom: 1rem;
+.layautMateriasGradosColumn > div {
+	margin-bottom: 1rem;
 }
 
-@media screen and (max-width: $max-celular){
-    .materiasGrados{
-        justify-content: center;}
+@media screen and (max-width: $max-celular) {
+	.materiasGrados {
+		justify-content: center;
+	}
 }
-    

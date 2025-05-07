@@ -1,131 +1,114 @@
-@import '../../global.scss';
 @import '../../variables.scss';
-.contenedorFooter{
-    display: flex;
-    padding: 2.25rem 6rem;
-    align-items: center;
-    justify-content: space-between;
-    
-    background-color: var(--colorPrincipal);
-    color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
-    margin-top: 8rem;
-    border-radius: $radio4;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
+.contenedorFooter {
+	display: flex;
+	padding: 2.25rem 6rem;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--colorPrincipal);
+	color: color-mix(in srgb, var(--colorPrincipal) 20%, rgb(255, 255, 255));
+	margin-top: 8rem;
+	border-radius: var(--radio4);
+	flex-wrap: wrap;
+	gap: 1rem;
+	width: 100%;
 
-    a {
-        text-decoration: none; /* Quita el subrayado */
-        color: inherit; /* Usa el color del texto del padre */
-    }
-    
-    .contenedor{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5625rem;
-        flex-wrap: wrap;
-        width: auto;
-        max-width: 40%;
+	a {
+		text-decoration: none; /* Quita el subrayado */
+		color: inherit; /* Usa el color del texto del padre */
+	}
 
-        
+	.contenedor {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5625rem;
+		flex-wrap: wrap;
+		width: auto;
+		max-width: 40%;
 
-        .info{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.625rem;
-            flex-wrap: wrap;
-            max-width: 100%;
+		.info {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.625rem;
+			flex-wrap: wrap;
+			max-width: 100%;
 
-            .redes{
-                display: flex;
-                max-width: 100%;
-                flex-wrap: wrap;
-                gap: 1rem;
+			.redes {
+				display: flex;
+				max-width: 100%;
+				flex-wrap: wrap;
+				gap: 1rem;
 
-                .logo{
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
-            }
+				.logo {
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
 
+			p {
+				max-width: 100%;
+				white-space: normal; /* Permite saltos de línea */
+				word-wrap: break-word;
+			}
+		}
+	}
 
+	.contenedorImg {
+		display: flex;
+		align-items: center; /* Centra la imagen */
+		justify-content: center;
+		max-width: 20%;
+		background-color: rgba(255, 255, 255, 0.5);
+		border-radius: var(--radio4);
 
-            p{
-                max-width: 100%;
-                white-space: normal; /* Permite saltos de línea */
-                word-wrap: break-word;
-            }
-            
-        }
-    }
+		.logo {
+			width: 100%; /* Ajusta el ancho al 100% del contenedor */
+			height: 100%; /* Ocupa toda la altura del contenedor */
 
-    .contenedorImg{
-        
-        display: flex;
-        align-items: center; /* Centra la imagen */
-        justify-content: center;
-        max-width: 20%;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: $radio4;
-        
-        
-        .logo{
-            width: 100%; /* Ajusta el ancho al 100% del contenedor */
-            height: 100%; /* Ocupa toda la altura del contenedor */
+			object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
+			object-position: center;
+		}
+	}
 
-            object-fit: contain; /* Asegura que la imagen completa se vea sin recortes */
-            object-position: center;
-
-        }
-    }
-
-    h3 {
-        max-width: 100%;
-        white-space: normal; /* Permite saltos de línea */
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-    }
+	h3 {
+		max-width: 100%;
+		white-space: normal; /* Permite saltos de línea */
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+	}
 }
 
+@media screen and (max-width: $max-celular) {
+	.contenedorFooter {
+		padding: 1.5rem 2.5rem;
 
-@media screen and (max-width: $max-celular){
+		a {
+			text-decoration: none; /* Quita el subrayado */
+			color: inherit; /* Usa el color del texto del padre */
+		}
 
-    .contenedorFooter{
-        
-        padding: 1.5rem 2.5rem;
+		.contenedor {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5625rem;
+			flex-wrap: wrap;
+			width: auto;
+			max-width: 100%;
+			margin: auto;
+		}
 
-        a {
-            text-decoration: none; /* Quita el subrayado */
-            color: inherit; /* Usa el color del texto del padre */
-        }
-        
-        .contenedor{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5625rem;
-            flex-wrap: wrap;
-            width: auto;
-            max-width: 100%;
-            margin: auto;
-    
-        }
-
-        .contenedorImg{
-            max-width: 30%;
-            margin: auto;
-        }
-    
-        
-    }
-
+		.contenedorImg {
+			max-width: 30%;
+			margin: auto;
+		}
+	}
 }
 
-.dark{
-    .contenedorFooter{
-        background-color: $dark-azul;
-    }
+.dark {
+	.contenedorFooter {
+		background-color: var(--dark-azul);
+	}
 }

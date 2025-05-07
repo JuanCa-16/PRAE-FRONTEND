@@ -1,353 +1,328 @@
-@import '../../global.scss';
 @import '../../variables.scss';
 
-
 //Estilos para la celda
-.celda{
+.celda {
+	border-radius: 0.75rem;
+	display: inline-flex;
+	padding: 0.3125rem 1.3125rem;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 
-    border-radius: 0.75rem;
-    display: inline-flex;
-    padding: 0.3125rem 1.3125rem;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+	p {
+		text-align: center;
+	}
 
-    p{
-        text-align: center;  
-    }
-    
-    //Si es de tipo titulo
-    &.titulo{
-        font-weight: bold;
-        color: var(--colorPildora1);
-        background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+	//Si es de tipo titulo
+	&.titulo {
+		font-weight: bold;
+		color: var(--colorPildora1);
+		background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-        //si tiene rol de ver
-        &.ver{
-            &:hover{
-                cursor: pointer;
-                color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
-                background-color: var(--colorPildora1);
-            }
-        }
-    }
+		//si tiene rol de ver
+		&.ver {
+			&:hover {
+				cursor: pointer;
+				color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+				background-color: var(--colorPildora1);
+			}
+		}
+	}
 
-    //Si es de tipo titulo2
-    &.titulo2{
-        font-weight: bold;
-        color: var(--colorPildora1);
-        background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+	//Si es de tipo titulo2
+	&.titulo2 {
+		font-weight: bold;
+		color: var(--colorPildora1);
+		background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
 
-        //si tiene rol de ver
-        &.ver{
-            &:hover{
-                cursor: pointer;
-                color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
-                background-color: var(--colorPildora1);
-            }
-        }
-    }
+		//si tiene rol de ver
+		&.ver {
+			&:hover {
+				cursor: pointer;
+				color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+				background-color: var(--colorPildora1);
+			}
+		}
+	}
 
-    //Si es de tipo normal
-    &.normal{
-        
-        padding: 0.375rem 1.3125rem;
-        background-color: var(--fondo);
+	//Si es de tipo normal
+	&.normal {
+		padding: 0.375rem 1.3125rem;
+		background-color: var(--fondo);
 
-        //si tiene el rol de ver
-        &.ver{
-            &:hover{
-                cursor: pointer;
-                color: var(--colorPildora1);
-                background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
-            }
-        }
-    }
+		//si tiene el rol de ver
+		&.ver {
+			&:hover {
+				cursor: pointer;
+				color: var(--colorPildora1);
+				background-color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+			}
+		}
+	}
 
-    &.morado{
-        //Si es de tipo titulo
-        &.titulo{
-            font-weight: bold;
-            color: var(--colorPildora2);
-            background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+	&.morado {
+		//Si es de tipo titulo
+		&.titulo {
+			font-weight: bold;
+			color: var(--colorPildora2);
+			background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
 
-            //si tiene rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-                    background-color: var(--colorPildora2);
-                }
-            }
-        }
+			//si tiene rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+					background-color: var(--colorPildora2);
+				}
+			}
+		}
 
-        //Si es de tipo titulo2
-        &.titulo2{
-            font-weight: bold;
-            color: var(--colorPildora2);
-            background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+		//Si es de tipo titulo2
+		&.titulo2 {
+			font-weight: bold;
+			color: var(--colorPildora2);
+			background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
 
-            //si tiene rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-                    background-color: var(--colorPildora2);
-                }
-            }
-        }
+			//si tiene rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
+					background-color: var(--colorPildora2);
+				}
+			}
+		}
 
-        //Si es de tipo normal
-        &.normal{
-            
-            padding: 0.375rem 1.3125rem;
-            background-color: var(--fondo);
+		//Si es de tipo normal
+		&.normal {
+			padding: 0.375rem 1.3125rem;
+			background-color: var(--fondo);
 
-            //si tiene el rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: var(--colorPildora2);
-                    background-color: color-mix(in srgb, var(--colorPildora2) 20%, rgb(255, 255, 255));
-                }
-            }
-        }
-    }
+			//si tiene el rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: var(--colorPildora2);
+					background-color: color-mix(
+						in srgb,
+						var(--colorPildora2) 20%,
+						rgb(255, 255, 255)
+					);
+				}
+			}
+		}
+	}
 
-    &.amarillo{
-        //Si es de tipo titulo
-        &.titulo{
-            font-weight: bold;
-            color: var(--colorPildora3);
-            background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+	&.amarillo {
+		//Si es de tipo titulo
+		&.titulo {
+			font-weight: bold;
+			color: var(--colorPildora3);
+			background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
 
-            //si tiene rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-                    background-color: var(--colorPildora3);
-                }
-            }
-        }
+			//si tiene rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+					background-color: var(--colorPildora3);
+				}
+			}
+		}
 
-        //Si es de tipo titulo2
-        &.titulo2{
-            font-weight: bold;
-            color: var(--colorPildora3);
-            background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+		//Si es de tipo titulo2
+		&.titulo2 {
+			font-weight: bold;
+			color: var(--colorPildora3);
+			background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
 
-            //si tiene rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-                    background-color: var(--colorPildora3);
-                }
-            }
-        }
+			//si tiene rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
+					background-color: var(--colorPildora3);
+				}
+			}
+		}
 
-        //Si es de tipo normal
-        &.normal{
-            
-            padding: 0.375rem 1.3125rem;
-            background-color: var(--fondo);
+		//Si es de tipo normal
+		&.normal {
+			padding: 0.375rem 1.3125rem;
+			background-color: var(--fondo);
 
-            //si tiene el rol de ver
-            &.ver{
-                &:hover{
-                    cursor: pointer;
-                    color: var(--colorPildora3);
-                    background-color: color-mix(in srgb, var(--colorPildora3) 20%, rgb(255, 255, 255));
-                }
-            }
-        }
-    }
-
-
+			//si tiene el rol de ver
+			&.ver {
+				&:hover {
+					cursor: pointer;
+					color: var(--colorPildora3);
+					background-color: color-mix(
+						in srgb,
+						var(--colorPildora3) 20%,
+						rgb(255, 255, 255)
+					);
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: $max-celular){
-    .celda{
-        display: flex;
-        padding: 0.2rem 0.5rem;
-        justify-content: center;     /* Centra el contenido horizontalmente */
-        align-items: center; 
+@media screen and (max-width: $max-celular) {
+	.celda {
+		display: flex;
+		padding: 0.2rem 0.5rem;
+		justify-content: center; /* Centra el contenido horizontalmente */
+		align-items: center;
 
+		p {
+			text-align: center;
+		}
 
-        p{
-            text-align: center;  
-        }
+		&.titulo {
+			height: 2rem;
+		}
 
-        &.titulo{
-            height: 2rem;
-        }
+		&.titulo2 {
+			height: 3.5rem;
+			overflow: hidden;
+		}
 
-        &.titulo2{
-            height: 3rem;
-            overflow: hidden;
-        }
-
-        &.normal{
-            height: 3rem;
-        }
-    }
+		&.normal {
+			height: 3.5rem;
+		}
+	}
 }
 
-.dark{
-    .celda{
+.dark {
+	.celda {
+		//Si es de tipo titulo
+		&.titulo {
+			color: var(--dark-azul);
+			background-color: var(--dark-contraste-azul);
 
-        //Si es de tipo titulo
-        &.titulo{
-            
-            color: $dark-azul;
-            background-color: $dark-contraste-azul;
-    
-            //si tiene rol de ver
-            &.ver{
-                &:hover{
-                    
-                    color: $dark-negro;
-                    background-color: $dark-azul;
-                }
-            }
-        }
-    
-        //Si es de tipo titulo2
-        &.titulo2{
-            
-            color: $dark-azul;
-            
-            background-color: $dark-contraste-azul;
-    
-            //Si tiene rol de ver
-            &.ver{
-                &:hover{
-                    
-                    color: $dark-negro;
-                    background-color: $dark-azul;
-                }
-            }
-        }
-    
-        //Si es de tipo normal
-        &.normal{
-            
-            
-            background-color: $dark-super-negro;
-    
-            //si tiene el rol de ver
-            &.ver{
-                &:hover{
+			//si tiene rol de ver
+			&.ver {
+				&:hover {
+					color: var(--dark-negro);
+					background-color: var(--dark-azul);
+				}
+			}
+		}
 
-                    color: $dark-azul;
-                    background-color: $dark-contraste-negro;
-                }
-            }
-        }
+		//Si es de tipo titulo2
+		&.titulo2 {
+			color: var(--dark-azul);
 
-        &.morado{
-            //Si es de tipo titulo
-            &.titulo{
-                
-                color: $dark-morado;
-                background-color: $dark-contraste-morado;
-        
-                //si tiene rol de ver
-                &.ver{
-                    &:hover{
-                        
-                        color: $dark-negro;
-                        background-color: $dark-morado;
-                    }
-                }
-            }
-        
-            //Si es de tipo titulo2
-            &.titulo2{
-                
-                color: $dark-morado;
-                
-                background-color: $dark-contraste-morado;
-        
-                //Si tiene rol de ver
-                &.ver{
-                    &:hover{
-                        
-                        color: $dark-negro;
-                        background-color: $dark-morado;
-                    }
-                }
-            }
-        
-            //Si es de tipo normal
-            &.normal{
-                
-                
-                background-color: $dark-super-negro;
-        
-                //si tiene el rol de ver
-                &.ver{
-                    &:hover{
+			background-color: var(--dark-contraste-azul);
 
-                        color: $dark-morado;
-                        background-color: $dark-contraste-negro;
-                    }
-                }
-            }
-        }
+			//Si tiene rol de ver
+			&.ver {
+				&:hover {
+					color: var(--dark-negro);
+					background-color: var(--dark-azul);
+				}
+			}
+		}
 
-        &.amarillo{
-            //Si es de tipo titulo
-            &.titulo{
-                
-                color: $dark-amarillo;
-                background-color: $dark-contraste-amarillo;
-        
-                //si tiene rol de ver
-                &.ver{
-                    &:hover{
-                        
-                        color: $dark-negro;
-                        background-color: $dark-amarillo;
-                    }
-                }
-            }
-        
-            //Si es de tipo titulo2
-            &.titulo2{
-                
-                color: $dark-amarillo;
-                
-                background-color: $dark-contraste-amarillo;
-        
-                //Si tiene rol de ver
-                &.ver{
-                    &:hover{
-                        
-                        color: $dark-negro;
-                        background-color: $dark-amarillo;
-                    }
-                }
-            }
-        
-            //Si es de tipo normal
-            &.normal{
-                
-                
-                background-color: $dark-super-negro;
-        
-                //si tiene el rol de ver
-                &.ver{
-                    &:hover{
+		//Si es de tipo normal
+		&.normal {
+			background-color: var(--dark-super-negro);
 
-                        color: $dark-amarillo;
-                        background-color: $dark-contraste-negro;
-                    }
-                }
-            }
-        }
-    
-    
-    }
+			//si tiene el rol de ver
+			&.ver {
+				&:hover {
+					color: var(--dark-azul);
+					background-color: var(--dark-contraste-negro);
+				}
+			}
+		}
+
+		&.morado {
+			//Si es de tipo titulo
+			&.titulo {
+				color: var(--dark-morado);
+				background-color: var(--dark-contraste-morado);
+
+				//si tiene rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-negro);
+						background-color: var(--dark-morado);
+					}
+				}
+			}
+
+			//Si es de tipo titulo2
+			&.titulo2 {
+				color: var(--dark-morado);
+
+				background-color: var(--dark-contraste-morado);
+
+				//Si tiene rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-negro);
+						background-color: var(--dark-morado);
+					}
+				}
+			}
+
+			//Si es de tipo normal
+			&.normal {
+				background-color: var(--dark-super-negro);
+
+				//si tiene el rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-morado);
+						background-color: var(--dark-contraste-negro);
+					}
+				}
+			}
+		}
+
+		&.amarillo {
+			//Si es de tipo titulo
+			&.titulo {
+				color: var(--dark-amarillo);
+				background-color: var(--dark-contraste-amarillo);
+
+				//si tiene rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-negro);
+						background-color: var(--dark-amarillo);
+					}
+				}
+			}
+
+			//Si es de tipo titulo2
+			&.titulo2 {
+				color: var(--dark-amarillo);
+
+				background-color: var(--dark-contraste-amarillo);
+
+				//Si tiene rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-negro);
+						background-color: var(--dark-amarillo);
+					}
+				}
+			}
+
+			//Si es de tipo normal
+			&.normal {
+				background-color: var(--dark-super-negro);
+
+				//si tiene el rol de ver
+				&.ver {
+					&:hover {
+						color: var(--dark-amarillo);
+						background-color: var(--dark-contraste-negro);
+					}
+				}
+			}
+		}
+	}
 }

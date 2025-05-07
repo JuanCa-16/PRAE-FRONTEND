@@ -112,7 +112,7 @@
 
   
     &:hover {
-      box-shadow: 0 1px 7px $dark-azul;
+      box-shadow: 0 1px 7px var(--dark-azul);
     }
   }
 
@@ -125,8 +125,8 @@
       textarea {
         padding: 1rem;
         border-radius: 10px;
-        background-color: $dark-super-negro;
-        border: 1px solid $dark-contraste-negro;
+        background-color: var(--dark-super-negro);
+        border: 1px solid var(--dark-contraste-negro);
         width: 100%;
         min-height: 120px;
         resize: none;
@@ -134,12 +134,12 @@
         font-size: 1rem;
   
         &:focus {
-          outline: 2px solid $dark-azul;
+          outline: 2px solid var(--dark-azul);
         }
       }
   
       .btn-guardar {
-          background-color: $dark-azul;
+          background-color: var(--dark-azul);
         }
         
     }
@@ -149,11 +149,11 @@
   
       .observacion-item {
 
-        background-color:$dark-super-negro;
+        background-color:var(--dark-super-negro);
 
         
         .fecha {
-          color: $dark-azul;
+          color: var(--dark-azul);
         }
   
 

@@ -28,9 +28,9 @@
         }
 
         .fondo{
-            background-color: $contraste-blanco;
+            background-color: var(--contraste-blanco);
             padding: 1rem;
-            border-radius: $radio1;
+            border-radius: var(--radio1);
         }
 
         .fuerte{
@@ -46,11 +46,11 @@
         .observaciones{
 
             .fondo{
-                background-color: $dark-super-negro;
+                background-color: var(--dark-super-negro);
             }
     
             .fuerte{
-                color:  $dark-azul;
+                color:  var(--dark-azul);
             }
         }
     }

@@ -116,23 +116,23 @@
 .dark{
     .contenedorLogin{
 
-        background-color: $dark-negro;
+        background-color: var(--dark-negro);
     
         .pagLogin{
 
-            background-color: $dark-negro;
+            background-color: var(--dark-negro);
     
             .izq{
-                background: $dark-super-negro;
+                background: var(--dark-super-negro);
             }
 
             .der{
-                background-color: $dark-negro;
+                background-color: var(--dark-negro);
                 .lato_1{
-                    color: $dark-contraste-azul;
+                    color: var(--dark-contraste-azul);
 
                     &:hover{
-                        color: $dark-azul;
+                        color: var(--dark-azul);
                         }
                     }
             }

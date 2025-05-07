@@ -1,10 +1,9 @@
-.contenedorMaterias{
-    display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 1.5rem;
-    //align-self: stretch;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
+.contenedorMaterias {
+	display: flex;
+	align-items: flex-start;
+	align-content: flex-start;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+	width: 100%;
+	justify-content: center;
 }
