@@ -26,6 +26,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
     const [info, setInfo] = useState([]);
     const [infoNota, setInfoNota] = useState([]);
 
+    const [totalPorcentajes, setTotalPorcentaje] = useState([]);
 
     const [reload, setReload] = useState(false);
 
@@ -50,8 +51,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                     throw new Error(`${errorData.message || response.status}`);
                 }
 
+                console.log('AAAAAA');
                 const data = await response.json();
-                console.log('AAAAAA',data);
                 const listaData = Object.values(data);
                 console.log('infoooo', listaData);
 
@@ -130,10 +131,10 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
             return;
         }
 
-        // if (totalPorcentajes + peso > 100) {
-        //     Alerta.error('Excederas el 100%');
-        //     return;
-        // }
+        if (totalPorcentajes + peso > 100) {
+            Alerta.error('Excederas el 100%');
+            return;
+        }
 
         try {
             setCargando(true);
@@ -196,28 +197,23 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
         setReload((prev) => !prev);
     };
 
-    const [expandir, setExpandir] = useState({});
+    const [expandir, setExpandir] = useState(true);
+
     const [primerClick, setPrimerClick] = useState(false);
 
-    const handlePrimerClick = (index) => {
+    const handlePrimerClick = () => {
         if (!primerClick) {
             setPrimerClick(true); // Establecer que el primer clic ha ocurrido
-			setExpandir((prevState) => ({
-				...prevState,
-				[index]: !prevState[index], // Si es true, se pone false, y viceversa
-			  }));
-        }else{
-			setExpandir((prevState) => ({
-				...prevState,
-				[index]: !prevState[index], // Si es true, se pone false, y viceversa
-			  }));
-		}
+            setExpandir(!expandir); // Puedes cambiar la lógica de expandir aquí
+        } else {
+            setExpandir(!expandir);
+        }
     };
 
     return (
         <div className='contenedorNotas'>
             {info.length > 0 ? (
-                info.map((periodo,idx) => {
+                info.map((periodo) => {
                     const listadoEst = periodo.estudiantes.map(
                         (item) => ` ${item.apellido} ${item.nombre}`
                     );
@@ -243,25 +239,23 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                         // 	})
                         // );
 
-                        const totalPorcentajes = periodo.estudiantes
+                        const total = periodo.estudiantes
                         .map((est) => est.actividades.map((act) => [{ peso: act.peso }]))[0]
                         .flat()
                         .reduce((sum, actividad) => sum + actividad.peso, 0); // Suma los pesos
 
-						console.log('PERIODO',idx)
-
-
+                    setTotalPorcentaje(total); // Guarda el resultado en el estado
                     return (
-                        <div className='grupo' key={idx}>
+                        <div className='grupo'>
                             <PildoraMateriaGrado
                                 texto={periodo.nombre.toUpperCase()}
                                 color={infoCurso.color}
-                                onClick={() => handlePrimerClick(idx)}
+                                onClick={handlePrimerClick}
                             ></PildoraMateriaGrado>
                             <div
                                 className={`contenedor ${
                                     primerClick
-                                        ? expandir[idx]
+                                        ? expandir
                                             ? 'expandir'
                                             : 'noExpandir'
                                         : 'noMostrar'
@@ -347,7 +341,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                                                             }}
                                                         />
                                                     )}
-                                                    {periodo.estudiantes.map(
+                                                    {info.map(
                                                         (
                                                             estudiante,
                                                             j
