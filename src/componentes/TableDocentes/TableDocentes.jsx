@@ -120,7 +120,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e,totalPesoPorcentaje) => {
         e.preventDefault();
 
         const peso = parseFloat(nombreAct.peso);
@@ -130,10 +130,10 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
             return;
         }
 
-        // if (totalPorcentajes + peso > 100) {
-        //     Alerta.error('Excederas el 100%');
-        //     return;
-        // }
+         if (totalPesoPorcentaje + peso > 100) {
+             Alerta.error('Excederas el 100%');
+             return;
+         }
 
         try {
             setCargando(true);
@@ -216,7 +216,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 
     return (
         <div className='contenedorNotas'>
-            {info.length > 0 ? (
+            {info.length > 0 && info[0].estudiantes.length > 0 ? (
+				
                 info.map((periodo,idx) => {
                     const listadoEst = periodo.estudiantes.map(
                         (item) => ` ${item.apellido} ${item.nombre}`
@@ -236,12 +237,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                         )[0]
                         .flat()
                         .sort((a, b) => a.actividad.localeCompare(b.actividad))
-                        // .sort((a, b) =>
-                        // 	a.trim().localeCompare(b.trim(), 'es', {
-                        // 		sensitivity: 'base', // ignora mayúsculas / tildes
-                        // 		ignorePunctuation: true,
-                        // 	})
-                        // );
+
 
                         const totalPorcentajes = periodo.estudiantes
                         .map((est) => est.actividades.map((act) => [{ peso: act.peso }]))[0]
@@ -344,6 +340,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                                                                 grado: infoCurso.curso,
                                                                 id_act: actividad.idAct,
                                                                 id_docente: infoDocente,
+																pesoTotalActual:totalPorcentajes,
                                                             }}
                                                         />
                                                     )}
@@ -442,82 +439,85 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
                                         )}
                                     </div>
                                 </div>
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className='contenedorAct'
-                                >
-                                    <div className='titulo'>
-                                        <p className='bold'>CREAR ACTIVIDAD:</p>
-                                        <p>
-                                            Total de porcentaje ocupado:{' '}
-                                            {totalPorcentajes}%, disponible
-                                            para asignar:{' '}
-                                            {100 - totalPorcentajes}%
-                                        </p>
-                                        {totalPorcentajes === 100 && (
-                                            <p className='alertaTxt'>
-                                                Edita el peso de
-                                                actividades para poder
-                                                asignar más.
-                                            </p>
-                                        )}
-                                    </div>
-                                    <div className='crearAct'>
-                                        <div className='campos'>
-                                            <InputContainer
-                                                titulo='Nombre'
-                                                placeholder='Nombre de la actividad'
-                                                inputType='text'
-                                                value={
-                                                    nombreAct.actividad
-                                                }
-                                                onChange={(value) =>
-                                                    handleChange(
-                                                        'actividad',
-                                                        capitalizeWords(
-                                                            value
-                                                        )
-                                                    )
-                                                } // Pasamos la función que actualizará el estado
-                                                required={true} // Hacemos que el campo sea obligatorio
-                                            />
-                                            <InputContainer
-                                                titulo='Peso'
-                                                placeholder='Valor entre 0 - 100'
-                                                inputType='text'
-                                                value={nombreAct.peso} // El valor del input viene del estado del componente padre
-                                                onChange={(value) =>
-                                                    handleChange(
-                                                        'peso',
-                                                        value
-                                                    )
-                                                } // Pasamos la función que actualizará el estado
-                                                required={true} // Hacemos que el campo sea obligatorio
-                                            />
-                                            <button
-                                                type='submit'
-                                                disabled={
-                                                    cargando ||
-                                                    totalPorcentajes ===
-                                                        100
-                                                }
-                                            >
-                                                {cargando
-                                                    ? 'cargando...'
-                                                    : totalPorcentajes ===
-                                                      100
-                                                    ? 'Sin Espacio'
-                                                    : 'Crear'}{' '}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                {periodo.estado && 
+								<form
+								onSubmit={(e) => handleSubmit(e, totalPorcentajes)}
+								className='contenedorAct'
+							>
+								<div className='titulo'>
+									<p className='bold'>CREAR ACTIVIDAD:</p>
+									<p>
+										Total de porcentaje ocupado:{' '}
+										{totalPorcentajes}%, disponible
+										para asignar:{' '}
+										{100 - totalPorcentajes}%
+									</p>
+									{totalPorcentajes === 100 && (
+										<p className='alertaTxt'>
+											Edita el peso de
+											actividades para poder
+											asignar más.
+										</p>
+									)}
+								</div>
+								<div className='crearAct'>
+									<div className='campos'>
+										<InputContainer
+											titulo='Nombre'
+											placeholder='Nombre de la actividad'
+											inputType='text'
+											value={
+												nombreAct.actividad
+											}
+											onChange={(value) =>
+												handleChange(
+													'actividad',
+													capitalizeWords(
+														value
+													)
+												)
+											} // Pasamos la función que actualizará el estado
+											required={true} // Hacemos que el campo sea obligatorio
+										/>
+										<InputContainer
+											titulo='Peso'
+											placeholder='Valor entre 0 - 100'
+											inputType='text'
+											value={nombreAct.peso} // El valor del input viene del estado del componente padre
+											onChange={(value) =>
+												handleChange(
+													'peso',
+													value
+												)
+											} // Pasamos la función que actualizará el estado
+											required={true} // Hacemos que el campo sea obligatorio
+										/>
+										<button
+											type='submit'
+											disabled={
+												cargando ||
+												totalPorcentajes ===
+													100
+											}
+										>
+											{cargando
+												? 'cargando...'
+												: totalPorcentajes ===
+												  100
+												? 'Sin Espacio'
+												: 'Crear'}{' '}
+										</button>
+									</div>
+								</div>
+							</form>
+								}
                             </div>
                         </div>
                     );
                 })
             ) : (
-                <p>Actualmente no hay periodos {info.length}</p>
+				info.length <= 0? <p>Actualmente no hay periodos {info.length}</p>:<p>Todavia no hay estudiantes</p>
+                
             )}
         </div>
     );
