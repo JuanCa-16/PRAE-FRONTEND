@@ -82,6 +82,11 @@ const Modal = ({
 
 		console.log('Datos del formulario ACTIVIDAD:', JSON.stringify(formData));
 
+		if (formData.pesoTotalActual + formData.pesoAct > 100) {
+			Alerta.error('Excederas el 100%');
+			return;
+		}
+
 		try {
 			const response = await fetch(`${API_URL}actividad/actualizar/${formData.id_act}`, {
 				method: 'PUT',
