@@ -4,12 +4,10 @@
 	from {
 		transform: translateY(-20px); /* Empieza un poco más arriba */
 		opacity: 0; /* Empieza invisible */
-		max-height: 0; /* Empieza con altura 0 */
 	}
 	to {
 		transform: translateY(0); /* Llega a su posición original */
 		opacity: 1; /* Se hace visible */
-		max-height: 1000rem; /* Ajusta este valor según el tamaño del contenido */
 	}
 }
 
@@ -17,12 +15,10 @@
 	from {
 		transform: translateY(0); /* Empieza desde la posición original */
 		opacity: 1; /* Empieza visible */
-		max-height: 1000rem; /* El contenedor tiene su altura completa */
 	}
 	to {
 		transform: translateY(-20px); /* Se mueve hacia arriba */
 		opacity: 0; /* Se hace invisible */
-		max-height: 0; /* Se colapsa */
 	}
 }
 .contenedorNotas {
@@ -39,11 +35,11 @@
 		gap: 1rem;
 		height: fit-content;
 		.contenedorPildoraG {
-			margin-bottom: 2rem;
+			margin-bottom: 1rem;
 		}
 
 		&:not(:first-child) {
-			margin-top: 1rem; /* Ajusta el valor del margin según sea necesario */
+			margin-top: 1.5rem; /* Ajusta el valor del margin según sea necesario */
 		}
 		.contenedor {
 			display: flex;
@@ -159,22 +155,21 @@
 			}
 
 			&.noExpandir {
-				opacity: 0; /* Se hace invisible */
-				max-height: 0; /* Se colapsa */
+				visibility: hidden;
 				animation: slideUpTable 0.2s ease-out; /* Animación para el deslizamiento hacia arriba */
+				display: none;
 			}
 
 			&.expandir {
-				opacity: 1; /* Se hace visible */
-				max-height: auto; /* Ajustar a un valor adecuado para tu contenido */
+				visibility: visible;
 				animation: slideDownTable 0.3s ease-in-out; /* Animación al expandirse */
 				//margin-bottom: 2rem;
 			}
 		}
 
 		.noMostrar {
-			opacity: 0; /* Se hace invisible */
-			max-height: 0; /* Se colapsa */
+			visibility: hidden;
+			display: none;
 		}
 	}
 }
