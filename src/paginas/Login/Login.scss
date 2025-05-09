@@ -4,6 +4,9 @@
 	display: flex;
 	width: 100%;
 	height: 100vh;
+	height: 100dvh;
+	max-height: 100vh;
+	max-height: 100dvh;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
@@ -19,6 +22,7 @@
 		.izq {
 			display: flex;
 			width: 100%;
+			max-width: 50%;
 			padding: 2rem 2rem;
 			flex-direction: column;
 			align-items: center;
@@ -26,6 +30,7 @@
 			background: var(--colorSecundario);
 			height: 100%;
 			max-height: 100vh;
+			max-height: 100dvh;
 
 			.imagen_logo {
 				display: flex;
@@ -78,18 +83,33 @@
 		.der {
 			display: flex;
 			width: 100%;
-			padding: 90px 96px;
+			padding: 1.5rem 4.5rem;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			align-self: stretch;
+			height: 100%;
+			max-height: 100vh;
+			max-height: 100dvh;
+			//align-self: stretch;
+
+			.btnDemo {
+				width: 100%;
+				height: 100%;
+				padding: 0.6rem;
+				max-height: 4rem;
+			}
+
+			.linea {
+				margin: 0.5rem 0;
+			}
 
 			.title {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				width: 100%;
-				height: 40%;
+				height: fit-content;
+				//max-height: 20%;
 				padding: 10px;
 			}
 
@@ -97,20 +117,20 @@
 				display: flex;
 				flex-direction: column;
 				width: 100%;
-				height: 100%;
+				height: fit-content;
+				//max-height: 60%;
 				gap: 25px;
-				padding: 10px;
+				padding: 0.6rem;
+				overflow-y: auto;
 			}
 
 			.inputs {
 				display: flex;
 				flex-direction: column;
-				gap: 15px;
+				gap: 1rem;
 				width: 100%;
-			}
-
-			.inputs input {
-				padding: 20px;
+				max-height: 100%;
+				//overflow: hidden;
 			}
 
 			.lato_1 {
@@ -121,6 +141,45 @@
 
 				&:hover {
 					color: var(--colorPrincipal);
+				}
+			}
+
+			.contenedorDemo {
+				display: none;
+			}
+		}
+
+		.Form_login::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&.demoView {
+		.pagLogin {
+			.der {
+				.title {
+					display: none;
+				}
+
+				.Form_login {
+					display: none;
+				}
+
+				.contenedorDemo {
+					display: flex;
+					width: 100%;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					gap: 2rem;
+					height: 100%;
+					max-height: 100vh;
+					max-height: 100dvh;
+					overflow-y: auto;
+
+					.contenedorPildoraG {
+						height: 4rem;
+					}
 				}
 			}
 		}
@@ -175,10 +234,11 @@
 			.izq {
 				display: flex;
 				width: 100%;
+				max-width: 100%;
 				// height: 100%;
 				height: auto;
-				max-height: 28%;
-				padding: 1.2rem 1.5rem;
+				max-height: 30%;
+				padding: 1.2rem 1.2rem;
 				padding-bottom: 1.5rem;
 				align-items: center;
 				gap: 10px;
@@ -223,7 +283,7 @@
 							padding: 0.2rem;
 							object-fit: contain;
 							object-position: center;
-							max-height: 40%;
+							max-height: 34%;
 							display: flex;
 							align-items: flex-start;
 						}
@@ -237,11 +297,11 @@
 				height: 70%;
 				max-height: 72%;
 				flex-grow: 1;
-				padding: 1.5rem 1.5rem;
+				padding: 1.2rem 1.2rem;
 				flex-direction: column;
 				align-items: center;
-				justify-content: center;
-				align-self: stretch;
+				justify-content: flex-start;
+				//align-self: stretch;
 				flex-shrink: 0;
 				background-color: var(--fondo);
 				border-top-left-radius: 2rem;
@@ -257,7 +317,8 @@
 					justify-content: flex-start;
 					width: 100%;
 					height: fit-content;
-					max-height: 100%;
+					max-height: 25%;
+					overflow: hidden;
 					padding: 10px;
 				}
 
@@ -266,10 +327,17 @@
 					flex-direction: column;
 					justify-content: flex-start;
 					width: 100%;
-					height: 100%;
+					height: fit-content;
 					gap: 25px;
-					padding: 10px;
-					max-height: 100%;
+					padding: 0.6rem;
+					max-height: 90%;
+				}
+
+				.btnDemo {
+					width: 100%;
+					height: 100%;
+					padding: 0;
+					max-height: 2.5rem;
 				}
 
 				.inputs {
@@ -291,6 +359,16 @@
 
 					&:hover {
 						color: var(--colorPrincipal);
+					}
+				}
+			}
+		}
+
+		&.demoView {
+			.pagLogin {
+				.der {
+					.contenedorDemo {
+						justify-content: flex-start;
 					}
 				}
 			}

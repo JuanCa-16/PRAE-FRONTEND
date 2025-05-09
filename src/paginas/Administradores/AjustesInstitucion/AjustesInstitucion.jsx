@@ -12,7 +12,7 @@ import Alerta from '../../../componentes/Alerta/Alerta';
 import './AjustesInstitucion.scss';
 
 const AjustesInstitucion = () => {
-	const { user, setUser } = useUser();
+	const { user, setUser, bloqueoDemo } = useUser();
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 
@@ -261,7 +261,12 @@ const AjustesInstitucion = () => {
 							)}
 						</div>
 
-						<button type='submit'>Guardar Cambios</button>
+						<button
+							disabled={bloqueoDemo}
+							type='submit'
+						>
+							Guardar Cambios
+						</button>
 					</form>
 				</div>
 				<div className='vistas'>

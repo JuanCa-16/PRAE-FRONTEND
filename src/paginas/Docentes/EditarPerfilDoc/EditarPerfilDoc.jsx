@@ -10,7 +10,7 @@ import './EditarPerfilDoc.scss';
 const EditarPerfilDoc = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user, setUser } = useUser();
+	const { user, setUser, bloqueoDemo } = useUser();
 
 	function capitalizeWords(str) {
 		return str
@@ -262,7 +262,7 @@ const EditarPerfilDoc = () => {
 
 					<button
 						type='submit'
-						disabled={isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged}
 					>
 						Guardar Cambios
 					</button>

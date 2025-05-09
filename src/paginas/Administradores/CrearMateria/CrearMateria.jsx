@@ -11,7 +11,7 @@ import './CrearMateria.scss';
 const CrearMateria = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
 	function capitalizeWords(str) {
@@ -170,7 +170,12 @@ const CrearMateria = () => {
 						required={true}
 						onChange={(value) => handleChange('materia', capitalizeWords(value))}
 					></InputContainer>
-					<button type='submit'>CREAR</button>
+					<button
+						type='submit'
+						disabled={bloqueoDemo}
+					>
+						CREAR
+					</button>
 				</form>
 			</div>
 			<Line></Line>

@@ -11,7 +11,7 @@ import './CrearGrados.scss';
 const CrearGrados = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 
 	const [reload, setReload] = useState(false);
 
@@ -177,7 +177,12 @@ const CrearGrados = () => {
 						required={true}
 						onChange={(value) => handleChange('grado', value)}
 					></InputContainer>
-					<button type='submit'>CREAR</button>
+					<button
+						type='submit'
+						disabled={bloqueoDemo}
+					>
+						CREAR
+					</button>
 				</form>
 			</div>
 			<Line></Line>

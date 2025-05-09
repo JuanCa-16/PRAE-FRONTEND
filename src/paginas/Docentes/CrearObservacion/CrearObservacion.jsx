@@ -13,7 +13,7 @@ const CrearObservacion = () => {
 	const { est } = location.state || {};
 	const [cargando, setCargando] = useState(false);
 
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 
 	const [reload, setReload] = useState(false);
 
@@ -139,7 +139,7 @@ const CrearObservacion = () => {
 				<button
 					type='submit'
 					className='btn-guardar'
-					disabled={cargando}
+					disabled={bloqueoDemo || cargando}
 				>
 					Guardar Cambios
 				</button>
@@ -163,6 +163,7 @@ const CrearObservacion = () => {
 								<p className='texto-observacion'>{obs.comentario}</p>
 
 								<button
+									disabled={bloqueoDemo}
 									type='button'
 									onClick={() => openModalObs(index)} // Abre el modal cuando se hace clic en el botón
 									className='btn-editar'

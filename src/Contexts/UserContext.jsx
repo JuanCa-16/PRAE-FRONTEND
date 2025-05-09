@@ -59,9 +59,18 @@ export const ContextProvider = ({ children }) => {
 	}, [theme]);
 
 	const [abrir, setAbrir] = useState(false);
+	const [bloqueoDemo, setBloqueoDemo] = useState(false);
+
+	useEffect(() => {
+		const demo = localStorage.getItem('DEMO');
+
+		if (demo) {
+			setBloqueoDemo(true);
+		}
+	}, [bloqueoDemo]);
 
 	return (
-		<UserContext.Provider value={{ user, setUser, abrir, setAbrir }}>
+		<UserContext.Provider value={{ user, setUser, abrir, setAbrir, bloqueoDemo, setBloqueoDemo }}>
 			<ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
 		</UserContext.Provider>
 	);
