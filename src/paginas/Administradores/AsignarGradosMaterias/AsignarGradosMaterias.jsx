@@ -13,7 +13,7 @@ import './AsignarGradosMaterias.scss';
 const AsignarGradosMaterias = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 	const navigate = useNavigate();
 	//Datos inciales a mostrar
@@ -541,7 +541,12 @@ const AsignarGradosMaterias = () => {
                             </div>
                             
                     </div> */}
-					<button type='submit'>Guardar Cambios</button>
+					<button
+						disabled={bloqueoDemo}
+						type='submit'
+					>
+						Guardar Cambios
+					</button>
 				</form>
 			</div>
 			<Line></Line>
@@ -609,6 +614,9 @@ const AsignarGradosMaterias = () => {
 													Ir
 												</button>
 												<button
+													disabled={
+														bloqueoDemo
+													}
 													onClick={() =>
 														setIsModalOpenConfirmacion(
 															true
@@ -638,6 +646,9 @@ const AsignarGradosMaterias = () => {
 											>
 												<div className='botonesJuntos'>
 													<button
+														disabled={
+															bloqueoDemo
+														}
 														onClick={() =>
 															handleEliminar(
 																index,

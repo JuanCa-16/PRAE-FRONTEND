@@ -48,7 +48,7 @@ function App() {
 	const API_URL = process.env.REACT_APP_API_URL;
 
 	//ALMACENAR LOS DATOS DEL USUARIO EXTRAIDOS DEL TOKEN
-	const { user, setUser, abrir, setAbrir } = useUser();
+	const { user, setUser, abrir, setAbrir, setBloqueoDemo } = useUser();
 	const { theme } = useTheme();
 
 	//VERIFICAR EXISTENCIA Y VALIDACION DEL TOKEN
@@ -90,7 +90,7 @@ function App() {
 	}, [setUser, API_URL]);
 
 	//Si inicia seseion se crear el LOCAL
-	const iniciarSesion = async (email, password) => {
+	const iniciarSesion = async (email, password, demoToken) => {
 		try {
 			const response = await fetch(`${API_URL}auth/login`, {
 				method: 'POST',
@@ -117,6 +117,10 @@ function App() {
 				const decoded = jwtDecode(data.token);
 				console.log('Token decodificado:', decoded);
 				setUser(decoded);
+
+				if (demoToken) {
+					localStorage.setItem('DEMO', true); // Solo lo guarda si demoToken es true
+				}
 			}
 			Alerta.success('Inicio de sesión exitoso');
 			return console.log('EXITOSO');
@@ -134,6 +138,8 @@ function App() {
 		Alerta.success('Sesión cerrada exitosamente');
 		setAbrir(false);
 		setUser(null);
+		setBloqueoDemo(false);
+		localStorage.removeItem('DEMO'); // Eliminar del localStorage
 	};
 
 	useEffect(() => {

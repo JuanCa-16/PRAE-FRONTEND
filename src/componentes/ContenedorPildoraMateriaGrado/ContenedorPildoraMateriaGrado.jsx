@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../Contexts/UserContext';
 import PildoraMateriaGrado from '../PildoraMateriaGrado/PildoraMateriaGrado';
 import Modal from '../Modal/Modal';
 import Masonry from 'react-masonry-css';
 import './ContenedorPildoraMateriaGrado.scss';
 
 const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, clase }) => {
+	const { bloqueoDemo } = useUser();
 	const pildorasFiltradas = info;
 	const navigate = useNavigate();
 	const manejarClick = (profe) => {
@@ -104,6 +106,7 @@ const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, c
 											  )
 									}
 									className='rojo'
+									disabled={bloqueoDemo}
 								>
 									ELIMINAR
 								</button>

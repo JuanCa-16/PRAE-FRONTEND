@@ -16,7 +16,7 @@ const VistaEst = () => {
 	const navigate = useNavigate();
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
 	function capitalizeWords(str) {
@@ -341,12 +341,13 @@ const VistaEst = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged}
 					>
 						Guardar Cambios
 					</button>
 				</form>
 				<button
+					disabled={bloqueoDemo}
 					onClick={openModal}
 					className='rojo'
 				>
@@ -360,6 +361,7 @@ const VistaEst = () => {
 					modalTitulo={`ELIMINAR ESTUDIANTE ${est.nombre.toUpperCase()} ${est.apellido.toUpperCase()}`}
 				>
 					<button
+						disabled={bloqueoDemo}
 						onClick={() => handleEliminar()}
 						className='rojo'
 					>

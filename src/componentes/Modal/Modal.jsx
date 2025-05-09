@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../../Contexts/UserContext';
+import { useUser } from '../../Contexts/UserContext';
 import InputContainer from '../Input/InputContainer';
 import Alerta from '../Alerta/Alerta';
 import './Modal.scss';
@@ -30,6 +31,7 @@ const Modal = ({
 	const token = localStorage.getItem('token');
 
 	const { theme } = useTheme();
+	const { bloqueoDemo } = useUser();
 	//La logica del modal eliminar se le hace es al boton que llega por children.
 
 	//Envio datos modal actividad.
@@ -82,7 +84,7 @@ const Modal = ({
 
 		console.log('Datos del formulario ACTIVIDAD:', JSON.stringify(formData));
 
-		if (formData.pesoTotalActual + formData.pesoAct > 100) {
+		if (parseInt(formData.pesoTotalActual - parseInt(ValorPeso)) + parseInt(formData.pesoAct) > 100) {
 			Alerta.error('Excederas el 100%');
 			return;
 		}
@@ -323,10 +325,16 @@ const Modal = ({
 											onChange={handlePesoChange} // Pasamos la función que actualizará el estado
 											required={true} // Hacemos que el campo sea obligatorio
 										/>
-										<button type='submit'>Editar</button>
+										<button
+											type='submit'
+											disabled={bloqueoDemo}
+										>
+											Editar
+										</button>
 										<button
 											type='button'
 											className='rojo'
+											disabled={bloqueoDemo}
 											onClick={abrirConfirmacion}
 										>
 											Eliminar
@@ -343,6 +351,7 @@ const Modal = ({
 									Esta acción no se podra revertir.
 								</p>
 								<button
+									disabled={bloqueoDemo}
 									type='button'
 									className='rojo'
 									onClick={() => handleEliminarAct()}
@@ -383,7 +392,12 @@ const Modal = ({
 										className='campo-observacion'
 									/>
 									<div className='botones-acciones'>
-										<button type='submit'>Editar</button>
+										<button
+											type='submit'
+											disabled={bloqueoDemo}
+										>
+											Editar
+										</button>
 										<button
 											type='button'
 											className='rojo'
@@ -407,6 +421,7 @@ const Modal = ({
 								puede revertir.
 							</p>
 							<button
+								disabled={bloqueoDemo}
 								type='button'
 								className='rojo'
 								onClick={handleEliminarObservacion}
@@ -438,7 +453,7 @@ const Modal = ({
 								/>
 								<button
 									onClick={handleSubmit2}
-									disabled={cargando}
+									disabled={bloqueoDemo || cargando}
 								>
 									{cargando ? 'cargando...' : 'Ingresar'}
 								</button>

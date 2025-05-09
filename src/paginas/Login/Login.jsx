@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TituloDes from '../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../componentes/Input/InputContainer';
+import PildoraMateriaGrado from '../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
+import Line from '../../componentes/Line/Line';
 import posterCel from '../../assets/posterCel.png';
 import Logo from '../../assets/logo.png';
 import './Login.scss';
+import { useUser } from '../../Contexts/UserContext';
 
 export default function Login({ func }) {
 	//Valores de los inputs
@@ -12,6 +15,10 @@ export default function Login({ func }) {
 		correo: '',
 		password: '',
 	});
+
+	const { setBloqueoDemo } = useUser();
+
+	const [demo, setDemo] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -33,8 +40,14 @@ export default function Login({ func }) {
 		// navigate("/home") /* cambiar la ruta despues */
 	};
 
+	const handlerDemo = (correo, clave) => {
+		console.log(correo, clave);
+		setBloqueoDemo(true);
+		func(correo, clave, true);
+	};
+
 	return (
-		<div className='contenedorLogin'>
+		<div className={`contenedorLogin ${demo ? 'demoView' : ''}`}>
 			<div className=' pagLogin'>
 				<div className='izq'>
 					<div className='imagen_logo'>
@@ -103,6 +116,35 @@ export default function Login({ func }) {
 							<button type='submit'>Ingresar</button>
 						</div>
 					</form>
+					<div className='contenedorDemo'>
+						<TituloDes
+							titulo='Prueba PRAE sin tener cuenta'
+							desc='Accede a una prueba, algunas acciones estaran bloqueadas.'
+						></TituloDes>
+						<PildoraMateriaGrado
+							color='azul'
+							texto='ADMINISTRADOR'
+							onClick={() =>
+								handlerDemo('juancamilohenao@gmail.com', 'juanca')
+							}
+						></PildoraMateriaGrado>
+						<PildoraMateriaGrado
+							color='morado'
+							texto='DOCENTE'
+							onClick={() => handlerDemo('juanva@gmail.com', 'juanma')}
+						></PildoraMateriaGrado>
+						<PildoraMateriaGrado
+							color='amarillo'
+							texto='ESTUDIANTE'
+							onClick={() => handlerDemo('nico@gmail.com', 'nico')}
+						></PildoraMateriaGrado>
+					</div>
+					<Line></Line>
+					<div className='btnDemo'>
+						<button onClick={() => setDemo(!demo)}>
+							{!demo ? 'Ir a demo' : 'Regresar'}{' '}
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

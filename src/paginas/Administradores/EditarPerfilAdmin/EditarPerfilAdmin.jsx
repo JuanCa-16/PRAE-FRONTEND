@@ -9,7 +9,7 @@ import './EditarPerfilAdmin.scss';
 const EditarPerfilAdmin = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user, setUser } = useUser();
+	const { user, setUser, bloqueoDemo } = useUser();
 
 	function capitalizeWords(str) {
 		return str
@@ -157,7 +157,7 @@ const EditarPerfilAdmin = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged}
 					>
 						Guardar Cambios
 					</button>

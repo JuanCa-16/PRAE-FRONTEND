@@ -16,7 +16,7 @@ const VistaDocente = () => {
 
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
 	function capitalizeWords(str) {
@@ -408,7 +408,7 @@ const VistaDocente = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={isFormUnchanged}
+						disabled={isFormUnchanged || bloqueoDemo}
 					>
 						Guardar Cambios
 					</button>
@@ -417,6 +417,7 @@ const VistaDocente = () => {
 				<button
 					onClick={openModal}
 					className='rojo'
+					disabled={bloqueoDemo}
 				>
 					Eliminar Profesor
 				</button>

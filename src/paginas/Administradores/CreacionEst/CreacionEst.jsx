@@ -13,7 +13,7 @@ import './CreacionEst.scss';
 const CreacionEst = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user } = useUser();
+	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
 	function capitalizeWords(str) {
@@ -314,7 +314,12 @@ const CreacionEst = () => {
 							placeholder={'Grado'}
 						></Selector>
 					</div>
-					<button type='submit'>Guardar Cambios</button>
+					<button
+						type='submit'
+						disabled={bloqueoDemo}
+					>
+						Guardar Cambios
+					</button>
 				</form>
 			</div>
 			<Line></Line>
