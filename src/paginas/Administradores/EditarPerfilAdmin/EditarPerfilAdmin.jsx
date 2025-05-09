@@ -51,42 +51,44 @@ const EditarPerfilAdmin = () => {
 
 		console.log('Datos enviados:', dataToSend);
 
-		try {
-			const response = await fetch(`${API_URL}usuario/updateAdmin/${dataToSend.doc}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: dataToSend.nombre,
-					apellido: dataToSend.apellidos,
-					correo: dataToSend.correo,
-					contraseña: dataToSend.contrasena || undefined,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/updateAdmin/${dataToSend.doc}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: dataToSend.nombre,
+						apellido: dataToSend.apellidos,
+						correo: dataToSend.correo,
+						contraseña: dataToSend.contrasena || undefined,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				//toast
-				throw new Error(`${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json();
+					//toast
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				const data = await response.json();
+
+				console.log('ADMIN EDITADO EXITOSAMENTE', data);
+				Alerta.success('Datos actualizados correctamente');
+
+				if (data.token) {
+					// 2. Guarda el nuevo token en localStorage
+					localStorage.setItem('token', data.token);
+
+					setUser(jwtDecode(data.token));
+				}
+			} catch (error) {
+				Alerta.error(error.message);
+				console.error(error);
 			}
-
-			const data = await response.json();
-
-			console.log('ADMIN EDITADO EXITOSAMENTE', data);
-			Alerta.success('Datos actualizados correctamente');
-
-			if (data.token) {
-				// 2. Guarda el nuevo token en localStorage
-				localStorage.setItem('token', data.token);
-
-				setUser(jwtDecode(data.token));
-			}
-		} catch (error) {
-			Alerta.error(error.message);
-			console.error(error);
 		}
 	};
 

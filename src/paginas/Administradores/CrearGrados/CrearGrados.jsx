@@ -41,31 +41,33 @@ const CrearGrados = () => {
 
 		const nuevoGrado = formData.grado.toUpperCase();
 
-		try {
-			const response = await fetch(`${API_URL}cursos`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: nuevoGrado,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}cursos`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: nuevoGrado,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				console.log('GRADO CREADO EXITOSAMENTE');
+				Alerta.success('Grado creado exitosamente');
+				setReload(!reload);
+				setFormData({ grado: '' });
+			} catch (error) {
+				console.error('Error al crear grado', error);
+				Alerta.error(error.message);
 			}
-
-			console.log('GRADO CREADO EXITOSAMENTE');
-			Alerta.success('Grado creado exitosamente');
-			setReload(!reload);
-			setFormData({ grado: '' });
-		} catch (error) {
-			console.error('Error al crear grado', error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -132,29 +134,31 @@ const CrearGrados = () => {
 
 	const handleEliminar = async (index, grado, id, onSuccess) => {
 		console.log(grado, index, id);
-		try {
-			const response = await fetch(`${API_URL}cursos/${id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}cursos/${id}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				console.log('GRADO ELIMINADO EXITOSAMENTE');
+				Alerta.success('Grado eliminado exitosamente');
+
+				// Si la petición fue exitosa, ejecuta la función `onSuccess` que es la que cierra el modal
+				if (onSuccess) onSuccess();
+				setReload(!reload);
+			} catch (error) {
+				console.error('Error al elimnar grado: ', error);
+				Alerta.error(error.message);
 			}
-
-			console.log('GRADO ELIMINADO EXITOSAMENTE');
-			Alerta.success('Grado eliminado exitosamente');
-
-			// Si la petición fue exitosa, ejecuta la función `onSuccess` que es la que cierra el modal
-			if (onSuccess) onSuccess();
-			setReload(!reload);
-		} catch (error) {
-			console.error('Error al elimnar grado: ', error);
-			Alerta.error(error.message);
 		}
 	};
 

@@ -333,29 +333,31 @@ const AsignarGradosMaterias = () => {
 	const handleEliminar = async (index, asigancion, grado, materia, profe) => {
 		console.log(asigancion, grado, materia, profe);
 
-		try {
-			const response = await fetch(`${API_URL}asignar/eliminarAsignacion/${asigancion}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}asignar/eliminarAsignacion/${asigancion}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				Alerta.success('Asignacion eliminada exitosamente');
+				console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
+
+				setIsModalOpenConfirmacion(false);
+				closeModal();
+				setReload(!reload);
+			} catch (error) {
+				console.error(error);
+				Alerta.error(error.message);
 			}
-
-			Alerta.success('Asignacion eliminada exitosamente');
-			console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
-
-			setIsModalOpenConfirmacion(false);
-			closeModal();
-			setReload(!reload);
-		} catch (error) {
-			console.error(error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -384,105 +386,109 @@ const AsignarGradosMaterias = () => {
 
 		console.log('aaaaa', combinaciones);
 
-		try {
-			const respuestas = await Promise.allSettled(
-				combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
-					const response = await fetch(`${API_URL}asignar/asignarMateria`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({ id_curso, id_materia, id_docente }),
+		if (!bloqueoDemo) {
+			try {
+				const respuestas = await Promise.allSettled(
+					combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
+						const response = await fetch(`${API_URL}asignar/asignarMateria`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({ id_curso, id_materia, id_docente }),
+						});
+
+						if (!response.ok) {
+							const errorData = await response.json();
+							throw new Error(errorData.error);
+						}
+
+						return response.json();
+					})
+				);
+
+				console.log('Respuestas del backend:', respuestas);
+
+				const errores = respuestas
+					.filter((result) => result.status === 'rejected')
+					.map((result, index) => ({
+						errorMsg: result.reason.message,
+						id_curso: combinaciones[index].id_curso,
+						id_materia: combinaciones[index].id_materia,
+					}));
+
+				const exitosos = respuestas
+					.map((result, index) => ({ result, combinacion: combinaciones[index] }))
+					.filter(({ result }) => result.status === 'fulfilled');
+
+				const exitos = exitosos.length;
+
+				if (exitos > 0) {
+					const exitosPorMateria = exitosos.reduce((acc, { combinacion }) => {
+						const { id_curso, id_materia } = combinacion;
+						const nombreMateria =
+							materiasSeleccionadas.find(
+								(m) => Number(m.value[0]) === Number(id_materia)
+							)?.label || `Materia ${id_materia}`;
+						const nombreCurso =
+							gradosSeleccionados.find(
+								(g) => Number(g.value) === Number(id_curso)
+							)?.label || `Curso ${id_curso}`;
+
+						if (!acc[nombreMateria]) {
+							acc[nombreMateria] = [];
+						}
+						acc[nombreMateria].push(nombreCurso);
+						return acc;
+					}, {});
+
+					const mensajeExito = Object.entries(exitosPorMateria)
+						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
+						.join('\n');
+
+					Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`);
+				}
+
+				if (errores.length > 0) {
+					const erroresPorMateria = errores.reduce((acc, { id_curso, id_materia }) => {
+						const nombreMateria =
+							materiasSeleccionadas.find(
+								(m) => Number(m.value[0]) === Number(id_materia)
+							)?.label || `Materia ${id_materia}`;
+						const nombreCurso =
+							gradosSeleccionados.find(
+								(g) => Number(g.value) === Number(id_curso)
+							)?.label || `Curso ${id_curso}`;
+
+						if (!acc[nombreMateria]) {
+							acc[nombreMateria] = [];
+						}
+						acc[nombreMateria].push(nombreCurso);
+						return acc;
+					}, {});
+
+					const mensajeError = Object.entries(erroresPorMateria)
+						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
+						.join('\n');
+
+					Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
+				}
+
+				// Limpiar el formulario solo si hubo éxitos
+				if (exitos > 0) {
+					setReload(!reload);
+					setFormData({
+						grados: [],
+						materias: [],
 					});
-
-					if (!response.ok) {
-						const errorData = await response.json();
-						throw new Error(errorData.error);
-					}
-
-					return response.json();
-				})
-			);
-
-			console.log('Respuestas del backend:', respuestas);
-
-			const errores = respuestas
-				.filter((result) => result.status === 'rejected')
-				.map((result, index) => ({
-					errorMsg: result.reason.message,
-					id_curso: combinaciones[index].id_curso,
-					id_materia: combinaciones[index].id_materia,
-				}));
-
-			const exitosos = respuestas
-				.map((result, index) => ({ result, combinacion: combinaciones[index] }))
-				.filter(({ result }) => result.status === 'fulfilled');
-
-			const exitos = exitosos.length;
-
-			if (exitos > 0) {
-				const exitosPorMateria = exitosos.reduce((acc, { combinacion }) => {
-					const { id_curso, id_materia } = combinacion;
-					const nombreMateria =
-						materiasSeleccionadas.find(
-							(m) => Number(m.value[0]) === Number(id_materia)
-						)?.label || `Materia ${id_materia}`;
-					const nombreCurso =
-						gradosSeleccionados.find((g) => Number(g.value) === Number(id_curso))
-							?.label || `Curso ${id_curso}`;
-
-					if (!acc[nombreMateria]) {
-						acc[nombreMateria] = [];
-					}
-					acc[nombreMateria].push(nombreCurso);
-					return acc;
-				}, {});
-
-				const mensajeExito = Object.entries(exitosPorMateria)
-					.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
-					.join('\n');
-
-				Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`);
+					setMateriasSeleccionadas([]);
+					setGradosSeleccionados([]);
+				}
+			} catch (error) {
+				console.error('Error en las peticiones:', error);
+				Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');
 			}
-
-			if (errores.length > 0) {
-				const erroresPorMateria = errores.reduce((acc, { id_curso, id_materia }) => {
-					const nombreMateria =
-						materiasSeleccionadas.find(
-							(m) => Number(m.value[0]) === Number(id_materia)
-						)?.label || `Materia ${id_materia}`;
-					const nombreCurso =
-						gradosSeleccionados.find((g) => Number(g.value) === Number(id_curso))
-							?.label || `Curso ${id_curso}`;
-
-					if (!acc[nombreMateria]) {
-						acc[nombreMateria] = [];
-					}
-					acc[nombreMateria].push(nombreCurso);
-					return acc;
-				}, {});
-
-				const mensajeError = Object.entries(erroresPorMateria)
-					.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
-					.join('\n');
-
-				Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
-			}
-
-			// Limpiar el formulario solo si hubo éxitos
-			if (exitos > 0) {
-				setReload(!reload);
-				setFormData({
-					grados: [],
-					materias: [],
-				});
-				setMateriasSeleccionadas([]);
-				setGradosSeleccionados([]);
-			}
-		} catch (error) {
-			console.error('Error en las peticiones:', error);
-			Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');
 		}
 	};
 

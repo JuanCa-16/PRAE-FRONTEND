@@ -102,46 +102,50 @@ const CreacionEst = () => {
 
 		console.log('Datos enviados:', formData);
 
-		try {
-			const response = await fetch(`${API_URL}usuario/estudiante`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					documento_identidad: formData.doc,
-					nombre: formData.nombre,
-					apellido: formData.apellidos,
-					correo: formData.correo,
-					contraseña: formData.contrasena,
-					id_institucion: user.institucion.id_institucion,
-					id_curso: formData.grado,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/estudiante`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						documento_identidad: formData.doc,
+						nombre: formData.nombre,
+						apellido: formData.apellidos,
+						correo: formData.correo,
+						contraseña: formData.contrasena,
+						id_institucion: user.institucion.id_institucion,
+						id_curso: formData.grado,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(`Error al crear estudiante: ${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(
+						`Error al crear estudiante: ${errorData.error || response.status}`
+					);
+				}
+
+				console.log('EST CREADO EXITOSAMENTE');
+				Alerta.success('Estudiante creado exitosamente');
+				// Reiniciar formulario
+				setFormData({
+					apellidos: '',
+					nombre: '',
+					correo: '',
+					doc: '',
+					contrasena: '',
+					grado: '',
+				});
+				setGradoAsignado(null);
+
+				setReload(!reload);
+			} catch (error) {
+				console.error(error);
+				Alerta.error(error.message);
 			}
-
-			console.log('EST CREADO EXITOSAMENTE');
-			Alerta.success('Estudiante creado exitosamente');
-			// Reiniciar formulario
-			setFormData({
-				apellidos: '',
-				nombre: '',
-				correo: '',
-				doc: '',
-				contrasena: '',
-				grado: '',
-			});
-			setGradoAsignado(null);
-
-			setReload(!reload);
-		} catch (error) {
-			console.error(error);
-			Alerta.error(error.message);
 		}
 	};
 
