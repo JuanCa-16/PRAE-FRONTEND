@@ -42,26 +42,28 @@ const Modal = ({
 	const [cargando, setCargando] = useState(false); // Estado para manejar si la observación está siendo editada
 
 	const handleEliminarObservacion = async () => {
-		try {
-			const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.message || 'Error al eliminar observación');
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(errorData.message || 'Error al eliminar observación');
+				}
+
+				Alerta.success('Observación eliminada');
+				closeModal();
+				recargar();
+			} catch (error) {
+				console.error('Error al eliminar observación:', error);
+				Alerta.error(error.message);
 			}
-
-			Alerta.success('Observación eliminada');
-			closeModal();
-			recargar();
-		} catch (error) {
-			console.error('Error al eliminar observación:', error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -89,31 +91,33 @@ const Modal = ({
 			return;
 		}
 
-		try {
-			const response = await fetch(`${API_URL}actividad/actualizar/${formData.id_act}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: formData.nombreAct,
-					peso: formData.pesoAct,
-					id_docente: formData.id_docente,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}actividad/actualizar/${formData.id_act}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: formData.nombreAct,
+						peso: formData.pesoAct,
+						id_docente: formData.id_docente,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				Alerta.success('Actividad actualizada');
+				closeModal();
+				recargar();
+			} catch (error) {
+				console.error('Error al crear actividad', error);
+				Alerta.error(error.message);
 			}
-
-			Alerta.success('Actividad actualizada');
-			closeModal();
-			recargar();
-		} catch (error) {
-			console.error('Error al crear actividad', error);
-			Alerta.error(error.message);
 		}
 
 		// Mostrar el objeto JSON en la consola (o enviarlo al servidor)
@@ -146,58 +150,63 @@ const Modal = ({
 			nota: nota,
 		};
 
-		if (formData.notaOriginal === '0') {
-			try {
-				setCargando(true);
-				const response = await fetch(`${API_URL}calificacion/asignar`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
-					body: JSON.stringify({
-						id_actividad: formData.id_actividad,
-						id_estudiante: formData.id_estudiante,
-						nota: formData.nota,
-					}),
-				});
+		if (!bloqueoDemo) {
+			if (formData.notaOriginal === '0') {
+				try {
+					setCargando(true);
+					const response = await fetch(`${API_URL}calificacion/asignar`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${token}`,
+						},
+						body: JSON.stringify({
+							id_actividad: formData.id_actividad,
+							id_estudiante: formData.id_estudiante,
+							nota: formData.nota,
+						}),
+					});
 
-				if (!response.ok) {
-					const errorData = await response.json();
-					throw new Error(errorData.message || 'Error al registrar nota');
+					if (!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.message || 'Error al registrar nota');
+					}
+
+					Alerta.success('Nota registrada correctamente');
+					setCargando(false);
+				} catch (error) {
+					console.error('Error al guardar nota:', error);
+					Alerta.error(error.message);
+					setCargando(false);
 				}
+			} else {
+				try {
+					const response = await fetch(
+						`${API_URL}calificacion/actualizar/${formData.id_nota}`,
+						{
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({
+								id_actividad: formData.id_actividad,
+								id_estudiante: formData.id_estudiante,
+								nota: formData.nota,
+							}),
+						}
+					);
 
-				Alerta.success('Nota registrada correctamente');
-				setCargando(false);
-			} catch (error) {
-				console.error('Error al guardar nota:', error);
-				Alerta.error(error.message);
-				setCargando(false);
-			}
-		} else {
-			try {
-				const response = await fetch(`${API_URL}calificacion/actualizar/${formData.id_nota}`, {
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`,
-					},
-					body: JSON.stringify({
-						id_actividad: formData.id_actividad,
-						id_estudiante: formData.id_estudiante,
-						nota: formData.nota,
-					}),
-				});
+					if (!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.message || 'Error al editar nota');
+					}
 
-				if (!response.ok) {
-					const errorData = await response.json();
-					throw new Error(errorData.message || 'Error al editar nota');
+					Alerta.success('Nota registrada correctamente');
+				} catch (error) {
+					console.error('Error al guardar nota:', error);
+					Alerta.error(error.message);
 				}
-
-				Alerta.success('Nota registrada correctamente');
-			} catch (error) {
-				console.error('Error al guardar nota:', error);
-				Alerta.error(error.message);
 			}
 		}
 
@@ -214,27 +223,29 @@ const Modal = ({
 
 	const handleSubmit3 = async (e) => {
 		e.preventDefault();
-		try {
-			const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({ comentario: observacionEditada }),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({ comentario: observacionEditada }),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.message || response.status);
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(errorData.message || response.status);
+				}
+
+				Alerta.success('Observación actualizada correctamente');
+				closeModal();
+				recargar(); // Actualiza la lista de observaciones si quieres
+			} catch (error) {
+				console.error('Error al actualizar observación', error);
+				Alerta.error(error.message);
 			}
-
-			Alerta.success('Observación actualizada correctamente');
-			closeModal();
-			recargar(); // Actualiza la lista de observaciones si quieres
-		} catch (error) {
-			console.error('Error al actualizar observación', error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -257,27 +268,29 @@ const Modal = ({
 
 		console.log('Datos del formulario ELIMINAR:', JSON.stringify(formData));
 
-		try {
-			const response = await fetch(`${API_URL}actividad/eliminar/${formData.id_act}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}actividad/eliminar/${formData.id_act}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				Alerta.success('Actividad eliminada');
+
+				closeModal();
+				recargar();
+			} catch (error) {
+				console.error('Error al crear actividad', error);
+				Alerta.error(error.message);
 			}
-
-			Alerta.success('Actividad eliminada');
-
-			closeModal();
-			recargar();
-		} catch (error) {
-			console.error('Error al crear actividad', error);
-			Alerta.error(error.message);
 		}
 	};
 

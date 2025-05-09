@@ -170,91 +170,93 @@ const VistaDocente = () => {
 		);
 		console.log('crear', crearMat);
 
-		try {
-			const response = await fetch(`${API_URL}usuario/updateProfesor/${dataToSend.doc}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: dataToSend.nombre,
-					apellido: dataToSend.apellidos,
-					correo: dataToSend.correo,
-					contraseña: dataToSend.contrasena || undefined,
-					area_ensenanza: dataToSend.area,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/updateProfesor/${dataToSend.doc}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: dataToSend.nombre,
+						apellido: dataToSend.apellidos,
+						correo: dataToSend.correo,
+						contraseña: dataToSend.contrasena || undefined,
+						area_ensenanza: dataToSend.area,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				//toast
-				throw new Error(`${errorData.error || response.status}`);
-			}
-
-			const data = await response.json();
-
-			for (const materia of crearMat) {
-				try {
-					const responseMateria = await fetch(`${API_URL}dictar`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({
-							documento_profe: dataToSend.doc,
-							id_materia: materia,
-						}),
-					});
-
-					if (!responseMateria.ok) {
-						const errorData = await responseMateria.json();
-						throw new Error(
-							`Error al asignar materia ${materia}: ${
-								errorData.message || responseMateria.status
-							}`
-						);
-					}
-				} catch (error) {
-					console.error(error);
+				if (!response.ok) {
+					const errorData = await response.json();
+					//toast
+					throw new Error(`${errorData.error || response.status}`);
 				}
-			}
 
-			for (const materia of eliminarMat) {
-				try {
-					const responseMateria = await fetch(`${API_URL}dictar`, {
-						method: 'DELETE',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({
-							documento_profe: dataToSend.doc,
-							id_materia: materia,
-						}),
-					});
+				const data = await response.json();
 
-					if (!responseMateria.ok) {
-						const errorData = await responseMateria.json();
-						throw new Error(
-							`Error al eliminar materia ${materia}: ${
-								errorData.message || responseMateria.status
-							}`
-						);
+				for (const materia of crearMat) {
+					try {
+						const responseMateria = await fetch(`${API_URL}dictar`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({
+								documento_profe: dataToSend.doc,
+								id_materia: materia,
+							}),
+						});
+
+						if (!responseMateria.ok) {
+							const errorData = await responseMateria.json();
+							throw new Error(
+								`Error al asignar materia ${materia}: ${
+									errorData.message || responseMateria.status
+								}`
+							);
+						}
+					} catch (error) {
+						console.error(error);
 					}
-				} catch (error) {
-					console.error(error);
 				}
-			}
 
-			console.log('DOCENTE EDITADO EXITOSAMENTE', data);
-			Alerta.success('Docente editado exitosamente');
-			setReload(!reload);
-		} catch (error) {
-			console.error('Error al editar un doncente: ', error);
-			alert.error(error.message);
+				for (const materia of eliminarMat) {
+					try {
+						const responseMateria = await fetch(`${API_URL}dictar`, {
+							method: 'DELETE',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({
+								documento_profe: dataToSend.doc,
+								id_materia: materia,
+							}),
+						});
+
+						if (!responseMateria.ok) {
+							const errorData = await responseMateria.json();
+							throw new Error(
+								`Error al eliminar materia ${materia}: ${
+									errorData.message || responseMateria.status
+								}`
+							);
+						}
+					} catch (error) {
+						console.error(error);
+					}
+				}
+
+				console.log('DOCENTE EDITADO EXITOSAMENTE', data);
+				Alerta.success('Docente editado exitosamente');
+				setReload(!reload);
+			} catch (error) {
+				console.error('Error al editar un doncente: ', error);
+				alert.error(error.message);
+			}
 		}
 	};
 
@@ -289,28 +291,30 @@ const VistaDocente = () => {
 	const closeModal = () => setIsModalOpen(false);
 
 	const handleEliminar = async () => {
-		try {
-			const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				console.log('DOCENTE ELIMINADO EXITOSAMENTE');
+				Alerta.success('Docente eliminado exitosamente');
+				closeModal();
+
+				navigate(`/profesores`);
+			} catch (error) {
+				console.error('Error al eliminar profesor: ', error);
+				alert.error(error.message);
 			}
-
-			console.log('DOCENTE ELIMINADO EXITOSAMENTE');
-			Alerta.success('Docente eliminado exitosamente');
-			closeModal();
-
-			navigate(`/profesores`);
-		} catch (error) {
-			console.error('Error al eliminar profesor: ', error);
-			alert.error(error.message);
 		}
 	};
 	return (

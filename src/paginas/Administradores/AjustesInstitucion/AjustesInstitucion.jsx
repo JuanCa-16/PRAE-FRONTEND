@@ -60,36 +60,41 @@ const AjustesInstitucion = () => {
 			formDataToSend.append('logo', formData.logo);
 		}
 
-		try {
-			const response = await fetch(`${API_URL}instituciones/${user.institucion.id_institucion}`, {
-				method: 'PUT',
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-				body: formDataToSend,
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(
+					`${API_URL}instituciones/${user.institucion.id_institucion}`,
+					{
+						method: 'PUT',
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+						body: formDataToSend,
+					}
+				);
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				console.log(errorData);
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json();
+					console.log(errorData);
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				const data = await response.json();
+				console.log('INSTITUCIÓN EDITADA EXITOSAMENTE', data);
+
+				Alerta.success('Datos actualizados correctamente');
+
+				if (data.token) {
+					// 2. Guarda el nuevo token en localStorage
+					localStorage.setItem('token', data.token);
+
+					setUser(jwtDecode(data.token));
+				}
+			} catch (error) {
+				//toast
+				Alerta.error(error.message);
+				console.error(error);
 			}
-
-			const data = await response.json();
-			console.log('INSTITUCIÓN EDITADA EXITOSAMENTE', data);
-
-			Alerta.success('Datos actualizados correctamente');
-
-			if (data.token) {
-				// 2. Guarda el nuevo token en localStorage
-				localStorage.setItem('token', data.token);
-
-				setUser(jwtDecode(data.token));
-			}
-		} catch (error) {
-			//toast
-			Alerta.error(error.message);
-			console.error(error);
 		}
 	};
 

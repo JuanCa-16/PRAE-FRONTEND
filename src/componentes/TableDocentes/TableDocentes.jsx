@@ -135,40 +135,42 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 			return;
 		}
 
-		try {
-			setCargando(true);
-			const response = await fetch(`${API_URL}actividad/crear`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: nombreAct.actividad,
-					peso: nombreAct.peso,
-					id_materia: infoCurso.id_materia,
-					id_docente: infoDocente,
-					id_curso: infoCurso.id_curso,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				setCargando(true);
+				const response = await fetch(`${API_URL}actividad/crear`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: nombreAct.actividad,
+						peso: nombreAct.peso,
+						id_materia: infoCurso.id_materia,
+						id_docente: infoDocente,
+						id_curso: infoCurso.id_curso,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				Alerta.success('Actividad realizada correctamente');
+				setCargando(false);
+				setReload(!reload);
+				console.log(nombreAct);
+				setNonombreAct({
+					actividad: '',
+					peso: '',
+				});
+			} catch (error) {
+				console.error('Error al crear actividad', error);
+				Alerta.error(error.message);
+				setCargando(false);
 			}
-
-			Alerta.success('Actividad realizada correctamente');
-			setCargando(false);
-			setReload(!reload);
-			console.log(nombreAct);
-			setNonombreAct({
-				actividad: '',
-				peso: '',
-			});
-		} catch (error) {
-			console.error('Error al crear actividad', error);
-			Alerta.error(error.message);
-			setCargando(false);
 		}
 	};
 

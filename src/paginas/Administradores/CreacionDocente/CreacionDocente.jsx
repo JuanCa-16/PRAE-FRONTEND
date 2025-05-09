@@ -96,75 +96,79 @@ const CreacionDocente = () => {
 
 		console.log('Datos enviados:', formData);
 
-		try {
-			const response = await fetch(`${API_URL}usuario/docente`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					documento_identidad: formData.doc,
-					nombre: formData.nombre,
-					apellido: formData.apellidos,
-					correo: formData.correo,
-					contraseña: formData.contrasena,
-					area_ensenanza: formData.area,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/docente`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						documento_identidad: formData.doc,
+						nombre: formData.nombre,
+						apellido: formData.apellidos,
+						correo: formData.correo,
+						contraseña: formData.contrasena,
+						area_ensenanza: formData.area,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(`Error al crear docente: ${errorData.error || response.status}`);
-			}
-
-			for (const materia of formData.materias) {
-				try {
-					const responseMateria = await fetch(`${API_URL}dictar`, {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({
-							documento_profe: formData.doc,
-							id_materia: materia,
-						}),
-					});
-
-					if (!responseMateria.ok) {
-						const errorData = await responseMateria.json();
-						throw new Error(
-							`Error al asignar materia ${materia}: ${
-								errorData.message || responseMateria.status
-							}`
-						);
-					}
-				} catch (error) {
-					Alerta.error(`Error al asignar materia ${materia}: ${error.message}`);
-					console.error(error);
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(
+						`Error al crear docente: ${errorData.error || response.status}`
+					);
 				}
+
+				for (const materia of formData.materias) {
+					try {
+						const responseMateria = await fetch(`${API_URL}dictar`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({
+								documento_profe: formData.doc,
+								id_materia: materia,
+							}),
+						});
+
+						if (!responseMateria.ok) {
+							const errorData = await responseMateria.json();
+							throw new Error(
+								`Error al asignar materia ${materia}: ${
+									errorData.message || responseMateria.status
+								}`
+							);
+						}
+					} catch (error) {
+						Alerta.error(`Error al asignar materia ${materia}: ${error.message}`);
+						console.error(error);
+					}
+				}
+
+				Alerta.success('Docente creado exitosamente');
+				console.log('DOCENTE CREADO EXITOSAMENTE');
+
+				setFormData({
+					apellidos: '',
+					nombre: '',
+					correo: '',
+					doc: '',
+					contrasena: '',
+					area: '',
+					materias: [],
+				});
+				setMateriasSeleccionadas([]);
+
+				setReload(!reload);
+			} catch (error) {
+				Alerta.error(error.message);
+				console.error('Error al crear Docente: ', error);
 			}
-
-			Alerta.success('Docente creado exitosamente');
-			console.log('DOCENTE CREADO EXITOSAMENTE');
-
-			setFormData({
-				apellidos: '',
-				nombre: '',
-				correo: '',
-				doc: '',
-				contrasena: '',
-				area: '',
-				materias: [],
-			});
-			setMateriasSeleccionadas([]);
-
-			setReload(!reload);
-		} catch (error) {
-			Alerta.error(error.message);
-			console.error('Error al crear Docente: ', error);
 		}
 	};
 

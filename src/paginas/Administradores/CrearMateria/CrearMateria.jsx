@@ -41,32 +41,34 @@ const CrearMateria = () => {
 		const nombreCapitalize = formData.materia;
 		console.log('Datos enviados:', nombreCapitalize);
 
-		try {
-			const response = await fetch(`${API_URL}materias`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: nombreCapitalize,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}materias`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: nombreCapitalize,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				console.log('MATERIA CREADO EXITOSAMENTE');
+				Alerta.success('Materia creada exitosamente');
+				setReload(!reload);
+				setFormData({ materia: '' });
+			} catch (error) {
+				//toast
+				console.error('Error al crear la materia', error);
+				Alerta.error(error.message);
 			}
-
-			console.log('MATERIA CREADO EXITOSAMENTE');
-			Alerta.success('Materia creada exitosamente');
-			setReload(!reload);
-			setFormData({ materia: '' });
-		} catch (error) {
-			//toast
-			console.error('Error al crear la materia', error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -122,27 +124,29 @@ const CrearMateria = () => {
 	const handleEliminar = async (index, materia, id, onSuccess) => {
 		console.log(materia, index, id);
 
-		try {
-			const response = await fetch(`${API_URL}materias/${id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}materias/${id}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+
+				console.log('MATERIA ELIMINADA EXITOSAMENTE');
+				Alerta.success('Materia eliminada exitosamente');
+				if (onSuccess) onSuccess();
+				setReload(!reload);
+			} catch (error) {
+				console.error('Eror al eliminar la materia: ', error);
+				Alerta.error(error.message);
 			}
-
-			console.log('MATERIA ELIMINADA EXITOSAMENTE');
-			Alerta.success('Materia eliminada exitosamente');
-			if (onSuccess) onSuccess();
-			setReload(!reload);
-		} catch (error) {
-			console.error('Eror al eliminar la materia: ', error);
-			Alerta.error(error.message);
 		}
 	};
 

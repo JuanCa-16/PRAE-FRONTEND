@@ -114,55 +114,57 @@ const VistaEst = () => {
 		console.log('envio', dataToSend);
 		console.log('original', initialFormData.current);
 
-		try {
-			const response = await fetch(`${API_URL}usuario/updateEstudiante/${dataToSend.doc}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					nombre: dataToSend.nombre,
-					apellido: dataToSend.apellidos,
-					correo: dataToSend.correo,
-					contraseña: dataToSend.contrasena || undefined,
-					id_curso: dataToSend.grado,
-					id_institucion: user.institucion.id_institucion,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/updateEstudiante/${dataToSend.doc}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						nombre: dataToSend.nombre,
+						apellido: dataToSend.apellidos,
+						correo: dataToSend.correo,
+						contraseña: dataToSend.contrasena || undefined,
+						id_curso: dataToSend.grado,
+						id_institucion: user.institucion.id_institucion,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json();
-				//toast
-				throw new Error(`${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json();
+					//toast
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				const data = await response.json();
+
+				Alerta.success('Estudiante editado exitosamente');
+				console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
+
+				//REVISAR ES SIMPLEMENTE LA URL
+
+				// navigate(`/estudiantes/${`${dataToSend.apellidos.split(" ")[0]} ${dataToSend.nombre.split(" ")[0]}`}`, {
+				//     replace: true,
+				//     state: {
+				//         est: {
+				//             ...est,
+				//             nombre: dataToSend.nombre,
+				//             apellido: dataToSend.apellidos,
+				//             correo: dataToSend.correo,
+				//             documento_identidad: dataToSend.doc,
+				//             id_curso: dataToSend.grado,
+				//             nombreCompleto: `${dataToSend.apellidos.split(" ")[0]} ${dataToSend.nombre.split(" ")[0]}`
+				//         }
+				//     }
+				// });
+
+				setReload(!reload);
+			} catch (error) {
+				console.error('Error al editar estudiante', error);
+				Alerta.error(error.message);
 			}
-
-			const data = await response.json();
-
-			Alerta.success('Estudiante editado exitosamente');
-			console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
-
-			//REVISAR ES SIMPLEMENTE LA URL
-
-			// navigate(`/estudiantes/${`${dataToSend.apellidos.split(" ")[0]} ${dataToSend.nombre.split(" ")[0]}`}`, {
-			//     replace: true,
-			//     state: {
-			//         est: {
-			//             ...est,
-			//             nombre: dataToSend.nombre,
-			//             apellido: dataToSend.apellidos,
-			//             correo: dataToSend.correo,
-			//             documento_identidad: dataToSend.doc,
-			//             id_curso: dataToSend.grado,
-			//             nombreCompleto: `${dataToSend.apellidos.split(" ")[0]} ${dataToSend.nombre.split(" ")[0]}`
-			//         }
-			//     }
-			// });
-
-			setReload(!reload);
-		} catch (error) {
-			console.error('Error al editar estudiante', error);
-			Alerta.error(error.message);
 		}
 	};
 
@@ -237,27 +239,29 @@ const VistaEst = () => {
 	const closeModal = () => setIsModalOpen(false);
 
 	const handleEliminar = async () => {
-		try {
-			const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-			});
+		if (!bloqueoDemo) {
+			try {
+				const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.error || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				console.log('ESTUDIANTE ELIMINADO EXITOSAMENTE');
+				Alerta.success('Estudiante eliminado exitosamente');
+				closeModal();
+
+				navigate(`/estudiantes`);
+			} catch (error) {
+				console.error('Error al eliminar estudiante: ', error);
 			}
-
-			console.log('ESTUDIANTE ELIMINADO EXITOSAMENTE');
-			Alerta.success('Estudiante eliminado exitosamente');
-			closeModal();
-
-			navigate(`/estudiantes`);
-		} catch (error) {
-			console.error('Error al eliminar estudiante: ', error);
 		}
 	};
 	return (

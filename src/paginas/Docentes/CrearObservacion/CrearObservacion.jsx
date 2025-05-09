@@ -49,34 +49,36 @@ const CrearObservacion = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		try {
-			setCargando(true);
-			const response = await fetch(`${API_URL}comentarios/`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`,
-				},
-				body: JSON.stringify({
-					comentario: formData.observacion,
-					documento_profe: user.id,
-					documento_estudiante: est.estudiante_id,
-				}),
-			});
+		if (!bloqueoDemo) {
+			try {
+				setCargando(true);
+				const response = await fetch(`${API_URL}comentarios/`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({
+						comentario: formData.observacion,
+						documento_profe: user.id,
+						documento_estudiante: est.estudiante_id,
+					}),
+				});
 
-			if (!response.ok) {
-				const errorData = await response.json(); // Obtiene respuesta del servidor
-				throw new Error(`${errorData.message || response.status}`);
+				if (!response.ok) {
+					const errorData = await response.json(); // Obtiene respuesta del servidor
+					throw new Error(`${errorData.message || response.status}`);
+				}
+				console.log('Datos enviados:', formData);
+				Alerta.success('Observación realizada correctamente');
+				setCargando(false);
+				setReload(!reload);
+				setFormData({ observacion: '' });
+			} catch (error) {
+				console.error('Error al crear observacion', error);
+				setCargando(false);
+				Alerta.error(error.message);
 			}
-			console.log('Datos enviados:', formData);
-			Alerta.success('Observación realizada correctamente');
-			setCargando(false);
-			setReload(!reload);
-			setFormData({ observacion: '' });
-		} catch (error) {
-			console.error('Error al crear observacion', error);
-			setCargando(false);
-			Alerta.error(error.message);
 		}
 	};
 
