@@ -197,29 +197,29 @@
 	.celda {
 		//Si es de tipo titulo
 		&.titulo {
-			color: var(--dark-azul);
-			background-color: var(--dark-contraste-azul);
+			color: var(--dark-azul-pildora);
+			background-color: var(--dark-contraste-azul-pildora);
 
 			//si tiene rol de ver
 			&.ver {
 				&:hover {
 					color: var(--dark-negro);
-					background-color: var(--dark-azul);
+					background-color: var(--dark-azul-pildora);
 				}
 			}
 		}
 
 		//Si es de tipo titulo2
 		&.titulo2 {
-			color: var(--dark-azul);
+			color: var(--dark-azul-pildora);
 
-			background-color: var(--dark-contraste-azul);
+			background-color: var(--dark-contraste-azul-pildora);
 
 			//Si tiene rol de ver
 			&.ver {
 				&:hover {
 					color: var(--dark-negro);
-					background-color: var(--dark-azul);
+					background-color: var(--dark-azul-pildora);
 				}
 			}
 		}
@@ -231,7 +231,7 @@
 			//si tiene el rol de ver
 			&.ver {
 				&:hover {
-					color: var(--dark-azul);
+					color: var(--dark-azul-pildora);
 					background-color: var(--dark-contraste-negro);
 				}
 			}

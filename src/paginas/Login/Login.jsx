@@ -40,10 +40,10 @@ export default function Login({ func }) {
 		// navigate("/home") /* cambiar la ruta despues */
 	};
 
-	const handlerDemo = (correo, clave) => {
-		console.log(correo, clave);
+	const handlerDemo = (rol) => {
+		console.log(rol);
 		setBloqueoDemo(true);
-		func(correo, clave, true);
+		func(rol,'no-password', true);
 	};
 
 	return (
@@ -125,24 +125,24 @@ export default function Login({ func }) {
 							color='azul'
 							texto='ADMINISTRADOR'
 							onClick={() =>
-								handlerDemo('juancamilohenao@gmail.com', 'juanca')
+								handlerDemo('admin')
 							}
 						></PildoraMateriaGrado>
 						<PildoraMateriaGrado
 							color='morado'
 							texto='DOCENTE'
-							onClick={() => handlerDemo('juanva@gmail.com', 'juanma')}
+							onClick={() => handlerDemo('docente')}
 						></PildoraMateriaGrado>
 						<PildoraMateriaGrado
 							color='amarillo'
 							texto='ESTUDIANTE'
-							onClick={() => handlerDemo('nico@gmail.com', 'nico')}
+							onClick={() => handlerDemo('estudiante')}
 						></PildoraMateriaGrado>
 					</div>
 					<Line></Line>
 					<div className='btnDemo'>
 						<button onClick={() => setDemo(!demo)}>
-							{!demo ? 'Ir a demo' : 'Regresar'}{' '}
+							{!demo ? 'Ir a demo' : 'Ir a Inicio'}{' '}
 						</button>
 					</div>
 				</div>

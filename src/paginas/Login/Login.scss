@@ -142,6 +142,9 @@
 				&:hover {
 					color: var(--colorPrincipal);
 				}
+
+				width: fit-content;
+				align-self: flex-end;
 			}
 
 			.contenedorDemo {
