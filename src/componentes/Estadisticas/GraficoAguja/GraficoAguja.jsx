@@ -6,8 +6,8 @@ const RADIAN = Math.PI / 180;
 /* Tramos de la escala 0-5 (con color) */
 const SEGMENTOS_BASE = [
 	{ name: 'Bajo', value: 2.9, color: '#ff4d4f' }, // 0-2.9
-	{ name: 'Aceptable', value: 1.0, color: '#faad14' }, // 3-3.9
-	{ name: 'Alto', value: 1.1, color: '#52c41a' }, // 4-5
+	{ name: 'Medio', value: 1.5, color: '#faad14' }, // 3-4.5
+	{ name: 'Alto', value: 0.6, color: '#52c41a' }, // 4.5-5
 ];
 const TOTAL = 5;
 

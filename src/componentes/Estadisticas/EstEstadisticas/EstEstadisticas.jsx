@@ -103,7 +103,7 @@ const EstEstadisticas = () => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 3, 1600: 3 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>

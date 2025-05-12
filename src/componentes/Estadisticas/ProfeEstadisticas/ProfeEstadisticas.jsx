@@ -104,7 +104,7 @@ const ProfeEstadisticas = () => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 2 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
 				className={`contenedorDataProfe ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
@@ -173,7 +173,12 @@ const ProfeEstadisticas = () => {
 							<GraficoBarras data={promedioGrados} />
 						</div>
 					) : (
-						<p>No hay datos para mostrar</p>
+						<PildoraEst
+							color='morado'
+							clase='peque pildoraEstadistica'
+							est='NO HAY PROMEDIO GRADOS'
+							estadistica
+						/>
 					)
 				) : (
 					<span className='loader'></span>
@@ -190,7 +195,7 @@ const ProfeEstadisticas = () => {
 											className='graficoBarras'
 										>
 											<p>Promedio {curso}</p>
-											{informacion.length <= 3 ? (
+											{informacion.length <= 2 ? (
 												<GraficoBarras
 													data={
 														informacion
