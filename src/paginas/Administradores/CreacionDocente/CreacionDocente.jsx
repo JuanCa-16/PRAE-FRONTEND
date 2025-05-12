@@ -15,6 +15,11 @@ const CreacionDocente = () => {
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
+	const CANT_EST_PAG = 9;
+	const INCREMENTO_PAG = 6;
+
+	const [cantVisible, setCantVisible] = useState(CANT_EST_PAG);
+
 	function capitalizeWords(str) {
 		return str
 			.split(' ') // Divide en palabras
@@ -246,6 +251,14 @@ const CreacionDocente = () => {
 			(filtroKey === '' || item.documento_identidad.toLowerCase().includes(filtroKey.toLowerCase())) // Filtra por cédula
 	);
 
+	const cargarMasEst = () => {
+		setCantVisible((prev) => Math.min(prev + INCREMENTO_PAG, pildorasFiltradas.length));
+	};
+
+	useEffect(() => {
+		setCantVisible(CANT_EST_PAG);
+	}, [profeSeleccionado, filtroKey]);
+
 	return (
 		<div className='contenedorCreacionDocente'>
 			<div className='crear'>
@@ -377,10 +390,19 @@ const CreacionDocente = () => {
 					</div>
 
 					<ContenedorPildoraMateriaGrado
-						info={pildorasFiltradas}
+						info={pildorasFiltradas.slice(0, cantVisible)}
 						docente={true}
 						clase={'docente'}
 					></ContenedorPildoraMateriaGrado>
+
+					{cantVisible < pildorasFiltradas.length && (
+						<button
+							className='btnCargarMas'
+							onClick={cargarMasEst}
+						>
+							Cargar más
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
