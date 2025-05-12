@@ -127,8 +127,8 @@
 			color: var(--dark-blanco);
 		}
 
-		background-color: var(--dark-azul);
-		color: var(--dark-contraste-azul);
+		background-color: var(--dark-azul-pildora);
+		color: var(--dark-contraste-azul-pildora);
 
 		//colores
 		&.morado {
@@ -148,15 +148,15 @@
 
 		//colores hover
 		&:hover {
-			background-color: var(--dark-contraste-azul);
+			background-color: var(--dark-contraste-azul-pildora);
 
 			h4 {
-				color: var(--dark-azul);
+				color: var(--dark-azul-pildora);
 			}
 
 			.elipse1,
 			.elipse2 {
-				background-color: var(--dark-azul);
+				background-color: var(--dark-azul-pildora);
 			}
 
 			&.morado {

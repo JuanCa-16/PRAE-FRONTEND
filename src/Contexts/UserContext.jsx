@@ -62,12 +62,13 @@ export const ContextProvider = ({ children }) => {
 	const [bloqueoDemo, setBloqueoDemo] = useState(false);
 
 	useEffect(() => {
-		const demo = localStorage.getItem('DEMO');
 
-		if (demo) {
+		if(user && user.demo){
 			setBloqueoDemo(true);
+			console.log('BLOQUEO',bloqueoDemo)
 		}
-	}, [bloqueoDemo]);
+		
+	}, [user, bloqueoDemo]);
 
 	return (
 		<UserContext.Provider value={{ user, setUser, abrir, setAbrir, bloqueoDemo, setBloqueoDemo }}>

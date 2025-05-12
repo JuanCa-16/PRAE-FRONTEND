@@ -19,6 +19,9 @@
 	--dark-azul: color-mix(in srgb, var(--colorPrincipal) 50%, rgb(145, 145, 145));
 	--dark-contraste-azul: color-mix(in srgb, var(--dark-azul) 25%, rgba(128, 128, 128, 0.1));
 
+	--dark-azul-pildora: color-mix(in srgb, var(--colorPildora1) 50%, rgb(145, 145, 145));
+	--dark-contraste-azul-pildora: color-mix(in srgb, var(--dark-azul-pildora) 25%, rgba(128, 128, 128, 0.1));
+
 	--dark-morado: color-mix(in srgb, var(--colorPildora2) 50%, rgb(145, 145, 145));
 	--dark-contraste-morado: color-mix(in srgb, var(--dark-morado) 25%, rgba(128, 128, 128, 0.1));
 

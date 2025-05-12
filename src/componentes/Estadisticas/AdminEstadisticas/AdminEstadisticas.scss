@@ -58,6 +58,20 @@
 			font-weight: 500;
 		}
 	}
+
+	.graficoAguja {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		height: 10.5rem;
+		padding-top: 1rem;
+		overflow: hidden;
+
+		p {
+			font-weight: 500;
+		}
+	}
 }
 
 .contenedorDataColumn {

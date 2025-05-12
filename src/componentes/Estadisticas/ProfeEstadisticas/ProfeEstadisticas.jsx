@@ -104,65 +104,67 @@ const ProfeEstadisticas = () => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 3, 1600: 3 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
 				className={`contenedorDataProfe ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				{cantidadMaterias !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='MATERIAS DICTADAS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadMaterias}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{cantidadMaterias !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='MATERIAS DICTADAS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadMaterias}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{cantidadGrados !== null ? (
-					<div>
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='GRADOS ASIGNADOS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadGrados}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{cantidadGrados !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='GRADOS ASIGNADOS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadGrados}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{cantidadEst !== null ? (
-					<div>
-						<PildoraEst
-							color='amarillo'
-							clase='peque pildoraEstadistica'
-							est='ESTUDIANTES:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadEst}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{cantidadEst !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='ESTUDIANTES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadEst}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
 
 				{promedioGrados !== null ? (
 					promedioGrados.length > 0 ? (
@@ -171,7 +173,12 @@ const ProfeEstadisticas = () => {
 							<GraficoBarras data={promedioGrados} />
 						</div>
 					) : (
-						<p>No hay datos para mostrar</p>
+						<PildoraEst
+							color='morado'
+							clase='peque pildoraEstadistica'
+							est='NO HAY PROMEDIO GRADOS'
+							estadistica
+						/>
 					)
 				) : (
 					<span className='loader'></span>
@@ -188,7 +195,7 @@ const ProfeEstadisticas = () => {
 											className='graficoBarras'
 										>
 											<p>Promedio {curso}</p>
-											{informacion.length <= 3 ? (
+											{informacion.length <= 2 ? (
 												<GraficoBarras
 													data={
 														informacion

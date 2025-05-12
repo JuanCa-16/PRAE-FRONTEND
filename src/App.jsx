@@ -91,13 +91,16 @@ function App() {
 
 	//Si inicia seseion se crear el LOCAL
 	const iniciarSesion = async (email, password, demoToken) => {
+
+		const envio = demoToken? {rol:email, demo:demoToken} : { email, password }  
+		console.log('envio', envio)
 		try {
 			const response = await fetch(`${API_URL}auth/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ email, password }),
+				body: JSON.stringify(envio),
 			});
 
 			if (!response.ok) {
@@ -117,10 +120,6 @@ function App() {
 				const decoded = jwtDecode(data.token);
 				console.log('Token decodificado:', decoded);
 				setUser(decoded);
-
-				if (demoToken) {
-					localStorage.setItem('DEMO', true); // Solo lo guarda si demoToken es true
-				}
 			}
 			Alerta.success('Inicio de sesión exitoso');
 			return console.log('EXITOSO');
@@ -139,7 +138,6 @@ function App() {
 		setAbrir(false);
 		setUser(null);
 		setBloqueoDemo(false);
-		localStorage.removeItem('DEMO'); // Eliminar del localStorage
 	};
 
 	useEffect(() => {

@@ -103,7 +103,7 @@ const EstEstadisticas = () => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 3, 1600: 3 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
@@ -162,61 +162,63 @@ const EstEstadisticas = () => {
 					<span className='loader'></span>
 				)}
 
-				{materiasAlto !== null ? (
-					<div>
-						<PildoraEst
-							color='amarillo'
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN ALTO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasAlto}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{materiasAlto !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN ALTO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasAlto}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{materiasMedia !== null ? (
-					<div>
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN MEDIO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasMedia}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{materiasMedia !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN MEDIO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasMedia}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{materiasBajo !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN BAJO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasBajo}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{materiasBajo !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN BAJO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasBajo}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
 
 				{promedioCursos !== null ? (
 					promedioCursos.length > 0 ? (

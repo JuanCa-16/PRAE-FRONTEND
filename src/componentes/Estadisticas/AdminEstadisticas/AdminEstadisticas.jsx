@@ -6,6 +6,8 @@ import AnimatedCounter from '../Animacion/AnimatedNumber';
 import PildoraEst from '../../PildoraEst/PildoraEst';
 import GraficoBarras from '../GraficoBarras/GraficoBarras';
 import GraficoTorta from '../GraficoTorta/GraficoTorta';
+import GraficoAguja from '../GraficoAguja/GraficoAguja';
+import GraficoRadar from '../GraficoRadar/GraficoRadar';
 import Masonry from 'react-masonry-css';
 import './AdminEstadisticas.scss';
 
@@ -20,26 +22,23 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 	const [cantidadDocentes, setCantidadDocentes] = useState(null);
 	const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
 	const [estudiantesCurso, setEstudiantesCurso] = useState(null);
+	const [porcentajeUsuarios, setPorcentajeUsuarios] = useState(null);
+	const [promedioMateriasCurso, setPromedioMateriasCurso] = useState(null);
 
 	const duracion = 1.5; // Duración de la animación en segundos
 
 	const ordenarGrados = (a, b) => {
-		const [gradoA, subgradoA] = a.name.split('-');
-		const [gradoB, subgradoB] = b.name.split('-');
+		const strA = a.name ?? a.titulo ?? a.curso ?? '';
+		const strB = b.name ?? b.titulo ?? b.curso ?? '';
 
-		// Convertir los grados en números
-		const gradoANum = Number(gradoA);
-		const gradoBNum = Number(gradoB);
+		const [gradoA, subA = ''] = strA.split('-');
+		const [gradoB, subB = ''] = strB.split('-');
 
-		// Primero ordenar por el número del grado
-		if (gradoANum !== gradoBNum) {
-			return gradoANum - gradoBNum; // Comparar los grados
-		} else {
-			// Si los grados son iguales, ordenar alfabéticamente por la letra
-			if (subgradoA < subgradoB) return -1;
-			if (subgradoA > subgradoB) return 1;
-			return 0;
-		}
+		const gA = Number(gradoA);
+		const gB = Number(gradoB);
+		if (gA !== gB) return gA - gB;
+
+		return subA.localeCompare(subB, 'es', { sensitivity: 'base' });
 	};
 
 	const handleData = (data) => {
@@ -71,12 +70,12 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 			);
 
 			setPromedioNotasCurso((prev) => {
-				const nuevo = JSON.stringify(nuevosPromedioGrados);
+				const nuevo = JSON.stringify(nuevosPromedioGrados.sort(ordenarGrados));
 				const anterior = JSON.stringify(prev);
 				if (nuevo === anterior) {
 					return prev;
 				}
-				return nuevosPromedioGrados;
+				return nuevosPromedioGrados.sort(ordenarGrados);
 			});
 
 			//ESTUDIANTES X GRADO
@@ -114,6 +113,44 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 				}
 				return nuevosDoc; // Solo actualizar si realmente cambió
 			});
+
+			//PORCENTAJE USUARIOS
+
+			const nuevoPorcentajeUsuarios = [
+				{ name: 'Profesores', value: Number(nuevosDoc) },
+				{ name: 'Estudiantes', value: Number(nuevosEst) },
+			];
+			setPorcentajeUsuarios((prev) => {
+				const nuevo = JSON.stringify(nuevoPorcentajeUsuarios);
+				const anterior = JSON.stringify(prev);
+
+				if (nuevo === anterior) {
+					return prev;
+				}
+				return nuevoPorcentajeUsuarios;
+			});
+
+			//PROMEDIO MATERIAS X GRADO
+			const nuevosPromedioMateriasGrados = Object.entries(
+				data.estadisticas.promedio_notas_por_materia
+			).map(([curso, info]) => ({
+				curso,
+				informacion: Object.entries(info).map(([titulo, prom]) => {
+					return {
+						titulo,
+						promedio: parseFloat(prom),
+					};
+				}),
+			}));
+
+			setPromedioMateriasCurso((prev) => {
+				const nuevo = JSON.stringify(nuevosPromedioMateriasGrados.sort(ordenarGrados));
+				const anterior = JSON.stringify(prev);
+				if (nuevo === anterior) {
+					return prev;
+				}
+				return nuevosPromedioMateriasGrados.sort(ordenarGrados);
+			});
 		}
 	};
 
@@ -131,43 +168,63 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 3, 1600: 3 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				{cantidadMaterias !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='MATERIAS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadMaterias}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{cantidadMaterias !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='MATERIAS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadMaterias}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{cantidadGrados !== null ? (
-					<div>
+					{cantidadGrados !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='GRADOS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadGrados}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
+
+				{porcentajeUsuarios !== null ? (
+					porcentajeUsuarios.length > 0 ? (
+						<div className='graficoTorta'>
+							<p>Usuarios Institucion</p>
+							<GraficoTorta data={porcentajeUsuarios}></GraficoTorta>
+						</div>
+					) : (
 						<PildoraEst
 							color='morado'
 							clase='peque pildoraEstadistica'
-							est='GRADOS:'
+							est='NO HAY USUARIOS INSTITUCION'
 							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadGrados}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+						/>
+					)
 				) : (
 					<span className='loader'></span>
 				)}
@@ -179,7 +236,12 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 							<GraficoBarras data={promedioNotasCurso} />
 						</div>
 					) : (
-						<p>No hay datos para mostrar</p>
+						<PildoraEst
+							color='morado'
+							clase='peque pildoraEstadistica'
+							est='NO HAY PROMEDIO X GRADOS'
+							estadistica
+						/>
 					)
 				) : (
 					<span className='loader'></span>
@@ -192,45 +254,126 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 							<GraficoTorta data={estudiantesCurso}></GraficoTorta>
 						</div>
 					) : (
-						<p>No hay datos para mostrar</p>
+						<PildoraEst
+							color='morado'
+							clase='peque pildoraEstadistica'
+							est='NO HAY ESTUDIANTES X GRADO'
+							estadistica
+						/>
 					)
 				) : (
 					<span className='loader'></span>
 				)}
 
-				{cantidadEst !== null ? (
-					<div>
+				<>
+					{cantidadEst !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='ESTUDIANTES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadEst}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+
+					{cantidadDocentes !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='PROFESORES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadDocentes}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
+
+				{promedioNotasCurso !== null ? (
+					promedioNotasCurso.length > 0 ? (
+						promedioNotasCurso.map(({ titulo, promedio }) => {
+							return (
+								<div className='graficoAguja'>
+									<p>Grado {titulo}</p>
+									<p>Promedio {promedio.toFixed(2)}</p>
+									<GraficoAguja
+										titulo={titulo}
+										promedio={promedio}
+									/>
+								</div>
+							);
+						})
+					) : (
 						<PildoraEst
-							color='amarillo'
+							color='morado'
 							clase='peque pildoraEstadistica'
-							est='ESTUDIANTES:'
+							est='NO HAY DATOS A MOSTRAR PROMEDIO MATERIAS GRADOS'
 							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadEst}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+						/>
+					)
 				) : (
 					<span className='loader'></span>
 				)}
 
-				{cantidadDocentes !== null ? (
-					<div>
+				{promedioMateriasCurso !== null ? (
+					promedioMateriasCurso.length > 0 ? (
+						promedioMateriasCurso.map(({ curso, informacion }) => {
+							return (
+								<>
+									{informacion.length > 0 ? (
+										<div
+											key={curso}
+											className='graficoBarras'
+										>
+											<p>Promedio {curso}</p>
+											{informacion.length <= 2 ? (
+												<GraficoBarras
+													data={
+														informacion
+													}
+												/>
+											) : (
+												<GraficoRadar
+													data={
+														informacion
+													}
+												/>
+											)}
+										</div>
+									) : (
+										<PildoraEst
+											color='amarillo'
+											clase='peque pildoraEstadistica'
+											est={`Grado ${curso} sin materias`}
+											estadistica
+										/>
+									)}
+								</>
+							);
+						})
+					) : (
 						<PildoraEst
+							color='amarillo'
 							clase='peque pildoraEstadistica'
-							est='DOCENTES:'
+							est='NO HAY DATOS PROM X GRADOS'
 							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadDocentes}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+						/>
+					)
 				) : (
 					<span className='loader'></span>
 				)}

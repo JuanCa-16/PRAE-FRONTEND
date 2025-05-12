@@ -16,6 +16,11 @@ const CreacionEst = () => {
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 
+	const CANT_EST_PAG = 9;
+	const INCREMENTO_PAG = 6;
+
+	const [cantVisible, setCantVisible] = useState(CANT_EST_PAG);
+
 	function capitalizeWords(str) {
 		return str
 			.split(' ') // Divide en palabras
@@ -239,6 +244,13 @@ const CreacionEst = () => {
 		navigate(`/estudiantes/${est.nombreCompleto}`, { state: datos }); // Navegar con los datos
 	};
 
+	const cargarMasEst = () => {
+		setCantVisible((prev) => Math.min(prev + INCREMENTO_PAG, pildorasFiltradas.length));
+	};
+	useEffect(() => {
+		setCantVisible(CANT_EST_PAG);
+	}, [nombreEstudianteSeleccionada, gradoSeleccionado, filtroKey]);
+
 	return (
 		<div className='contenedorCreacionEst'>
 			<div className='crear'>
@@ -362,7 +374,7 @@ const CreacionEst = () => {
 
 					<div className='estudiantes'>
 						{pildorasFiltradas.length > 0 ? (
-							pildorasFiltradas.map((item, index) => (
+							pildorasFiltradas.slice(0, cantVisible).map((item, index) => (
 								<PildoraEst
 									key={index}
 									est={item.nombreCompleto}
@@ -378,6 +390,8 @@ const CreacionEst = () => {
 							</p>
 						)}
 					</div>
+
+					{cantVisible < pildorasFiltradas.length && ( <button className='btnCargarMas' onClick={cargarMasEst}>Cargar más</button> )}
 				</div>
 			</div>
 		</div>
