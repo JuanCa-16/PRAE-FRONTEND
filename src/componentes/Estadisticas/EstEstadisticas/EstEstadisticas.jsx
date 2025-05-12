@@ -162,61 +162,63 @@ const EstEstadisticas = () => {
 					<span className='loader'></span>
 				)}
 
-				{materiasAlto !== null ? (
-					<div>
-						<PildoraEst
-							color='amarillo'
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN ALTO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasAlto}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{materiasAlto !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN ALTO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasAlto}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{materiasMedia !== null ? (
-					<div>
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN MEDIO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasMedia}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{materiasMedia !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN MEDIO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasMedia}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{materiasBajo !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='MATERIAS EN BAJO:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={materiasBajo}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+					{materiasBajo !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='MATERIAS EN BAJO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={materiasBajo}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
 
 				{promedioCursos !== null ? (
 					promedioCursos.length > 0 ? (

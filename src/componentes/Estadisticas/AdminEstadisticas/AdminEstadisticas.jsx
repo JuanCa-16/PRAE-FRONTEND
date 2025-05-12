@@ -6,6 +6,7 @@ import AnimatedCounter from '../Animacion/AnimatedNumber';
 import PildoraEst from '../../PildoraEst/PildoraEst';
 import GraficoBarras from '../GraficoBarras/GraficoBarras';
 import GraficoTorta from '../GraficoTorta/GraficoTorta';
+import GraficoAguja from '../GraficoAguja/GraficoAguja';
 import Masonry from 'react-masonry-css';
 import './AdminEstadisticas.scss';
 
@@ -20,6 +21,7 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 	const [cantidadDocentes, setCantidadDocentes] = useState(null);
 	const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
 	const [estudiantesCurso, setEstudiantesCurso] = useState(null);
+	const [porcentajeUsuarios, setPorcentajeUsuarios] = useState(null);
 
 	const duracion = 1.5; // Duración de la animación en segundos
 
@@ -114,6 +116,22 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 				}
 				return nuevosDoc; // Solo actualizar si realmente cambió
 			});
+
+			//PORCENTAJE USUARIOS
+
+			const nuevoPorcentajeUsuarios = [
+				{ name: 'Profesores', value: Number(nuevosDoc) },
+				{ name: 'Estudiantes', value: Number(nuevosEst) },
+			];
+			setPorcentajeUsuarios((prev) => {
+				const nuevo = JSON.stringify(nuevoPorcentajeUsuarios);
+				const anterior = JSON.stringify(prev);
+
+				if (nuevo === anterior) {
+					return prev;
+				}
+				return nuevoPorcentajeUsuarios;
+			});
 		}
 	};
 
@@ -131,43 +149,58 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 			onData={handleData}
 		>
 			<Masonry
-				breakpointCols={{ default: 4, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 3, 1600: 3 }} // Configuración de las columnas según el ancho
+				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 2 }} // Configuración de las columnas según el ancho
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				{cantidadMaterias !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='MATERIAS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadMaterias}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{cantidadMaterias !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='MATERIAS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadMaterias}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{cantidadGrados !== null ? (
-					<div>
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='GRADOS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadGrados}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+					{cantidadGrados !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='GRADOS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadGrados}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
+
+				{porcentajeUsuarios !== null ? (
+					porcentajeUsuarios.length > 0 ? (
+						<div className='graficoTorta'>
+							<p>Usuarios Institucion</p>
+							<GraficoTorta data={porcentajeUsuarios}></GraficoTorta>
+						</div>
+					) : (
+						<p>No hay datos para mostrar</p>
+					)
 				) : (
 					<span className='loader'></span>
 				)}
@@ -198,39 +231,64 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 					<span className='loader'></span>
 				)}
 
-				{cantidadEst !== null ? (
-					<div>
-						<PildoraEst
-							color='amarillo'
-							clase='peque pildoraEstadistica'
-							est='ESTUDIANTES:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadEst}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{cantidadEst !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='ESTUDIANTES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadEst}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
 
-				{cantidadDocentes !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='DOCENTES:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadDocentes}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+					{cantidadDocentes !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='PROFESORES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadDocentes}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
+
+				{console.log(promedioNotasCurso)}
+
+				{promedioNotasCurso !== null ? (
+					promedioNotasCurso.length > 0 ? (
+						promedioNotasCurso.map(({ titulo, promedio }) => {
+							return (
+								<div className='graficoAguja'>
+									<p>Grado {titulo}</p>
+									<p>Promedio {promedio.toFixed(2)}</p>
+									<GraficoAguja
+										titulo={titulo}
+										promedio={promedio}
+									/>
+								</div>
+							);
+						})
+					) : (
+						<p>No hay datos para mostrar</p>
+					)
 				) : (
 					<span className='loader'></span>
 				)}

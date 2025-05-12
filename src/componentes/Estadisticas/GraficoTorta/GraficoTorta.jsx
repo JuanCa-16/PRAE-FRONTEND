@@ -117,8 +117,8 @@ const GraficoTorta = ({ data }) => {
 						data={data}
 						cx='50%' // Centra el gráfico
 						cy='50%' // Centra el gráfico
-						innerRadius={30}
-						outerRadius={55}
+						innerRadius={50}
+						outerRadius={70}
 						fill='var(--colorPildora1)' // Color de las porciones
 						dataKey='value'
 						startAngle={90}
