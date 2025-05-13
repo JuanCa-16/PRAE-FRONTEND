@@ -16,6 +16,11 @@ const Observaciones = () => {
 
 	const [infoPildoras, setInfoPildoras] = useState([]);
 
+	const CANT_EST_PAG = 9;
+	const INCREMENTO_PAG = 6;
+
+	const [cantVisible, setCantVisible] = useState(CANT_EST_PAG);
+
 	useEffect(() => {
 		const listaEstAsignados = async () => {
 			try {
@@ -84,6 +89,13 @@ const Observaciones = () => {
 		navigate(`/observaciones/${est.nombre_completo}`, { state: datos }); // Navegar con los datos
 	};
 
+	const cargarMasEst = () => {
+		setCantVisible((prev) => Math.min(prev + INCREMENTO_PAG, pildorasFiltradas.length));
+	};
+	useEffect(() => {
+		setCantVisible(CANT_EST_PAG);
+	}, [nombreEstudianteSeleccionada, gradoSeleccionado, filtroKey]);
+	
 	return (
 		<div className='contenedorObservaciones'>
 			<TituloDes
@@ -120,7 +132,7 @@ const Observaciones = () => {
 
 				<div className='materias'>
 					{pildorasFiltradas.length > 0 ? (
-						pildorasFiltradas.map((item, index) => (
+						pildorasFiltradas.slice(0, cantVisible).map((item, index) => (
 							<PildoraEst
 								key={index}
 								est={item.nombre_completo}
@@ -136,6 +148,8 @@ const Observaciones = () => {
 						</p>
 					)}
 				</div>
+
+				{cantVisible < pildorasFiltradas.length && ( <button className='btnCargarMas' onClick={cargarMasEst}>Cargar más</button> )}
 			</div>
 		</div>
 	);
