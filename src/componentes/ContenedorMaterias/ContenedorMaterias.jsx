@@ -4,6 +4,22 @@ import { useUser } from '../../Contexts/UserContext';
 import Pildora from '../Pildora/Pildora';
 import './ContenedorMaterias.scss';
 
+/**
+ * Componente que muestra un contenedor de materias asignadas a un estudiante o profesor.
+ * Permite navegar a la página de notas de la materia seleccionada.
+ * 
+ * @component
+ * 
+ * @param {string} url - La URL base para la navegación a las páginas de notas.
+ * @param {Array} info - Array de objetos que contienen la información de las materias a mostrar.
+ * @param {boolean} [est=true] - Si es `true`, muestra las materias del estudiante; si es `false`, muestra las materias del profesor.
+ * @param {string} nombre - El nombre del estudiante o profesor.
+ * @param {string} idEst - El ID del estudiante.
+ * @param {string} idProfe - El ID del profesor.
+ * 
+ * @returns {JSX.Element} Un contenedor con las materias asignadas, o un mensaje si no hay materias.
+ */
+
 const ContenedorMaterias = ({ url, info, est = true, nombre, idEst, idProfe }) => {
 	const navigate = useNavigate();
 	const { user } = useUser();

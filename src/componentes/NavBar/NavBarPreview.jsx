@@ -7,6 +7,19 @@ import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
 import './NavBarPreview.scss';
 
+/**
+ * Componente NavBarPreview que renderiza una barra de navegación para la vista previa en personalizar institución.
+ * Muestra el logo y las opciones de navegación para los roles definidos.
+ * 
+ * @component
+ * 
+ * @param {string} [rol='normal'] - El rol del usuario (normal, estudiante, docente, admin), lo que determina qué menú se muestra.
+ * @param {string} [nombreUsuario='JUAN CAMILO HENAO GALLEGO'] - El nombre del usuario que se muestra en el menú.
+ * @param {string} [imagen] - Imagen personalizada para el logo, si no se proporciona se usa el logo predeterminado.
+ * 
+ * @returns {JSX.Element} El componente NavBarPreview con la personalización actual.
+ */
+
 const NavBarPreview = ({ rol = 'normal', nombreUsuario = 'JUAN CAMILO HENAO GALLEGO', imagen }) => {
 	const menus = {
 		normal: [

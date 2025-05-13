@@ -5,6 +5,29 @@ import InputContainer from '../Input/InputContainer';
 import Alerta from '../Alerta/Alerta';
 import './Modal.scss';
 
+/**
+ * Componente Modal que muestra un modal interactivo para eliminar o editar datos, como observaciones, actividades o notas.
+ * El modal cambia de diseño dependiendo del tipo de acción (eliminar, editar).
+ * 
+ * @component
+ * 
+ * @param {boolean} isOpen - Indica si el modal está abierto o cerrado.
+ * @param {function} recargar - Función para recargar los datos después de realizar una acción.
+ * @param {function} closeModal - Función para cerrar el modal.
+ * @param {string} tipo - Tipo de acción a realizar (puede ser 'eliminar', 'actividad', 'observacion').
+ * @param {string} [modalTitulo='Eliminar'] - Título del modal, por defecto 'Eliminar'.
+ * @param {string} [modalTexto='Estas seguro de eliminar...'] - Texto del modal que describe la acción que se va a realizar.
+ * @param {string} [valorAct=''] - Valor de la actividad, usado para editar o eliminar actividades.
+ * @param {string} [ValorPeso=''] - Valor del peso de la actividad, usado para editar actividades.
+ * @param {string} [valorNota=''] - Valor de la nota, usado para registrar o editar la nota de un estudiante.
+ * @param {string} [valorObs=''] - Valor de la observación, usado para editar o eliminar observaciones.
+ * @param {Object} [extraData={}] - Datos adicionales para el procesamiento del modal (como ID de la observación o actividad).
+ * @param {ReactNode} children - Elementos hijos que se pasan al modal para su personalización.
+ * 
+ * @returns {JSX.Element} Un modal con diferentes funcionalidades dependiendo del tipo de acción.
+ */
+
+
 const Modal = ({
 	isOpen,
 	recargar,

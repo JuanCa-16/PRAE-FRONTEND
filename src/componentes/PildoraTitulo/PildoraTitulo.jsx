@@ -2,14 +2,29 @@ import React from 'react';
 import { useTheme } from '../../Contexts/UserContext';
 import './PildoraTitulo.scss';
 
-//Fucnion para poner mayusculas iniciales
+//Funcion para poner mayusculas iniciales
 const capitalizeWords = (str) => {
 	return str.replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
+/**
+ * Componente PildoraTitulo que muestra una "píldora" con información sobre un estudiante, la materia, el grado y la nota.
+ * Se puede personalizar con un color, un nombre de estudiante, una materia, un grado y una nota.
+ * 
+ * @component
+ * 
+ * @param {string} [color='azul'] - El color de la píldora, utilizado para personalizar el estilo.
+ * @param {string} [nombre='NOMBRE DOCENTE'] - El nombre del estudiante que se mostrará en la píldora.
+ * @param {string} [materia='CALCULO II'] - La materia que se mostrará en la píldora.
+ * @param {string} [nota='4.5'] - La nota del estudiante en la materia.
+ * @param {string} [grado] - El grado del estudiante (por ejemplo, "11-2").
+ * 
+ * @returns {JSX.Element} Una "píldora" con la información del estudiante, la materia, la nota y el grado.
+ */
+
 const PildoraTitulo = ({
 	color = 'azul',
-	nombre = 'Juan Camilo Henao',
+	nombre = 'NOMBRE DOCENTE',
 	materia = 'CALCULO II',
 	nota = '4.5',
 	grado,

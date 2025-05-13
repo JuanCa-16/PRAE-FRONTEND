@@ -6,6 +6,22 @@ import Modal from '../Modal/Modal';
 import Masonry from 'react-masonry-css';
 import './ContenedorPildoraMateriaGrado.scss';
 
+/**
+ * Componente que muestra un contenedor de "píldoras" para las materias o grados,
+ * con la capacidad de eliminar o navegar a la página correspondiente.
+ * Utiliza el componente **`Masonry`** para el diseño responsivo.
+ * 
+ * @component
+ * 
+ * @param {Array} info - Array de objetos que contienen la información.
+ * @param {boolean} [docente=false] - Si es `true`, muestra la información de los profesores; si es `false`, muestra la información de las materias.
+ * @param {function} eliminar - Función que se ejecuta al eliminar una materia o grado.
+ * @param {string} txt - Texto que describe si se trata de una materia o grado (usado en el mensaje de confirmación de eliminación).
+ * @param {string} clase - Clase CSS que se aplica al componente, dependiendo de si es para grados o materias.
+ * 
+ * @returns {JSX.Element} Un contenedor con las "píldoras" de materias o grados, o un mensaje si no hay datos.
+ */
+
 const ContenedorPildoraMateriaGrado = ({ info, docente = false, eliminar, txt, clase }) => {
 	const { bloqueoDemo } = useUser();
 	const pildorasFiltradas = info;

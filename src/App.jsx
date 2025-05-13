@@ -44,6 +44,20 @@ import ResetClave from './paginas/ResetClave/ResetClave.jsx';
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 
+function Docs() {
+  return (
+    <div className='contenedorDocumentacion'>
+      <iframe
+        src="/0.1.0/indexDocs.html"  // Aquí coloca la URL a tu archivo HTML
+        width="100%"
+        height="100vh"  // Ajusta el tamaño del iframe
+        title="Documentación"
+		className='documentacion'
+      ></iframe>
+    </div>
+  );
+}
+
 function App() {
 	const API_URL = process.env.REACT_APP_API_URL;
 
@@ -408,6 +422,11 @@ function App() {
 								element={<EstadisticasAdmin />}
 							/>
 						</Route>
+
+						<Route
+							path='/jsdocs'
+							element={<Docs />}
+						/>
 
 						<Route
 							path='/*'

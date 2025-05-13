@@ -9,6 +9,18 @@ import Alerta from '../Alerta/Alerta';
 import Line from '../Line/Line';
 import './TableDocentes.scss';
 
+/**
+ * Componente TableDocentes que renderiza una tabla interactiva con la información de los estudiantes, actividades y notas de un curso asignado a un docente.
+ * Muestra las actividades de los estudiantes, permite agregar nuevas actividades y editar las notas de los estudiantes.
+ * 
+ * @component
+ * 
+ * @param {Object} infoCurso - Información sobre el curso, incluyendo el ID de la materia, curso y nombre.
+ * @param {string} infoDocente - El ID del docente para obtener sus actividades y notas.
+ * 
+ * @returns {JSX.Element} Una tabla con las actividades, estudiantes y sus notas, con opciones para editar y agregar actividades.
+ */
+
 const TableDocentes = ({ infoCurso, infoDocente }) => {
 	function capitalizeWords(str) {
 		return str
