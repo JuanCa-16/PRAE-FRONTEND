@@ -1,3 +1,25 @@
+@keyframes slideDownTableEst {
+	from {
+		transform: translateY(-20px); /* Empieza un poco más arriba */
+		opacity: 0; /* Empieza invisible */
+	}
+	to {
+		transform: translateY(0); /* Llega a su posición original */
+		opacity: 1; /* Se hace visible */
+	}
+}
+
+@keyframes slideUpTableEst {
+	from {
+		transform: translateY(0); /* Empieza desde la posición original */
+		opacity: 1; /* Empieza visible */
+	}
+	to {
+		transform: translateY(-20px); /* Se mueve hacia arriba */
+		opacity: 0; /* Se hace invisible */
+	}
+}
+
 .contenedorVistaMateria {
 	width: 100%;
 	display: flex;
@@ -5,7 +27,6 @@
 	align-items: flex-start;
 	gap: 1.5rem;
 	align-self: stretch;
-	height: 100%;
 
 	.contenedor {
 		display: flex;
@@ -14,20 +35,60 @@
 		gap: 0.625rem;
 		align-self: stretch;
 
-		.tabla {
+		.grupoNotas {
 			display: flex;
-			padding: 0.75rem 0rem;
-			justify-content: space-between;
-			align-items: flex-start;
-			align-self: stretch;
-			gap: 0.3rem;
+			flex-direction: column;
+			width: 100%;
+			//gap: 1rem;
+			height: fit-content;
+			justify-content: center;
+			align-items: center;
+			.contenedorPildoraG {
+				margin-bottom: 1rem;
+			}
 
-			.col {
+			.contenedorTable {
+				width: 100%;
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				gap: 1.0625rem;
+				align-items: flex-start;
+				gap: 0.625rem;
+				align-self: stretch;
+				transition: all 0.3s ease-out; /* Suavizar la transición del cambio de altura y contenido */
+
+				.tabla {
+					display: flex;
+					padding: 0.75rem 0rem;
+					justify-content: space-between;
+					align-items: flex-start;
+					align-self: stretch;
+					gap: 0.3rem;
+
+					.col {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						gap: 1.0625rem;
+					}
+				}
+
+				&.noExpandir {
+					visibility: hidden;
+					animation: slideUpTableEst 0.2s ease-out; /* Animación para el deslizamiento hacia arriba */
+					display: none;
+				}
+
+				&.expandir {
+					visibility: visible;
+					animation: slideDownTableEst 0.3s ease-in-out; /* Animación al expandirse */
+					//margin-bottom: 2rem;
+				}
+			}
+
+			.noMostrar {
+				visibility: hidden;
+				display: none;
 			}
 		}
 	}

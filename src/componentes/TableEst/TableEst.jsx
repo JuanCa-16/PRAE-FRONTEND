@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../../Contexts/UserContext';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
+import PildoraMateriaGrado from '../PildoraMateriaGrado/PildoraMateriaGrado';
 import Celda from '../Celda/Celda';
+import Line from '../Line/Line';
 import './TableEst.scss';
 
 const TableEst = ({ infoMateria, idEst }) => {
@@ -50,6 +52,24 @@ const TableEst = ({ infoMateria, idEst }) => {
 		user.institucion.id_institucion,
 	]);
 
+	const [expandir, setExpandir] = useState({});
+	const [primerClick, setPrimerClick] = useState(false);
+
+	const handlePrimerClick = (index) => {
+		if (!primerClick) {
+			setPrimerClick(true); // Establecer que el primer clic ha ocurrido
+			setExpandir((prevState) => ({
+				...prevState,
+				[index]: !prevState[index], // Si es true, se pone false, y viceversa
+			}));
+		} else {
+			setExpandir((prevState) => ({
+				...prevState,
+				[index]: !prevState[index], // Si es true, se pone false, y viceversa
+			}));
+		}
+	};
+
 	return (
 		<div className='contenedorVistaMateria'>
 			<div className='contenedor'>
@@ -60,64 +80,137 @@ const TableEst = ({ infoMateria, idEst }) => {
 					color={infoMateria.color}
 					grado={infoMateria.curso}
 				></PildoraTitulo>
+				<Line></Line>
 				{info.actividades ? (
-					<div className='tabla'>
-						<div className='col 1'>
-							<Celda
-								color={infoMateria.color}
-								txt='Actividad'
-								tipo='titulo'
-								rol='NoVer'
-							></Celda>
-							{info.actividades.map((item, index) => (
-								<Celda
+					Object.keys(info.actividades).length > 0 ? (
+						Object.entries(info.actividades).map(([key, periodo]) => (
+							<dic
+								className='grupoNotas'
+								key={key}
+							>
+								<PildoraMateriaGrado
+									texto={periodo.nombre.toUpperCase()}
 									color={infoMateria.color}
-									key={index}
-									tipo='titulo2'
-									txt={item.actividad}
-									rol='NoVer'
-								></Celda>
-							))}
-						</div>
-						<div className='col 2'>
-							<Celda
-								color={infoMateria.color}
-								txt='Notas'
-								tipo='titulo'
-								rol='NoVer'
-							></Celda>
-							{info.actividades.map((item, index) => (
-								<Celda
-									color={infoMateria.color}
-									key={index}
-									tipo='normal'
-									txt={item.nota}
-									rol='NoVer'
-								></Celda>
-							))}
-						</div>
-						<div className='col 3'>
-							<Celda
-								color={infoMateria.color}
-								txt='Peso'
-								tipo='titulo'
-								rol='NoVer'
-							></Celda>
-							{info.actividades.map((item, index) => (
-								<Celda
-									color={infoMateria.color}
-									key={index}
-									tipo='normal'
-									txt={item.peso + '%'}
-									rol='NoVer'
-								></Celda>
-							))}
-						</div>
-					</div>
+									onClick={() => handlePrimerClick(key)}
+								></PildoraMateriaGrado>
+								<div
+									className={`contenedorTable ${
+										primerClick
+											? expandir[key]
+												? 'expandir'
+												: 'noExpandir'
+											: 'noMostrar'
+									}`}
+								>
+									{periodo.actividades.length > 0 ? (
+										<div className='tabla'>
+											<div className='col 1'>
+												<Celda
+													color={
+														infoMateria.color
+													}
+													txt='Actividad'
+													tipo='titulo'
+													rol='NoVer'
+												></Celda>
+												{periodo.actividades.map(
+													(
+														item,
+														index
+													) => (
+														<Celda
+															color={
+																infoMateria.color
+															}
+															key={
+																index
+															}
+															tipo='titulo2'
+															txt={
+																item.actividad
+															}
+															rol='NoVer'
+														></Celda>
+													)
+												)}
+											</div>
+											<div className='col 2'>
+												<Celda
+													color={
+														infoMateria.color
+													}
+													txt='Notas'
+													tipo='titulo'
+													rol='NoVer'
+												></Celda>
+												{periodo.actividades.map(
+													(
+														item,
+														index
+													) => (
+														<Celda
+															color={
+																infoMateria.color
+															}
+															key={
+																index
+															}
+															tipo='normal'
+															txt={
+																item.nota
+															}
+															rol='NoVer'
+														></Celda>
+													)
+												)}
+											</div>
+											<div className='col 3'>
+												<Celda
+													color={
+														infoMateria.color
+													}
+													txt='Peso'
+													tipo='titulo'
+													rol='NoVer'
+												></Celda>
+												{periodo.actividades.map(
+													(
+														item,
+														index
+													) => (
+														<Celda
+															color={
+																infoMateria.color
+															}
+															key={
+																index
+															}
+															tipo='normal'
+															txt={
+																item.peso +
+																'%'
+															}
+															rol='NoVer'
+														></Celda>
+													)
+												)}
+											</div>
+										</div>
+									) : (
+										<p className='tabla'>
+											No hay actividades asignadas
+										</p>
+									)}
+								</div>
+								<Line></Line>
+							</dic>
+						))
+					) : (
+						<div>Sin Periodos</div>
+					)
 				) : (
 					<div>Sin datos</div>
 				)}
-				{/* {(info.length > 0)? (<h1>MAYOR</h1>) : <p>No hay actividades todavia</p>} */}
 			</div>
 		</div>
 	);
