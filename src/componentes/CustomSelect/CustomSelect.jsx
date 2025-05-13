@@ -2,6 +2,20 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../../Contexts/UserContext';
 import './CustomSelect.scss';
 
+/**
+ * Componente CustomSelect que crea un selector de opciones con capacidad de filtrado y enfoque.
+ * 
+ * @component
+ * 
+ * @param {Array} opciones - Array de opciones que se mostrarán en el selector.
+ * @param {string} valorSeleccionado - El valor actualmente seleccionado en el selector.
+ * @param {function} setValorSeleccionado - Función para actualizar el valor seleccionado.
+ * @param {string} [titulo='Titulo'] - Título que se mostrará sobre el selector.
+ * @param {string} [placeholder] - Texto que aparece como placeholder.
+ * 
+ * @returns {JSX.Element} Un campo de selección con las opciones filtradas y seleccionables.
+ */
+
 const CustomSelect = ({ opciones, valorSeleccionado, setValorSeleccionado, titulo = 'Titulo', placeholder }) => {
 	const [abierto, setAbierto] = useState(false);
 	const [filtro, setFiltro] = useState(valorSeleccionado || ''); // Estado del input

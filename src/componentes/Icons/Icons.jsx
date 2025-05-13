@@ -1,5 +1,16 @@
 import * as React from 'react';
 
+/**
+ * @namespace Icons
+ */
+
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de inicio.
+ * Este es el icono que se utiliza para la pantalla de inicio.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const HomeIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -30,6 +41,14 @@ const HomeIcon = ({
 	);
 };
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de estudio.
+ * Este es el icono que representa el estudio o aprendizaje.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
+
 const StudyIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -56,6 +75,13 @@ const StudyIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de ajustes.
+ * Este es el icono utilizado para la configuración o ajustes de la aplicación.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const AjustesIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -81,6 +107,13 @@ const AjustesIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de listado.
+ * Este es el icono que representa un listado o menú.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const ListadoIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -106,6 +139,13 @@ const ListadoIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de estudiante.
+ * Este es el icono que representa a un estudiante.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const EstudianteIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -134,6 +174,13 @@ const EstudianteIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de Profesor.
+ * Este es el icono que representa a un Profesor.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const TeacherIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -170,6 +217,13 @@ const TeacherIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de grados.
+ * Este es el icono que representa los grados o niveles educativos.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const GradosIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -197,6 +251,13 @@ const GradosIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de salir.
+ * Este es el icono utilizado para cerrar sesión o salir de la aplicación.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const ExitIcon = ({
 	color = '#000',
 	colorApagado = '#000',
@@ -222,6 +283,13 @@ const ExitIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de tema.
+ * Este es el icono utilizado para cambiar o configurar el tema (oscuro/claro).
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const ThemeIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -248,6 +316,13 @@ const ThemeIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de institución.
+ * Este es el icono utilizado para representar una institución o entidad educativa.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const InstitucionIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -274,6 +349,13 @@ const InstitucionIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de datos.
+ * Este es el icono utilizado para representar datos o estadísticas.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const DataIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -299,6 +381,13 @@ const DataIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de Facebook.
+ * Este es el icono de la red social Facebook, utilizado para vincular a la página oficial.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const FacebookIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -324,6 +413,13 @@ const FacebookIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de Instagram.
+ * Este es el icono de la red social Instagram, utilizado para vincular a la página oficial.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const InstagramIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -349,6 +445,13 @@ const InstagramIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de menú.
+ * Este es el icono utilizado para abrir o cerrar el menú de navegación.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const MenuIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -375,6 +478,13 @@ const MenuIcon = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de ojo.
+ * Este es el icono utilizado para representar la visibilidad de elementos o contenido en password.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const EyeIcon = ({
 	color = '#157AFE',
 	colorApagado = '#000',
@@ -411,6 +521,14 @@ const EyeIcon = ({
 		/>
 	</svg>
 );
+
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de ojo bloqueado.
+ * Este es el icono utilizado para representar la invisibilidad o el bloqueo de contenido en password.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
 const EyeIconBlock = ({
 	color = '#157AFE',
 	colorApagado = '#000',

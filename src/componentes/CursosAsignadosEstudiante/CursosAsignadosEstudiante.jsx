@@ -3,6 +3,21 @@ import TituloDes from '../TituloDes/TituloDes';
 import ContenedorMaterias from '../ContenedorMaterias/ContenedorMaterias';
 import './CursosAsignadosEstudiante.scss';
 
+/**
+ * Componente que muestra las materias asignadas a un estudiante en un curso determinado.
+ * Obtiene los datos desde la API y los muestra en un contenedor organizado.
+ * 
+ * @component
+ * 
+ * @param {string} url - La URL base para navegar a otras páginas relacionadas con las materias.
+ * @param {string} idCurso - El ID del curso del estudiante para obtener las materias asignadas.
+ * @param {string} idInstitucion - El ID de la institución para filtrar las materias por institución.
+ * @param {string} nombreEst - El nombre del estudiante, que se mostrará en la interfaz.
+ * @param {string} idEst - El ID del estudiante para la navegación y otras funcionalidades.
+ * 
+ * @returns {JSX.Element} Un contenedor con las materias asignadas al estudiante, mostradas en el componente **`ContenedorMaterias`**.
+ */
+
 const CursosAsignadosEstudiante = ({ url, idCurso, idInstitucion, nombreEst, idEst }) => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');

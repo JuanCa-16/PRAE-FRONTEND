@@ -4,6 +4,19 @@ import CustomSelect from '../CustomSelect/CustomSelect.jsx';
 import ContenedorMaterias from '../ContenedorMaterias/ContenedorMaterias.jsx';
 import './CursosAsignadosDocente.scss';
 
+/**
+ * Componente que muestra un listado de los cursos asignados a un docente,
+ * permitiendo filtrar por materia y grado. Los cursos se obtienen de una API.
+ * 
+ * @component
+ * 
+ * @param {string} idProfe - El ID del profesor para obtener sus asignaciones de cursos.
+ * @param {string} idInstitucion - El ID de la institución para filtrar los cursos.
+ * @param {string} url - La URL base para navegar a otras páginas relacionadas con los cursos.
+ * 
+ * @returns {JSX.Element} Un contenedor con los cursos asignados al docente, con filtros de materia y grado.
+ */
+
 const CursosAsignadosDocente = ({ idProfe, idInstitucion, url }) => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');

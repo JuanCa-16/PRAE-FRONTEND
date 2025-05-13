@@ -6,6 +6,18 @@ import Celda from '../Celda/Celda';
 import Line from '../Line/Line';
 import './TableEst.scss';
 
+/**
+ * Componente TableEst que muestra una tabla con la información de las actividades y notas de un estudiante en una materia específica.
+ * Permite expandir cada período para ver las actividades, sus notas y los pesos correspondientes.
+ * 
+ * @component
+ * 
+ * @param {Object} infoMateria - Información sobre la materia, incluyendo el ID, nombre, color, y el profesor.
+ * @param {string} idEst - El ID del estudiante para obtener sus actividades y notas.
+ * 
+ * @returns {JSX.Element} Una tabla con las actividades, las notas y los pesos correspondientes a cada actividad del estudiante en la materia.
+ */
+
 const TableEst = ({ infoMateria, idEst }) => {
 	//Informacion de la tabla traer info del BACK
 

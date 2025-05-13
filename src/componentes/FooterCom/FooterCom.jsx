@@ -3,6 +3,16 @@ import { useUser } from '../../Contexts/UserContext';
 import { FacebookIcon, InstagramIcon } from '../Icons/Icons';
 import './FooterCom.scss';
 
+/**
+ * Componente FooterCom que muestra el pie de página de la aplicación, con información de la institución, redes sociales y logo.
+ * 
+ * @component
+ * 
+ * @param {string} [imagen] - URL de una imagen de logo personalizada. Si no se proporciona, se usa el logo de la institución.
+ * 
+ * @returns {JSX.Element} El pie de página con la información de la institución y los iconos de redes sociales.
+ */
+
 const FooterCom = ({ imagen }) => {
 	const { user } = useUser();
 	const [colorHex, setColorHex] = useState('');

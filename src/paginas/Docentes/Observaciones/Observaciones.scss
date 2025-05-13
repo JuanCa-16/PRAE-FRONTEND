@@ -15,6 +15,11 @@
 		gap: 1.5rem;
 		align-self: stretch;
 
+		.btnCargarMas {
+			width: fit-content;
+			align-self: center;
+		}
+
 		.filtros {
 			display: flex;
 			width: 100%;

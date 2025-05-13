@@ -216,6 +216,18 @@ button {
 	width: 100%;
 }
 
+.contenedorDocumentacion{
+	width: 100%;
+	height: 100vh;
+	height: 100dvh;
+
+	.documentacion{
+		width: 100%;
+		height: 100vh;
+		height: 100dvh;
+	}
+}
+
 @media screen and (max-width: $max-celular) {
 	//Estilos de letra (ROBOTO por defecto)
 	h1 {
