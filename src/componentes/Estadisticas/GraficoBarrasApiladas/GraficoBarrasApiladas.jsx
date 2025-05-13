@@ -3,10 +3,11 @@ import { useTheme } from '../../../Contexts/UserContext';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList, Legend } from 'recharts';
 import './GraficoBarrasApiladas.scss';
 
-// Ejemplo de datos con cada titulo y su respectivo promedio por periodo
-const GraficoBarrasApiladas = ({ data }) => {
-	const alturaGrafico = Math.min(data.length * 60, 800);
+const GraficoBarrasApiladas = ({ data, periodos = 4 }) => {
+	const alturaGrafico = Math.min(data.length * 110, 200);
 	const { theme } = useTheme();
+
+	const cantPeriodos = periodos;
 
 	return (
 		<div
@@ -50,38 +51,48 @@ const GraficoBarrasApiladas = ({ data }) => {
 					<Legend />
 
 					{/* Barra Apilada para el promedio de cada periodo */}
-					<Bar
-						dataKey='periodo1'
-						stackId='a'
-						className='periodo1Bar'
-						name='Periodo 1'
-					></Bar>
-					<Bar
-						dataKey='periodo2'
-						stackId='a'
-						className='periodo2Bar'
-						name='Periodo 2'
-					></Bar>
-					<Bar
-						dataKey='periodo3'
-						stackId='a'
-						className='periodo3Bar'
-						name='Periodo 3'
-					></Bar>
+					{cantPeriodos >= 1 && (
+						<Bar
+							dataKey='periodo1'
+							stackId='a'
+							className='periodo1Bar'
+							name='Periodo 1'
+						></Bar>
+					)}
 
-					<Bar
-						className='periodo4Bar'
-						dataKey='periodo4'
-						stackId='a'
-						name='Periodo 4'
-					>
-						<LabelList
-							className='labelList'
-							dataKey='total'
-							position='right'
-							fill='var(--colorPildora2)'
-						/>
-					</Bar>
+					{cantPeriodos >= 2 && (
+						<Bar
+							dataKey='periodo2'
+							stackId='a'
+							className='periodo2Bar'
+							name='Periodo 2'
+						></Bar>
+					)}
+
+					{cantPeriodos >= 3 && (
+						<Bar
+							dataKey='periodo3'
+							stackId='a'
+							className='periodo3Bar'
+							name='Periodo 3'
+						></Bar>
+					)}
+
+					{cantPeriodos >= 4 && (
+						<Bar
+							className='periodo4Bar'
+							dataKey='periodo4'
+							stackId='a'
+							name='Periodo 4'
+						></Bar>
+					)}
+
+					<LabelList
+						className='labelList'
+						dataKey='total'
+						position='right'
+						fill='var(--colorPildora2)'
+					/>
 				</BarChart>
 			</ResponsiveContainer>
 		</div>
