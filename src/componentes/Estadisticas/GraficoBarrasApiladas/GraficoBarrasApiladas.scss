@@ -1,0 +1,56 @@
+.graficoBarrasApiladasData {
+	.recharts-cartesian-axis-tick-value {
+		fill: var(--colorPildora1); // Variable CSS para color eje X
+	}
+
+	.recharts-legend-wrapper {
+		width: 100% !important;
+	}
+
+	.periodo1Bar,
+	.legend-item-0 {
+		fill: var(--colorPildora1);
+		color: var(--colorPildora1);
+	}
+	.periodo2Bar,
+	.legend-item-1 {
+		fill: var(--colorPildora2);
+		color: var(--colorPildora2);
+	}
+	.periodo3Bar,
+	.legend-item-2 {
+		fill: var(--colorPildora3);
+		color: var(--colorPildora3);
+	}
+	.periodo4Bar,
+	.legend-item-3 {
+		fill: color-mix(in srgb, var(--colorPildora1) 50%, rgb(0, 0, 0));
+		color: color-mix(in srgb, var(--colorPildora1) 50%, rgb(0, 0, 0));
+	}
+
+	&.dark {
+		.recharts-cartesian-axis-tick-value {
+			fill: var(--dark-azul); // Variable CSS para color eje X
+		}
+		.periodo1Bar,
+		.legend-item-0 {
+			fill: var(--dark-azul);
+			color: var(--dark-azul);
+		}
+		.periodo2Bar,
+		.legend-item-1 {
+			fill: var(--dark-morado);
+			color: var(--dark-morado);
+		}
+		.periodo3Bar,
+		.legend-item-2 {
+			fill: var(--dark-amarillo);
+			color: var(--dark-amarillo);
+		}
+		.periodo4Bar,
+		.legend-item-3 {
+			fill: color-mix(in srgb, var(--dark-azul) 50%, rgb(0, 0, 0));
+			color: color-mix(in srgb, var(--dark-azul) 50%, rgb(0, 0, 0));
+		}
+	}
+}

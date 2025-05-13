@@ -8,6 +8,7 @@ import GraficoBarras from '../GraficoBarras/GraficoBarras';
 import GraficoTorta from '../GraficoTorta/GraficoTorta';
 import GraficoAguja from '../GraficoAguja/GraficoAguja';
 import GraficoRadar from '../GraficoRadar/GraficoRadar';
+import GraficoBarrasApiladas from '../GraficoBarrasApiladas/GraficoBarrasApiladas';
 import Masonry from 'react-masonry-css';
 import './AdminEstadisticas.scss';
 
@@ -21,6 +22,7 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 	const [cantidadEst, setCantidadEst] = useState(null);
 	const [cantidadDocentes, setCantidadDocentes] = useState(null);
 	const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
+	const [promedioNotasCursoAcumulado, setPromedioNotasCursoAcumulado] = useState(null);
 	const [estudiantesCurso, setEstudiantesCurso] = useState(null);
 	const [porcentajeUsuarios, setPorcentajeUsuarios] = useState(null);
 	const [promedioMateriasCurso, setPromedioMateriasCurso] = useState(null);
@@ -76,6 +78,30 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 					return prev;
 				}
 				return nuevosPromedioGrados.sort(ordenarGrados);
+			});
+
+			//PROMEDIO X GRADO ACUMULADO
+			const nuevosPromedioGradosAcumulado = Object.entries(
+				data.estadisticas.promedio_notas_por_grado_acumulado
+			)
+				.map(([titulo, info]) => {
+					return Object.entries(info).map(([tituloPeriodo, prom], index) => {
+						const periodo = `periodo${index + 1}`;
+						return {
+							titulo,
+							[periodo]: parseFloat(prom),
+						};
+					});
+				})
+				.flat(); // Usamos flat() para aplanar el arreglo de arrays en un solo arreglo
+
+			setPromedioNotasCursoAcumulado((prev) => {
+				const nuevo = JSON.stringify(nuevosPromedioGradosAcumulado.sort(ordenarGrados));
+				const anterior = JSON.stringify(prev);
+				if (nuevo === anterior) {
+					return prev;
+				}
+				return nuevosPromedioGradosAcumulado.sort(ordenarGrados);
 			});
 
 			//ESTUDIANTES X GRADO
@@ -229,17 +255,17 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 					<span className='loader'></span>
 				)}
 
-				{promedioNotasCurso !== null ? (
-					promedioNotasCurso.length > 0 ? (
+				{promedioNotasCursoAcumulado !== null ? (
+					promedioNotasCursoAcumulado.length > 0 ? (
 						<div className='graficoBarras'>
-							<p>Promedio x Grado</p>
-							<GraficoBarras data={promedioNotasCurso} />
+							<p>Promedio Acumulado x Grado</p>
+							<GraficoBarrasApiladas data={promedioNotasCursoAcumulado} />
 						</div>
 					) : (
 						<PildoraEst
 							color='morado'
 							clase='peque pildoraEstadistica'
-							est='NO HAY PROMEDIO X GRADOS'
+							est='NO HAY PROMEDIO X GRADOS ACUMULADO'
 							estadistica
 						/>
 					)
