@@ -1,0 +1,35 @@
+.contenedorFormularioPeriodos {
+	display: flex;
+	flex-direction: column;
+	//background-color: var(--colorSecundario);
+	border-radius: var(--radio1);
+	gap: 2rem;
+
+	.contenedorPeriodos {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-items: center;
+		gap: 2rem;
+
+		.layautPeriodos {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+		.layautPeriodosColumn {
+			padding: 0 0.6rem;
+		}
+
+		.layautPeriodosColumn > div {
+			margin-bottom: 1rem;
+		}
+	}
+
+	button {
+		width: fit-content;
+		align-self: center;
+	}
+}

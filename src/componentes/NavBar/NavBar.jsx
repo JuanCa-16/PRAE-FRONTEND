@@ -56,6 +56,7 @@ const NavBar = ({ rol = 'normal', nombreUsuario = 'NOMBRE APELLIDO', func, image
 		admin: [
 			{ texto: 'Grados', icono: StudyIcon, ruta: '/crearGrados' },
 			{ texto: 'Materias', icono: ListadoIcon, ruta: '/crearMaterias' },
+			{ texto: 'Periodos', icono: ListadoIcon, ruta: '/periodos' },
 			{ texto: 'Profesores', icono: TeacherIcon, ruta: '/profesores' },
 			{ texto: 'Estudiantes', icono: EstudianteIcon, ruta: '/estudiantes' },
 			{ texto: 'Cursos', icono: GradosIcon, ruta: '/asignarGradosMaterias' },

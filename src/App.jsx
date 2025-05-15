@@ -43,19 +43,20 @@ import RecuperarClave from './paginas/RecuperarClave/RecuperarClave.jsx';
 import ResetClave from './paginas/ResetClave/ResetClave.jsx';
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
+import Periodos from './paginas/Administradores/Periodos/Periodos.jsx';
 
 function Docs() {
-  return (
-    <div className='contenedorDocumentacion'>
-      <iframe
-        src="/0.1.0/indexDocs.html"  // Aquí coloca la URL a tu archivo HTML
-        width="100%"
-        height="100vh"  // Ajusta el tamaño del iframe
-        title="Documentación"
-		className='documentacion'
-      ></iframe>
-    </div>
-  );
+	return (
+		<div className='contenedorDocumentacion'>
+			<iframe
+				src='/0.1.0/indexDocs.html' // Aquí coloca la URL a tu archivo HTML
+				width='100%'
+				height='100vh' // Ajusta el tamaño del iframe
+				title='Documentación'
+				className='documentacion'
+			></iframe>
+		</div>
+	);
 }
 
 function App() {
@@ -105,9 +106,8 @@ function App() {
 
 	//Si inicia seseion se crear el LOCAL
 	const iniciarSesion = async (email, password, demoToken) => {
-
-		const envio = demoToken? {rol:email, demo:demoToken} : { email, password }  
-		console.log('envio', envio)
+		const envio = demoToken ? { rol: email, demo: demoToken } : { email, password };
+		console.log('envio', envio);
 		try {
 			const response = await fetch(`${API_URL}auth/login`, {
 				method: 'POST',
@@ -380,6 +380,10 @@ function App() {
 							<Route
 								path='/crearMaterias'
 								element={<CrearMateria />}
+							/>
+							<Route
+								path='/periodos'
+								element={<Periodos></Periodos>}
 							/>
 							<Route
 								path='/profesores'
