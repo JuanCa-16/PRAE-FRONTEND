@@ -4,6 +4,31 @@ import InputContainer from '../Input/InputContainer.jsx';
 import Alerta from '../Alerta/Alerta.jsx';
 import './PildoraPeriodos.scss';
 
+/**
+ * Componente PildoraPeriodos que muestra un formulario para gestionar un periodo académico, 
+ * incluyendo el peso, la fecha de inicio y la fecha de fin. Realiza validaciones en los campos 
+ * y permite la edición condicional de las fechas.
+ * 
+ * @component
+ * 
+ * @param {string} titulo - El título del periodo (e.g., "PERIODO 1", "PERIODO 2").
+ * @param {Object} valores - Objeto que contiene los valores del periodo:
+ *   - {string} peso - El peso del periodo (valor inicial, generalmente vacío).
+ *   - {string} fecha_inicio - La fecha de inicio del periodo en formato `YYYY-MM-DD`.
+ *   - {string} fecha_fin - La fecha de fin del periodo en formato `YYYY-MM-DD`.
+ * @param {function} onChange - Función que se ejecuta cuando se modifica el valor de algún campo.
+ *   Recibe un objeto con:
+ *   - {string} periodoKey - El nombre del campo modificado (por ejemplo: 'peso', 'fecha_inicio', 'fecha_fin').
+ *   - {string|number} value - El nuevo valor del campo.
+ * @param {string} color - El color que se usa para personalizar el estilo del componente (por ejemplo, 'azul', 'morado').
+ * @param {boolean} editable - Determina si los campos de fecha son editables o no.
+ * @param {string} [minInicio] - La fecha mínima que se puede seleccionar en los campos de fecha, debe estar en formato `YYYY-MM-DD`.
+ * 
+ * @returns {JSX.Element} Un formulario que permite gestionar un periodo académico, con campos de entrada
+ * para el peso y las fechas de inicio y fin, con validaciones y edición condicional de las fechas.
+ */
+
+
 const PildoraPeriodos = ({ titulo, valores, onChange, color, editable, minInicio }) => {
 	//recibe el titulo del input que se modifico y el valor que recibio del inputContainer y llama a la funcion del padre con estos parametros
 	const handleChange = (periodoKey, value) => {

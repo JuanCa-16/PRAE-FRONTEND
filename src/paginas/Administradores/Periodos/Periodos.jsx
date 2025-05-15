@@ -3,18 +3,21 @@ import { useUser } from '../../../Contexts/UserContext';
 import PildoraPeriodos from '../../../componentes/PildoraPeriodos/PildoraPeriodos';
 import Alerta from '../../../componentes/Alerta/Alerta';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import Modal from '../../../componentes/Modal/Modal';
 import Masonry from 'react-masonry-css';
 import './Periodos.scss';
+
 const Periodos = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { bloqueoDemo } = useUser();
+	const [modalConfirmacion, setModalConfirmacion] = useState(false);
 
 	const initialPeriodosData = useRef({
-		periodo1: { nombre: 'PERIODO 1', peso: '', fecha_inicio: '', fecha_fin: '' },
-		periodo2: { nombre: 'PERIODO 2', peso: '', fecha_inicio: '', fecha_fin: '' },
-		periodo3: { nombre: 'PERIODO 3', peso: '', fecha_inicio: '', fecha_fin: '' },
-		periodo4: { nombre: 'PERIODO 4', peso: '', fecha_inicio: '', fecha_fin: '' },
+		periodo1: { nombre: 'PERIODO 1', peso: '', fecha_inicio: '', fecha_fin: '', bloqueado: false },
+		periodo2: { nombre: 'PERIODO 2', peso: '', fecha_inicio: '', fecha_fin: '', bloqueado: false },
+		periodo3: { nombre: 'PERIODO 3', peso: '', fecha_inicio: '', fecha_fin: '', bloqueado: false },
+		periodo4: { nombre: 'PERIODO 4', peso: '', fecha_inicio: '', fecha_fin: '', bloqueado: false },
 	});
 
 	const [formPeriodos, setFormPeriodos] = useState(initialPeriodosData.current);
@@ -114,7 +117,7 @@ const Periodos = () => {
 				console.error(error);
 			}
 		}
-
+		setModalConfirmacion(false);
 		console.log(formPeriodos); // Aquí tienes los 9 inputs agrupados
 	};
 
@@ -206,7 +209,24 @@ const Periodos = () => {
 					></PildoraPeriodos>
 				</Masonry>
 			</div>
-			<button type='submit'>Guardar</button>
+			<button
+				type='button'
+				onClick={() => setModalConfirmacion(true)}
+			>
+				Guardar
+			</button>
+			{modalConfirmacion && (
+				<Modal
+					isOpen={true}
+					closeModal={() => setModalConfirmacion(false)}
+					tipo='eliminar'
+					modalTexto={formPeriodos.periodo1.bloqueado? 'Ya realizaste los cambios permitidos' : 'Estas seguro de estos ajustes? No se podra volver a editar.'}
+					modalTitulo={formPeriodos.periodo1.bloqueado? 'CAMBIOS YA REALIZADOS': 'CONFIRMAR PERIODOS'}
+				>
+					{console.log(formPeriodos)}
+					<button disabled={bloqueoDemo || formPeriodos.periodo1.bloqueado} type='submit'>Aceptar y Enviar</button>
+				</Modal>
+			)}
 		</form>
 	);
 };
