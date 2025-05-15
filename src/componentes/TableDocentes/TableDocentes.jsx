@@ -188,22 +188,27 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 
 	///MODALES
 
-	const [modalIndexAbierto, setModalIndexAbierto] = useState(null); // Guardar el índice de la actividad que tiene el modal abierto
+	const [modalIndexAbierto, setModalIndexAbierto] = useState({
+		periodoIndex: null,
+		actividadIndex: null,
+	}); // Guardar el índice de la actividad que tiene el modal abierto
 
-	const openModalAct = (index) => setModalIndexAbierto(index); // Establecer el índice de la actividad que se abre
-	const closeModalAct = () => setModalIndexAbierto(null); // Cerrar el modal
+	const openModalAct = (periodoIndex, actividadIndex) => setModalIndexAbierto({ periodoIndex, actividadIndex }); // Establecer el índice de la actividad que se abre
+	const closeModalAct = () => setModalIndexAbierto({ periodoIndex: null, actividadIndex: null }); // Cerrar el modal
 
 	// Cambiar el estado modalIndexNota para que sea un objeto con los índices de actividad y estudiante
-	const [modalIndexNota, setModalIndexNota] = useState({ actividadIndex: null, estudianteIndex: null });
+	const [modalIndexNota, setModalIndexNota] = useState({
+		periodoIndex: null,
+		actividadIndex: null,
+		estudianteIndex: null,
+	});
 
-	const openModalNota = (actividadIndex, estudianteIndex) => {
-		setModalIndexNota({ actividadIndex, estudianteIndex });
-		console.log(actividadIndex);
-		console.log(estudianteIndex);
+	const openModalNota = (periodoIndex, actividadIndex, estudianteIndex) => {
+		setModalIndexNota({ periodoIndex, actividadIndex, estudianteIndex });
 	};
 
 	const closeModalNota = () => {
-		setModalIndexNota({ actividadIndex: null, estudianteIndex: null });
+		setModalIndexNota({ periodoIndex: null, actividadIndex: null, estudianteIndex: null });
 	};
 
 	const handleReload = () => {
@@ -230,7 +235,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 
 	return (
 		<div className='contenedorNotas'>
-			{console.log('infooo',infoNota)}
+			{console.log('infooo', infoNota)}
+			{/* PILDORA CON PROMEDIO TOTAL DEL AÑO Y PERIODOS */}
 			<PildoraTitulo
 				nota={infoNota ? infoNota.promedioGeneral : '-'}
 				materia={infoCurso.materia}
@@ -239,6 +245,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 				grado={infoCurso.curso}
 			></PildoraTitulo>
 			<Line></Line>
+
+			{/* las 4 tablas por periodos */}
 			{info.length > 0 && info[0].estudiantes.length > 0 ? (
 				info.map((periodo, idx) => {
 					const listadoEst = periodo.estudiantes.map(
@@ -269,17 +277,25 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 						infoNota.promediosPorPeriodo.filter(
 							(p) => p.periodo === periodo.nombre
 						)[0] || null;
-					console.log('DDDDD', promedioBase);
+					//console.log('DDDDD', promedioBase);
 					return (
 						<div
 							className='grupo'
 							key={idx}
 						>
+							{/* titulo Periodo y si promedio con % */}
 							<PildoraMateriaGrado
-								texto={periodo.nombre.toUpperCase() + ' -- ' + (promedioBase?.promedioPonderado ?? '0') + '%'}
+								texto={
+									periodo.nombre.toUpperCase() +
+									' -- ' +
+									(promedioBase?.promedioPonderado ?? '0') +
+									'%'
+								}
 								color={infoCurso.color}
 								onClick={() => handlePrimerClick(idx)}
 							></PildoraMateriaGrado>
+
+							{/* tabla */}
 							<div
 								className={`contenedor ${
 									primerClick
@@ -289,6 +305,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 										: 'noMostrar'
 								}`}
 							>
+								{/* titulo tabla con pormedio de ese periodo  */}
 								<PildoraTitulo
 									nota={
 										promedioBase
@@ -300,7 +317,10 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 									color={infoCurso.color}
 									grado={infoCurso.curso}
 								></PildoraTitulo>
+
+								{/* tabla */}
 								<div className='tabla'>
+									{/* listado */}
 									<div className='col colListado'>
 										<Celda
 											txt='Listado'
@@ -318,6 +338,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 											></Celda>
 										))}
 									</div>
+
+									{/* actividades y notas  */}
 									<div className={`notas ${infoCurso.color}`}>
 										{actividadesUnicas.map(
 											(actividad, i) => (
@@ -338,43 +360,46 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 														tipo='titulo'
 														onClick={() =>
 															openModalAct(
+																idx,
 																i
 															)
 														}
 													/>
 													{/* Modal específico para la actividad seleccionada */}
-													{modalIndexAbierto ===
-														i && (
-														<Modal
-															isOpen={
-																true
-															}
-															closeModal={
-																closeModalAct
-															}
-															recargar={
-																handleReload
-															}
-															tipo='actividad'
-															modalTitulo='EDITAR ACTIVIDAD'
-															modalTexto='Edita los parametros de tu actividad'
-															valorAct={
-																actividad.actividad
-															}
-															ValorPeso={
-																actividad.peso
-															}
-															extraData={{
-																materia: infoCurso.materia,
-																profesor: infoCurso.nombre_completo,
-																grado: infoCurso.curso,
-																id_act: actividad.idAct,
-																id_docente: infoDocente,
-																pesoTotalActual:
-																	totalPorcentajes,
-															}}
-														/>
-													)}
+													{modalIndexAbierto.periodoIndex ===
+														idx &&
+														modalIndexAbierto.actividadIndex ===
+															i && (
+															<Modal
+																isOpen={
+																	true
+																}
+																closeModal={
+																	closeModalAct
+																}
+																recargar={
+																	handleReload
+																}
+																tipo='actividad'
+																modalTitulo='EDITAR ACTIVIDAD'
+																modalTexto='Edita los parametros de tu actividad'
+																valorAct={
+																	actividad.actividad
+																}
+																ValorPeso={
+																	actividad.peso
+																}
+																extraData={{
+																	materia: infoCurso.materia,
+																	profesor: infoCurso.nombre_completo,
+																	grado: infoCurso.curso,
+																	id_act: actividad.idAct,
+																	id_docente: infoDocente,
+																	pesoTotalActual:
+																		totalPorcentajes,
+																}}
+															/>
+														)}
 													{periodo.estudiantes.map(
 														(
 															estudiante,
@@ -408,6 +433,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 																		}
 																		onClick={() =>
 																			openModalNota(
+																				idx,
 																				i,
 																				j
 																			)
@@ -415,8 +441,10 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 																	/>
 
 																	{/* Modal de nota específico para la combinación de actividad y estudiante */}
-																	{modalIndexNota.actividadIndex ===
-																		i &&
+																	{modalIndexNota.periodoIndex ===
+																		idx &&
+																		modalIndexNota.actividadIndex ===
+																			i &&
 																		modalIndexNota.estudianteIndex ===
 																			j && (
 																			<Modal

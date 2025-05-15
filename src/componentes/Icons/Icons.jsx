@@ -554,6 +554,51 @@ const EyeIconBlock = ({
 	</svg>
 );
 
+/**
+ * @function
+ * @memberof Icons
+ * @description Icono de Periodos (calendario).
+ * Este es el icono utilizado para representar el apartado de las fechas de los periodos.
+ * @returns {JSX.Element} El icono SVG personalizado.
+ */
+const PeriodosIcon = ({
+	color = '#157AFE',
+	colorApagado = '#000',
+	width = 30,
+	height = 30,
+	estado,
+	activo,
+	dark,
+	...props
+}) => (
+	<svg
+		xmlns='http://www.w3.org/2000/svg'
+		width={18}
+		height={18}
+		fill='none'
+		{...props}
+	>
+		<path
+			className={estado || activo ? 'colorear' : 'normal'}
+			stroke={estado || activo ? color : colorApagado}
+			strokeWidth={1.5}
+			d='M1 8.6c0-3.017 0-4.526.938-5.462C2.875 2.2 4.383 2.2 7.4 2.2h3.2c3.017 0 4.526 0 5.462.938C17 4.075 17 5.583 17 8.6v1.6c0 3.017 0 4.526-.938 5.462-.937.937-2.445.938-5.462.938H7.4c-3.017 0-4.526 0-5.462-.938C1 14.725 1 13.217 1 10.2V8.6Z'
+		/>
+		<path
+			className={estado || activo ? 'colorear' : 'normal'}
+			stroke={estado || activo ? color : colorApagado}
+			strokeLinecap='round'
+			strokeWidth={1.5}
+			d='M5 2.2V1m8 1.2V1M1.4 6.2h15.2'
+		/>
+		<path
+			className={estado || activo ? 'colorear' : 'normal'}
+			fill={estado || activo ? color : colorApagado}
+			d='M13.8 12.6a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm0-3.2a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm-4 3.2a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm0-3.2a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm-4 3.2a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Zm0-3.2a.8.8 0 1 1-1.6 0 .8.8 0 0 1 1.6 0Z'
+		/>
+	</svg>
+);
+
 // Exporta todos los iconos
 export {
 	HomeIcon,
@@ -572,4 +617,5 @@ export {
 	DataIcon,
 	EyeIcon,
 	EyeIconBlock,
+	PeriodosIcon,
 };

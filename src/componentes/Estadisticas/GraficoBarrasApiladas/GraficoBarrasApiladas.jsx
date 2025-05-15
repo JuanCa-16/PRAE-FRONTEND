@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import './GraficoBarrasApiladas.scss';
 
 const GraficoBarrasApiladas = ({ data, periodos = 4 }) => {
-	const alturaGrafico = Math.min(data.length * 110, 200);
+	const alturaGrafico = Math.min(data.length * 60, 1000);
 	const { theme } = useTheme();
 
 	const cantPeriodos = periodos;
