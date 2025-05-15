@@ -101,6 +101,20 @@
 			}
 		}
 	}
+
+	input[type='date'] {
+		font-family: 'Roboto', sans-serif;
+		font-size: 1rem;
+		cursor: pointer;
+	}
+
+	input[type='date']:disabled {
+		background-color: #f0f0f0; /* Fondo gris claro */
+		color: #888888; /* Texto gris */
+		border: 1px solid #ccc; /* Borde gris */
+		cursor: not-allowed; /* Cursor prohibido */
+		/* Puedes agregar más estilos compatibles */
+	}
 }
 
 .dark {

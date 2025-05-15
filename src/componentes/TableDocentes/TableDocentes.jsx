@@ -12,12 +12,12 @@ import './TableDocentes.scss';
 /**
  * Componente TableDocentes que renderiza una tabla interactiva con la información de los estudiantes, actividades y notas de un curso asignado a un docente.
  * Muestra las actividades de los estudiantes, permite agregar nuevas actividades y editar las notas de los estudiantes.
- * 
+ *
  * @component
- * 
+ *
  * @param {Object} infoCurso - Información sobre el curso, incluyendo el ID de la materia, curso y nombre.
  * @param {string} infoDocente - El ID del docente para obtener sus actividades y notas.
- * 
+ *
  * @returns {JSX.Element} Una tabla con las actividades, estudiantes y sus notas, con opciones para editar y agregar actividades.
  */
 
@@ -108,8 +108,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 				}
 
 				const data = await response.json();
-				console.log(data);
-				setInfoNota(data.promedio.promedioCurso);
+				console.log('fff', data);
+				setInfoNota(data.promedio);
 			} catch (error) {
 				Alerta.error(`Error al obtener nota promedio: ${error.message}`, true);
 			}
@@ -230,6 +230,15 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 
 	return (
 		<div className='contenedorNotas'>
+			{console.log('infooo',infoNota)}
+			<PildoraTitulo
+				nota={infoNota ? infoNota.promedioGeneral : '-'}
+				materia={infoCurso.materia}
+				nombre={infoCurso.nombre_completo}
+				color={infoCurso.color}
+				grado={infoCurso.curso}
+			></PildoraTitulo>
+			<Line></Line>
 			{info.length > 0 && info[0].estudiantes.length > 0 ? (
 				info.map((periodo, idx) => {
 					const listadoEst = periodo.estudiantes.map(
@@ -256,15 +265,18 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 						.flat()
 						.reduce((sum, actividad) => sum + actividad.peso, 0); // Suma los pesos
 
-					console.log('PERIODO', idx);
-
+					const promedioBase =
+						infoNota.promediosPorPeriodo.filter(
+							(p) => p.periodo === periodo.nombre
+						)[0] || null;
+					console.log('DDDDD', promedioBase);
 					return (
 						<div
 							className='grupo'
 							key={idx}
 						>
 							<PildoraMateriaGrado
-								texto={periodo.nombre.toUpperCase()}
+								texto={periodo.nombre.toUpperCase() + ' -- ' + (promedioBase?.promedioPonderado ?? '0') + '%'}
 								color={infoCurso.color}
 								onClick={() => handlePrimerClick(idx)}
 							></PildoraMateriaGrado>
@@ -278,7 +290,11 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 								}`}
 							>
 								<PildoraTitulo
-									nota={infoNota}
+									nota={
+										promedioBase
+											? promedioBase.promedioBase
+											: '-'
+									}
 									materia={infoCurso.materia}
 									nombre={infoCurso.nombre_completo}
 									color={infoCurso.color}

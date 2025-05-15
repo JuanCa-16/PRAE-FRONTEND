@@ -9,7 +9,9 @@
 	text-align: left;
 	position: relative;
 	cursor: pointer;
-	min-height: 2.87rem;
+	//min-height: 2.87rem;
+	height: 2.5rem;
+	max-height: 2.87rem;
 
 	//Estilos logo y texto
 	.etiqueta {

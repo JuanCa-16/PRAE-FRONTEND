@@ -32,6 +32,8 @@ function InputContainer({
 	isDisabled = false,
 	nomInput,
 	onChange = () => {},
+	tituloDisabled,
+	minInicio
 }) {
 	const [isFocused, setIsFocused] = useState(false);
 	const { theme } = useTheme();
@@ -78,6 +80,9 @@ function InputContainer({
 					required={required}
 					disabled={isDisabled}
 					name={nomInput}
+					inputMode={inputType === 'number'? 'numeric' : undefined}
+					title={isDisabled && tituloDisabled? tituloDisabled: undefined}
+					min={inputType === 'date'? minInicio : undefined}
 				/>
 
 				{inputType === 'password' && value.length > 0 && (

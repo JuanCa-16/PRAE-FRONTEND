@@ -1,0 +1,59 @@
+@use '../../variables.scss' as *;
+
+.periodoPildora {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 16px;
+	width: 100%;
+	box-shadow: -3px -3px 20px -4px rgba(0, 0, 0, 0.25), 3px 3px 20px -4px rgba(0, 0, 0, 0.25);
+	border-radius: var(--radio2);
+	background-color: var(--fondo);
+	width: 100%;
+	//min-width: 10rem;
+	//max-width: 24.25rem;
+
+	.formulario {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		gap: 1rem;
+		width: 100%;
+
+		.titulos {
+			display: flex;
+			width: 100%;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			align-content: center;
+			gap: 1rem;
+
+			.inputPorcentaje {
+				display: flex;
+				//min-width: 4.6rem;
+				//max-width: 6.6rem;
+				flex: 1;
+			}
+		}
+
+		.inputs {
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+			gap: 1rem;
+		}
+	}
+}
+
+.dark {
+	.periodoPildora {
+		box-shadow: -3px -3px 20px -4px rgba(0, 0, 0, 0.25), 3px 3px 20px -4px rgba(0, 0, 0, 0.25);
+		background-color: var(--dark-contraste-negro);
+	}
+}
