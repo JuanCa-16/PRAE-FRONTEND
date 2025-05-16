@@ -12,6 +12,7 @@ const Periodos = () => {
 	const token = localStorage.getItem('token');
 	const { bloqueoDemo } = useUser();
 	const [modalConfirmacion, setModalConfirmacion] = useState(false);
+	const [reload, setReload] = useState(false);
 
 	const initialPeriodosData = useRef({
 		periodo1: { nombre: 'PERIODO 1', peso: '', fecha_inicio: '', fecha_fin: '', bloqueado: false },
@@ -58,7 +59,7 @@ const Periodos = () => {
 		};
 
 		infoPeriodos();
-	}, [API_URL, token]);
+	}, [API_URL, token,reload]);
 
 	//Recibe el periodo ty los 2 parametros del hijo que es nombre del input odificado y su valor
 	const handleChange = (periodo, periodoKey, value) => {
@@ -112,6 +113,7 @@ const Periodos = () => {
 					})
 				);
 				Alerta.success('Guardado Exitosamente');
+				setReload(!reload);
 			} catch (error) {
 				Alerta.error(`Error al guardar: ${error.message}`);
 				console.error(error);
