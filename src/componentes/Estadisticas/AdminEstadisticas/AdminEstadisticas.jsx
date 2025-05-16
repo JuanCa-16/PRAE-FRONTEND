@@ -85,15 +85,24 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 				data.estadisticas.promedio_notas_por_grado_acumulado
 			)
 				.map(([titulo, info]) => {
-					return Object.entries(info).map(([tituloPeriodo, prom], index) => {
-						const periodo = `periodo${index + 1}`;
-						return {
-							titulo,
-							[periodo]: parseFloat(prom),
-						};
+
+					const resultado = {titulo};
+					Object.entries(info).forEach(([tituloPeriodo, prom]) => {
+						const periodo =
+							tituloPeriodo === 'PRIMER PERIODO'
+								? 'periodo1'
+								: tituloPeriodo === 'SEGUNDO PERIODO'
+								? 'periodo2'
+								: tituloPeriodo === 'TERCER PERIODO'
+								? 'periodo3'
+								: tituloPeriodo === 'CUARTO PERIODO'
+								? 'periodo4'
+								: 'total';
+						resultado[periodo] = parseFloat(prom);
 					});
+
+					return resultado;
 				})
-				.flat(); // Usamos flat() para aplanar el arreglo de arrays en un solo arreglo
 
 			setPromedioNotasCursoAcumulado((prev) => {
 				const nuevo = JSON.stringify(nuevosPromedioGradosAcumulado.sort(ordenarGrados));
@@ -236,7 +245,6 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 						<span className='loader'></span>
 					)}
 				</>
-
 				{porcentajeUsuarios !== null ? (
 					porcentajeUsuarios.length > 0 ? (
 						<div className='graficoTorta'>
@@ -257,8 +265,9 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 
 				{promedioNotasCursoAcumulado !== null ? (
 					promedioNotasCursoAcumulado.length > 0 ? (
-						<div className='graficoBarras'>
+						<div className='graficoBarras acumulado'>
 							<p>Promedio Acumulado x Grado</p>
+							{console.log('aaaaas',promedioNotasCursoAcumulado)}
 							<GraficoBarrasApiladas data={promedioNotasCursoAcumulado} />
 						</div>
 					) : (

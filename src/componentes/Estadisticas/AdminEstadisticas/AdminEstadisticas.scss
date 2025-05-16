@@ -6,6 +6,7 @@
 	width: 100%;
 
 	.graficoBarras {
+		padding-top: 1rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -43,6 +44,10 @@
 
 	.graficoBarras::-webkit-scrollbar-thumb:hover {
 		background: var(--colorPildora1); /* Un poco más visible al pasar el mouse */
+	}
+
+	.acumulado{
+		min-height: 10rem;
 	}
 
 	.graficoTorta {

@@ -31,7 +31,6 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 			.join(' ');
 	}
 
-	console.log('AQUITOY', infoCurso, infoDocente);
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -42,6 +41,38 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 	const [reload, setReload] = useState(false);
 
 	const [cargando, setCargando] = useState(false);
+
+	const [configurado, setConfigurado] = useState(true);
+
+	useEffect(() => {
+		const infoPeriodos = async () => {
+			try {
+				const response = await fetch(`${API_URL}periodosAcademicos/actual`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json();
+					throw new Error(`${errorData.error || response.status}`);
+				}
+
+				const getPeriodos = await response.json();
+				console.log(getPeriodos);
+				const getPeriodosBloqueo = getPeriodos[0].bloqueado;
+
+				console.log('Respuesta del servidor periodos:', getPeriodosBloqueo);
+				setConfigurado(getPeriodosBloqueo);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		infoPeriodos();
+	}, [API_URL, token]);
 
 	useEffect(() => {
 		const notasCursoDocente = async () => {
@@ -233,7 +264,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 		}
 	};
 
-	return (
+	return configurado ? (
 		<div className='contenedorNotas'>
 			{console.log('infooo', infoNota)}
 			{/* PILDORA CON PROMEDIO TOTAL DEL AÑO Y PERIODOS */}
@@ -598,6 +629,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 				<p>Todavia no hay estudiantes</p>
 			)}
 		</div>
+	) : (
+		<p className='lato'>Primero debes configurar PERIODOS.</p>
 	);
 };
 
