@@ -96,7 +96,7 @@ const TableEst = ({ infoMateria, idEst }) => {
 				{info.actividades ? (
 					Object.keys(info.actividades).length > 0 ? (
 						Object.entries(info.actividades).map(([key, periodo]) => (
-							<dic
+							<div
 								className='grupoNotas'
 								key={key}
 							>
@@ -215,7 +215,7 @@ const TableEst = ({ infoMateria, idEst }) => {
 									)}
 								</div>
 								<Line></Line>
-							</dic>
+							</div>
 						))
 					) : (
 						<div>Sin Periodos</div>
