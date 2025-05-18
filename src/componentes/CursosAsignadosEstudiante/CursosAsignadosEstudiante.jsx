@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TituloDes from '../TituloDes/TituloDes';
 import ContenedorMaterias from '../ContenedorMaterias/ContenedorMaterias';
 import './CursosAsignadosEstudiante.scss';
+import DescargarBoletin from '../DescargarBoletin/DescargarBoletin';
 
 /**
  * Componente que muestra las materias asignadas a un estudiante en un curso determinado.
@@ -78,6 +79,8 @@ const CursosAsignadosEstudiante = ({ url, idCurso, idInstitucion, nombreEst, idE
 				nombre={nombreEst}
 				idEst={idEst}
 			></ContenedorMaterias>
+
+			<DescargarBoletin idEst={idEst}></DescargarBoletin>
 		</div>
 	);
 };

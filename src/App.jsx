@@ -44,20 +44,7 @@ import ResetClave from './paginas/ResetClave/ResetClave.jsx';
 import FooterCom from './componentes/FooterCom/FooterCom.jsx';
 import ScrollToTop from './componentes/ScrollToTop/ScrollToTop.jsx';
 import Periodos from './paginas/Administradores/Periodos/Periodos.jsx';
-
-function Docs() {
-	return (
-		<div className='contenedorDocumentacion'>
-			<iframe
-				src='/0.1.0/indexDocs.html' // Aquí coloca la URL a tu archivo HTML
-				width='100%'
-				height='100vh' // Ajusta el tamaño del iframe
-				title='Documentación'
-				className='documentacion'
-			></iframe>
-		</div>
-	);
-}
+import RedirectToDocs from './componentes/RedirectToDocs/RedirectToDocs.jsx';
 
 function App() {
 	const API_URL = process.env.REACT_APP_API_URL;
@@ -429,7 +416,7 @@ function App() {
 
 						<Route
 							path='/jsdocs'
-							element={<Docs />}
+							element={<RedirectToDocs />}
 						/>
 
 						<Route
