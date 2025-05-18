@@ -30,6 +30,7 @@
 		padding: 1.5rem;
 		position: relative;
 		max-width: 11rem;
+		background-color: var(--colorPildora1);
 
 		h4 {
 			color: var(--blanco);
@@ -51,6 +52,10 @@
 			gap: 10px;
 			position: relative;
 			width: 100%;
+		}
+
+		&.grande{
+			min-width: 100%;
 		}
 
 		.elipse1,
@@ -211,6 +216,8 @@
 
 		&.grande {
 			box-shadow: 0px 4px 11px var(--dark-super-negro);
+			background-color: var(--dark-azul-pildora);
+			color: var(--dark-contraste-azul-pildora);
 
 			h4 {
 				color: var(--dark-blanco);

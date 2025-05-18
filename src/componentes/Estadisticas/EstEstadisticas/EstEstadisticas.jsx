@@ -14,6 +14,7 @@ const EstEstadisticas = () => {
 	const documento_estudiante = user.id;
 	const duracion = 1.5; // Duración de la animación en segundos
 
+	const [puesto, setPuesto] = useState(null);
 	const [cantidadMaterias, setCantidadMaterias] = useState(null);
 	const [cantObservaciones, setCantObservaciones] = useState(null);
 	const [materiasAlto, setMateriasAlto] = useState(null);
@@ -24,6 +25,15 @@ const EstEstadisticas = () => {
 
 	const handleData = (data) => {
 		if (data.identificador === `${documento_estudiante}`) {
+			//PUESTO
+			const nuevoPuesto = data.estadisticas.puesto;
+			setPuesto((prev) => {
+				if (prev === nuevoPuesto) {
+					return prev; // No hacer nada si no cambió
+				}
+				return nuevoPuesto; // Solo actualizar si realmente cambió
+			});
+
 			//MATERIAS
 			const nuevasMaterias = data.estadisticas.materias_inscritas;
 			setCantidadMaterias((prev) => {
@@ -107,60 +117,82 @@ const EstEstadisticas = () => {
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				{promedioTotal !== null ? (
-					<div>
+				{puesto !== null ? (
+
 						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='PROMEDIO:'
+							color='azul'
+							est={user.nombre}
 							estadistica
+							clase= 'grande full'
 						>
+							{'#\u00A0'}
 							<AnimatedCounter
 								from={0}
-								to={promedioTotal}
+								to={puesto}
 								duration={duracion}
 							/>
 						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
-				{cantidadMaterias !== null ? (
-					<div>
-						<PildoraEst
-							clase='peque pildoraEstadistica'
-							est='CANTIDAD MATERIAS:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantidadMaterias}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
+
 				) : (
 					<span className='loader'></span>
 				)}
 
-				{cantObservaciones !== null ? (
-					<div>
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='TOTAL OBSERVACIONES:'
-							estadistica
-						>
-							<AnimatedCounter
-								from={0}
-								to={cantObservaciones}
-								duration={duracion}
-							/>
-						</PildoraEst>
-					</div>
-				) : (
-					<span className='loader'></span>
-				)}
+				<>
+					{promedioTotal !== null ? (
+						<div>
+							<PildoraEst
+								color='morado'
+								clase='peque pildoraEstadistica'
+								est='PROMEDIO:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={promedioTotal}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+					{cantidadMaterias !== null ? (
+						<div>
+							<PildoraEst
+								clase='peque pildoraEstadistica'
+								est='CANTIDAD MATERIAS:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadMaterias}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+
+					{cantObservaciones !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='TOTAL OBSERVACIONES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantObservaciones}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)}
+				</>
 
 				<>
 					{materiasAlto !== null ? (

@@ -1,0 +1,30 @@
+.contenedorDescarga {
+	width: fit-content;
+	align-self: center;
+	button {
+		background-color: var(--rojo);
+		gap: 1rem;
+
+		&:hover {
+			box-shadow: 0px 4px 10px var(--rojo);
+		}
+	}
+
+	.iconosSvg {
+		.normal {
+			fill: var(--blanco);
+		}
+	}
+}
+
+.dark {
+	.contenedorDescarga {
+		button {
+			background-color: color-mix(in srgb, var(--rojo) 70%, rgb(145, 145, 145));
+
+			&:hover {
+				box-shadow: 0px 4px 10px color-mix(in srgb, var(--rojo) 50%, rgb(145, 145, 145));
+			}
+		}
+	}
+}
