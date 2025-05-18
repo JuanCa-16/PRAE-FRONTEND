@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PdfIcon } from '../Icons/Icons';
 import { useUser } from '../../Contexts/UserContext';
 import Alerta from '../Alerta/Alerta';
@@ -8,9 +8,11 @@ const DescargarBoletin = ({ idEst }) => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
+	const [descargando, setDescargando] = useState(false)
 
-	const generarPdf = async () => {
+ 	const generarPdf = async () => {
 		if (!bloqueoDemo) {
+			setDescargando(true)
 			const ruta = user.rol === 'admin' ? `${API_URL}boletines/${idEst}` : `${API_URL}boletines`;
 			try {
 				const response = await fetch(ruta, {
@@ -39,9 +41,11 @@ const DescargarBoletin = ({ idEst }) => {
 				// 4️⃣  Limpieza
 				a.remove();
 				window.URL.revokeObjectURL(url);
+				setDescargando(false)
 			} catch (error) {
 				console.error(error);
 				Alerta.error('No se pudo descargar el PDF');
+				setDescargando(false)
 			}
 		}
 	};
@@ -49,10 +53,10 @@ const DescargarBoletin = ({ idEst }) => {
 	return (
 		<div className='contenedorDescarga'>
 			<button
-				disabled={bloqueoDemo}
+				disabled={bloqueoDemo || descargando}
 				onClick={generarPdf}
 			>
-				<PdfIcon></PdfIcon> Descargar Boletin
+				<PdfIcon></PdfIcon> {descargando? 'Descargando...': 'Descargar Boletin'}
 			</button>
 		</div>
 	);
