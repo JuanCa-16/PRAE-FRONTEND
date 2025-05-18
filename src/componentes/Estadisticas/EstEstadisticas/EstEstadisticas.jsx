@@ -54,7 +54,7 @@ const EstEstadisticas = () => {
 
 			//MATERIAS
 
-			const nuevaMateriaAlto = data.estadisticas.notas_altas;
+			const nuevaMateriaAlto = data.estadisticas.materias_altas;
 			setMateriasAlto((prev) => {
 				if (prev === nuevaMateriaAlto) {
 					return prev; // No hacer nada si no cambió
@@ -62,7 +62,7 @@ const EstEstadisticas = () => {
 				return nuevaMateriaAlto; // Solo actualizar si realmente cambió
 			});
 
-			const nuevaMateriaMedia = data.estadisticas.notas_medias;
+			const nuevaMateriaMedia = data.estadisticas.materias_medias;
 			setMateriasMedia((prev) => {
 				if (prev === nuevaMateriaMedia) {
 					return prev; // No hacer nada si no cambió
@@ -70,7 +70,7 @@ const EstEstadisticas = () => {
 				return nuevaMateriaMedia; // Solo actualizar si realmente cambió
 			});
 
-			const nuevaMateriaBaja = data.estadisticas.notas_bajas;
+			const nuevaMateriaBaja = data.estadisticas.materias_bajas;
 			setMateriasBajo((prev) => {
 				if (prev === nuevaMateriaBaja) {
 					return prev; // No hacer nada si no cambió
