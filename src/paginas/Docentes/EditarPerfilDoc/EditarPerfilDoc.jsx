@@ -5,14 +5,13 @@ import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import Selector from '../../../componentes/Selector/Selector';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import useAppSounds from '../../../hooks/useAppSounds';
 import './EditarPerfilDoc.scss';
 
 const EditarPerfilDoc = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, setUser, bloqueoDemo } = useUser();
-	const { playCompleted, playError } = useAppSounds();
+	
 	const [cargando,setCargando] = useState(false)
 
 	function capitalizeWords(str) {
@@ -83,7 +82,7 @@ const EditarPerfilDoc = () => {
 
 				const data = await response.json();
 
-				playCompleted()
+				
 				Alerta.success('Datos actualizados correctamente');
 				console.log('DOCENTE EDITADO EXITOSAMENTE', data);
 				setCargando(false)
@@ -95,7 +94,7 @@ const EditarPerfilDoc = () => {
 					setUser(jwtDecode(data.token));
 				}
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				Alerta.error(error.message);
 				console.error(error);

@@ -8,11 +8,10 @@ import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './AsignarGradosMaterias.scss';
 
 const AsignarGradosMaterias = () => {
-	const { playCompleted, playError } = useAppSounds();
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -352,7 +351,7 @@ const AsignarGradosMaterias = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
-				playCompleted()
+				
 				Alerta.success('Asignacion eliminada exitosamente');
 				console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
 
@@ -361,7 +360,7 @@ const AsignarGradosMaterias = () => {
 				setReload(!reload);
 				setCargando(false)
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				console.error(error);
 				Alerta.error(error.message);
@@ -383,7 +382,6 @@ const AsignarGradosMaterias = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0) {
-			playError()
 			Alerta.error('Debes seleccionar al menos una materia y grado');
 			return;
 		}
@@ -457,7 +455,7 @@ const AsignarGradosMaterias = () => {
 						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
 						.join('\n');
 
-					playCompleted()
+					
 					Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`);
 				}
 
@@ -483,7 +481,7 @@ const AsignarGradosMaterias = () => {
 						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
 						.join('\n');
 
-					playError()
+					
 					Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
 				}
 
@@ -497,11 +495,11 @@ const AsignarGradosMaterias = () => {
 					setMateriasSeleccionadas([]);
 					setGradosSeleccionados([]);
 
-					playCompleted()
+					
 				}
 				setCargando(false)
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				console.error('Error en las peticiones:', error);
 				Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');

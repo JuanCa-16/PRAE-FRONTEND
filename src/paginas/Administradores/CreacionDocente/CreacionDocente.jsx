@@ -4,14 +4,14 @@ import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 import InputContainer from '../../../componentes/Input/InputContainer.jsx';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
+
 import Line from '../../../componentes/Line/Line.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import './CreacionDocente.scss';
 
 const CreacionDocente = () => {
-	const { playCompleted, playError } = useAppSounds()
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -98,7 +98,7 @@ const CreacionDocente = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0) {
-			playError()
+			
 			Alerta.error('Debes seleccionar minimo una materia');
 			return;
 		}
@@ -155,14 +155,14 @@ const CreacionDocente = () => {
 							);
 						}
 					} catch (error) {
-						playError()
+						
 						Alerta.error(`Error al asignar materia ${materia}: ${error.message}`);
 						console.error(error);
 						setCargando(false)
 					}
 				}
 
-				playCompleted()
+				
 				Alerta.success('Docente creado exitosamente');
 				console.log('DOCENTE CREADO EXITOSAMENTE');
 
@@ -181,7 +181,7 @@ const CreacionDocente = () => {
 				setCargando(false)
 			} catch (error) {
 				setCargando(false)
-				playError()
+				
 				Alerta.error(error.message);
 				console.error('Error al crear Docente: ', error);
 			}

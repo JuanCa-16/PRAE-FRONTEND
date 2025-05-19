@@ -6,11 +6,10 @@ import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildor
 import InputContainer from '../../../componentes/Input/InputContainer';
 import Line from '../../../componentes/Line/Line.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './CrearMateria.scss';
 
 const CrearMateria = () => {
-	const { playCompleted, playError } = useAppSounds()
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -62,14 +61,14 @@ const CrearMateria = () => {
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
-				playCompleted()
+				
 				console.log('MATERIA CREADO EXITOSAMENTE');
 				Alerta.success('Materia creada exitosamente');
 				setReload(!reload);
 				setFormData({ materia: '' });
 			} catch (error) {
 				//toast
-				playError()
+				
 				console.error('Error al crear la materia', error);
 				Alerta.error(error.message);
 			}

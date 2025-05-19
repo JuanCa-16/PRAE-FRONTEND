@@ -4,7 +4,6 @@ import { jwtDecode } from 'jwt-decode';
 import { ProtectedRoute } from './routes/ProtectedRoute.jsx';
 import { useUser } from './Contexts/UserContext.jsx';
 import { useTheme } from './Contexts/UserContext.jsx';
-import useAppSounds from './hooks/useAppSounds.jsx';
 import Prueba from './componentes/Prueba.jsx';
 import NavBar from './componentes/NavBar/NavBar.jsx';
 import Alerta from './componentes/Alerta/Alerta.jsx';
@@ -48,7 +47,7 @@ import Periodos from './paginas/Administradores/Periodos/Periodos.jsx';
 import RedirectToDocs from './componentes/RedirectToDocs/RedirectToDocs.jsx';
 
 function App() {
-	const { playBlocked, playSuccess } = useAppSounds();
+	
 
 	const API_URL = process.env.REACT_APP_API_URL;
 
@@ -125,11 +124,11 @@ function App() {
 				console.log('Token decodificado:', decoded);
 				setUser(decoded);
 			}
-			playSuccess()
+			
 			Alerta.success('Inicio de sesión exitoso');
 			return console.log('EXITOSO');
 		} catch (error) {
-			playBlocked()
+			
 			console.error('Error al iniciar sesión:', error);
 			Alerta.error(error.message);
 			window.scrollTo(0, 0);
@@ -139,7 +138,7 @@ function App() {
 
 	//Eliminar TOKEN del local
 	const cerrarSesion = () => {
-		playSuccess()
+		
 		localStorage.removeItem('token'); // Eliminar del localStorage
 		Alerta.success('Sesión cerrada exitosamente');
 		setAbrir(false);

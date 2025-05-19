@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useAppSounds from '../../hooks/useAppSounds';
 import TituloDes from '../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../componentes/Input/InputContainer';
 import Alerta from '../../componentes/Alerta/Alerta';
@@ -9,7 +8,7 @@ import resetLogo from '../../assets/resetLogo.png';
 import './ResetClave.scss';
 
 export default function ResetClave() {
-	const { playSuccess, playBlocked } = useAppSounds()
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const { token } = useParams();
 	const [validado, setValidado] = useState(false);
@@ -64,7 +63,7 @@ export default function ResetClave() {
 
 		if (getClave.clave !== getClave.clave2) {
 			Alerta.error('Las contraseñas no coinciden');
-			playBlocked()
+			
 			return;
 		}
 
@@ -87,13 +86,12 @@ export default function ResetClave() {
 
 			const data = await response.json();
 
-			playSuccess()
+			
 			Alerta.success('Contraseña actualizada correctamente');
 			console.log('contraseña exitosa', data);
-			setTimeout(() => navigate('/login', { replace: true }), 1700);
-			//navigate('/login', { replace: true });
+			navigate('/login', { replace: true });
 		} catch (error) {
-			playBlocked()
+			
 			console.error('Error al editar', error);
 			Alerta.error(error.message);
 		}

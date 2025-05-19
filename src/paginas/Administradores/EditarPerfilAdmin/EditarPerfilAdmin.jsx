@@ -5,13 +5,12 @@ import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './EditarPerfilAdmin.scss';
-import useAppSounds from '../../../hooks/useAppSounds';
 
 const EditarPerfilAdmin = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, setUser, bloqueoDemo } = useUser();
-	const { playCompleted, playError } = useAppSounds();
+	
 	const [cargando, setCargando] = useState(false)
 
 	function capitalizeWords(str) {
@@ -80,7 +79,7 @@ const EditarPerfilAdmin = () => {
 
 				const data = await response.json();
 
-				playCompleted()
+				
 				console.log('ADMIN EDITADO EXITOSAMENTE', data);
 				Alerta.success('Datos actualizados correctamente');
 				setCargando(false)
@@ -92,7 +91,7 @@ const EditarPerfilAdmin = () => {
 					setUser(jwtDecode(data.token));
 				}
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				Alerta.error(error.message);
 				console.error(error);

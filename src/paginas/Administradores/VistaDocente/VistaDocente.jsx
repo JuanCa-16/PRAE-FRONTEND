@@ -8,11 +8,10 @@ import Line from '../../../componentes/Line/Line.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './VistaDocente.scss';
 
 const VistaDocente = () => {
-	const { playCompleted, playError } = useAppSounds()
+		
 	const location = useLocation();
 	const { profe } = location.state || {};
 
@@ -150,7 +149,7 @@ const VistaDocente = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0) {
-			playError()
+			
 			alert('Debes seleccionar alemnos una materia');
 			return;
 		}
@@ -257,13 +256,13 @@ const VistaDocente = () => {
 					}
 				}
 
-				playCompleted()
+				
 				console.log('DOCENTE EDITADO EXITOSAMENTE', data);
 				Alerta.success('Docente editado exitosamente');
 				setReload(!reload);
 				setCargando(false)
 			} catch (error) {
-				playError()
+				
 				console.error('Error al editar un doncente: ', error);
 				alert.error(error.message);
 				setCargando(false)
@@ -318,15 +317,14 @@ const VistaDocente = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
-				playCompleted()
+				
 				console.log('DOCENTE ELIMINADO EXITOSAMENTE');
 				Alerta.success('Docente eliminado exitosamente');
 				closeModal();
 				setCargando(false)
-				setTimeout(() => navigate('/profesores', { replace: true }), 1400);
-				//navigate(`/profesores`);
+				navigate('/profesores', { replace: true })
 			} catch (error) {
-				playError()
+				
 				console.error('Error al eliminar profesor: ', error);
 				alert.error(error.message);
 				setCargando(false)

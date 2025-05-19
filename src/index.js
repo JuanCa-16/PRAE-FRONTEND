@@ -9,7 +9,7 @@ import App from './App';
 import './global.scss';
 
 // 🎧 Sonidos que quieres usar
-const sonidos = ['ui/blocked', 'ui/success_bling', 'ui/submit', 'notification/error', 'ui/success_blip', 'ui/radio_select', 'ui/window_open', 'ui/window_close'];
+const sonidos = ['ui/submit', 'notification/error', 'ui/success_blip', 'ui/radio_select'];
 
 // 🧠 Función para iniciar la app después del intento de precarga
 const startApp = () => {

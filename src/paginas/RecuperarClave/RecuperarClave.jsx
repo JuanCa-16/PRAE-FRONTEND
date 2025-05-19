@@ -5,12 +5,12 @@ import InputContainer from '../../componentes/Input/InputContainer';
 import Alerta from '../../componentes/Alerta/Alerta';
 import imagenLogin from '../../assets/imagenLogin.png';
 import emailLogo from '../../assets/emailLogo.png';
-import useAppSounds from '../../hooks/useAppSounds';
+
 import './RecuperarClave.scss';
 
 export default function RecuperarClave() {
 
-	const { playBlocked, playSend } = useAppSounds()
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 
 	//Valores de los inputs
@@ -52,13 +52,12 @@ export default function RecuperarClave() {
 			}
 
 			setCargado(false);
-			playSend()
+			
 			console.log('Correo enviado');
 			Alerta.success('Correo enviado con exito');
-			setTimeout(() => navigate('/login'), 1600);
-			//navigate('/login');
+			navigate('/login');
 		} catch (error) {
-			playBlocked()
+			
 			console.error('Error al recuperar clave', error);
 			Alerta.error(error.message);
 			setCargado(false);

@@ -4,11 +4,10 @@ import { useUser } from '../../../Contexts/UserContext';
 import Alerta from '../../../componentes/Alerta/Alerta';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import Modal from '../../../componentes/Modal/Modal';
-import useAppSounds from '../../../hooks/useAppSounds';
 import './CrearObservacion.scss';
 
 const CrearObservacion = () => {
-	const { playCompleted, playError } = useAppSounds();
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const location = useLocation();
@@ -71,14 +70,14 @@ const CrearObservacion = () => {
 					const errorData = await response.json(); // Obtiene respuesta del servidor
 					throw new Error(`${errorData.message || response.status}`);
 				}
-				playCompleted()
+				
 				console.log('Datos enviados:', formData);
 				Alerta.success('Observación realizada correctamente');
 				setCargando(false);
 				setReload(!reload);
 				setFormData({ observacion: '' });
 			} catch (error) {
-				playError()
+				
 				console.error('Error al crear observacion', error);
 				setCargando(false);
 				Alerta.error(error.message);
