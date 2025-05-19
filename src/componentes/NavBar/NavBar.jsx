@@ -15,7 +15,7 @@ import {
 	ThemeIcon,
 	MenuIcon,
 	DataIcon,
-	PeriodosIcon
+	PeriodosIcon,
 } from '../Icons/Icons.jsx';
 import LogoPrae from '../LogoPrae/LogoPrae';
 import PildoraEst from '../PildoraEst/PildoraEst';
@@ -24,15 +24,15 @@ import './NavBar.scss';
 /**
  * Componente NavBar que renderiza una barra de navegación personalizada con opciones dinámicas basadas en el rol del usuario.
  * El menú de navegación cambia dependiendo de si el usuario es estudiante, docente o administrador.
- * 
+ *
  * @component
- * 
+ *
  * @param {string} [rol='normal'] - El rol del usuario (normal, estudiante, docente, admin), lo que determina qué menú se muestra.
  * @param {string} [nombreUsuario='NOMBRE APELLIDO'] - El nombre del usuario que se muestra en el menú.
  * @param {function} func - Función que se ejecuta al hacer clic en la opción de "Salir".
  * @param {string} [imagen] - Imagen personalizada para el logo, si no se proporciona se usa el logo predeterminado.
  * @param {string} [inst] - Estilo adicional que puede aplicarse al contenedor del NavBar.
- * 
+ *
  * @returns {JSX.Element} El componente NavBar con enlaces dinámicos, íconos y funcionalidades según el rol del usuario.
  */
 
@@ -115,6 +115,22 @@ const NavBar = ({ rol = 'normal', nombreUsuario = 'NOMBRE APELLIDO', func, image
 			document.removeEventListener('mousedown', handleClickOutside); // Limpia el evento al desmontar
 		};
 	}, [setAbrir]);
+
+	
+	useEffect(() => {
+		if (abrir) {
+			const scrollY = window.scrollY;
+			document.body.style.position = 'fixed';
+			document.body.style.top = `-${scrollY}px`;
+			document.body.style.width = '100%';
+		} else {
+			const scrollY = document.body.style.top;
+			document.body.style.position = '';
+			document.body.style.top = '';
+			document.body.style.width = '';
+			window.scrollTo(0, parseInt(scrollY || '0') * -1);
+		}
+	}, [abrir]);
 
 	const itemActivo =
 		menuSeleccionado.find((item) => decodeURIComponent(location.pathname).startsWith(item.ruta))?.texto ||
