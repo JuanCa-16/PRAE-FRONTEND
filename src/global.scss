@@ -252,7 +252,7 @@ button {
 
 	.App {
 		display: flex;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		height: 100vh;
 		height: 100dvh;
 
@@ -284,8 +284,8 @@ button {
 			margin: 0;
 			padding: 0;
 			height: auto;
-			position: sticky;
-			bottom: 0;
+			position: fixed;
+			//bottom: 0;
 			z-index: 9999;
 		}
 
