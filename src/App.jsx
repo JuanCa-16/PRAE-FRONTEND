@@ -144,6 +144,12 @@ function App() {
 		setAbrir(false);
 		setUser(null);
 		setBloqueoDemo(false);
+
+		const scrollY = document.body.style.top;
+		document.body.style.position = '';
+		document.body.style.top = '';
+		document.body.style.width = '';
+		window.scrollTo(0, parseInt(scrollY || '0') * -1);
 	};
 
 	useEffect(() => {
