@@ -14,6 +14,8 @@ const ScrollToTop = () => {
 		if (mainContent) {
 			mainContent.scrollTo(0, 0);
 		}
+
+		window.scrollTo({ top: 0, behavior: 'instant' });
 	}, [pathname]);
 
 	return null;
