@@ -3,14 +3,15 @@ import { useTheme } from '../../Contexts/UserContext';
 import { useUser } from '../../Contexts/UserContext';
 import InputContainer from '../Input/InputContainer';
 import Alerta from '../Alerta/Alerta';
+import useAppSounds from '../../hooks/useAppSounds';
 import './Modal.scss';
 
 /**
  * Componente Modal que muestra un modal interactivo para eliminar o editar datos, como observaciones, actividades o notas.
  * El modal cambia de diseño dependiendo del tipo de acción (eliminar, editar).
- * 
+ *
  * @component
- * 
+ *
  * @param {boolean} isOpen - Indica si el modal está abierto o cerrado.
  * @param {function} recargar - Función para recargar los datos después de realizar una acción.
  * @param {function} closeModal - Función para cerrar el modal.
@@ -23,10 +24,9 @@ import './Modal.scss';
  * @param {string} [valorObs=''] - Valor de la observación, usado para editar o eliminar observaciones.
  * @param {Object} [extraData={}] - Datos adicionales para el procesamiento del modal (como ID de la observación o actividad).
  * @param {ReactNode} children - Elementos hijos que se pasan al modal para su personalización.
- * 
+ *
  * @returns {JSX.Element} Un modal con diferentes funcionalidades dependiendo del tipo de acción.
  */
-
 
 const Modal = ({
 	isOpen,
@@ -42,6 +42,9 @@ const Modal = ({
 	extraData = {},
 	children,
 }) => {
+	const { playCompleted, playError, playPopPupOpen,playPopPupClose } = useAppSounds();
+
+
 	function capitalizeWords(str) {
 		return str
 			.split(' ') // Divide en palabras
@@ -80,10 +83,13 @@ const Modal = ({
 					throw new Error(errorData.message || 'Error al eliminar observación');
 				}
 
+				playCompleted();
 				Alerta.success('Observación eliminada');
-				closeModal();
+				setTimeout(() => closeModal(), 1000);
+				//closeModal();
 				recargar();
 			} catch (error) {
+				playError();
 				console.error('Error al eliminar observación:', error);
 				Alerta.error(error.message);
 			}
@@ -110,6 +116,7 @@ const Modal = ({
 		console.log('Datos del formulario ACTIVIDAD:', JSON.stringify(formData));
 
 		if (parseInt(formData.pesoTotalActual - parseInt(ValorPeso)) + parseInt(formData.pesoAct) > 100) {
+			playError();
 			Alerta.error('Excederas el 100%');
 			return;
 		}
@@ -134,14 +141,18 @@ const Modal = ({
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
+				playCompleted();
 				Alerta.success('Actividad actualizada');
 				closeModal();
 				recargar();
 			} catch (error) {
+				playError();
 				console.error('Error al crear actividad', error);
 				Alerta.error(error.message);
 			}
 		}
+
+		playCompleted();
 
 		// Mostrar el objeto JSON en la consola (o enviarlo al servidor)
 
@@ -165,6 +176,7 @@ const Modal = ({
 		// Validación: solo números entre 0 y 5, incluyendo decimales
 		const notaNumerica = parseFloat(nota);
 		if (isNaN(notaNumerica) || notaNumerica < 0 || notaNumerica > 5) {
+			playError();
 			Alerta.error('La nota debe ser un número entre 0 y 5');
 			return;
 		}
@@ -195,9 +207,11 @@ const Modal = ({
 						throw new Error(errorData.message || 'Error al registrar nota');
 					}
 
+					playCompleted();
 					Alerta.success('Nota registrada correctamente');
 					setCargando(false);
 				} catch (error) {
+					playError();
 					console.error('Error al guardar nota:', error);
 					Alerta.error(error.message);
 					setCargando(false);
@@ -225,8 +239,10 @@ const Modal = ({
 						throw new Error(errorData.message || 'Error al editar nota');
 					}
 
+					playCompleted();
 					Alerta.success('Nota registrada correctamente');
 				} catch (error) {
+					playError();
 					console.error('Error al guardar nota:', error);
 					Alerta.error(error.message);
 				}
@@ -237,6 +253,7 @@ const Modal = ({
 		console.log('Datos del formulario NOTAS:', JSON.stringify(formData));
 		closeModal();
 		recargar();
+		playCompleted();
 		// Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
 	};
 
@@ -247,6 +264,7 @@ const Modal = ({
 	const handleSubmit3 = async (e) => {
 		e.preventDefault();
 		if (!bloqueoDemo) {
+			setCargando(true);
 			try {
 				const response = await fetch(`${API_URL}comentarios/${extraData.id_observacion}`, {
 					method: 'PUT',
@@ -262,10 +280,15 @@ const Modal = ({
 					throw new Error(errorData.message || response.status);
 				}
 
+				playCompleted();
 				Alerta.success('Observación actualizada correctamente');
-				closeModal();
+				setTimeout(() => closeModal(), 700);
+				//closeModal();
+				setCargando(false);
 				recargar(); // Actualiza la lista de observaciones si quieres
 			} catch (error) {
+				playError();
+				setCargando(false);
 				console.error('Error al actualizar observación', error);
 				Alerta.error(error.message);
 			}
@@ -275,8 +298,11 @@ const Modal = ({
 	//MANEJO LOGICA MODAL
 	if (!isOpen) return null; // No renderiza el modal si isOpen es false
 
+	playPopPupOpen(); 
+
 	const handleClickOutside = (e) => {
 		// Cerrar modal si se hace clic fuera del área del modal
+		playPopPupClose()
 		if (e.target.classList.contains('modal-overlay')) {
 			closeModal();
 		}
@@ -306,14 +332,18 @@ const Modal = ({
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
+				playCompleted();
 				Alerta.success('Actividad eliminada');
 
 				closeModal();
 				recargar();
 			} catch (error) {
+				playError();
 				console.error('Error al crear actividad', error);
 				Alerta.error(error.message);
 			}
+
+			playCompleted();
 		}
 	};
 
@@ -430,9 +460,13 @@ const Modal = ({
 									<div className='botones-acciones'>
 										<button
 											type='submit'
-											disabled={bloqueoDemo}
+											disabled={
+												bloqueoDemo || cargando
+											}
 										>
-											Editar
+											{cargando
+												? 'Editando'
+												: 'Editar'}
 										</button>
 										<button
 											type='button'

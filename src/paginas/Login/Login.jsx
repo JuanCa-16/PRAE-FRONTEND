@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../Contexts/UserContext';
 import TituloDes from '../../componentes/TituloDes/TituloDes';
 import InputContainer from '../../componentes/Input/InputContainer';
 import PildoraMateriaGrado from '../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
@@ -7,7 +8,6 @@ import Line from '../../componentes/Line/Line';
 import posterCel from '../../assets/posterCel.png';
 import Logo from '../../assets/logo.png';
 import './Login.scss';
-import { useUser } from '../../Contexts/UserContext';
 
 export default function Login({ func }) {
 	//Valores de los inputs

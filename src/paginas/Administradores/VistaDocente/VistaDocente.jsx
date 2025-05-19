@@ -8,9 +8,11 @@ import Line from '../../../componentes/Line/Line.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './VistaDocente.scss';
 
 const VistaDocente = () => {
+	const { playCompleted, playError } = useAppSounds()
 	const location = useLocation();
 	const { profe } = location.state || {};
 
@@ -18,6 +20,7 @@ const VistaDocente = () => {
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
+	const [cargando,setCargando] =useState(false)
 
 	function capitalizeWords(str) {
 		return str
@@ -147,6 +150,7 @@ const VistaDocente = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0) {
+			playError()
 			alert('Debes seleccionar alemnos una materia');
 			return;
 		}
@@ -171,6 +175,7 @@ const VistaDocente = () => {
 		console.log('crear', crearMat);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/updateProfesor/${dataToSend.doc}`, {
 					method: 'PUT',
@@ -220,6 +225,7 @@ const VistaDocente = () => {
 						}
 					} catch (error) {
 						console.error(error);
+						setCargando(false)
 					}
 				}
 
@@ -247,15 +253,20 @@ const VistaDocente = () => {
 						}
 					} catch (error) {
 						console.error(error);
+						setCargando(false)
 					}
 				}
 
+				playCompleted()
 				console.log('DOCENTE EDITADO EXITOSAMENTE', data);
 				Alerta.success('Docente editado exitosamente');
 				setReload(!reload);
+				setCargando(false)
 			} catch (error) {
+				playError()
 				console.error('Error al editar un doncente: ', error);
 				alert.error(error.message);
+				setCargando(false)
 			}
 		}
 	};
@@ -292,6 +303,7 @@ const VistaDocente = () => {
 
 	const handleEliminar = async () => {
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
 					method: 'DELETE',
@@ -306,14 +318,18 @@ const VistaDocente = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
+				playCompleted()
 				console.log('DOCENTE ELIMINADO EXITOSAMENTE');
 				Alerta.success('Docente eliminado exitosamente');
 				closeModal();
-
-				navigate(`/profesores`);
+				setCargando(false)
+				setTimeout(() => navigate('/profesores', { replace: true }), 1400);
+				//navigate(`/profesores`);
 			} catch (error) {
+				playError()
 				console.error('Error al eliminar profesor: ', error);
 				alert.error(error.message);
+				setCargando(false)
 			}
 		}
 	};
@@ -412,9 +428,9 @@ const VistaDocente = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={isFormUnchanged || bloqueoDemo}
+						disabled={isFormUnchanged || bloqueoDemo || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Guardando...':'Guardar Cambios'}
 					</button>
 				</form>
 
@@ -435,8 +451,9 @@ const VistaDocente = () => {
 					<button
 						onClick={() => handleEliminar()}
 						className='rojo'
+						disabled={cargando}
 					>
-						ELIMINAR
+						{cargando? 'Eliminando...' : 'ELIMINAR'}
 					</button>
 				</Modal>
 			</div>

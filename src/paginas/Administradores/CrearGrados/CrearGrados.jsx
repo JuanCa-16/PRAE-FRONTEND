@@ -6,9 +6,12 @@ import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildor
 import InputContainer from '../../../componentes/Input/InputContainer';
 import Line from '../../../componentes/Line/Line.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './CrearGrados.scss';
 
 const CrearGrados = () => {
+
+	const { playCompleted, playError } = useAppSounds()
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -35,7 +38,9 @@ const CrearGrados = () => {
 		const regex = /^(1[0-1]|[1-9])-([1-9]|[A-Za-z])$/;
 
 		if (!regex.test(formData.grado)) {
+			playError()
 			console.log('Formato no válido, debe ser 1-1, 9-2 o 3-A');
+			Alerta.error('Formato no válido, debe ser #-#  o #-A');
 			return;
 		}
 
@@ -59,12 +64,13 @@ const CrearGrados = () => {
 					const errorData = await response.json(); // Obtiene respuesta del servidor
 					throw new Error(`${errorData.message || response.status}`);
 				}
-
+				playCompleted()
 				console.log('GRADO CREADO EXITOSAMENTE');
 				Alerta.success('Grado creado exitosamente');
 				setReload(!reload);
 				setFormData({ grado: '' });
 			} catch (error) {
+				playError()
 				console.error('Error al crear grado', error);
 				Alerta.error(error.message);
 			}

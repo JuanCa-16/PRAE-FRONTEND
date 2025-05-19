@@ -4,6 +4,7 @@ import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
 import PildoraMateriaGrado from '../PildoraMateriaGrado/PildoraMateriaGrado';
 import Celda from '../Celda/Celda';
 import Line from '../Line/Line';
+import useAppSounds from '../../hooks/useAppSounds';
 import './TableEst.scss';
 
 /**
@@ -20,7 +21,7 @@ import './TableEst.scss';
 
 const TableEst = ({ infoMateria, idEst }) => {
 	//Informacion de la tabla traer info del BACK
-
+	const {playExpand} = useAppSounds()
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user } = useUser();
@@ -80,6 +81,8 @@ const TableEst = ({ infoMateria, idEst }) => {
 				[index]: !prevState[index], // Si es true, se pone false, y viceversa
 			}));
 		}
+
+		playExpand()
 	};
 
 	return (

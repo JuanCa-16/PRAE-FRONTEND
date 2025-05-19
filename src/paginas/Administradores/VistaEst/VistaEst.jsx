@@ -8,9 +8,11 @@ import Line from '../../../componentes/Line/Line.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './VistaEst.scss';
 
 const VistaEst = () => {
+	const { playCompleted, playError } = useAppSounds();
 	const location = useLocation();
 	const { est } = location.state || {};
 	const navigate = useNavigate();
@@ -18,6 +20,7 @@ const VistaEst = () => {
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
+	const [cargando,setCargando] = useState(false)
 
 	function capitalizeWords(str) {
 		return str
@@ -103,7 +106,8 @@ const VistaEst = () => {
 		e.preventDefault();
 
 		if (!gradoAsignado) {
-			alert('Debes seleccionar un grado');
+			playError()
+			Alerta.error('Debes seleccionar un grado');
 			return;
 		}
 		const dataToSend = {
@@ -115,6 +119,7 @@ const VistaEst = () => {
 		console.log('original', initialFormData.current);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/updateEstudiante/${dataToSend.doc}`, {
 					method: 'PUT',
@@ -140,6 +145,7 @@ const VistaEst = () => {
 
 				const data = await response.json();
 
+				playCompleted()
 				Alerta.success('Estudiante editado exitosamente');
 				console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
 
@@ -161,7 +167,10 @@ const VistaEst = () => {
 				// });
 
 				setReload(!reload);
+				setCargando(false)
 			} catch (error) {
+				setCargando(false)
+				playError()
 				console.error('Error al editar estudiante', error);
 				Alerta.error(error.message);
 			}
@@ -241,6 +250,7 @@ const VistaEst = () => {
 	const handleEliminar = async () => {
 		if (!bloqueoDemo) {
 			try {
+				setCargando(true)
 				const response = await fetch(`${API_URL}usuario/${formData.doc}`, {
 					method: 'DELETE',
 					headers: {
@@ -254,12 +264,16 @@ const VistaEst = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
+				playCompleted()
 				console.log('ESTUDIANTE ELIMINADO EXITOSAMENTE');
 				Alerta.success('Estudiante eliminado exitosamente');
 				closeModal();
-
-				navigate(`/estudiantes`);
+				setCargando(false)
+				setTimeout(() => navigate('/estudiantes', { replace: true }), 1400);
+				//navigate(`/estudiantes`);
 			} catch (error) {
+				playError()
+				setCargando(false)
 				console.error('Error al eliminar estudiante: ', error);
 			}
 		}
@@ -345,9 +359,9 @@ const VistaEst = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={bloqueoDemo || isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Guardando...':'Guardar Cambios'}
 					</button>
 				</form>
 				<button
@@ -365,11 +379,11 @@ const VistaEst = () => {
 					modalTitulo={`ELIMINAR ESTUDIANTE ${est.nombre.toUpperCase()} ${est.apellido.toUpperCase()}`}
 				>
 					<button
-						disabled={bloqueoDemo}
+						disabled={bloqueoDemo || cargando}
 						onClick={() => handleEliminar()}
 						className='rojo'
 					>
-						ELIMINAR
+						{cargando? 'Eliminando...':'Eliminar'}
 					</button>
 				</Modal>
 			</div>

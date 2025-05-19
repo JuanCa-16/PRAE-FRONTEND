@@ -8,14 +8,17 @@ import Modal from '../../../componentes/Modal/Modal.jsx';
 import Pildora from '../../../componentes/Pildora/Pildora.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './AsignarGradosMaterias.scss';
 
 const AsignarGradosMaterias = () => {
+	const { playCompleted, playError } = useAppSounds();
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
 	const navigate = useNavigate();
+	const [cargando, setCargando] = useState(false)
 	//Datos inciales a mostrar
 	const [formData, setFormData] = useState({
 		grados: [],
@@ -334,6 +337,7 @@ const AsignarGradosMaterias = () => {
 		console.log(asigancion, grado, materia, profe);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}asignar/eliminarAsignacion/${asigancion}`, {
 					method: 'DELETE',
@@ -348,13 +352,17 @@ const AsignarGradosMaterias = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
+				playCompleted()
 				Alerta.success('Asignacion eliminada exitosamente');
 				console.log('ASIGNACION ELIMINADO EXITOSAMENTE');
 
 				setIsModalOpenConfirmacion(false);
 				closeModal();
 				setReload(!reload);
+				setCargando(false)
 			} catch (error) {
+				playError()
+				setCargando(false)
 				console.error(error);
 				Alerta.error(error.message);
 			}
@@ -375,7 +383,8 @@ const AsignarGradosMaterias = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0 || gradosSeleccionados.length === 0) {
-			Alerta.info('Debes seleccionar al menos una materia y grado');
+			playError()
+			Alerta.error('Debes seleccionar al menos una materia y grado');
 			return;
 		}
 		console.log('Datos enviados:', formData);
@@ -387,6 +396,7 @@ const AsignarGradosMaterias = () => {
 		console.log('aaaaa', combinaciones);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const respuestas = await Promise.allSettled(
 					combinaciones.map(async ({ id_curso, id_materia, id_docente }) => {
@@ -447,6 +457,7 @@ const AsignarGradosMaterias = () => {
 						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
 						.join('\n');
 
+					playCompleted()
 					Alerta.success(`Asignaciones exitosas:\n${mensajeExito}`);
 				}
 
@@ -472,6 +483,7 @@ const AsignarGradosMaterias = () => {
 						.map(([materia, cursos]) => `${materia}: ${cursos.join(', ')}`)
 						.join('\n');
 
+					playError()
 					Alerta.error(`Error en algunas asignaciones:\n${mensajeError}`);
 				}
 
@@ -484,8 +496,13 @@ const AsignarGradosMaterias = () => {
 					});
 					setMateriasSeleccionadas([]);
 					setGradosSeleccionados([]);
+
+					playCompleted()
 				}
+				setCargando(false)
 			} catch (error) {
+				playError()
+				setCargando(false)
 				console.error('Error en las peticiones:', error);
 				Alerta.error('Ocurrió un error inesperado al realizar las asignaciones.');
 			}
@@ -548,10 +565,10 @@ const AsignarGradosMaterias = () => {
                             
                     </div> */}
 					<button
-						disabled={bloqueoDemo}
+						disabled={bloqueoDemo || cargando}
 						type='submit'
 					>
-						Guardar Cambios
+						{cargando? 'Guardando...': 'Guardar'}
 					</button>
 				</form>
 			</div>
@@ -653,7 +670,7 @@ const AsignarGradosMaterias = () => {
 												<div className='botonesJuntos'>
 													<button
 														disabled={
-															bloqueoDemo
+															bloqueoDemo || cargando
 														}
 														onClick={() =>
 															handleEliminar(
@@ -666,7 +683,7 @@ const AsignarGradosMaterias = () => {
 														}
 														className='rojo'
 													>
-														ELIMINAR
+														{cargando? 'Eliminando...' : 'Eliminar'}
 													</button>
 													<button
 														type='button'

@@ -8,13 +8,16 @@ import Line from '../../../componentes/Line/Line.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './CreacionEst.scss';
 
 const CreacionEst = () => {
+	const { playCompleted, playError } = useAppSounds();
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
+	const [cargando,setCargando] = useState(false)
 
 	const CANT_EST_PAG = 9;
 	const INCREMENTO_PAG = 6;
@@ -101,13 +104,15 @@ const CreacionEst = () => {
 		e.preventDefault();
 
 		if (!gradoAsignado) {
-			Alerta.info('Debes seleccionar un grado');
+			playError()
+			Alerta.error('Debes seleccionar un grado');
 			return;
 		}
 
 		console.log('Datos enviados:', formData);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/estudiante`, {
 					method: 'POST',
@@ -133,6 +138,7 @@ const CreacionEst = () => {
 					);
 				}
 
+				playCompleted()
 				console.log('EST CREADO EXITOSAMENTE');
 				Alerta.success('Estudiante creado exitosamente');
 				// Reiniciar formulario
@@ -147,7 +153,10 @@ const CreacionEst = () => {
 				setGradoAsignado(null);
 
 				setReload(!reload);
+				setCargando(false)
 			} catch (error) {
+				playError()
+				setCargando(false)
 				console.error(error);
 				Alerta.error(error.message);
 			}
@@ -332,9 +341,9 @@ const CreacionEst = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={bloqueoDemo}
+						disabled={bloqueoDemo || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Creando...': 'Crear'}
 					</button>
 				</form>
 			</div>

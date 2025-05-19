@@ -4,12 +4,15 @@ import { useUser } from '../../../Contexts/UserContext';
 import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import useAppSounds from '../../../hooks/useAppSounds';
 import './PerfilEst.scss';
 
 const PerfilEst = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, setUser, bloqueoDemo } = useUser();
+	const [cargando, setCargando] = useState(false)
+	const { playCompleted, playError } = useAppSounds();
 
 	const initialFormData = useRef({
 		apellidos: user.apellido,
@@ -41,6 +44,7 @@ const PerfilEst = () => {
 		console.log('Datos enviados:', dataToSend);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/updateEstudiante/${dataToSend.doc}`, {
 					method: 'PUT',
@@ -66,9 +70,10 @@ const PerfilEst = () => {
 
 				const data = await response.json();
 
+				playCompleted()
 				Alerta.success('Datos actualizados correctamente');
 				console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
-
+				setCargando(false)
 				if (data.token) {
 					// 2. Guarda el nuevo token en localStorage
 					localStorage.setItem('token', data.token);
@@ -76,6 +81,8 @@ const PerfilEst = () => {
 					setUser(jwtDecode(data.token));
 				}
 			} catch (error) {
+				playError()
+				setCargando(false)
 				Alerta.error(error.message);
 				console.error(error);
 			}
@@ -143,9 +150,9 @@ const PerfilEst = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={bloqueoDemo || isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Guardando...' : 'Guardar Cambios'}
 					</button>
 				</form>
 			</div>
