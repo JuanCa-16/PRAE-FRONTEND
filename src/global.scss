@@ -229,6 +229,10 @@ button {
 }
 
 @media screen and (max-width: $max-celular) {
+
+	body{
+		overflow-y: auto;
+	}
 	//Estilos de letra (ROBOTO por defecto)
 	h1 {
 		font-size: 2rem; /* 32px */
@@ -253,8 +257,9 @@ button {
 	.App {
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
-		height: 100dvh;
+		//height: 100vh;
+		//height: 100dvh;
+		height: auto;
 
 		padding: 0;
 		margin: 0;
@@ -265,7 +270,8 @@ button {
 		.main-content {
 			width: 100%;
 			background-color: var(--fondo);
-			max-height: 100%;
+			//max-height: 100%;
+			height: 100%;
 			overflow: auto;
 			padding: 1.5rem 1.5rem 6.875rem 1.5rem;
 			position: relative;
