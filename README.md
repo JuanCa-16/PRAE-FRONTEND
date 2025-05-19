@@ -70,12 +70,15 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
  ┣ 📜 .gitignore            # Archivos ignorados por Git
  ┗ 📜 README.md             # Documentación del proyecto (este archivo)
 ```
-📚 Documentación
-📄 El proyecto fue documentado utilizando JSDoc, una herramienta estándar para generar documentación a partir de comentarios en el código JavaScript.
+---
 
-🎨 Se utilizó el tema clean-jsdoc-theme para personalizar la apariencia de la documentación generada, brindando una presentación más limpia y profesional.
+## 📚 Documentación
+
+- 📄 El proyecto fue documentado utilizando **JSDoc**, una herramienta estándar para generar documentación a partir de comentarios en el código JavaScript.
+- 🎨 Se utilizó el tema [`clean-jsdoc-theme`](https://www.npmjs.com/package/clean-jsdoc-theme) para mejorar la presentación visual de la documentación, brindando una apariencia limpia y profesional.
 
 ---
+
 
 ## 🚀 Despliegue
 
