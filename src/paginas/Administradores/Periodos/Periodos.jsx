@@ -3,11 +3,15 @@ import { useUser } from '../../../Contexts/UserContext';
 import PildoraPeriodos from '../../../componentes/PildoraPeriodos/PildoraPeriodos';
 import Alerta from '../../../componentes/Alerta/Alerta';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
+import useAppSounds from '../../../hooks/useAppSounds';
 import Modal from '../../../componentes/Modal/Modal';
 import Masonry from 'react-masonry-css';
 import './Periodos.scss';
 
 const Periodos = () => {
+
+	const { playCompleted, playError } = useAppSounds()
+
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { bloqueoDemo } = useUser();
@@ -82,6 +86,7 @@ const Periodos = () => {
 		}, 0);
 
 		if (totalPeso !== 100) {
+			playError()
 			Alerta.error('La suma de los pesos debe ser 100%');
 			return;
 		}
@@ -112,9 +117,11 @@ const Periodos = () => {
 						}
 					})
 				);
+				playCompleted()
 				Alerta.success('Guardado Exitosamente');
 				setReload(!reload);
 			} catch (error) {
+				playError()
 				Alerta.error(`Error al guardar: ${error.message}`);
 				console.error(error);
 			}

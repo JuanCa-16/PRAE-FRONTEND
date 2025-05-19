@@ -4,16 +4,19 @@ import Alerta from '../../../componentes/Alerta/Alerta.jsx';
 import CustomSelect from '../../../componentes/CustomSelect/CustomSelect.jsx';
 import ContenedorPildoraMateriaGrado from '../../../componentes/ContenedorPildoraMateriaGrado/ContenedorPildoraMateriaGrado.jsx';
 import InputContainer from '../../../componentes/Input/InputContainer.jsx';
+import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import Line from '../../../componentes/Line/Line.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import './CreacionDocente.scss';
 
 const CreacionDocente = () => {
+	const { playCompleted, playError } = useAppSounds()
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
 	const [reload, setReload] = useState(false);
+	const [cargando, setCargando] = useState(false)
 
 	const CANT_EST_PAG = 9;
 	const INCREMENTO_PAG = 6;
@@ -95,13 +98,15 @@ const CreacionDocente = () => {
 		e.preventDefault();
 
 		if (materiasSeleccionadas.length === 0) {
-			Alerta.info('Debes seleccionar alemnos una materia');
+			playError()
+			Alerta.error('Debes seleccionar minimo una materia');
 			return;
 		}
 
 		console.log('Datos enviados:', formData);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/docente`, {
 					method: 'POST',
@@ -150,11 +155,14 @@ const CreacionDocente = () => {
 							);
 						}
 					} catch (error) {
+						playError()
 						Alerta.error(`Error al asignar materia ${materia}: ${error.message}`);
 						console.error(error);
+						setCargando(false)
 					}
 				}
 
+				playCompleted()
 				Alerta.success('Docente creado exitosamente');
 				console.log('DOCENTE CREADO EXITOSAMENTE');
 
@@ -170,7 +178,10 @@ const CreacionDocente = () => {
 				setMateriasSeleccionadas([]);
 
 				setReload(!reload);
+				setCargando(false)
 			} catch (error) {
+				setCargando(false)
+				playError()
 				Alerta.error(error.message);
 				console.error('Error al crear Docente: ', error);
 			}
@@ -356,9 +367,9 @@ const CreacionDocente = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={bloqueoDemo}
+						disabled={bloqueoDemo || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Enviando...': 'Guardar Cambios'}
 					</button>
 				</form>
 			</div>

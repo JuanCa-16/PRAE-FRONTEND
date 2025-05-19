@@ -5,11 +5,14 @@ import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import './EditarPerfilAdmin.scss';
+import useAppSounds from '../../../hooks/useAppSounds';
 
 const EditarPerfilAdmin = () => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, setUser, bloqueoDemo } = useUser();
+	const { playCompleted, playError } = useAppSounds();
+	const [cargando, setCargando] = useState(false)
 
 	function capitalizeWords(str) {
 		return str
@@ -52,6 +55,7 @@ const EditarPerfilAdmin = () => {
 		console.log('Datos enviados:', dataToSend);
 
 		if (!bloqueoDemo) {
+			setCargando(true)
 			try {
 				const response = await fetch(`${API_URL}usuario/updateAdmin/${dataToSend.doc}`, {
 					method: 'PUT',
@@ -76,8 +80,10 @@ const EditarPerfilAdmin = () => {
 
 				const data = await response.json();
 
+				playCompleted()
 				console.log('ADMIN EDITADO EXITOSAMENTE', data);
 				Alerta.success('Datos actualizados correctamente');
+				setCargando(false)
 
 				if (data.token) {
 					// 2. Guarda el nuevo token en localStorage
@@ -86,6 +92,8 @@ const EditarPerfilAdmin = () => {
 					setUser(jwtDecode(data.token));
 				}
 			} catch (error) {
+				playError()
+				setCargando(false)
 				Alerta.error(error.message);
 				console.error(error);
 			}
@@ -159,9 +167,9 @@ const EditarPerfilAdmin = () => {
 					</div>
 					<button
 						type='submit'
-						disabled={bloqueoDemo || isFormUnchanged}
+						disabled={bloqueoDemo || isFormUnchanged || cargando}
 					>
-						Guardar Cambios
+						{cargando? 'Guardando...': 'Guardar'}
 					</button>
 				</form>
 			</div>

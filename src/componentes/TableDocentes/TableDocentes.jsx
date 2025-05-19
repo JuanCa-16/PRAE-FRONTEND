@@ -3,6 +3,7 @@ import { useUser } from '../../Contexts/UserContext';
 import PildoraMateriaGrado from '../PildoraMateriaGrado/PildoraMateriaGrado';
 import InputContainer from '../Input/InputContainer';
 import PildoraTitulo from '../PildoraTitulo/PildoraTitulo';
+import useAppSounds from '../../hooks/useAppSounds';
 import Celda from '../Celda/Celda';
 import Modal from '../Modal/Modal';
 import Alerta from '../Alerta/Alerta';
@@ -22,6 +23,9 @@ import './TableDocentes.scss';
  */
 
 const TableDocentes = ({ infoCurso, infoDocente }) => {
+
+	const { playCompleted, playError, playExpand } = useAppSounds();
+
 	function capitalizeWords(str) {
 		return str
 			.split(' ') // Divide en palabras
@@ -169,11 +173,13 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 		const peso = parseFloat(nombreAct.peso);
 
 		if (isNaN(peso) || peso < 0 || peso > 100) {
+			playError()
 			Alerta.error('El peso debe ser un número entre 0 y 100.');
 			return;
 		}
 
 		if (totalPesoPorcentaje + peso > 100) {
+			playError()
 			Alerta.error('Excederas el 100%');
 			return;
 		}
@@ -201,6 +207,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
+				playCompleted()
 				Alerta.success('Actividad realizada correctamente');
 				setCargando(false);
 				setReload(!reload);
@@ -210,6 +217,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 					peso: '',
 				});
 			} catch (error) {
+				playError()
 				console.error('Error al crear actividad', error);
 				Alerta.error(error.message);
 				setCargando(false);
@@ -262,6 +270,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 				[index]: !prevState[index], // Si es true, se pone false, y viceversa
 			}));
 		}
+
+		playExpand()
 	};
 
 	return configurado ? (
