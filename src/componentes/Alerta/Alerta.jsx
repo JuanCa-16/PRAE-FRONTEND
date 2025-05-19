@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast';
 import './Alerta.scss';
-
+import { playSound } from 'react-sounds'; // ✅ esta sí se puede usar
 /**
  * Objeto que maneja las notificaciones personalizadas para la aplicación.
  * Proporciona métodos para mostrar alertas de tipo éxito, error, información y alertas personalizadas.
@@ -26,49 +26,50 @@ import './Alerta.scss';
  */
 
 const Alerta = {
-	success: (message, grande = false) =>
-		toast.custom(
-			(t) => (
+	success: (message, grande = false) => {
+		playSound('ui/success_blip'); // 🔊
+		return toast.custom(
+			() => (
 				<div className={`my-toast my-toast-success ${grande ? 'my-toast-large' : ''}`}>
 					{message}
 				</div>
 			),
-			{
-				duration: 3000,
-			}
-		),
+			{ duration: 3000 }
+		);
+	},
 
-	error: (message, grande = false) =>
-		toast.custom(
-			(t) => (
+	error: (message, grande = false) => {
+		playSound('notification/error'); // 🔊
+		return toast.custom(
+			() => (
 				<div className={`my-toast my-toast-error ${grande ? 'my-toast-large' : ''}`}>
 					{message}
 				</div>
 			),
-			{
-				duration: 5000,
-			}
-		),
+			{ duration: 5000 }
+		);
+	},
 
-	info: (message) =>
-		toast.custom((t) => <div className='my-toast my-toast-info'>{message}</div>, {
-			duration: 5000,
-		}),
+	info: (message) => {
+		playSound('ui/submit'); // 🔊
+		return toast.custom(
+			() => <div className='my-toast my-toast-info'>{message}</div>,
+			{ duration: 5000 }
+		);
+	},
 
-	custom: (message, options) =>
-		toast.custom(
-			(t) => (
-				<div
-					className='my-toast'
-					{...options}
-				>
+	custom: (message, options) => {
+		playSound('ui/radio_select'); // ejemplo para custom
+		return toast.custom(
+			() => (
+				<div className='my-toast' {...options}>
 					{message}
 				</div>
 			),
-			{
-				duration: 3000,
-			}
-		),
+			{ duration: 3000 }
+		);
+	},
 };
+
 
 export default Alerta;

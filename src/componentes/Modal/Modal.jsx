@@ -3,7 +3,6 @@ import { useTheme } from '../../Contexts/UserContext';
 import { useUser } from '../../Contexts/UserContext';
 import InputContainer from '../Input/InputContainer';
 import Alerta from '../Alerta/Alerta';
-import useAppSounds from '../../hooks/useAppSounds';
 import './Modal.scss';
 
 /**
@@ -42,7 +41,7 @@ const Modal = ({
 	extraData = {},
 	children,
 }) => {
-	const { playCompleted, playError, playPopPupOpen,playPopPupClose } = useAppSounds();
+	
 
 
 	function capitalizeWords(str) {
@@ -83,13 +82,12 @@ const Modal = ({
 					throw new Error(errorData.message || 'Error al eliminar observación');
 				}
 
-				playCompleted();
+				
 				Alerta.success('Observación eliminada');
-				setTimeout(() => closeModal(), 1000);
-				//closeModal();
+				closeModal();
 				recargar();
 			} catch (error) {
-				playError();
+				
 				console.error('Error al eliminar observación:', error);
 				Alerta.error(error.message);
 			}
@@ -116,7 +114,7 @@ const Modal = ({
 		console.log('Datos del formulario ACTIVIDAD:', JSON.stringify(formData));
 
 		if (parseInt(formData.pesoTotalActual - parseInt(ValorPeso)) + parseInt(formData.pesoAct) > 100) {
-			playError();
+			
 			Alerta.error('Excederas el 100%');
 			return;
 		}
@@ -141,18 +139,18 @@ const Modal = ({
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
-				playCompleted();
+				
 				Alerta.success('Actividad actualizada');
 				closeModal();
 				recargar();
 			} catch (error) {
-				playError();
+				
 				console.error('Error al crear actividad', error);
 				Alerta.error(error.message);
 			}
 		}
 
-		playCompleted();
+		
 
 		// Mostrar el objeto JSON en la consola (o enviarlo al servidor)
 
@@ -176,7 +174,7 @@ const Modal = ({
 		// Validación: solo números entre 0 y 5, incluyendo decimales
 		const notaNumerica = parseFloat(nota);
 		if (isNaN(notaNumerica) || notaNumerica < 0 || notaNumerica > 5) {
-			playError();
+			
 			Alerta.error('La nota debe ser un número entre 0 y 5');
 			return;
 		}
@@ -207,11 +205,11 @@ const Modal = ({
 						throw new Error(errorData.message || 'Error al registrar nota');
 					}
 
-					playCompleted();
+					
 					Alerta.success('Nota registrada correctamente');
 					setCargando(false);
 				} catch (error) {
-					playError();
+					
 					console.error('Error al guardar nota:', error);
 					Alerta.error(error.message);
 					setCargando(false);
@@ -239,10 +237,10 @@ const Modal = ({
 						throw new Error(errorData.message || 'Error al editar nota');
 					}
 
-					playCompleted();
+					
 					Alerta.success('Nota registrada correctamente');
 				} catch (error) {
-					playError();
+					
 					console.error('Error al guardar nota:', error);
 					Alerta.error(error.message);
 				}
@@ -253,7 +251,7 @@ const Modal = ({
 		console.log('Datos del formulario NOTAS:', JSON.stringify(formData));
 		closeModal();
 		recargar();
-		playCompleted();
+		
 		// Aquí puedes agregar lógica para enviar el JSON a un servidor o hacer algo más con él
 	};
 
@@ -280,14 +278,14 @@ const Modal = ({
 					throw new Error(errorData.message || response.status);
 				}
 
-				playCompleted();
+				
 				Alerta.success('Observación actualizada correctamente');
-				setTimeout(() => closeModal(), 700);
-				//closeModal();
+
+				closeModal();
 				setCargando(false);
 				recargar(); // Actualiza la lista de observaciones si quieres
 			} catch (error) {
-				playError();
+				
 				setCargando(false);
 				console.error('Error al actualizar observación', error);
 				Alerta.error(error.message);
@@ -298,11 +296,9 @@ const Modal = ({
 	//MANEJO LOGICA MODAL
 	if (!isOpen) return null; // No renderiza el modal si isOpen es false
 
-	playPopPupOpen(); 
 
 	const handleClickOutside = (e) => {
 		// Cerrar modal si se hace clic fuera del área del modal
-		playPopPupClose()
 		if (e.target.classList.contains('modal-overlay')) {
 			closeModal();
 		}
@@ -332,18 +328,18 @@ const Modal = ({
 					throw new Error(`${errorData.message || response.status}`);
 				}
 
-				playCompleted();
+				
 				Alerta.success('Actividad eliminada');
 
 				closeModal();
 				recargar();
 			} catch (error) {
-				playError();
+				
 				console.error('Error al crear actividad', error);
 				Alerta.error(error.message);
 			}
 
-			playCompleted();
+			
 		}
 	};
 

@@ -4,7 +4,6 @@ import { useUser } from '../../../Contexts/UserContext';
 import Alerta from '../../../componentes/Alerta/Alerta';
 import InputContainer from '../../../componentes/Input/InputContainer';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
-import useAppSounds from '../../../hooks/useAppSounds';
 import './PerfilEst.scss';
 
 const PerfilEst = () => {
@@ -12,7 +11,7 @@ const PerfilEst = () => {
 	const token = localStorage.getItem('token');
 	const { user, setUser, bloqueoDemo } = useUser();
 	const [cargando, setCargando] = useState(false)
-	const { playCompleted, playError } = useAppSounds();
+	
 
 	const initialFormData = useRef({
 		apellidos: user.apellido,
@@ -70,7 +69,7 @@ const PerfilEst = () => {
 
 				const data = await response.json();
 
-				playCompleted()
+				
 				Alerta.success('Datos actualizados correctamente');
 				console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
 				setCargando(false)
@@ -81,7 +80,7 @@ const PerfilEst = () => {
 					setUser(jwtDecode(data.token));
 				}
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				Alerta.error(error.message);
 				console.error(error);

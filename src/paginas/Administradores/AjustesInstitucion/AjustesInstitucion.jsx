@@ -8,12 +8,11 @@ import NavBarItem from '../../../componentes/NavBar/NavBarItem';
 import PildoraMateriaGrado from '../../../componentes/PildoraMateriaGrado/PildoraMateriaGrado';
 import TituloDes from '../../../componentes/TituloDes/TituloDes';
 import Alerta from '../../../componentes/Alerta/Alerta';
-import useAppSounds from '../../../hooks/useAppSounds';
 
 import './AjustesInstitucion.scss';
 
 const AjustesInstitucion = () => {
-	const { playCompleted, playError } = useAppSounds();
+	
 	const { user, setUser, bloqueoDemo } = useUser();
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
@@ -82,7 +81,7 @@ const AjustesInstitucion = () => {
 				}
 
 				const data = await response.json();
-				playCompleted()
+				
 				console.log('INSTITUCIÓN EDITADA EXITOSAMENTE', data);
 
 				Alerta.success('Datos actualizados correctamente');
@@ -95,7 +94,7 @@ const AjustesInstitucion = () => {
 				}
 			} catch (error) {
 				//toast
-				playError()
+				
 				Alerta.error(error.message);
 				console.error(error);
 			}
@@ -115,7 +114,7 @@ const AjustesInstitucion = () => {
 			setFormData((prev) => ({ ...prev, logo: file }));
 			setPreview(URL.createObjectURL(file));
 		} else {
-			playError()
+			
 			Alerta.error('Por favor, selecciona una imagen válida.');
 		}
 	};

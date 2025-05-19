@@ -8,11 +8,10 @@ import Line from '../../../componentes/Line/Line.jsx';
 import PildoraEst from '../../../componentes/PildoraEst/PildoraEst.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './CreacionEst.scss';
 
 const CreacionEst = () => {
-	const { playCompleted, playError } = useAppSounds();
+	
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
 	const { user, bloqueoDemo } = useUser();
@@ -104,7 +103,7 @@ const CreacionEst = () => {
 		e.preventDefault();
 
 		if (!gradoAsignado) {
-			playError()
+			
 			Alerta.error('Debes seleccionar un grado');
 			return;
 		}
@@ -138,7 +137,7 @@ const CreacionEst = () => {
 					);
 				}
 
-				playCompleted()
+				
 				console.log('EST CREADO EXITOSAMENTE');
 				Alerta.success('Estudiante creado exitosamente');
 				// Reiniciar formulario
@@ -155,7 +154,7 @@ const CreacionEst = () => {
 				setReload(!reload);
 				setCargando(false)
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				console.error(error);
 				Alerta.error(error.message);

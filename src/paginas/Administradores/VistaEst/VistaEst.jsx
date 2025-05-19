@@ -8,11 +8,10 @@ import Line from '../../../componentes/Line/Line.jsx';
 import Modal from '../../../componentes/Modal/Modal.jsx';
 import Selector from '../../../componentes/Selector/Selector.jsx';
 import TituloDes from '../../../componentes/TituloDes/TituloDes.jsx';
-import useAppSounds from '../../../hooks/useAppSounds.jsx';
 import './VistaEst.scss';
 
 const VistaEst = () => {
-	const { playCompleted, playError } = useAppSounds();
+	
 	const location = useLocation();
 	const { est } = location.state || {};
 	const navigate = useNavigate();
@@ -106,7 +105,7 @@ const VistaEst = () => {
 		e.preventDefault();
 
 		if (!gradoAsignado) {
-			playError()
+			
 			Alerta.error('Debes seleccionar un grado');
 			return;
 		}
@@ -145,7 +144,7 @@ const VistaEst = () => {
 
 				const data = await response.json();
 
-				playCompleted()
+				
 				Alerta.success('Estudiante editado exitosamente');
 				console.log('ESTUDIANTE EDITADO EXITOSAMENTE', data);
 
@@ -170,7 +169,7 @@ const VistaEst = () => {
 				setCargando(false)
 			} catch (error) {
 				setCargando(false)
-				playError()
+				
 				console.error('Error al editar estudiante', error);
 				Alerta.error(error.message);
 			}
@@ -264,15 +263,14 @@ const VistaEst = () => {
 					throw new Error(`${errorData.error || response.status}`);
 				}
 
-				playCompleted()
+				
 				console.log('ESTUDIANTE ELIMINADO EXITOSAMENTE');
 				Alerta.success('Estudiante eliminado exitosamente');
 				closeModal();
 				setCargando(false)
-				setTimeout(() => navigate('/estudiantes', { replace: true }), 1400);
-				//navigate(`/estudiantes`);
+				navigate('/estudiantes', { replace: true });
 			} catch (error) {
-				playError()
+				
 				setCargando(false)
 				console.error('Error al eliminar estudiante: ', error);
 			}
