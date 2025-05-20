@@ -88,7 +88,7 @@ const TableEst = ({ infoMateria, idEst }) => {
 		<div className='contenedorVistaMateria'>
 			<div className='contenedor'>
 				<PildoraTitulo
-					nota={info.promedio_general}
+					nota={info.promedio_general ? info.promedio_general.promedio_general : '-'}
 					materia={infoMateria.materia}
 					nombre={infoMateria.nombre_completo}
 					color={infoMateria.color}
@@ -103,7 +103,10 @@ const TableEst = ({ infoMateria, idEst }) => {
 								key={key}
 							>
 								<PildoraMateriaGrado
-									texto={periodo.nombre.toUpperCase()}
+									texto={periodo.nombre.toUpperCase() +
+									':\u00A0\u00A0\u00A0' +
+									(periodo.valor_neto ?? '0') +
+									'%'}
 									color={infoMateria.color}
 									onClick={() => handlePrimerClick(key)}
 								></PildoraMateriaGrado>
@@ -116,6 +119,13 @@ const TableEst = ({ infoMateria, idEst }) => {
 											: 'noMostrar'
 									}`}
 								>
+									<PildoraTitulo
+										nota={periodo.promedio_periodo ? periodo.promedio_periodo  : '-'}
+										materia={infoMateria.materia}
+										nombre={infoMateria.nombre_completo}
+										color={infoMateria.color}
+										grado={infoMateria.curso}
+									></PildoraTitulo>
 									{periodo.actividades.length > 0 ? (
 										<div className='tabla'>
 											<div className='col 1'>

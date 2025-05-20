@@ -1,3 +1,5 @@
+@use '../../variables.scss' as *;
+
 .contenedorPilaTitulo {
 	display: flex;
 	width: 100%;
@@ -96,6 +98,17 @@
 		top: calc(50% - 23.5px);
 		right: 67px;
 		opacity: 0.05;
+	}
+}
+
+@media screen and (max-width: $max-celular){
+	.contenedorPilaTitulo{
+		.infoContainer{
+			//justify-content: center;
+			.info{
+				max-width: 50%;
+			}
+		}
 	}
 }
 
