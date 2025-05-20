@@ -150,7 +150,7 @@ const VistaDocente = () => {
 
 		if (materiasSeleccionadas.length === 0) {
 			
-			alert('Debes seleccionar alemnos una materia');
+			Alerta.error('Debes seleccionar alemnos una materia');
 			return;
 		}
 
@@ -264,7 +264,7 @@ const VistaDocente = () => {
 			} catch (error) {
 				
 				console.error('Error al editar un doncente: ', error);
-				alert.error(error.message);
+				Alerta.error(error.message);
 				setCargando(false)
 			}
 		}
@@ -324,9 +324,9 @@ const VistaDocente = () => {
 				setCargando(false)
 				navigate('/profesores', { replace: true })
 			} catch (error) {
-				
+				setCargando(false)
 				console.error('Error al eliminar profesor: ', error);
-				alert.error(error.message);
+				Alerta.error(error.message);
 				setCargando(false)
 			}
 		}
