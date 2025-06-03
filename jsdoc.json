@@ -45,7 +45,7 @@
 				},
 				{
 					"title": "Documentación BACK",
-					"link": "https://mi-backend-prae-55793889802.us-central1.run.app",
+					"link": "https://prae-backend-55793889802.us-south1.run.app",
 					"target": "_blank",
 					"class": "some-class",
 					"id": "some-id"
