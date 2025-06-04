@@ -7,7 +7,7 @@ import AnimatedCounter from '../Animacion/AnimatedNumber';
 import GraficoBarras from '../GraficoBarras/GraficoBarras';
 import GraficoRadar from '../GraficoRadar/GraficoRadar';
 import Masonry from 'react-masonry-css';
-import './ProfeEstadisticas.scss';
+import '../AdminEstadisticas/AdminEstadisticas.scss'
 
 const ProfeEstadisticas = () => {
 	const { theme } = useTheme();
@@ -105,7 +105,7 @@ const ProfeEstadisticas = () => {
 		>
 			<Masonry
 				breakpointCols={{ default: 3, 550: 1, 700: 2, 900: 1, 1100: 2, 1400: 2, 1600: 3 }} // Configuración de las columnas según el ancho
-				className={`contenedorDataProfe ${theme}`} // Clase para el contenedor
+				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
 				<>
