@@ -24,7 +24,7 @@ const EstEstadisticas = () => {
 	const [promedioTotal, setPromedioTotal] = useState(null);
 
 	const handleData = (data) => {
-		if (data.identificador === `${documento_estudiante}`) {
+		if (String(data.identificador) === `${documento_estudiante}`) {
 			//PUESTO
 			const nuevoPuesto = data.estadisticas.puesto;
 			setPuesto((prev) => {
