@@ -44,7 +44,7 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 	};
 
 	const handleData = (data) => {
-		if (data.identificador === `${idInstitucion}`) {
+		if (String(data.identificador) === `${idInstitucion}`) {
 			//MATERIAS
 			const nuevasMaterias = data.estadisticas.materias.materias_activas;
 			setCantidadMaterias((prev) => {
@@ -373,7 +373,7 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 									{informacion.length > 0 ? (
 										<div
 											key={curso}
-											className='graficoBarras'
+											className={informacion.length <= 2 ? 'graficoBarras': 'graficoEspacial'}
 										>
 											<p>Promedio {curso}</p>
 											{informacion.length <= 2 ? (

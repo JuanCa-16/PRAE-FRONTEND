@@ -22,7 +22,7 @@ const GraficoRadar = ({ data }) => {
 		<div
 			style={{
 				width: '100%',
-				height: '400px', // Ajusta la altura según lo que necesites
+				height: '170px', // Ajusta la altura según lo que necesites
 				paddingTop: '0.5rem',
 			}}
 			className={`graficoRadar ${theme}`}

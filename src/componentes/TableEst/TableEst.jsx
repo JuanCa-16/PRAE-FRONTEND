@@ -105,8 +105,7 @@ const TableEst = ({ infoMateria, idEst }) => {
 								<PildoraMateriaGrado
 									texto={periodo.nombre.toUpperCase() +
 									':\u00A0\u00A0\u00A0' +
-									(periodo.valor_neto ?? '0') +
-									'%'}
+									(periodo.valor_neto ?? '0')}
 									color={infoMateria.color}
 									onClick={() => handlePrimerClick(key)}
 								></PildoraMateriaGrado>

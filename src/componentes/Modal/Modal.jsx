@@ -512,7 +512,7 @@ const Modal = ({
 								<InputContainer
 									titulo='Nota'
 									placeholder='Nueva nota'
-									inputType='text'
+									inputType='number'
 									value={nota} // El valor del input viene del estado del componente padre
 									onChange={handleNotaChange} // Pasamos la función que actualizará el estado
 									required={true} // Hacemos que el campo sea obligatorio

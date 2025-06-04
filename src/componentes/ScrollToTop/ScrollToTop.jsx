@@ -16,6 +16,11 @@ const ScrollToTop = () => {
 		}
 
 		window.scrollTo({ top: 0, behavior: 'instant' });
+
+		const body = document.body;
+        if (body) {
+            body.scrollIntoView({ behavior: 'instant', block: 'start' });
+        }
 	}, [pathname]);
 
 	return null;

@@ -13,7 +13,7 @@ const DescargarBoletin = ({ idEst }) => {
  	const generarPdf = async () => {
 		if (!bloqueoDemo) {
 			setDescargando(true)
-			const ruta = user.rol === 'admin' ? `${API_URL}boletines/${idEst}` : `${API_URL}boletines`;
+			const ruta = user.rol === 'admin' ? `${API_URL}boletines/${idEst}` : `${API_URL}boletines/final`;
 			try {
 				const response = await fetch(ruta, {
 					method: 'GET',

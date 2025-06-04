@@ -21,7 +21,7 @@ const ProfeEstadisticas = () => {
 	const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
 	const [promedioGrados, setPromedioGrados] = useState(null);
 	const handleData = (data) => {
-		if (data.identificador === `${idProfe}`) {
+		if (String(data.identificador) === `${idProfe}`) {
 			//MATERIAS
 			const nuevasMaterias = data.estadisticas.materias_dictadas;
 			setCantidadMaterias((prev) => {

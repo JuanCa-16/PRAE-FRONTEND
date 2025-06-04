@@ -327,8 +327,8 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 								texto={
 									periodo.nombre.toUpperCase() +
 									':\u00A0\u00A0\u00A0'+
-									(promedioBase?.promedioPonderado ?? '0') +
-									'%'
+									(promedioBase?.promedioPonderado ?? '0') 
+									
 								}
 								color={infoCurso.color}
 								onClick={() => handlePrimerClick(idx)}
