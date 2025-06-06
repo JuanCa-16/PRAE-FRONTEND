@@ -19,7 +19,7 @@ import './GraficoBarras.scss';
 //      { grado: '8-2', promedio: 4.3 },
 //    ];
 const GraficoBarras = ({ data }) => {
-	const alturaGrafico = Math.min(data.length * 60, 250);
+	const alturaGrafico = Math.min(data.length * 70, 250);
 
 	const { theme } = useTheme();
 

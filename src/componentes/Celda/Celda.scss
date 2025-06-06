@@ -212,6 +212,11 @@
 					background-color: var(--dark-azul-pildora);
 				}
 			}
+
+			&.activo{
+				color: var(--dark-negro);
+				background-color: var(--dark-azul-pildora);
+			}
 		}
 
 		//Si es de tipo titulo2
