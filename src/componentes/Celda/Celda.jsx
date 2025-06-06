@@ -14,11 +14,11 @@ import './Celda.scss';
  * @param {function} onClick - Función que se ejecuta cuando la celda es clickeada.
  */
 
-const Celda = ({ txt = 'Valor', color, tipo = 'titulo', rol = 'ver', onClick }) => {
+const Celda = ({ txt = 'Valor', color, tipo = 'titulo', rol = 'ver', clase, onClick }) => {
 	const { theme } = useTheme();
 	return (
 		<div
-			className={`${theme} celda ${tipo} ${rol} ${color}`}
+			className={`${theme} celda ${clase} ${tipo} ${rol} ${color}`}
 			onClick={onClick}
 		>
 			<p>{txt}</p>

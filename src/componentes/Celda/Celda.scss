@@ -27,6 +27,11 @@
 				background-color: var(--colorPildora1);
 			}
 		}
+
+		&.activo{
+			color: color-mix(in srgb, var(--colorPildora1) 20%, rgb(255, 255, 255));
+			background-color: var(--colorPildora1);
+		}
 	}
 
 	//Si es de tipo titulo2

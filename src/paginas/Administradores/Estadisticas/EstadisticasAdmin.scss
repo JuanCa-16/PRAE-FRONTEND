@@ -5,4 +5,14 @@
 	align-items: flex-start;
 	gap: 3.0625rem;
 	align-self: stretch;
+
+	.contenedorFiltros {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+
+		.celda {
+			max-width: fit-content;
+		}
+	}
 }
