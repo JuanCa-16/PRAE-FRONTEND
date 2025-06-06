@@ -12,7 +12,7 @@ import GraficoBarrasApiladas from '../GraficoBarrasApiladas/GraficoBarrasApilada
 import Masonry from 'react-masonry-css';
 import './AdminEstadisticas.scss';
 
-const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
+const AdminEstadisticas = ({ gradoFiltro, funcionRecargaCantMaterias = () => {} }) => {
 	const { theme } = useTheme();
 	const { user } = useUser();
 	const idInstitucion = user.institucion.id_institucion;
@@ -83,26 +83,24 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 			//PROMEDIO X GRADO ACUMULADO
 			const nuevosPromedioGradosAcumulado = Object.entries(
 				data.estadisticas.promedio_notas_por_grado_acumulado
-			)
-				.map(([titulo, info]) => {
+			).map(([titulo, info]) => {
+				const resultado = { titulo };
+				Object.entries(info).forEach(([tituloPeriodo, prom]) => {
+					const periodo =
+						tituloPeriodo === 'PRIMER PERIODO'
+							? 'periodo1'
+							: tituloPeriodo === 'SEGUNDO PERIODO'
+							? 'periodo2'
+							: tituloPeriodo === 'TERCER PERIODO'
+							? 'periodo3'
+							: tituloPeriodo === 'CUARTO PERIODO'
+							? 'periodo4'
+							: 'total';
+					resultado[periodo] = parseFloat(prom);
+				});
 
-					const resultado = {titulo};
-					Object.entries(info).forEach(([tituloPeriodo, prom]) => {
-						const periodo =
-							tituloPeriodo === 'PRIMER PERIODO'
-								? 'periodo1'
-								: tituloPeriodo === 'SEGUNDO PERIODO'
-								? 'periodo2'
-								: tituloPeriodo === 'TERCER PERIODO'
-								? 'periodo3'
-								: tituloPeriodo === 'CUARTO PERIODO'
-								? 'periodo4'
-								: 'total';
-						resultado[periodo] = parseFloat(prom);
-					});
-
-					return resultado;
-				})
+				return resultado;
+			});
 
 			setPromedioNotasCursoAcumulado((prev) => {
 				const nuevo = JSON.stringify(nuevosPromedioGradosAcumulado.sort(ordenarGrados));
@@ -207,68 +205,120 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				<>
-					{cantidadMaterias !== null ? (
-						<div>
-							<PildoraEst
-								clase='peque pildoraEstadistica'
-								est='MATERIAS:'
-								estadistica
-							>
-								<AnimatedCounter
-									from={0}
-									to={cantidadMaterias}
-									duration={duracion}
-								/>
-							</PildoraEst>
-						</div>
-					) : (
-						<span className='loader'></span>
-					)}
+				{gradoFiltro === 'Todos' && (
+					<>
+						{cantidadMaterias !== null ? (
+							<div>
+								<PildoraEst
+									clase='peque pildoraEstadistica'
+									est='MATERIAS:'
+									estadistica
+								>
+									<AnimatedCounter
+										from={0}
+										to={cantidadMaterias}
+										duration={duracion}
+									/>
+								</PildoraEst>
+							</div>
+						) : (
+							<span className='loader'></span>
+						)}
 
-					{cantidadGrados !== null ? (
-						<div>
+						{cantidadGrados !== null ? (
+							<div>
+								<PildoraEst
+									color='morado'
+									clase='peque pildoraEstadistica'
+									est='GRADOS:'
+									estadistica
+								>
+									<AnimatedCounter
+										from={0}
+										to={cantidadGrados}
+										duration={duracion}
+									/>
+								</PildoraEst>
+							</div>
+						) : (
+							<span className='loader'></span>
+						)}
+					</>
+				)}
+
+				{gradoFiltro === 'Todos' &&
+					(porcentajeUsuarios !== null ? (
+						porcentajeUsuarios.length > 0 ? (
+							<div className='graficoTorta'>
+								<p>Usuarios Institucion</p>
+								<GraficoTorta data={porcentajeUsuarios}></GraficoTorta>
+							</div>
+						) : (
 							<PildoraEst
 								color='morado'
 								clase='peque pildoraEstadistica'
-								est='GRADOS:'
+								est='NO HAY USUARIOS INSTITUCION'
 								estadistica
-							>
-								<AnimatedCounter
-									from={0}
-									to={cantidadGrados}
-									duration={duracion}
-								/>
-							</PildoraEst>
+							/>
+						)
+					) : (
+						<span className='loader'></span>
+					))}
+
+				{gradoFiltro !== 'Todos' &&
+					(estudiantesCurso !== null ? (
+						<div>
+							{/* FUNCION AOTOEJECUTABLE SE ENVUELVE EN ( FUNCION(){....}   () PARAENTESIS PARA EJECUTAR) */}
+							{(() => {
+								const estudiantesFiltrados = estudiantesCurso.filter(
+									(dato) => dato.name === gradoFiltro
+								);
+								const cantFiltrada =
+									estudiantesFiltrados.length >= 1
+										? estudiantesFiltrados[0].value
+										: 0;
+
+								return (
+									<PildoraEst
+										clase='peque pildoraEstadistica'
+										est='ESTUDIANTES:'
+										estadistica
+									>
+										{/* Usamos la cantidad filtrada de estudiantes */}
+										<AnimatedCounter
+											from={0}
+											to={cantFiltrada}
+											duration={duracion}
+										/>
+									</PildoraEst>
+								);
+							})()}
 						</div>
 					) : (
 						<span className='loader'></span>
-					)}
-				</>
-				{porcentajeUsuarios !== null ? (
-					porcentajeUsuarios.length > 0 ? (
-						<div className='graficoTorta'>
-							<p>Usuarios Institucion</p>
-							<GraficoTorta data={porcentajeUsuarios}></GraficoTorta>
-						</div>
-					) : (
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='NO HAY USUARIOS INSTITUCION'
-							estadistica
-						/>
-					)
-				) : (
-					<span className='loader'></span>
-				)}
+					))}
 
 				{promedioNotasCursoAcumulado !== null ? (
 					promedioNotasCursoAcumulado.length > 0 ? (
 						<div className='graficoBarras acumulado'>
-							<p>Promedio Acumulado x Grado</p>
-							{console.log('aaaaas',promedioNotasCursoAcumulado)}
-							<GraficoBarrasApiladas data={promedioNotasCursoAcumulado} />
+							{(() => {
+								const promedioCursoAcumuladoFiltrado =
+									promedioNotasCursoAcumulado.filter(
+										(dato) => dato.titulo === gradoFiltro
+									);
+								return (
+									<>
+										<p>Promedio Acumulado x Grado</p>
+										<GraficoBarrasApiladas
+											data={
+												gradoFiltro === 'Todos'
+													? promedioNotasCursoAcumulado
+													: promedioCursoAcumuladoFiltrado
+											}
+										/>
+									</>
+								);
+							})()}
 						</div>
 					) : (
 						<PildoraEst
@@ -282,68 +332,84 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 					<span className='loader'></span>
 				)}
 
-				{estudiantesCurso !== null ? (
-					estudiantesCurso.length > 0 ? (
-						<div className='graficoTorta'>
-							<p>Estudiantes x Grado</p>
-							<GraficoTorta data={estudiantesCurso}></GraficoTorta>
-						</div>
-					) : (
-						<PildoraEst
-							color='morado'
-							clase='peque pildoraEstadistica'
-							est='NO HAY ESTUDIANTES X GRADO'
-							estadistica
-						/>
-					)
-				) : (
-					<span className='loader'></span>
+				{gradoFiltro === 'Todos' && (
+					<>
+						{estudiantesCurso !== null ? (
+							estudiantesCurso.length > 0 ? (
+								<div className='graficoTorta'>
+									<p>Estudiantes x Grado</p>
+									<GraficoTorta
+										data={estudiantesCurso}
+									></GraficoTorta>
+								</div>
+							) : (
+								<PildoraEst
+									color='morado'
+									clase='peque pildoraEstadistica'
+									est='NO HAY ESTUDIANTES X GRADO'
+									estadistica
+								/>
+							)
+						) : (
+							<span className='loader'></span>
+						)}
+					</>
 				)}
 
-				<>
-					{cantidadEst !== null ? (
-						<div>
-							<PildoraEst
-								color='amarillo'
-								clase='peque pildoraEstadistica'
-								est='ESTUDIANTES:'
-								estadistica
-							>
-								<AnimatedCounter
-									from={0}
-									to={cantidadEst}
-									duration={duracion}
-								/>
-							</PildoraEst>
-						</div>
-					) : (
-						<span className='loader'></span>
-					)}
+				{gradoFiltro === 'Todos' && (
+					<>
+						{cantidadEst !== null ? (
+							<div>
+								<PildoraEst
+									color='amarillo'
+									clase='peque pildoraEstadistica'
+									est='ESTUDIANTES:'
+									estadistica
+								>
+									<AnimatedCounter
+										from={0}
+										to={cantidadEst}
+										duration={duracion}
+									/>
+								</PildoraEst>
+							</div>
+						) : (
+							<span className='loader'></span>
+						)}
 
-					{cantidadDocentes !== null ? (
-						<div>
-							<PildoraEst
-								clase='peque pildoraEstadistica'
-								est='PROFESORES:'
-								estadistica
-							>
-								<AnimatedCounter
-									from={0}
-									to={cantidadDocentes}
-									duration={duracion}
-								/>
-							</PildoraEst>
-						</div>
-					) : (
-						<span className='loader'></span>
-					)}
-				</>
+						{cantidadDocentes !== null ? (
+							<div>
+								<PildoraEst
+									clase='peque pildoraEstadistica'
+									est='PROFESORES:'
+									estadistica
+								>
+									<AnimatedCounter
+										from={0}
+										to={cantidadDocentes}
+										duration={duracion}
+									/>
+								</PildoraEst>
+							</div>
+						) : (
+							<span className='loader'></span>
+						)}
+					</>
+				)}
 
 				{promedioNotasCurso !== null ? (
 					promedioNotasCurso.length > 0 ? (
-						promedioNotasCurso.map(({ titulo, promedio }) => {
+						(gradoFiltro === 'Todos'
+							? promedioNotasCurso
+							: promedioNotasCurso.filter(
+									(dato) => dato.titulo === gradoFiltro
+							)
+						).map(({ titulo, promedio, index }) => {
 							return (
-								<div className='graficoAguja'>
+								<div
+									className='graficoAguja'
+									key={index}
+								>
 									<p>Grado {titulo}</p>
 									<p>Promedio {promedio.toFixed(2)}</p>
 									<GraficoAguja
@@ -367,13 +433,23 @@ const AdminEstadisticas = ({ funcionRecargaCantMaterias = () => {} }) => {
 
 				{promedioMateriasCurso !== null ? (
 					promedioMateriasCurso.length > 0 ? (
-						promedioMateriasCurso.map(({ curso, informacion }) => {
+						(gradoFiltro === 'Todos'
+							? promedioMateriasCurso
+							: promedioMateriasCurso.filter(
+									(dato) => dato.curso === gradoFiltro
+							)
+						).map(({ curso, informacion }) => {
+							
 							return (
 								<>
 									{informacion.length > 0 ? (
 										<div
 											key={curso}
-											className={informacion.length <= 2 ? 'graficoBarras': 'graficoEspacial'}
+											className={
+												informacion.length <= 2
+													? 'graficoBarras'
+													: 'graficoEspacial'
+											}
 										>
 											<p>Promedio {curso}</p>
 											{informacion.length <= 2 ? (

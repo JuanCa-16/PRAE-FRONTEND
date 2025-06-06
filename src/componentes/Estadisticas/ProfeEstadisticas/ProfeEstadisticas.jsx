@@ -9,7 +9,7 @@ import GraficoRadar from '../GraficoRadar/GraficoRadar';
 import Masonry from 'react-masonry-css';
 import '../AdminEstadisticas/AdminEstadisticas.scss'
 
-const ProfeEstadisticas = () => {
+const ProfeEstadisticas = ({gradoFiltro}) => {
 	const { theme } = useTheme();
 	const { user } = useUser();
 	const idProfe = user.id;
@@ -108,7 +108,8 @@ const ProfeEstadisticas = () => {
 				className={`contenedorData ${theme}`} // Clase para el contenedor
 				columnClassName='contenedorDataColumn' // Clase para las columnas
 			>
-				<>
+
+				{gradoFiltro === 'Todos' && (<>
 					{cantidadMaterias !== null ? (
 						<div>
 							<PildoraEst
@@ -164,13 +165,27 @@ const ProfeEstadisticas = () => {
 					) : (
 						<span className='loader'></span>
 					)}
-				</>
+				</>)}
+				
 
 				{promedioGrados !== null ? (
 					promedioGrados.length > 0 ? (
 						<div className='graficoBarras'>
-							<p>Promedio Grados</p>
-							<GraficoBarras data={promedioGrados} />
+							{(() => {
+								const promedioGradoFiltrado=
+									promedioGrados.filter(
+										(dato) => dato.titulo === gradoFiltro
+									);
+								return (
+									<>
+										<p>Promedio Grados</p>
+										<GraficoBarras data={gradoFiltro === 'Todos'
+													? promedioGrados
+													: promedioGradoFiltrado} />
+									</>
+								);
+							})()}
+							
 						</div>
 					) : (
 						<PildoraEst
@@ -186,7 +201,12 @@ const ProfeEstadisticas = () => {
 
 				{promedioNotasCurso !== null ? (
 					promedioNotasCurso.length > 0 ? (
-						promedioNotasCurso.map(({ curso, informacion }) => {
+						(gradoFiltro === 'Todos'
+							? promedioNotasCurso
+							: promedioNotasCurso.filter(
+									(dato) => dato.curso === gradoFiltro
+							)
+						).map(({ curso, informacion }) => {
 							return (
 								<>
 									{informacion.length > 0 ? (
