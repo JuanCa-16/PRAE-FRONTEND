@@ -18,6 +18,7 @@ const ProfeEstadisticas = ({gradoFiltro}) => {
 	const [cantidadMaterias, setCantidadMaterias] = useState(null);
 	const [cantidadGrados, setCantidadGrados] = useState(null);
 	const [cantidadEst, setCantidadEst] = useState(null);
+	const [cantidadEstCurso, setCantidadEstCurso] = useState(null);
 	const [promedioNotasCurso, setPromedioNotasCurso] = useState(null);
 	const [promedioGrados, setPromedioGrados] = useState(null);
 	const handleData = (data) => {
@@ -56,7 +57,7 @@ const ProfeEstadisticas = ({gradoFiltro}) => {
 					informacion: Object.entries(info)
 						.map(([titulo, prom]) => {
 							// Solo incluir las materias que no sean la excluida
-							if (titulo === 'promedioCurso') {
+							if (titulo === 'promedioCurso' || titulo ===  'totalEstudiantes') {
 								return null; // Retorna null para excluir la materia
 							}
 
@@ -76,6 +77,32 @@ const ProfeEstadisticas = ({gradoFiltro}) => {
 					return prev;
 				}
 				return nuevosPromedioGrados;
+			});
+
+			//ESTUDIANTES X CURSO 
+			const nuevosEstCurso = Object.entries(data.estadisticas.promedio_por_curso).map(
+				([curso, info]) => ({
+					curso,
+					cant: Object.entries(info)
+						.map(([titulo,cant]) => {
+
+							if (titulo ===  'totalEstudiantes') {
+								return cant; 
+							}
+
+							return null
+						})
+						.filter((item) => item !== null)[0] // Elimina los nulls  excluidas)
+				})
+			);
+
+			setCantidadEstCurso((prev) => {
+				const nuevo = JSON.stringify(nuevosEstCurso);
+				const anterior = JSON.stringify(prev);
+				if (nuevo === anterior) {
+					return prev;
+				}
+				return nuevosEstCurso;
 			});
 
 			//PROMEDIO  X GRADO
@@ -166,6 +193,30 @@ const ProfeEstadisticas = ({gradoFiltro}) => {
 						<span className='loader'></span>
 					)}
 				</>)}
+
+				{gradoFiltro !== 'Todos' && (
+
+					cantidadEstCurso !== null ? (
+						<div>
+							<PildoraEst
+								color='amarillo'
+								clase='peque pildoraEstadistica'
+								est='ESTUDIANTES:'
+								estadistica
+							>
+								<AnimatedCounter
+									from={0}
+									to={cantidadEstCurso.filter(
+									(dato) => dato.curso === gradoFiltro
+							)[0].cant}
+									duration={duracion}
+								/>
+							</PildoraEst>
+						</div>
+					) : (
+						<span className='loader'></span>
+					)
+				)}
 				
 
 				{promedioGrados !== null ? (
