@@ -13,7 +13,7 @@ const GraficoRadar = ({ data }) => {
 
 	// Generamos un identificador único por grado (puedes usar el índice o cualquier otro método único)
 	const radarData = data.map((item, index) => ({
-		id: `${index}. ${item.titulo}`, // Asignamos un id único basado en el nombre y el índice
+		id: `${index + 1}. ${item.titulo}`, // Asignamos un id único basado en el nombre y el índice
 		subject: item.titulo, // Nombre completo del grado
 		A: item.promedio, // El promedio es el valor que se graficará
 	}));
