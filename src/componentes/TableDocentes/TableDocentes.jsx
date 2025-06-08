@@ -549,7 +549,7 @@ const TableDocentes = ({ infoCurso, infoDocente }) => {
 									>
 										<div className='titulo'>
 											<p className='bold'>
-												CREAR ACTIVIDAD:
+												Crear Actividad:
 											</p>
 											<p>
 												Total de porcentaje

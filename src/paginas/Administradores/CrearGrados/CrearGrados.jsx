@@ -171,8 +171,8 @@ const CrearGrados = () => {
 		<div className='grados'>
 			<div className='crear'>
 				<TituloDes
-					titulo='CREAR UN GRADO ACADÉMICO'
-					desc='Ingresa el curso (1° a 11°) para organizar correctamente la estructura académica.'
+					titulo='Crear Grado'
+					desc='Ingresa el grado a crear (1° a 11°).'
 				></TituloDes>
 				<form
 					onSubmit={handleSubmit}
@@ -190,15 +190,15 @@ const CrearGrados = () => {
 						type='submit'
 						disabled={bloqueoDemo}
 					>
-						CREAR
+						Crear
 					</button>
 				</form>
 			</div>
 			<Line></Line>
 			<div className='todosGrados'>
 				<TituloDes
-					titulo='LISTADO DE GRADOS'
-					desc='Elimina un grado para actualizar la estructura académica. Asegúrate de que no haya información importante antes de proceder.'
+					titulo='Listado de Grados'
+					desc='Visualiza los grados académicos registrados en la institución. Selecciona un grado para eliminarlo si es necesario.'
 				/>
 				<div className='informacion'>
 					<div className='filtros'>
@@ -209,7 +209,7 @@ const CrearGrados = () => {
 							titulo='Grado'
 							placeholder='Seleccione un grado...'
 						/>
-						<button onClick={limpiarFiltros}>Vaciar</button>
+						<button onClick={limpiarFiltros}>Limpiar</button>
 					</div>
 
 					<ContenedorPildoraMateriaGrado

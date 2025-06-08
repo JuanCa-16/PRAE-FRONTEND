@@ -96,7 +96,7 @@ const PerfilEst = () => {
 		<div className='contenedorPerfilEst'>
 			<div className='editar'>
 				<TituloDes
-					titulo='EDITAR PERFIL ESTUDIANTE'
+					titulo='Edita tu Perfil'
 					desc='Accede a tu perfil y realiza cambios en tus datos personales para tenerlo siempre actualizado.'
 				/>
 				<form

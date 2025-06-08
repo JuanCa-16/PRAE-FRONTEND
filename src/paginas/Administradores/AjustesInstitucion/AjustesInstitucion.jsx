@@ -132,7 +132,7 @@ const AjustesInstitucion = () => {
 			}}
 		>
 			<TituloDes
-				titulo='PERSONALIZACIÓN DE LA INSTITUCIÓN'
+				titulo='Personalización de la Institución'
 				desc='Personaliza la plataforma ajustando la interfaz y funcionalidades según tus preferencias para facilitar su uso diario.'
 			/>
 			<div className='contPersonalizacion'>

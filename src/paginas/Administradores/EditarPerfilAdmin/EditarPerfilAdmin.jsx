@@ -107,7 +107,7 @@ const EditarPerfilAdmin = () => {
 		<div className='contenedorPerfilAdmin'>
 			<div className='editar'>
 				<TituloDes
-					titulo='EDITA TU PERFIL'
+					titulo='Edita tu Perfil'
 					desc='Accede a tu perfil y actualiza tus datos personales para mantener tu información actualizada y garantizar una gestión eficiente en la plataforma.'
 				/>
 				<form

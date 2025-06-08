@@ -33,7 +33,19 @@
 			}
 
 			.input-container {
-				max-width: fit-content;
+				width: 50%;
+				min-width: 12.5rem;
+				flex: 1;
+			}
+
+			.custom-select {
+				width: 50%;
+				min-width: 12.5rem;
+				flex: 1;
+
+				.selected {
+					width: 100%;
+				}
 			}
 		}
 
@@ -44,6 +56,7 @@
 			gap: 1.5rem;
 			align-self: stretch;
 			flex-wrap: wrap;
+			justify-content: center;
 		}
 	}
 }
@@ -52,8 +65,17 @@
 	.contenedorObservaciones {
 		padding: 0rem 0.5rem;
 		.informacion {
-			.materias {
-				justify-content: center;
+
+			.filtros {
+				.input-container {
+					width: 25%;
+					min-width: 8.5rem;
+				}
+
+				.custom-select {
+					width: 25%;
+					min-width: 8.5rem;
+				}
 			}
 		}
 	}

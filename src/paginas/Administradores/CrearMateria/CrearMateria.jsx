@@ -162,8 +162,8 @@ const CrearMateria = () => {
 		<div className='crearMaterias'>
 			<div className='crear'>
 				<TituloDes
-					titulo='CREAR UNA MATERIA'
-					desc='Ingresa el nombre de la asignatura para agregarla al sistema, asegurate de que sea preciso y evita duplicados.'
+					titulo='Crear Materia'
+					desc='Ingresa el nombre de la materia para agregarla al sistema, asegurate de que sea preciso y evita duplicados.'
 				></TituloDes>
 				<form
 					onSubmit={handleSubmit}
@@ -181,14 +181,14 @@ const CrearMateria = () => {
 						type='submit'
 						disabled={bloqueoDemo}
 					>
-						CREAR
+						Crear
 					</button>
 				</form>
 			</div>
 			<Line></Line>
 			<div className='todosMaterias'>
 				<TituloDes
-					titulo='LISTADO DE MATERIAS'
+					titulo='Listado de Materias'
 					desc='Accede al listado de materias y elimina la que ya no sea necesaria. Ten en cuenta que se eliminarán todos los datos asociados.'
 				/>
 				<div className='informacion'>

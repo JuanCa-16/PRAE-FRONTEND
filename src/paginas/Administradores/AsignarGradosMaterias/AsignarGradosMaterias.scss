@@ -29,12 +29,17 @@
 				max-width: 100%;
 				justify-content: flex-start;
 				padding: 1rem 0;
-				gap: 5rem;
+				gap: 3rem;
+				flex-wrap: wrap;
+
 				.selector,
 				.seleccion {
 					display: flex;
 					flex-direction: column;
 					gap: 1rem;
+					min-width: 10rem;
+					flex-grow: 1;
+					max-width: 45%;
 				}
 			}
 
@@ -68,6 +73,16 @@
 				align-self: stretch;
 				flex-wrap: wrap;
 
+				.custom-select {
+					width: 50%;
+					min-width: 12.5rem;
+					flex: 1;
+
+					.selected {
+						width: 100%;
+					}
+				}
+
 				button {
 					width: fit-content;
 				}
@@ -100,7 +115,13 @@
 			.formulario {
 				.selectorGrado,
 				.selecciones {
-					flex-direction: column;
+					gap: 1.5rem;
+					.selector,
+					.seleccion {
+						width: 50%;
+						min-width: 1rem;
+						max-width: 100%;
+					}
 				}
 			}
 		}
@@ -124,6 +145,11 @@
 						input {
 							width: 100%;
 						}
+					}
+
+					.custom-select {
+
+						min-width: 8.5rem;
 					}
 
 					button {

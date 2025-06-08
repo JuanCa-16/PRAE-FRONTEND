@@ -204,7 +204,7 @@ const EditarPerfilDoc = () => {
 		<div className='contenedorPerfilDoc'>
 			<div className='editar'>
 				<TituloDes
-					titulo='EDITA TU PERFIL'
+					titulo='Edita tu Perfil'
 					desc='Accede a tu perfil para revisar y actualizar tus datos personales, asegurando una correcta gestión y comunicación.'
 				/>
 				<form

@@ -274,7 +274,7 @@ const CreacionDocente = () => {
 		<div className='contenedorCreacionDocente'>
 			<div className='crear'>
 				<TituloDes
-					titulo='CREAR UN PROFESOR'
+					titulo='Crear Profesor'
 					desc='Registra un nuevo profesor y asigna los cursos que gestionará, asegurándote de ingresar toda la información requerida correctamente.'
 				></TituloDes>
 				<form
@@ -369,14 +369,14 @@ const CreacionDocente = () => {
 						type='submit'
 						disabled={bloqueoDemo || cargando}
 					>
-						{cargando? 'Enviando...': 'Guardar Cambios'}
+						{cargando? 'Guardando...': 'Crear'}
 					</button>
 				</form>
 			</div>
 			<Line></Line>
 			<div className='lista'>
 				<TituloDes
-					titulo='LISTADO DE PROFESORES'
+					titulo='Listado de Profesores'
 					desc='Selecciona un profesor para obtener más información detallada sobre su perfil y los cursos que gestiona.'
 				/>
 				<div className='informacion'>

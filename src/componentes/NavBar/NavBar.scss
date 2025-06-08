@@ -206,6 +206,12 @@
 				padding: 1rem 0.5rem;
 			}
 
+			.itemBar::-webkit-scrollbar {
+				width: 0rem;
+				height: 0rem; /* Reduce el tamaño de la barra de desplazamiento horizontal */
+				border-radius: 0px; /* Bordes redondeados */
+			}
+
 			.tituloSuperior {
 				min-height: fit-content;
 				height: 4rem;
