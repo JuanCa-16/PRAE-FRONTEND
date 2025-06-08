@@ -55,6 +55,7 @@ const DescargarBoletin = ({ idEst }) => {
 			<button
 				disabled={bloqueoDemo || descargando}
 				onClick={generarPdf}
+				className='pdf'
 			>
 				<PdfIcon></PdfIcon> {descargando? 'Descargando...': 'Descargar Boletin'}
 			</button>

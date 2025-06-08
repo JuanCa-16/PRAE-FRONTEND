@@ -27,7 +27,7 @@
 		}
 	}
 
-	.graficoEspacial{
+	.graficoEspacial {
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		display: flex;
@@ -61,7 +61,7 @@
 		background: var(--colorPildora1); /* Un poco más visible al pasar el mouse */
 	}
 
-	.acumulado{
+	.acumulado {
 		tspan {
 			font-size: 0.8rem;
 		}
@@ -108,6 +108,20 @@
 	background: var(--colorSecundario);
 	border-radius: var(--radio2);
 	margin-bottom: 30px;
+}
+
+.divMasonry {
+	width: 100%;
+}
+
+.botonExportar {
+	&.pdf {
+		.iconosSvg {
+			.normal {
+				fill: var(--blanco);
+			}
+		}
+	}
 }
 
 .dark {
