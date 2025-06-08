@@ -15,6 +15,7 @@ const GraficoBarrasApiladas = ({ data, periodos = 4 }) => {
 				width: '100%',
 				height: `${alturaGrafico}px`,
 				paddingTop: '1rem',
+				marginBottom: '2rem',
 			}}
 			className={`graficoBarrasApiladasData ${theme}`}
 		>
