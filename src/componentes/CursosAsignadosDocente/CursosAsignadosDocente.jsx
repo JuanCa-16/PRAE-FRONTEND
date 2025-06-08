@@ -84,7 +84,7 @@ const CursosAsignadosDocente = ({ idProfe, idInstitucion, url }) => {
 	return (
 		<div className='lista'>
 			<TituloDes
-				titulo='LISTADO DE CURSOS ASIGNADOS:'
+				titulo='Listado de Cursos Asignados'
 				desc='Consulta los cursos que tienes asignados en los distintos grados. Gestiona las calificaciones y el progreso de tus estudiantes en cada uno de tus grupos.'
 			/>
 			<div className='informacion'>

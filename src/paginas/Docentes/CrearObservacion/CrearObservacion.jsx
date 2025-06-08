@@ -121,7 +121,7 @@ const CrearObservacion = () => {
 	return (
 		<div className='contenedorCrearObser'>
 			<TituloDes
-				titulo='REALIZAR OBSERVACIÓN A UN ESTUDIANTE'
+				titulo='Realizar Observación'
 				desc='Documenta y guarda una observación académica o disciplinaria a un estudiante.'
 			/>
 

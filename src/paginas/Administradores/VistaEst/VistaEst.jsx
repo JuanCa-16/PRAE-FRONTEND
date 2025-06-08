@@ -280,7 +280,7 @@ const VistaEst = () => {
 		<div className='contenedorVistaEst'>
 			<div className='editar'>
 				<TituloDes
-					titulo='EDITAR UN ESTUDIANTE'
+					titulo='Editar Estudiante'
 					desc='Edita el perfil de un estudiante en la plataforma y mantenlo siempre actualizado.'
 				></TituloDes>
 				<form

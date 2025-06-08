@@ -263,8 +263,8 @@ const CreacionEst = () => {
 		<div className='contenedorCreacionEst'>
 			<div className='crear'>
 				<TituloDes
-					titulo='CREAR UN ESTUDIANTE'
-					desc='Registra un nuevo profesor proporcionando la información necesaria y asigna los cursos correspondientes, asegurate de que los datos sean correctos.'
+					titulo='Crear Estudiante'
+					desc='Registra un nuevo estudiante proporcionando la información necesaria, asegurate de que los datos sean correctos.'
 				></TituloDes>
 				<form
 					onSubmit={handleSubmit}
@@ -342,14 +342,14 @@ const CreacionEst = () => {
 						type='submit'
 						disabled={bloqueoDemo || cargando}
 					>
-						{cargando? 'Creando...': 'Crear'}
+						{cargando? 'Guardando...': 'Crear'}
 					</button>
 				</form>
 			</div>
 			<Line></Line>
 			<div className='contenedorListadoEst'>
 				<TituloDes
-					titulo='LISTADO DE ESTUDIANTES'
+					titulo='Listado de Estudiantes'
 					desc='Consulta el listado de estudiantes registrados, organizados por grados, para gestionar y revisar su progreso académico.'
 				/>
 				<div className='informacion'>

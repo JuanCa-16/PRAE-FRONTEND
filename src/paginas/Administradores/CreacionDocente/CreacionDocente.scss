@@ -114,5 +114,20 @@
 				}
 			}
 		}
+
+		.lista {
+			.informacion {
+				.filtros {
+					gap: 1rem;
+					.input-container {
+						max-width: 30%;
+					}
+
+					.custom-select{
+						width: 30%;
+					}
+				}
+			}
+		}
 	}
 }

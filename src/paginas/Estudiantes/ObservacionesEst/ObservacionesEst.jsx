@@ -100,7 +100,7 @@ const ObservacionesEst = () => {
 	return (
 		<div className='contenedorObservacionesEst'>
 			<TituloDes
-				titulo='MIS OBSERVACIONES'
+				titulo='Mis Observaciones'
 				desc='Lee las observaciones que los docentes han realizado sobre tu desempeño académico. Estas te ayudarán a conocer tus fortalezas y tus áreas a mejorar.'
 			/>
 			<div className='observaciones'>

@@ -57,7 +57,7 @@ const EstadisticasAdmin = () => {
 	return (
 		<div className='contenedorEstAdmin'>
 			<TituloDes
-				titulo='ESTADÍSTICAS DE LA INSTITUCIÓN'
+				titulo='Estadísticas de la Institución'
 				desc='Consulta estadísticas de tu institución para obtener información detallada sobre el rendimiento académico y otros aspectos clave para tomar mejores decisiones.'
 			></TituloDes>
 			<div className='contenedorFiltros'>

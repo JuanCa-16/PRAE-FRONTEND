@@ -84,6 +84,7 @@
 				display: flex;
 				width: 100%;
 				align-items: flex-end;
+				justify-content: center;
 				gap: 2.75rem;
 				align-self: stretch;
 				flex-wrap: wrap;
@@ -93,7 +94,19 @@
 				}
 
 				.input-container {
-					max-width: fit-content;
+					flex: 1 1;
+					width: 30%;
+					min-width: 11.5rem;
+				}
+
+				.custom-select {
+					width: 30%;
+					flex: 1;
+					min-width: 11.5rem;
+
+					.selected {
+						width: 100%;
+					}
 				}
 			}
 
@@ -101,6 +114,7 @@
 				display: flex;
 				align-items: center;
 				align-content: center;
+				justify-content: center;
 				gap: 1.5rem;
 				align-self: stretch;
 				flex-wrap: wrap;
@@ -130,6 +144,15 @@
 
 		.contenedorListadoEst {
 			.informacion {
+				.filtros {
+					.input-container {
+						min-width: 10rem;
+					}
+
+					.custom-select {
+						min-width: 10rem;
+					}
+				}
 				.estudiantes {
 					justify-content: center;
 				}

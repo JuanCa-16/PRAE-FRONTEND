@@ -335,7 +335,7 @@ const VistaDocente = () => {
 		<div className='contenedorVistaDocente'>
 			<div className='editar'>
 				<TituloDes
-					titulo='EDITAR PROFESOR'
+					titulo='Editar Profesor'
 					desc='Edita el perfil de un profesor en la plataforma y mantenlo siempre actualizado.'
 				></TituloDes>
 				<form

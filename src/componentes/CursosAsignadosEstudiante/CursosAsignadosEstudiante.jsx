@@ -69,8 +69,8 @@ const CursosAsignadosEstudiante = ({ url, idCurso, idInstitucion, nombreEst, idE
 	return (
 		<div className='contenedorCursos'>
 			<TituloDes
-				titulo='MIS MATERIAS:'
-				desc='Accede a todas tus materias de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'
+				titulo='Mis Cursos:'
+				desc='Accede a todas tus cursos de forma organizada, consulta tus calificaciones y sigue tu progreso académico de manera sencilla y rápida.'
 			></TituloDes>
 
 			<ContenedorMaterias

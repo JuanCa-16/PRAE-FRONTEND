@@ -65,7 +65,7 @@ const EstadisticasDocentes = () => {
 	return (
 		<div className='contenedorEstDocente'>
 			<TituloDes
-				titulo='ESTADÍSTICAS'
+				titulo='Estadísticas'
 				desc='Aquí podrás consultar diversas estadísticas...'
 			></TituloDes>
 			<div className='contenedorFiltros'>

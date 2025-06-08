@@ -511,8 +511,8 @@ const AsignarGradosMaterias = () => {
 		<div className='contenedorAsignarGradosMaterias'>
 			<div className='crear'>
 				<TituloDes
-					titulo='ASIGNACIÓN DE MATERIAS A GRADOS'
-					desc='Asigna las asignaturas correspondientes a cada nivel educativo.'
+					titulo='Creación Cursos'
+					desc='Asigna las asignaturas correspondientes a cada grado de la institución.'
 				></TituloDes>
 				<form
 					onSubmit={handleSubmit}
@@ -573,7 +573,7 @@ const AsignarGradosMaterias = () => {
 			<Line></Line>
 			<div className='lista'>
 				<TituloDes
-					titulo='LISTADO DE CURSOS ASIGNADOS'
+					titulo='Listado de Cursos'
 					desc='Consulta los cursos que tienes asignados en los distintos grados, gestiona las calificaciones y el progreso de tus estudiantes en cada uno de tus grupos.'
 				/>
 				<div className='informacion'>

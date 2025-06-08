@@ -167,7 +167,7 @@ const Periodos = () => {
 			onSubmit={handleSubmit}
 		>
 			<TituloDes
-				titulo='PERIODOS'
+				titulo='Periodos'
 				desc='Maneja los periodos del año academico de tu institucion, Acepta la plantilla o personalizalo. OJO solo se puede una vez.'
 			></TituloDes>
 			<div className='contenedorPeriodos'>

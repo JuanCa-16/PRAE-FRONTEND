@@ -29,7 +29,7 @@
 	align-items: flex-start;
 	gap: 0.5rem;
 	align-self: stretch;
-
+	
 	.grupo {
 		display: flex;
 		flex-direction: column;
@@ -38,6 +38,7 @@
 		height: fit-content;
 		justify-content: center;
 		align-items: center;
+		
 		.contenedorPildoraG {
 			margin-bottom: 1rem;
 		}

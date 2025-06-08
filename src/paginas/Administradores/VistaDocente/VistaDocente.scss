@@ -1,65 +1,102 @@
-.contenedorVistaDocente{
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 2rem;
-    align-self: stretch;
+@use '../../../variables.scss' as *;
+.contenedorVistaDocente {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	gap: 2rem;
+	align-self: stretch;
 
-    .editar{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        align-self: stretch;
+	.editar {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.625rem;
+		align-self: stretch;
 
-        .formulario{
-            display: flex;
-            width: 100%;
-            max-width: 100%;
-            padding: 1.5rem 0rem;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.25rem;
+		.formulario {
+			display: flex;
+			width: 100%;
+			max-width: 100%;
+			padding: 1.5rem 0rem;
+			flex-direction: column;
+			align-items: center;
+			gap: 2.25rem;
 
-            .inputs{
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                align-content: center;
-                row-gap: 1.5rem;
-                align-self: stretch;
-                flex-wrap: wrap;
+			.inputs {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				align-content: center;
+				row-gap: 1.5rem;
+				align-self: stretch;
+				flex-wrap: wrap;
 
-                .input-container{
-                    width: 30%;
-                    min-width: 12.5rem;
-                    padding: 1rem;
-                }
+				.input-container {
+					flex: 1; //solo esta linea hace que crezca
+					width: 30%;
+					min-width: 12.5rem;
+					padding: 1rem;
+				}
+			}
 
-            }
+			.selectorMat {
+				display: flex;
+				width: 100%;
+				max-width: 100%;
+				justify-content: space-between;
+				padding: 1rem;
+				gap: 1rem;
+				.selector {
+					display: flex;
+					flex-direction: column;
+					gap: 1rem;
+				}
+			}
 
-            .selectorMat{
-                display: flex;
-                width: 100%;
-                max-width: 100%;
-                justify-content: space-between;
-                padding: 1rem;
-                gap: 1rem;
-                .selector{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-            }
+			button {
+				width: auto;
+			}
+		}
+	}
 
-            button{
-                width: auto;
-            }
-        }
-    }
+	button {
+		width: fit-content;
+		align-self: center;
+	}
+}
 
-    button{
-        width: fit-content;
-        align-self: center;
-    }
+@media screen and (max-width: $max-celular) {
+	.contenedorVistaDocente {
+		.editar {
+			.formulario {
+				.inputs {
+					.input-container {
+						min-width: 10rem;
+					}
+				}
+
+				.selectorMat {
+					display: flex;
+					width: 100%;
+					max-width: 100%;
+					align-self: flex-start;
+				}
+			}
+		}
+
+        .lista {
+			.informacion {
+				.filtros {
+					gap: 1rem;
+					.input-container {
+						max-width: 30%;
+					}
+
+					.custom-select{
+						width: 30%;
+					}
+				}
+			}
+		}
+	}
 }
