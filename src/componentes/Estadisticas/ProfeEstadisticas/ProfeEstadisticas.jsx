@@ -434,7 +434,7 @@ const ProfeEstadisticas = ({ gradoFiltro }) => {
 				className='botonExportar pdf'
 				disabled={descargando}
 			>
-				<PdfIcon></PdfIcon> {descargando ? 'Descargando...' : 'Descargar Boletin'}
+				<PdfIcon></PdfIcon> {descargando ? 'Descargando...' : 'Descargar Estadísticas'}
 			</button>
 		</WebSocketListener>
 	);
