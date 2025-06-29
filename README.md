@@ -75,7 +75,8 @@ Este repositorio contiene el **frontend** de la aplicación, desarrollado con te
 ## 📚 Documentación
 
 - 📄 El proyecto fue documentado utilizando **JSDoc**, una herramienta estándar para generar documentación a partir de comentarios en el código JavaScript.
-- 🎨 Se utilizó el tema [`clean-jsdoc-theme`](https://www.npmjs.com/package/clean-jsdoc-theme) para mejorar la presentación visual de la documentación, brindando una apariencia limpia y profesional.
+- 🎨 Se utilizó el tema [`clean-jsdoc-theme`](https://www.npmjs.com/package/clean-jsdoc-theme) para brindar una apariencia limpia y profesional.
+- 🔗 Ver documentación: [https://praeapp.vercel.app/0.1.0/indexDocs.html](https://praeapp.vercel.app/0.1.0/indexDocs.html)
 
 ---
 
