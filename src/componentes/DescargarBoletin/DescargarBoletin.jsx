@@ -7,7 +7,7 @@ import './DescargarBoletin.scss';
 const DescargarBoletin = ({ idEst }) => {
 	const API_URL = process.env.REACT_APP_API_URL;
 	const token = localStorage.getItem('token');
-	const { user, bloqueoDemo } = useUser();
+	const { user } = useUser();
 	const [descargando, setDescargando] = useState(false);
 
 	const generarPdf = async () => {
